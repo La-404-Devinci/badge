@@ -385,11 +385,3 @@ html {
 body {
     min-height: -webkit-fill-available;
 }
-
-.keyboard-nav-active tr:hover td {
-    background-color: transparent !important;
-}
-
-.keyboard-nav-active [class*="group-hover"]:hover {
-    background-color: transparent !important;
-}

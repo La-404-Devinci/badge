@@ -6,11 +6,7 @@
     "tailwindCSS.experimental.classRegex": [
         ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
     ],
-    "tailwindCSS.classAttributes": [
-        "class",
-        "className",
-        ".*ClassName"
-    ],
+    "tailwindCSS.classAttributes": ["class", "className", ".*ClassName"],
     "i18n-ally.localesPaths": [
         "lib/i18n",
         "app/api/locale",
