@@ -44,24 +44,13 @@ export const listUsers = async ({
     // Get users with their waitlist status included
     const users = await db.query.user.findMany({
         where: userFilters.length > 0 ? and(...userFilters) : undefined,
-        with: {
-            accessStatus: true,
-        },
         orderBy: [getOrderByConfig()].filter(Boolean),
     });
 
-    // Filter by waitlist status if specified
-    let filteredUsers = [...users];
-    if (input.waitlistStatus && input.waitlistStatus !== "all") {
-        filteredUsers = users.filter(
-            (user) => user.accessStatus?.status === input.waitlistStatus
-        );
-    }
-
     // Apply pagination
-    const total = filteredUsers.length;
+    const total = users.length;
     const offset = (input.page - 1) * input.limit;
-    const paginatedUsers = filteredUsers.slice(offset, offset + input.limit);
+    const paginatedUsers = users.slice(offset, offset + input.limit);
 
     // Return paginated result
     return {

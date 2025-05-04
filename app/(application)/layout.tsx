@@ -16,7 +16,6 @@ export default async function ApplicationLayout({
     children: React.ReactNode;
 }) {
     const authResponse = await getServerSession();
-
     if (!authResponse?.user) {
         redirect(PAGES.SIGN_IN, RedirectType.replace);
     }

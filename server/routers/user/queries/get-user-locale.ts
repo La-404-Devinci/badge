@@ -11,9 +11,5 @@ export const getUserLocale = async ({ db, session }: UserQueryContext) => {
         .where(eq(userPreferences.userId, session.user.id))
         .limit(1);
 
-    console.log(session.user.id, "session.user.id");
-
-    console.log(result);
-
     return result?.language;
 };
