@@ -1,0 +1,831 @@
+{
+    "common": {
+        "loading": "Chargement...",
+        "error": "Une erreur est survenue",
+        "submit": "Soumettre",
+        "cancel": "Annuler",
+        "saving": "Enregistrement...",
+        "saved": "Enregistré",
+        "optional": "Optionnel",
+        "discard": "Annuler",
+        "apply": "Enregistrer",
+        "applying": "Enregistrement...",
+        "save": "Enregistrer",
+        "reloadPage": "Recharger la page",
+        "applyChanges": "Enregistrer",
+        "change": "Modifier",
+        "upload": "Téléverser",
+        "uploading": "Téléversement...",
+        "copy": "Copier",
+        "copied": "Copié",
+        "search": "Rechercher",
+        "pagination": {
+            "showing": "Affichage",
+            "to": "à",
+            "of": "de",
+            "entries": "entrées",
+            "items": "articles",
+            "previous": "Précédent",
+            "next": "Suivant",
+            "page": "Page"
+        }
+    },
+    "components": {
+        "userButton": {
+            "sessionError": "Erreur de session",
+            "tryReloading": "Essayez de recharger la page",
+            "settings": "Paramètres",
+            "logout": "Déconnexion",
+            "termsAndConditions": "Conditions générales",
+            "versionLabel": "v."
+        },
+        "avatar": {
+            "title": {
+                "new": "Mettre à jour la photo de profil",
+                "initial": "Ajouter une photo de profil"
+            },
+            "dimensions": "Image carrée, minimum 400x400px",
+            "recommendedSize": "Pour de meilleurs résultats, téléversez une image carrée d'au moins 400x400 pixels"
+        },
+        "imageDropzone": {
+            "uploading": "Téléchargement...",
+            "dropImagePrompt": "Déposez une image ici, ou cliquez pour sélectionner un fichier",
+            "acceptedFormats": "PNG, JPG, GIF jusqu'à 10 Mo"
+        },
+        "sidebar": {
+            "navigation": {
+                "main": "Principal",
+                "dashboard": "Tableau de bord",
+                "calendar": "Calendrier",
+                "projects": "Projets",
+                "teams": "Équipes",
+                "integrations": "Intégrations",
+                "benefits": "Avantages",
+                "documents": "Documents",
+                "favorites": "Favoris",
+                "search": "Rechercher...",
+                "mobileMenu": "Menu Mobile",
+                "mobileMenuDescription": "Ce menu offre des options de navigation mobile, y compris l'accès aux liens de navigation principaux, aux projets favoris, à la recherche et aux paramètres utilisateur."
+            },
+            "settings": {
+                "title": "Autres",
+                "settingsLink": "Paramètres",
+                "support": "Support",
+                "admin": "Admin"
+            },
+            "favorites": {
+                "loomMobileApp": "Application mobile Loom",
+                "mondayRedesign": "Refonte du lundi",
+                "udemyCourses": "Cours Udemy"
+            }
+        },
+        "impersonationBanner": {
+            "message": "Mode administrateur : Vous visualisez l'application en tant que {userName}",
+            "stopImpersonation": "Retour à la vue administrateur"
+        },
+        "table": {
+            "clearFilters": "Effacer les filtres"
+        },
+        "themeSelector": {
+            "darkMode": "Mode sombre",
+            "lightMode": "Mode clair",
+            "systemWithMode": "Système ({mode})"
+        },
+        "application": {
+            "createRequest": {
+                "label": "Créer une demande"
+            }
+        }
+    },
+    "landing": {
+        "title": "Template de démarrage Next.js d'Impulse Lab avec AlignUI"
+    },
+    "cookieConsent": {
+        "title": "Nous respectons votre vie privée",
+        "description": "Nous utilisons des cookies de suivi pour comprendre comment vous utilisez le produit et améliorer votre expérience. Vous pouvez autoriser tous les cookies ou vous désinscrire.",
+        "decline": "Non merci",
+        "accept": "Autoriser tout"
+    },
+    "settings": {
+        "title": "Page des paramètres",
+        "description": "Gérez vos préférences et configurez diverses options.",
+        "items": {
+            "account": "Paramètres du compte",
+            "notification": "Paramètres de notification",
+            "privacySecurity": "Confidentialité & Sécurité"
+        },
+        "notificationSettings": {
+            "tabs": {
+                "preferences": "Préférences",
+                "method": "Méthode",
+                "advanced": "Avancé"
+            },
+            "headerTitle": "paramètres de notification",
+            "preferences": {
+                "title": "Préférences de notification",
+                "description": "Choisissez quelles notifications vous souhaitez recevoir.",
+                "newsUpdates": {
+                    "label": "Actualités et mises à jour",
+                    "description": "Restez informé des dernières actualités, mises à jour et annonces."
+                },
+                "remindersEvents": {
+                    "label": "Rappels et alertes système",
+                    "description": "Recevez des rappels pour les événements, les alertes importantes et les notifications système."
+                },
+                "promotionsOffers": {
+                    "label": "Promotions et offres",
+                    "description": "Recevez des notifications concernant les promotions spéciales, les réductions et les offres exclusives."
+                }
+            },
+            "method": {
+                "title": "Méthode de notification",
+                "description": "Choisissez comment vous préférez recevoir les notifications.",
+                "emailNotifications": {
+                    "label": "Notifications par email",
+                    "description": "Recevez les notifications par email"
+                },
+                "pushNotifications": {
+                    "label": "Notifications push",
+                    "description": "Recevez des mises à jour et des alertes en temps réel directement sur votre appareil"
+                },
+                "smsNotifications": {
+                    "label": "Notifications SMS",
+                    "description": "Recevez les notifications par SMS"
+                }
+            },
+            "advanced": {
+                "title": "Préférences avancées",
+                "description": "Choisissez les notifications avancées que vous souhaitez recevoir.",
+                "leaveAttendance": {
+                    "label": "Congés et présence",
+                    "description": "Mises à jour sur les congés approuvés, les registres de présence et les rappels importants liés à la présence."
+                },
+                "deadlineNotification": {
+                    "label": "Notification d'échéance",
+                    "description": "Recevez des rappels opportuns avant les échéances imminentes."
+                }
+            },
+            "common": {
+                "infoAlert": "Maximisez votre utilisation de l'application en laissant les paramètres de notification actifs.",
+                "saveSuccess": "Paramètres de notification mis à jour avec succès",
+                "saveError": "Échec de la mise à jour des paramètres de notification"
+            }
+        },
+        "companySettings": {
+            "tabs": {
+                "companySettings": "Paramètres de l'entreprise",
+                "contactInformation": "Informations de contact",
+                "socialLinks": "Liens sociaux",
+                "exportData": "Exporter les données"
+            },
+            "selectMenu": "Paramètres de l'entreprise"
+        },
+        "account": {
+            "myAccount": "Mon compte",
+            "languageRegion": "Langue & Région",
+            "appearance": "Apparence",
+            "billing": "Plan & Facturation",
+            "accountSettings": "paramètres compte",
+            "myAccountSettings": {
+                "name": "Nom",
+                "emailAddress": "Adresse e-mail",
+                "phoneNumber": "Numéro de téléphone",
+                "sessionError": "Erreur de session",
+                "profileLoadError": "Impossible de charger votre profil. Veuillez réessayer plus tard.",
+                "emailAlreadyInUse": "Email déjà utilisé",
+                "emailUpdateError": "Impossible de mettre à jour votre email",
+                "avatarUpdateError": "Échec de la mise à jour de l'avatar. Veuillez réessayer.",
+                "emailVerificationSent": "Nous vous avons envoyé un email de vérification pour confirmer votre nouvelle adresse email.",
+                "phoneTooltip": "Entrez votre numéro de téléphone sans l'indicatif du pays, car il est sélectionné séparément. Seuls les chiffres sont autorisés.",
+                "nameValidation": "Le nom doit comporter au moins 2 caractères",
+                "emailValidation": "Veuillez entrer une adresse email valide"
+            },
+            "languageRegionSettings": {
+                "title": "Langue & Région",
+                "description": "Personnalisez les paramètres de langue et de région",
+                "language": "Langue",
+                "selectLanguage": "Sélectionnez une langue",
+                "timezone": "Fuseau horaire",
+                "timezoneTooltip": "Le paramètre de fuseau horaire actuel. Sélectionnez le fuseau horaire correspondant à votre localisation.",
+                "selectTimezone": "Sélectionnez un fuseau horaire",
+                "timeFormat": "Format de l'heure",
+                "timeFormatTooltip": "Choisissez entre un format d'affichage 12 heures ou 24 heures.",
+                "selectTimeFormat": "Sélectionnez un format d'heure",
+                "dateFormat": "Format de date",
+                "dateFormatTooltip": "Sélectionnez comment vous souhaitez que la date soit affichée.",
+                "selectDateFormat": "Sélectionnez un format de date",
+                "12Hours": "12 heures",
+                "24Hours": "24 heures"
+            }
+        },
+        "appearanceSettings": {
+            "title": "Paramètres d'apparence",
+            "description": "Personnalisez votre expérience visuelle avec les options de thème",
+            "lightMode": "Mode clair",
+            "lightModeDescription": "Choisissez un thème clair et classique.",
+            "darkMode": "Mode sombre",
+            "darkModeDescription": "Sélectionnez un thème sombre et élégant.",
+            "systemMode": "Système",
+            "systemModeDescription": "S'adapte au thème de votre appareil."
+        },
+        "privacySecurity": {
+            "selectMenu": "Confidentialité & Sécurité",
+            "tabs": {
+                "changePassword": "Changer le mot de passe",
+                "twoFactorSecurity": "Sécurité 2FA",
+                "activeSessions": "Sessions actives",
+                "deleteAccount": "Supprimer le compte"
+            },
+            "activeSessions": {
+                "title": "Sessions actives",
+                "description": "Surveillez et gérez toutes vos sessions actives.",
+                "signOutAllDevices": "Déconnexion de tous les autres appareils",
+                "unknownDevice": "Appareil inconnu"
+            },
+            "changePassword": {
+                "title": "Changer le mot de passe",
+                "description": "Mettez à jour le mot de passe pour une sécurité renforcée du compte.",
+                "currentPassword": "Mot de passe actuel",
+                "newPassword": "Nouveau mot de passe",
+                "confirmPassword": "Confirmer le nouveau mot de passe",
+                "passwordRequirements": "Doit contenir au moins ;",
+                "requireUppercase": "Au moins 1 majuscule",
+                "requireNumber": "Au moins 1 chiffre",
+                "requireLength": "Au moins 8 caractères",
+                "successMessage": "Mot de passe mis à jour avec succès"
+            },
+            "deleteAccount": {
+                "title": "Supprimer le compte",
+                "description": "Gérer le processus de suppression du compte.",
+                "warningCannotUndo": "Cette action ne peut pas être annulée.",
+                "warningDataRemoval": "Toutes vos données, y compris votre profil, vos publications et vos informations personnelles, seront définitivement supprimées.",
+                "confirmationText": "En entrant votre mot de passe, vous confirmez que vous comprenez et acceptez les conséquences de la suppression de votre compte.",
+                "confirmDeletion": "Confirmer la suppression",
+                "passwordHint": "Fournissez votre mot de passe pour procéder à la suppression du compte.",
+                "invalidPassword": "Le mot de passe que vous avez saisi est incorrect. Veuillez réessayer.",
+                "error": "Une erreur s'est produite lors de la suppression de votre compte. Veuillez réessayer plus tard.",
+                "successMessage": "Votre compte avec toutes les données associées a été supprimé avec succès"
+            },
+            "twoFactorSecurity": {
+                "title": "Sécurité 2FA",
+                "description": "Activez l'authentification à deux facteurs pour votre compte.",
+                "twoFactorAuthentication": "Authentification à deux facteurs",
+                "authenticatorApp": {
+                    "title": "Application d'authentification",
+                    "enabled": "Votre compte est protégé par une application d'authentification.",
+                    "disabled": "Ajoutez une couche de sécurité supplémentaire avec une application d'authentification."
+                },
+                "securityNote": "L'authentification à deux facteurs ajoute une couche de sécurité supplémentaire en exigeant une deuxième étape de vérification.",
+                "passkeys": {
+                    "title": "Clés d'accès",
+                    "error": "Une erreur s'est produite",
+                    "noPasskeys": "Pas encore de clés d'accès",
+                    "description": "Les clés d'accès offrent un moyen plus sécurisé de se connecter sans mots de passe.",
+                    "addPasskey": "Ajouter une clé d'accès",
+                    "addedOn": "Ajoutée le",
+                    "rename": "Renommer",
+                    "delete": "Supprimer",
+                    "deletePasskey": "Supprimer la clé d'accès",
+                    "deleteConfirmation": "Êtes-vous sûr de vouloir supprimer la clé d'accès \"{name}\" ?\n\nVous devrez l'enregistrer à nouveau pour l'utiliser.",
+                    "unnamed": "Sans nom",
+                    "renameDialog": {
+                        "title": "Renommer la clé d'accès",
+                        "description": "Mettez à jour le nom de votre clé d'accès.",
+                        "passkeyName": "Nom de la clé d'accès",
+                        "passkeyNameTooltip": "Ce nom vous aide à identifier votre clé d'accès sur tous vos appareils.",
+                        "passkeyNamePlaceholder": "Entrez le nom de la clé d'accès",
+                        "renameError": "Échec du renommage de la clé d'accès"
+                    },
+                    "addPasskeyModal": {
+                        "title": "Ajouter une clé d'accès",
+                        "description": "Une façon sécurisée et facile de vous connecter à votre compte",
+                        "infoText": "Les clés d'accès utilisent la biométrie ou votre appareil pour vous authentifier, sans besoin de mots de passe.",
+                        "passkeyName": "Nom de la clé d'accès",
+                        "passkeyNamePlaceholder": "Entrez un nom pour votre clé d'accès",
+                        "processing": "Traitement...",
+                        "addPasskey": "Ajouter la clé d'accès",
+                        "errors": {
+                            "alreadyRegistered": "Cette clé d'accès est déjà enregistrée",
+                            "canceledOrTimedOut": "L'opération a été annulée ou a expiré",
+                            "generic": "Une erreur s'est produite"
+                        }
+                    }
+                },
+                "disableDialog": {
+                    "title": "Désactiver l'A2F",
+                    "description": "Entrez votre mot de passe pour désactiver l'A2F",
+                    "securityWarning": {
+                        "title": "Avertissement de sécurité",
+                        "message": "La désactivation de l'authentification à deux facteurs réduira considérablement la sécurité de votre compte. Ne procédez que si vous en êtes absolument certain."
+                    },
+                    "confirmPassword": "Confirmer le mot de passe",
+                    "passwordPlaceholder": "Entrez votre mot de passe",
+                    "disabling": "Désactivation...",
+                    "disable": "Désactiver",
+                    "errors": {
+                        "invalidPassword": "Le mot de passe que vous avez saisi est incorrect. Veuillez réessayer.",
+                        "generic": "Une erreur s'est produite. Veuillez réessayer."
+                    }
+                },
+                "authenticatorModal": {
+                    "steps": {
+                        "password": {
+                            "title": "Confirmer le mot de passe",
+                            "description": "Entrez votre mot de passe pour activer le MFA"
+                        },
+                        "verify": {
+                            "title": "Configurer l'application de MFA",
+                            "description": "Scannez le code QR avec votre téléphone"
+                        },
+                        "backup": {
+                            "title": "Codes de récupération",
+                            "description": "Enregistrez ces codes dans un endroit securisé"
+                        }
+                    },
+                    "errors": {
+                        "invalidPassword": "Le mot de passe que vous avez saisi est incorrect",
+                        "generic": "Une erreur s'est produite lors de la configuration du MFA",
+                        "setupFailed": "Échec de la configuration du MFA",
+                        "invalidCode": "Code de vérification invalide"
+                    }
+                },
+                "authenticatorSteps": {
+                    "password": {
+                        "password": "Mot de passe",
+                        "placeholder": "Entrez votre mot de passe",
+                        "verifying": "Vérification...",
+                        "continue": "Continuer"
+                    },
+                    "verify": {
+                        "verification": "Vérification",
+                        "instructions": "Entrez le code à 6 chiffres de votre application d'authentification",
+                        "placeholder": "Entrez le code à 6 chiffres",
+                        "manualSetup": "Vous ne pouvez pas scanner le QR Code ?",
+                        "appInstructions": "Dans votre application d'authentification :",
+                        "scanQrCode": "Scannez le code QR avec votre téléphone pour activer l'authentification à deux facteurs",
+                        "orEnterManually": "Entrez ce code manuellement dans votre application d'authentification",
+                        "verifying": "Vérification...",
+                        "verify": "Vérifier"
+                    },
+                    "backup": {
+                        "instructions": "Conservez ces codes de récupération dans un endroit sécurisé. Chaque code peut être utilisé une fois si vous perdez l'accès à votre application d'authentification.",
+                        "downloadCodes": "Télécharger les codes",
+                        "copyCodes": "Copier tous les codes",
+                        "printCodes": "Imprimer les codes",
+                        "codesCopied": "Codes copiés dans le presse-papiers",
+                        "finish": "Terminer la configuration",
+                        "backupCodes": "Codes de récupération",
+                        "saveThese": "enregistrez-les"
+                    }
+                }
+            }
+        },
+        "billing": {
+            "title": "Forfait et facturation",
+            "description": "Gérez votre abonnement et vos informations de paiement",
+            "upgradeAlert": "Passez à un forfait premium pour débloquer des fonctionnalités supplémentaires et un support.",
+            "cancelAlert": "Votre abonnement sera annulé à la fin de la période de facturation en cours."
+        }
+    },
+    "auth": {
+        "common": {
+            "buttons": {
+                "signIn": "Se connecter",
+                "register": "S'inscrire",
+                "resetPassword": "Réinitialiser le mot de passe",
+                "contactUs": "Nous contacter",
+                "goBack": "Retour",
+                "goBackToLogin": "Retour à la connexion",
+                "termsOfService": "Conditions d'utilisation",
+                "submitCode": "Soumettre le code",
+                "resendCode": "Renvoyer le code",
+                "resending": "Réenvoi...",
+                "privacyPolicy": "Politique de confidentialité",
+                "signInWithGoogle": "Se connecter avec Google"
+            },
+            "labels": {
+                "email": "Adresse email",
+                "password": "Mot de passe",
+                "fullName": "Nom complet",
+                "newPassword": "Nouveau mot de passe",
+                "confirmPassword": "Confirmer le mot de passe",
+                "rememberMe": "Rester connecté"
+            },
+            "loading": {
+                "signingIn": "Connexion en cours...",
+                "sendingEmail": "Envoi de l'email...",
+                "resetingPassword": "Réinitialisation du mot de passe...",
+                "verifying": "Vérification...",
+                "signingInWithGoogle": "Connexion avec Google en cours..."
+            }
+        },
+        "forms": {
+            "signIn": {
+                "title": "Connectez-vous",
+                "subtitle": "Entrez vos identifiants pour vous connecter.",
+                "forgotPassword": "Mot de passe oublié ?",
+                "errors": {
+                    "invalidCredentials": "Email ou mot de passe invalide"
+                }
+            },
+            "signUp": {
+                "title": "Créer un nouveau compte",
+                "subtitle": "Entrez vos informations pour vous inscrire.",
+                "passwordRequirements": "Doit contenir 1 majuscule, 1 chiffre, min. 8 caractères.",
+                "termsAgreement": "En cliquant sur S'inscrire, vous acceptez nos",
+                "errors": {
+                    "userExists": "Cette adresse email est déjà utilisée, veuillez vous connecter.",
+                    "waitlistDisabled": "L'inscription est actuellement désactivée.",
+                    "notWhitelisted": "Cet email n'est pas autorisé pour l'inscription."
+                }
+            },
+            "forgotPassword": {
+                "title": "Réinitialiser le mot de passe",
+                "subtitle": "Entrez votre email pour réinitialiser votre mot de passe.",
+                "successMessage": "Si cette adresse email est associée à un compte, nous vous avons envoyé un email pour réinitialiser votre mot de passe.",
+                "noAccess": "Vous n'avez plus accès ?"
+            },
+            "resetPassword": {
+                "title": "Réinitialiser le mot de passe",
+                "subtitle": "Créez un nouveau mot de passe pour votre compte.",
+                "successMessage": "Votre mot de passe a été modifié",
+                "passwordCriteria": {
+                    "intro": "Doit contenir au moins ;",
+                    "uppercase": "Au moins 1 majuscule",
+                    "number": "Au moins 1 chiffre",
+                    "length": "Au moins 8 caractères"
+                }
+            },
+            "verification": {
+                "title": "Entrez le code de vérification",
+                "subtitle": "Nous avons envoyé un code à",
+                "issues": "Problèmes pour recevoir le code ?",
+                "successMessage": "Votre email a été vérifié. Vous pouvez maintenant vous connecter à votre compte."
+            },
+            "waitlist": {
+                "title": "Rejoignez notre liste d'attente",
+                "subtitle": "Entrez votre email pour rejoindre notre liste d'attente et être parmi les premiers à être informés lors de notre lancement.",
+                "submit": "Rejoindre la liste",
+                "privacyNotice": "En rejoignant notre liste d'attente, vous acceptez la politique de {projectName}",
+                "successTitle": "Vous êtes sur la liste !",
+                "successSubtitle": "Merci pour votre intérêt. Nous vous informerons lors de notre lancement.",
+                "alreadyHaveAccess": "Vous avez déjà un compte ?"
+            }
+        },
+        "header": {
+            "signIn": {
+                "text": "Vous n'avez pas de compte ?",
+                "link": "S'inscrire"
+            },
+            "signUp": {
+                "text": "Vous avez déjà un compte ?",
+                "link": "Se connecter"
+            },
+            "forgotPassword": {
+                "text": "Vous avez changé d'avis ?",
+                "link": "Retour à la connexion"
+            },
+            "verification": {
+                "text": "Vous avez changé d'avis ?",
+                "link": "Retour à la connexion"
+            },
+            "resetPassword": {
+                "text": "Vous avez changé d'avis ?",
+                "link": "Retour à la connexion"
+            },
+            "confirmAccess": {
+                "text": "Vous avez changé d'avis ?",
+                "link": "Retour"
+            },
+            "waitlist": {
+                "text": "Vous avez déjà un compte ?",
+                "link": "Se connecter"
+            }
+        },
+        "twoFactor": {
+            "title": "Authentification à Deux Facteurs",
+            "description": "Vérifiez votre identité pour continuer",
+            "steps": {
+                "totp": {
+                    "title": "Vérification par Authentificateur",
+                    "description": "Saisissez le code à 6 chiffres de votre application d'authentification",
+                    "noAccessMessage": "Vous n'avez pas accès à votre application d'authentification ?",
+                    "rememberDevice": "Se souvenir de cet appareil pour 60 jours"
+                },
+                "backup": {
+                    "title": "Vérification par Code de Secours",
+                    "description": "Saisissez l'un de vos codes de secours. Chaque code ne peut être utilisé qu'une seule fois.",
+                    "codeLabel": "Code de Secours",
+                    "codePlaceholder": "Saisissez votre code de secours"
+                },
+                "email": {
+                    "title": "Vérification par Email",
+                    "description": "Nous allons envoyer un code de vérification à votre adresse email",
+                    "codeSent": "Nous avons envoyé un code de vérification à votre adresse email. Saisissez le code ci-dessous."
+                },
+                "recovery": {
+                    "title": "Récupération de Compte",
+                    "description": "Choisissez une méthode alternative pour vérifier votre identité",
+                    "options": {
+                        "backup": {
+                            "title": "Code de Secours",
+                            "description": "Utilisez l'un de vos codes de secours"
+                        },
+                        "email": {
+                            "title": "Code par Email",
+                            "description": "Recevez un code à usage unique par email"
+                        }
+                    }
+                }
+            },
+            "actions": {
+                "verify": "Vérifier",
+                "verifying": "Vérification en cours...",
+                "sendVerificationCode": "Envoyer le code de vérification",
+                "resendCode": "Renvoyer le code",
+                "resendCodeWithTimer": "Renvoyer le code ({seconds}s)",
+                "sending": "Envoi en cours...",
+                "tryAnotherMethod": "Essayer une autre méthode",
+                "backToAuthenticator": "Retour à l'authentificateur",
+                "backToRecoveryOptions": "Retour aux options de récupération"
+            },
+            "errors": {
+                "unknown": "Une erreur inconnue s'est produite. Veuillez réessayer.",
+                "invalidCode": "Code de vérification invalide. Veuillez réessayer.",
+                "userNotFound": "Utilisateur non trouvé. Veuillez contacter le support.",
+                "invalidTwoFactorCookie": "Votre session d'authentification à deux facteurs a expiré. Veuillez vous reconnecter.",
+                "invalidBackupCode": "Code de secours invalide. Veuillez réessayer.",
+                "retrySignIn": "Votre session d'authentification à deux facteurs a expiré. Veuillez vous reconnecter."
+            },
+            "success": {
+                "authenticationSuccessful": "Authentification réussie"
+            }
+        }
+    },
+    "subscription": {
+        "modal": {
+            "chooseYourPlan": "Choisissez votre forfait",
+            "selectPlanDescription": "Sélectionnez le forfait qui convient le mieux à vos besoins",
+            "changePlan": "Changer de forfait",
+            "upgrade": "Mettre à niveau",
+            "cancel": "Annuler"
+        },
+        "status": {
+            "currentlyOnFreePlan": "Vous utilisez actuellement le forfait gratuit.",
+            "upgradePlan": "Mettre à niveau",
+            "trial": "Essai",
+            "canceled": "Annulé",
+            "cancelsOn": "Annulé le {date}",
+            "renewsOn": "Renouvellement le {date}",
+            "trialConversion": "L'essai gratuit sera converti en abonnement payant",
+            "daysRemaining": "{days} jour(s) restant(s) dans votre essai",
+            "trialActive": "Votre essai est actif",
+            "upgrade": "Mettre à niveau",
+            "manageSubscription": "Gérer l'abonnement"
+        }
+    },
+    "imageCropper": {
+        "zoomLabel": "Zoom",
+        "zoomAriaLabel": "Zoom",
+        "removeButton": "Supprimer",
+        "removeTooltip": "Supprimer l'image"
+    },
+    "phoneNumberInput": {
+        "emptyStateTitle": "Aucun pays trouvé",
+        "emptyStateDescription": "Essayez de rechercher par nom de pays ou indicatif téléphonique"
+    },
+    "fileUpload": {
+        "percentSymbol": "%",
+        "sizeUnit": "Ko",
+        "of": "de",
+        "status": {
+            "completed": "Terminé",
+            "failed": "Échec"
+        },
+        "actions": {
+            "tryAgain": "Réessayer",
+            "remove": "Supprimer",
+            "cancel": "Annuler"
+        }
+    },
+    "admin": {
+        "title": "Tableau de bord administrateur",
+        "description": "Gérez les paramètres de votre application et les utilisateurs",
+        "items": {
+            "dashboard": "Tableau de bord",
+            "users": "Gérer les utilisateurs",
+            "settings": "Paramètres de l'application",
+            "waitlist": "Gérer la liste d'attente"
+        },
+        "users": {
+            "title": "Gestion des utilisateurs",
+            "description": "Gérer les comptes utilisateurs et les autorisations",
+            "access": {
+                "approved": "approuvé",
+                "denied": "refusé",
+                "pending": "en attente",
+                "updated": "mis à jour",
+                "updateSuccess": "Accès utilisateur {status}",
+                "updateError": "Échec de la mise à jour du statut d'accès de l'utilisateur"
+            }
+        }
+    },
+    "adminUsers": {
+        "filters": {
+            "all": "Tous les utilisateurs",
+            "members": "Membres de l'équipe",
+            "invited": "Invité",
+            "waitlistStatus": "Statut de la liste d'attente",
+            "approved": "Approuvé",
+            "pending": "En attente",
+            "rejected": "Rejeté",
+            "notOnWaitlist": "Pas sur liste d'attente",
+            "notFound": "Non trouvé",
+            "role": "Rôle de l'utilisateur",
+            "admin": "Administrateur",
+            "user": "Utilisateur",
+            "sortBy": "Trier par",
+            "name": "Nom",
+            "email": "E-mail",
+            "createdAt": "Date de création",
+            "ascending": "Croissant",
+            "descending": "Décroissant",
+            "clearFilters": "Effacer les filtres"
+        },
+        "actions": {
+            "addMember": "Ajouter un membre",
+            "viewProfile": "Voir le profil",
+            "editUser": "Modifier l'utilisateur",
+            "approveAccess": "Approuver l'accès",
+            "rejectAccess": "Refuser l'accès",
+            "addToWaitlist": "Ajouter à la liste d'attente",
+            "banUser": "Bannir l'utilisateur",
+            "unbanUser": "Débloquer l'utilisateur",
+            "impersonate": "Usurper l'identité de l'utilisateur"
+        },
+        "columns": {
+            "user": "Utilisateur",
+            "role": "Rôle",
+            "waitlistStatus": "Statut de la liste d'attente",
+            "emailVerified": "Email vérifié",
+            "joined": "Rejoint",
+            "banned": "Statut de bannissement"
+        },
+        "roles": {
+            "user": "Utilisateur",
+            "admin": "Administrateur",
+            "banned": "Banni",
+            "title": "Modifier le rôle"
+        },
+        "verification": {
+            "yes": "Oui",
+            "no": "Non"
+        },
+        "table": {
+            "selectAll": "Tout sélectionner",
+            "selectRow": "Sélectionner la ligne"
+        },
+        "pagination": {
+            "showing": "Affichage",
+            "to": "à",
+            "of": "de",
+            "users": "utilisateurs",
+            "previous": "Précédent",
+            "next": "Suivant",
+            "page": "Page"
+        },
+        "toast": {
+            "impersonateSuccess": "Imitation de l'utilisateur réussie",
+            "impersonateError": "Échec de l'usurpation de l'utilisateur",
+            "banSuccess": "Utilisateur banni avec succès",
+            "banError": "Échec de l'interdiction de l'utilisateur",
+            "unbanSuccess": "Utilisateur débanni avec succès",
+            "unbanError": "Échec du déblocage de l'utilisateur",
+            "addToWaitlistSuccess": "Utilisateur ajouté à la liste d'attente",
+            "addToWaitlistError": "Échec de l'ajout de l'utilisateur à la liste d'attente",
+            "approveAccessSuccess": "Accès utilisateur approuvé",
+            "approveAccessError": "Échec de l'approbation de l'accès utilisateur",
+            "rejectAccessSuccess": "Accès utilisateur refusé",
+            "rejectAccessError": "Échec du rejet de l'accès utilisateur",
+            "banLoading": "{count, plural, =1 {Bannissement de l'utilisateur...} other {Bannissement de # utilisateurs...}}",
+            "updateStatusLoading": "{count, plural, =1 {Mise à jour du statut de l'utilisateur...} other {Mise à jour du statut de # utilisateurs...}}",
+            "unbanLoading": {
+                "single": "Débannissement de l'utilisateur...",
+                "multiple": "Débannissement de {count} utilisateurs..."
+            },
+            "changeRoleLoading": "Changement du rôle de l'utilisateur en {role}...",
+            "changeRoleSuccess": "Rôle de l'utilisateur changé en {role} avec succès",
+            "changeRoleError": "Échec du changement de rôle de l'utilisateur"
+        },
+        "emptyState": {
+            "title": "Aucun utilisateur trouvé pour cette recherche.",
+            "description": "Veuillez réessayer."
+        },
+        "banned": {
+            "yes": "Banni",
+            "no": "Actif"
+        },
+        "banDialog": {
+            "title": "Bannir l'utilisateur",
+            "description": "Êtes-vous sûr de vouloir bannir {email} ? Cela empêchera l'utilisateur de se connecter.",
+            "confirm": "Bannir l'utilisateur",
+            "cancel": "Annuler"
+        },
+        "bulkBanDialog": {
+            "description": "Êtes-vous sûr de vouloir bannir {count} utilisateurs ? Cela les empêchera de se connecter."
+        },
+        "unbanDialog": {
+            "title": "Débannir l'utilisateur",
+            "description": "Êtes-vous sûr de vouloir débannir {email} ? Cela permettra à l'utilisateur de se connecter à nouveau.",
+            "confirm": "Débannir l'utilisateur",
+            "cancel": "Annuler"
+        }
+    },
+    "adminWaitlist": {
+        "filters": {
+            "all": "Tous",
+            "allStatuses": "Tous les statuts",
+            "allRegistrations": "Tous les utilisateurs",
+            "status": "Statut",
+            "approved": "Approuvé",
+            "pending": "En attente",
+            "rejected": "Rejeté",
+            "registrationStatus": "Statut d'inscription",
+            "registered": "Enregistré",
+            "unregistered": "Non enregistré",
+            "clearFilters": "Effacer les filtres"
+        },
+        "status": {
+            "approved": "Approuvé",
+            "pending": "En attente",
+            "rejected": "Rejeté",
+            "yes": "Oui",
+            "no": "Non"
+        },
+        "columns": {
+            "email": "E-mail",
+            "status": "Statut",
+            "registered": "Enregistré",
+            "addedDate": "Date d'ajout"
+        },
+        "actions": {
+            "approve": "Approuver l'accès",
+            "reject": "Refuser l'accès",
+            "inviteUser": "Inviter un utilisateur",
+            "impersonate": "Se connecter en tant que",
+            "banUser": "Bannir l'utilisateur",
+            "unbanUser": "Débannir l'utilisateur",
+            "resendInvitation": "Renvoyer l'invitation",
+            "addToWhitelist": "Ajouter à la liste blanche"
+        },
+        "pagination": {
+            "showing": "Affichage",
+            "to": "à",
+            "of": "de",
+            "entries": "entrées",
+            "previous": "Précédent",
+            "next": "Suivant",
+            "page": "Page"
+        },
+        "toast": {
+            "approveAccessSuccess": "Accès approuvé avec succès",
+            "approveAccessError": "Échec de l'approbation de l'accès",
+            "rejectAccessSuccess": "Accès refusé avec succès",
+            "rejectAccessError": "Échec du rejet de l'accès",
+            "invitationSentSuccess": "Invitation envoyée avec succès",
+            "invitationSentError": "Échec de l'envoi de l'invitation",
+            "cantImpersonate": "Impossible d'usurper l'identité d'un utilisateur non enregistré",
+            "banSuccess": "Utilisateur banni avec succès",
+            "banError": "Échec de l'interdiction de l'utilisateur",
+            "cantBanUnregistered": "Impossible de bannir un utilisateur non enregistré",
+            "unbanSuccess": "Utilisateur débanni avec succès",
+            "unbanError": "Échec du déblocage de l'utilisateur",
+            "cantUnbanUnregistered": "Impossible de rétablir un utilisateur non enregistré",
+            "approveAccessLoading": "Approbation de l'accès...",
+            "rejectAccessLoading": "Rejet de l'accès...",
+            "invitationSendingLoading": "Envoi de l'invitation...",
+            "banLoading": "Bannissement de l'utilisateur...",
+            "unbanLoading": "Débannissement de l'utilisateur...",
+            "statusUpdatingSingle": "Mise à jour du statut...",
+            "statusUpdatingMultiple": "Mise à jour du statut pour {count} entrées...",
+            "batchApproveSuccess": "{count} entrées de liste d'attente approuvées avec succès",
+            "batchApproveError": "Échec de l'approbation de {count} entrées sur la liste d'attente",
+            "batchRejectSuccess": "{count} entrées de liste d'attente rejetées avec succès",
+            "batchRejectError": "Échec du rejet de {count} entrées sur la liste d'attente",
+            "addingToWhitelist": "Ajout de l'utilisateur à la liste blanche...",
+            "addedToWhitelist": "Utilisateur ajouté à la liste blanche avec succès"
+        },
+        "errors": {
+            "emailAlreadyExists": "L'email existe déjà dans la liste blanche",
+            "addToWhitelistError": "Échec de l'ajout de l'utilisateur à la liste blanche"
+        },
+        "modal": {
+            "addToWhitelistTitle": "Ajouter un utilisateur à la liste blanche",
+            "addToWhitelistDescription": "Cela leur permettra de s'inscrire pour un compte.",
+            "emailLabel": "Adresse e-mail",
+            "emailPlaceholder": "Entrez l'adresse e-mail",
+            "cancel": "Annuler",
+            "addUser": "Ajouter un utilisateur"
+        }
+    }
+}

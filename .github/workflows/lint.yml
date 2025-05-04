@@ -1,0 +1,73 @@
+name: Run checks
+
+on:
+    pull_request:
+        branches:
+            - main
+            - master
+            - dev
+    push:
+        branches:
+            - main
+            - master
+
+jobs:
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm i
+            - name: Run lint
+              run: pnpm lint
+
+    check-format:
+        name: Check Format
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm i
+            - name: Format
+              run: pnpm format --write
+            - name: Check if files changed
+              run: |
+                  if [ -z "$(git status --porcelain)" ]; then
+                      echo "No files changed"
+                      exit 0
+                  else
+                      echo "Files changed"
+                      exit 1
+                  fi
+
+    typecheck:
+        name: Typecheck
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm i
+            - name: Run typecheck
+              run: pnpm typecheck

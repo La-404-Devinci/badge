@@ -1,0 +1,863 @@
+{
+    "common": {
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "saving": "Saving...",
+        "saved": "Saved",
+        "optional": "Optional",
+        "discard": "Discard",
+        "apply": "Apply Changes",
+        "applying": "Applying",
+        "save": "Save",
+        "reloadPage": "Reload Page",
+        "applyChanges": "Apply Changes",
+        "change": "Change",
+        "upload": "Upload",
+        "uploading": "Uploading...",
+        "copy": "Copy",
+        "copied": "Copied",
+        "search": "Search",
+        "pagination": {
+            "showing": "Showing",
+            "to": "to",
+            "of": "of",
+            "entries": "entries",
+            "items": "items",
+            "previous": "Previous",
+            "next": "Next",
+            "page": "Page"
+        },
+        "buttons": {
+            "signInWithGoogle": "Sign in with Google"
+        }
+    },
+    "components": {
+        "themeSelector": {
+            "darkMode": "Dark Mode",
+            "lightMode": "Light Mode",
+            "systemWithMode": "System ({mode})"
+        },
+        "userButton": {
+            "sessionError": "Session Error",
+            "tryReloading": "Try reloading the page",
+            "settings": "Settings",
+            "logout": "Logout",
+            "termsAndConditions": "Terms & Conditions",
+            "versionLabel": "v."
+        },
+        "avatar": {
+            "title": {
+                "new": "Update Profile Picture",
+                "initial": "Add Profile Picture"
+            },
+            "dimensions": "Square image, minimum 400x400px",
+            "recommendedSize": "For best results, upload a square image of at least 400x400 pixels"
+        },
+        "imageDropzone": {
+            "uploading": "Uploading...",
+            "dropImagePrompt": "Drop an image here, or click to select a file",
+            "acceptedFormats": "PNG, JPG, GIF up to 10MB"
+        },
+        "sidebar": {
+            "navigation": {
+                "main": "Main",
+                "dashboard": "Dashboard",
+                "calendar": "Calendar",
+                "projects": "Projects",
+                "teams": "Teams",
+                "integrations": "Integrations",
+                "benefits": "Benefits",
+                "documents": "Documents",
+                "favorites": "Favorites",
+                "search": "Search...",
+                "mobileMenu": "Mobile Menu",
+                "mobileMenuDescription": "This menu provides mobile navigation options, including access to main navigation links, favorite projects, search, and user settings."
+            },
+            "settings": {
+                "title": "Others",
+                "settingsLink": "Settings",
+                "support": "Support",
+                "admin": "Admin"
+            },
+            "favorites": {
+                "loomMobileApp": "Loom Mobile App",
+                "mondayRedesign": "Monday Redesign",
+                "udemyCourses": "Udemy Courses"
+            }
+        },
+        "impersonationBanner": {
+            "message": "Admin mode: You are viewing the application as {userName}",
+            "stopImpersonation": "Return to admin view"
+        },
+        "table": {
+            "clearFilters": "Clear Filters"
+        },
+        "application": {
+            "createRequest": {
+                "label": "Create Request"
+            }
+        }
+    },
+    "landing": {
+        "title": "Impulse Lab Next.js Starter Template with AlignUI"
+    },
+    "cookieConsent": {
+        "title": "We value your privacy",
+        "description": "We use tracking cookies to understand how you use the product and help us improve your experience. You can choose to allow all cookies or opt out.",
+        "decline": "No Thanks",
+        "accept": "Allow All"
+    },
+    "settings": {
+        "title": "Settings Page",
+        "description": "Manage your preferences and configure various options.",
+        "items": {
+            "account": "Account Settings",
+            "notification": "Notification Settings",
+            "privacySecurity": "Privacy & Security"
+        },
+        "notificationSettings": {
+            "tabs": {
+                "preferences": "Preferences",
+                "method": "Method",
+                "advanced": "Advanced"
+            },
+            "headerTitle": "notification settings",
+            "preferences": {
+                "title": "Notification Preferences",
+                "description": "Choose what notifications you want to receive.",
+                "newsUpdates": {
+                    "label": "News and Updates",
+                    "description": "Stay informed about the latest news, updates, and announcements."
+                },
+                "remindersEvents": {
+                    "label": "Reminders and System Alerts",
+                    "description": "Get reminders for events, important alerts, and system notifications."
+                },
+                "promotionsOffers": {
+                    "label": "Promotions and Offers",
+                    "description": "Receive notifications about special promotions, discounts, and exclusive offers."
+                }
+            },
+            "method": {
+                "title": "Notification Method",
+                "description": "Choose how you prefer to receive notifications.",
+                "emailNotifications": {
+                    "label": "Email Notifications",
+                    "description": "Receive notifications via email"
+                },
+                "pushNotifications": {
+                    "label": "Push Notifications",
+                    "description": "Get real-time updates and alerts directly on your device"
+                },
+                "smsNotifications": {
+                    "label": "SMS Notifications",
+                    "description": "Receive notifications via SMS"
+                }
+            },
+            "advanced": {
+                "title": "Advanced Preferences",
+                "description": "Choose advanced notifications you want to receive.",
+                "leaveAttendance": {
+                    "label": "Leave and Attendance",
+                    "description": "Updates on approved leaves, attendance records, and important attendance-related reminders."
+                },
+                "deadlineNotification": {
+                    "label": "Deadline Notification",
+                    "description": "Receive timely reminders before approaching deadlines."
+                }
+            },
+            "common": {
+                "infoAlert": "Maximize your app usage by leaving notification settings active.",
+                "saveSuccess": "Notification settings updated successfully",
+                "saveError": "Failed to update notification settings"
+            }
+        },
+        "companySettings": {
+            "tabs": {
+                "companySettings": "Company Settings",
+                "contactInformation": "Contact Information",
+                "socialLinks": "Social Links",
+                "exportData": "Export Data"
+            },
+            "selectMenu": "select menu"
+        },
+        "account": {
+            "myAccount": "My Account",
+            "languageRegion": "Language & Region",
+            "appearance": "Appearance",
+            "billing": "Plan & Billing",
+            "accountSettings": "account settings",
+            "myAccountSettings": {
+                "name": "Name",
+                "emailAddress": "Email Address",
+                "phoneNumber": "Phone Number",
+                "sessionError": "Session Error",
+                "profileLoadError": "Could not load your profile. Please try again later.",
+                "emailAlreadyInUse": "Email already in use",
+                "emailUpdateError": "Could not update your email",
+                "avatarUpdateError": "Failed to update avatar. Please try again.",
+                "emailVerificationSent": "We've sent you a verification email to confirm your new email address.",
+                "phoneTooltip": "Enter your phone number without the country code, as it is selected separately. Only numbers are allowed.",
+                "nameValidation": "Name must be at least 2 characters",
+                "emailValidation": "Please enter a valid email address"
+            },
+            "languageRegionSettings": {
+                "title": "Language & Region",
+                "description": "Customize language and regional settings",
+                "language": "Language",
+                "selectLanguage": "Select a language",
+                "timezone": "Timezone",
+                "timezoneTooltip": "The current time zone setting. Select the time zone that matches your location.",
+                "selectTimezone": "Select a timezone",
+                "timeFormat": "Time Format",
+                "timeFormatTooltip": "Choose between a 12-hour or 24-hour clock display format.",
+                "selectTimeFormat": "Select a time format",
+                "dateFormat": "Date Format",
+                "dateFormatTooltip": "Select how you want the date to be displayed.",
+                "selectDateFormat": "Select a date format",
+                "12Hours": "12 hours",
+                "24Hours": "24 hours"
+            }
+        },
+        "appearanceSettings": {
+            "title": "Appearance Settings",
+            "description": "Customize your visual experience with theme options",
+            "lightMode": "Light Mode",
+            "lightModeDescription": "Pick a clean and classic light theme.",
+            "darkMode": "Dark Mode",
+            "darkModeDescription": "Select a sleek and modern dark theme.",
+            "systemMode": "System",
+            "systemModeDescription": "Adapts to your device's theme."
+        },
+        "privacySecurity": {
+            "selectMenu": "Privacy & Security",
+            "tabs": {
+                "changePassword": "Change Password",
+                "twoFactorSecurity": "2FA Security",
+                "activeSessions": "Active Sessions",
+                "deleteAccount": "Delete Account"
+            },
+            "activeSessions": {
+                "title": "Active Sessions",
+                "description": "Monitor and manage all your active sessions.",
+                "signOutAllDevices": "Sign out all other devices",
+                "unknownDevice": "Unknown device"
+            },
+            "changePassword": {
+                "title": "Change Password",
+                "description": "Update password for enhanced account security.",
+                "currentPassword": "Current Password",
+                "newPassword": "New Password",
+                "confirmPassword": "Confirm New Password",
+                "passwordRequirements": "Must contain at least;",
+                "requireUppercase": "At least 1 uppercase",
+                "requireNumber": "At least 1 number",
+                "requireLength": "At least 8 characters",
+                "successMessage": "Password updated successfully"
+            },
+            "deleteAccount": {
+                "title": "Delete Account",
+                "description": "Manage the process of deleting account.",
+                "warningCannotUndo": "This action cannot be undone.",
+                "warningDataRemoval": "All of your data, including your profile, posts, and personal information, will be permanently removed.",
+                "confirmationText": "By entering your password, you confirm that you understand and accept the consequences of deleting your account.",
+                "confirmDeletion": "Confirm Deletion",
+                "passwordHint": "Provide your password to proceed with account deletion.",
+                "invalidPassword": "The password you entered is incorrect. Please try again.",
+                "error": "An error occurred while deleting your account. Please try again later.",
+                "successMessage": "Your account with all associated data has been deleted successfully"
+            },
+            "twoFactorSecurity": {
+                "title": "2FA Security",
+                "description": "Enable two-factor authentication to your account.",
+                "twoFactorAuthentication": "Two-Factor Authentication",
+                "authenticatorApp": {
+                    "title": "Authenticator App",
+                    "enabled": "Your account is protected with an authenticator app.",
+                    "disabled": "Add an extra layer of security with an authenticator app."
+                },
+                "securityNote": "Two-factor authentication adds an extra layer of security by requiring a second verification step.",
+                "passkeys": {
+                    "title": "Passkeys",
+                    "error": "An error occurred",
+                    "noPasskeys": "No passkeys yet",
+                    "description": "Passkeys provide a more secure way to sign in without passwords.",
+                    "addPasskey": "Add a passkey",
+                    "addedOn": "Added on",
+                    "rename": "Rename",
+                    "delete": "Delete",
+                    "deletePasskey": "Delete Passkey",
+                    "deleteConfirmation": "Are you sure you want to delete the passkey \"{name}\"?\n\nYou will need to register it again to use it.",
+                    "unnamed": "Unnamed",
+                    "renameDialog": {
+                        "title": "Rename Passkey",
+                        "description": "Update the name of your passkey.",
+                        "passkeyName": "Passkey Name",
+                        "passkeyNameTooltip": "This name helps you identify your passkey across your devices.",
+                        "passkeyNamePlaceholder": "Enter passkey name",
+                        "renameError": "Failed to rename passkey"
+                    },
+                    "addPasskeyModal": {
+                        "title": "Add a Passkey",
+                        "description": "A secure and easy way to log in to your account",
+                        "infoText": "Passkeys use biometrics or your device to authenticate you, without the need for passwords.",
+                        "passkeyName": "Passkey Name",
+                        "passkeyNamePlaceholder": "Enter a name for your passkey",
+                        "processing": "Processing...",
+                        "addPasskey": "Add Passkey",
+                        "errors": {
+                            "alreadyRegistered": "This passkey is already registered",
+                            "canceledOrTimedOut": "The operation has been cancelled or timed out",
+                            "generic": "An error occurred"
+                        }
+                    }
+                },
+                "disableDialog": {
+                    "title": "Disable Two-Factor Authentication",
+                    "description": "Enter your password to disable 2FA",
+                    "securityWarning": {
+                        "title": "Security Warning",
+                        "message": "Disabling two-factor authentication will significantly reduce the security of your account. Only proceed if you're absolutely sure."
+                    },
+                    "confirmPassword": "Confirm Password",
+                    "passwordPlaceholder": "Enter your password",
+                    "disabling": "Disabling...",
+                    "disable": "Disable Two-Factor",
+                    "errors": {
+                        "invalidPassword": "The password you entered is incorrect. Please try again.",
+                        "generic": "Something went wrong. Please try again."
+                    }
+                },
+                "authenticatorModal": {
+                    "steps": {
+                        "password": {
+                            "title": "Confirm Password",
+                            "description": "Enter your password to enable 2FA"
+                        },
+                        "verify": {
+                            "title": "Setup Authenticator App",
+                            "description": "Scan the QR code with your authenticator app"
+                        },
+                        "backup": {
+                            "title": "Backup Codes",
+                            "description": "Save these codes for account recovery"
+                        }
+                    },
+                    "errors": {
+                        "invalidPassword": "The password you entered is incorrect. Please try again.",
+                        "generic": "Something went wrong while setting up two-factor authentication. Please try again.",
+                        "setupFailed": "Failed to setup authenticator",
+                        "invalidCode": "Invalid verification code"
+                    }
+                },
+                "authenticatorSteps": {
+                    "password": {
+                        "password": "Password",
+                        "placeholder": "Enter your password",
+                        "verifying": "Verifying...",
+                        "continue": "Continue"
+                    },
+                    "verify": {
+                        "verification": "Verification",
+                        "instructions": "Enter the 6-digit code from your authenticator app",
+                        "placeholder": "Enter 6-digit code",
+                        "manualSetup": "Can't scan the QR code?",
+                        "appInstructions": "In your authenticator app:",
+                        "scanQrCode": "Scan this QR code with your authenticator app to enable two-factor authentication",
+                        "orEnterManually": "Enter this key manually in your authenticator app",
+                        "verifying": "Verifying...",
+                        "verify": "Verify"
+                    },
+                    "backup": {
+                        "instructions": "Store these backup codes in a secure location. Each code can be used once if you lose access to your authenticator app.",
+                        "downloadCodes": "Download Codes",
+                        "copyCodes": "Copy All Codes",
+                        "printCodes": "Print Codes",
+                        "codesCopied": "Codes copied to clipboard",
+                        "finish": "Finish Setup",
+                        "backupCodes": "Backup Codes",
+                        "saveThese": "save these"
+                    }
+                }
+            }
+        },
+        "billing": {
+            "title": "Plan & Billing",
+            "description": "Manage your subscription and payment details",
+            "upgradeAlert": "Upgrade to a premium plan to unlock additional features and support.",
+            "cancelAlert": "Your subscription is set to cancel at the end of the current billing period."
+        }
+    },
+    "auth": {
+        "common": {
+            "buttons": {
+                "signIn": "Sign in",
+                "register": "Register",
+                "resetPassword": "Reset Password",
+                "contactUs": "Contact us",
+                "goBack": "Go Back",
+                "goBackToLogin": "Go Back to Login",
+                "termsOfService": "Terms of Service",
+                "submitCode": "Submit Code",
+                "resendCode": "Resend code",
+                "resending": "Resending...",
+                "privacyPolicy": "Privacy Policy",
+                "signInWithGoogle": "Sign in with Google"
+            },
+            "labels": {
+                "email": "Email Address",
+                "password": "Password",
+                "fullName": "Full Name",
+                "newPassword": "New Password",
+                "confirmPassword": "Confirm Password",
+                "rememberMe": "Keep me logged in"
+            },
+            "loading": {
+                "signingIn": "Signing in...",
+                "sendingEmail": "Sending email...",
+                "resetingPassword": "Resetting password...",
+                "verifying": "Verifying...",
+                "signingInWithGoogle": "Signing in with Google..."
+            }
+        },
+        "forms": {
+            "signIn": {
+                "title": "Login to your account",
+                "subtitle": "Enter your details to login.",
+                "forgotPassword": "Forgot password?",
+                "errors": {
+                    "invalidCredentials": "Invalid email or password"
+                }
+            },
+            "signUp": {
+                "title": "Create a new account",
+                "subtitle": "Enter your details to register.",
+                "passwordRequirements": "Must contain 1 uppercase letter, 1 number, min. 8 characters.",
+                "termsAgreement": "By clicking Register, you agree to accept {projectName}",
+                "errors": {
+                    "userExists": "This email address is already in use, please sign in instead.",
+                    "waitlistDisabled": "Registration is currently disabled.",
+                    "notWhitelisted": "This email is not whitelisted for registration."
+                }
+            },
+            "forgotPassword": {
+                "title": "Reset Password",
+                "subtitle": "Enter your email to reset your password.",
+                "successMessage": "If this email address is associated with an account, we've sent you an email to reset your password.",
+                "noAccess": "Don't have access anymore?"
+            },
+            "resetPassword": {
+                "title": "Reset Password",
+                "subtitle": "Create a new password for your account.",
+                "successMessage": "Your password has been changed",
+                "passwordCriteria": {
+                    "intro": "Must contain at least;",
+                    "uppercase": "At least 1 uppercase",
+                    "number": "At least 1 number",
+                    "length": "At least 8 characters"
+                }
+            },
+            "verification": {
+                "title": "Enter Verification Code",
+                "subtitle": "We've sent a code to",
+                "issues": "Experiencing issues receiving the code?",
+                "successMessage": "Your email has been verified. You can now sign in to your account."
+            },
+            "waitlist": {
+                "title": "Join our Waitlist",
+                "subtitle": "Enter your email to join our waitlist and be among the first to know when we launch.",
+                "submit": "Join Waitlist",
+                "privacyNotice": "By joining our waitlist, you agree to {projectName}'s",
+                "successTitle": "You're on the List!",
+                "successSubtitle": "Thank you for your interest. We'll notify you when you will get access !",
+                "alreadyHaveAccess": "Already have an account?"
+            }
+        },
+        "header": {
+            "signIn": {
+                "text": "Don't have an account?",
+                "link": "Register"
+            },
+            "signUp": {
+                "text": "Already have an account?",
+                "link": "Login"
+            },
+            "forgotPassword": {
+                "text": "Changed your mind?",
+                "link": "Go Back to Login"
+            },
+            "verification": {
+                "text": "Changed your mind?",
+                "link": "Go Back to Login"
+            },
+            "resetPassword": {
+                "text": "Changed your mind?",
+                "link": "Go Back to Login"
+            },
+            "confirmAccess": {
+                "text": "Changed your mind?",
+                "link": "Go Back"
+            },
+            "waitlist": {
+                "text": "Already have an account?",
+                "link": "Sign in"
+            }
+        },
+        "twoFactor": {
+            "title": "Two-Factor Authentication",
+            "description": "Verify your identity to continue",
+            "steps": {
+                "totp": {
+                    "title": "Authenticator Verification",
+                    "description": "Enter the 6-digit code from your authenticator app",
+                    "noAccessMessage": "Don't have access to your authenticator app?",
+                    "rememberDevice": "Remember this device for 60 days"
+                },
+                "backup": {
+                    "title": "Backup Code Verification",
+                    "description": "Enter one of your backup codes. Each code can only be used once.",
+                    "codeLabel": "Backup Code",
+                    "codePlaceholder": "Enter your backup code"
+                },
+                "email": {
+                    "title": "Email Verification",
+                    "description": "We'll send a verification code to your email address",
+                    "codeSent": "We've sent a verification code to your email address. Enter the code below."
+                },
+                "recovery": {
+                    "title": "Account Recovery",
+                    "description": "Choose an alternative method to verify your identity",
+                    "options": {
+                        "backup": {
+                            "title": "Backup Code",
+                            "description": "Use one of your backup codes"
+                        },
+                        "email": {
+                            "title": "Email Code",
+                            "description": "Receive a one-time code via email"
+                        }
+                    }
+                }
+            },
+            "actions": {
+                "verify": "Verify",
+                "verifying": "Verifying...",
+                "sendVerificationCode": "Send verification code",
+                "resendCode": "Resend code",
+                "resendCodeWithTimer": "Resend code ({seconds}s)",
+                "sending": "Sending...",
+                "tryAnotherMethod": "Try another method",
+                "backToAuthenticator": "Back to authenticator",
+                "backToRecoveryOptions": "Back to recovery options"
+            },
+            "errors": {
+                "unknown": "An unknown error occurred. Please try again.",
+                "invalidCode": "Invalid verification code. Please try again.",
+                "userNotFound": "User not found. Please contact support.",
+                "invalidTwoFactorCookie": "Your two-factor session has expired. Please sign in again.",
+                "invalidBackupCode": "Invalid backup code. Please try again.",
+                "retrySignIn": "Your two-factor session has expired. Please sign in again."
+            },
+            "success": {
+                "authenticationSuccessful": "Authentication successful"
+            }
+        }
+    },
+    "subscription": {
+        "modal": {
+            "chooseYourPlan": "Choose your plan",
+            "selectPlanDescription": "Select the plan that best fits your needs",
+            "changePlan": "Change plan",
+            "upgrade": "Upgrade",
+            "cancel": "Cancel"
+        },
+        "status": {
+            "currentlyOnFreePlan": "You're currently on the free plan.",
+            "upgradePlan": "Upgrade Plan",
+            "trial": "Trial",
+            "canceled": "Canceled",
+            "cancelsOn": "Cancels on {date}",
+            "renewsOn": "Renews on {date}",
+            "trialConversion": "Free trial will convert to a paid subscription",
+            "daysRemaining": "{days} day(s) remaining in your trial",
+            "trialActive": "Your trial is active",
+            "upgrade": "Upgrade",
+            "manageSubscription": "Manage Subscription"
+        }
+    },
+    "imageCropper": {
+        "zoomLabel": "Zoom",
+        "zoomAriaLabel": "Zoom",
+        "removeButton": "Remove",
+        "removeTooltip": "Remove image"
+    },
+    "phoneNumberInput": {
+        "emptyStateTitle": "No country found",
+        "emptyStateDescription": "Try searching by country name or phone code"
+    },
+    "fileUpload": {
+        "percentSymbol": "%",
+        "sizeUnit": "KB",
+        "of": "of",
+        "status": {
+            "completed": "Completed",
+            "failed": "Failed"
+        },
+        "actions": {
+            "tryAgain": "Try Again",
+            "remove": "Remove",
+            "cancel": "Cancel"
+        }
+    },
+    "admin": {
+        "title": "Admin Dashboard",
+        "description": "Manage your application settings and users",
+        "items": {
+            "dashboard": "Dashboard",
+            "users": "Manage Users",
+            "waitlist": "Manage Waitlist",
+            "settings": "Application Settings"
+        },
+        "users": {
+            "title": "User Management",
+            "description": "Manage user accounts and permissions",
+            "access": {
+                "approved": "approved",
+                "denied": "denied",
+                "pending": "pending",
+                "updated": "updated",
+                "updateSuccess": "User access {status}",
+                "updateError": "Failed to update user access status"
+            }
+        }
+    },
+    "adminUsers": {
+        "filters": {
+            "all": "All Users",
+            "members": "Team Members",
+            "invited": "Invited",
+            "waitlistStatus": "Waitlist Status",
+            "approved": "Approved",
+            "pending": "Pending",
+            "rejected": "Rejected",
+            "notOnWaitlist": "Not On Waitlist",
+            "notFound": "Not Found",
+            "role": "User Role",
+            "admin": "Admin",
+            "user": "User",
+            "sortBy": "Sort By",
+            "name": "Name",
+            "email": "Email",
+            "createdAt": "Date Created",
+            "ascending": "Ascending",
+            "descending": "Descending",
+            "clearFilters": "Clear Filters"
+        },
+        "emptyState": {
+            "title": "No users found for this search.",
+            "description": "Please try again."
+        },
+        "actions": {
+            "addMember": "Add Member",
+            "viewProfile": "View Profile",
+            "editUser": "Edit User",
+            "impersonate": "Impersonate User",
+            "approveAccess": "Approve Access",
+            "rejectAccess": "Reject Access",
+            "addToWaitlist": "Add to Waitlist",
+            "banUser": "Ban User",
+            "unbanUser": "Unban User"
+        },
+        "columns": {
+            "user": "User",
+            "role": "Role",
+            "waitlistStatus": "Waitlist Status",
+            "emailVerified": "Email Verified",
+            "joined": "Joined",
+            "banned": "Ban Status"
+        },
+        "banned": {
+            "yes": "Banned",
+            "no": "Active"
+        },
+        "verification": {
+            "yes": "Yes",
+            "no": "No"
+        },
+        "table": {
+            "selectAll": "Select all",
+            "selectRow": "Select row"
+        },
+        "pagination": {
+            "showing": "Showing",
+            "to": "to",
+            "of": "of",
+            "users": "users",
+            "previous": "Previous",
+            "next": "Next",
+            "page": "Page"
+        },
+        "toast": {
+            "impersonateSuccess": "Successfully impersonating user",
+            "impersonateError": "Failed to impersonate user",
+            "banLoading": {
+                "single": "Banning user...",
+                "multiple": "Banning {count} users..."
+            },
+            "banSuccess": {
+                "single": "User banned successfully",
+                "multiple": "{count} users banned successfully"
+            },
+            "banError": {
+                "single": "Failed to ban user",
+                "multiple": "Failed to ban {count} users"
+            },
+            "unbanLoading": {
+                "single": "Unbanning user...",
+                "multiple": "Unbanning {count} users..."
+            },
+            "unbanSuccess": {
+                "single": "User unbanned successfully",
+                "multiple": "{count} users unbanned successfully"
+            },
+            "unbanError": {
+                "single": "Failed to unban user",
+                "multiple": "Failed to unban {count} users"
+            },
+            "addToWaitlistSuccess": "User added to waitlist",
+            "addToWaitlistError": "Failed to add user to waitlist",
+            "updateStatusLoading": {
+                "single": "Updating user status...",
+                "multiple": "Updating {count} users status..."
+            },
+            "approveAccessSuccess": {
+                "single": "User access approved",
+                "multiple": "{count} users access approved"
+            },
+            "approveAccessError": {
+                "single": "Failed to approve user access",
+                "multiple": "Failed to approve {count} users access"
+            },
+            "rejectAccessSuccess": {
+                "single": "User access rejected",
+                "multiple": "{count} users access rejected"
+            },
+            "rejectAccessError": {
+                "single": "Failed to reject user access",
+                "multiple": "Failed to reject {count} users access"
+            },
+            "changeRoleLoading": "Changing user role to {role}...",
+            "changeRoleSuccess": "User role changed to {role} successfully",
+            "changeRoleError": "Failed to change user role"
+        },
+        "banDialog": {
+            "title": "Ban User",
+            "description": "Are you sure you want to ban {email}? This will prevent the user from logging in.",
+            "confirm": "Ban User",
+            "cancel": "Cancel"
+        },
+        "bulkBanDialog": {
+            "description": "Are you sure you want to ban {count} users? This will prevent them from logging in."
+        },
+        "unbanDialog": {
+            "title": "Unban User",
+            "description": "Are you sure you want to unban {email}? This will allow the user to log in again.",
+            "confirm": "Unban User",
+            "cancel": "Cancel"
+        },
+        "roles": {
+            "title": "Change Role",
+            "admin": "Admin",
+            "user": "User"
+        }
+    },
+    "adminWaitlist": {
+        "filters": {
+            "all": "All",
+            "allStatuses": "All statuses",
+            "allRegistrations": "All users",
+            "status": "Status",
+            "approved": "Approved",
+            "pending": "Pending",
+            "rejected": "Rejected",
+            "registrationStatus": "Registration Status",
+            "registered": "Registered",
+            "unregistered": "Not Registered",
+            "clearFilters": "Clear Filters"
+        },
+        "status": {
+            "approved": "Approved",
+            "pending": "Pending",
+            "rejected": "Rejected",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "columns": {
+            "email": "Email",
+            "status": "Status",
+            "registered": "Registered",
+            "addedDate": "Date Added"
+        },
+        "actions": {
+            "approve": "Approve Access",
+            "reject": "Reject Access",
+            "inviteUser": "Invite User",
+            "impersonate": "Impersonate User",
+            "banUser": "Ban User",
+            "unbanUser": "Unban User",
+            "resendInvitation": "Resend Invitation",
+            "addToWhitelist": "Add to Whitelist"
+        },
+        "pagination": {
+            "showing": "Showing",
+            "to": "to",
+            "of": "of",
+            "entries": "entries",
+            "previous": "Previous",
+            "next": "Next",
+            "page": "Page"
+        },
+        "errors": {
+            "emailAlreadyExists": "Email already exists in the whitelist",
+            "addToWhitelistError": "Failed to add user to whitelist"
+        },
+        "toast": {
+            "approveAccessSuccess": "Access approved successfully",
+            "approveAccessError": "Failed to approve access",
+            "approveAccessLoading": "Approving access...",
+            "rejectAccessSuccess": "Access rejected successfully",
+            "rejectAccessError": "Failed to reject access",
+            "rejectAccessLoading": "Rejecting access...",
+            "invitationSentSuccess": "Invitation sent successfully",
+            "invitationSentError": "Failed to send invitation",
+            "invitationSendingLoading": "Sending invitation...",
+            "cantImpersonate": "Cannot impersonate unregistered user",
+            "banSuccess": "User banned successfully",
+            "banError": "Failed to ban user",
+            "banLoading": "Banning user...",
+            "cantBanUnregistered": "Cannot ban unregistered user",
+            "unbanSuccess": "User unbanned successfully",
+            "unbanError": "Failed to unban user",
+            "unbanLoading": "Unbanning user...",
+            "cantUnbanUnregistered": "Cannot unban unregistered user",
+            "statusUpdatingSingle": "Updating status...",
+            "statusUpdatingMultiple": "Updating status for {count} entries...",
+            "batchApproveSuccess": "{count} waitlist entries approved successfully",
+            "batchApproveError": "Failed to approve {count} waitlist entries",
+            "batchRejectSuccess": "{count} waitlist entries rejected successfully",
+            "batchRejectError": "Failed to reject {count} waitlist entries",
+            "addingToWhitelist": "Adding user to whitelist...",
+            "addedToWhitelist": "User added to whitelist successfully"
+        },
+        "modal": {
+            "addToWhitelistTitle": "Add User to Whitelist",
+            "addToWhitelistDescription": "This will allow them to register for an account.",
+            "emailLabel": "Email Address",
+            "emailPlaceholder": "Enter email address",
+            "cancel": "Cancel",
+            "addUser": "Add User"
+        }
+    }
+}
