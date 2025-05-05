@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { PAGES } from "@/constants/pages";
 import { getServerSession } from "@/lib/auth/utils";
 
+import CarouselWrapper from "./_components/carousel-wrapper";
 import AuthFooter from "./_components/footer";
 import AuthHeader from "./_components/header";
 
@@ -18,19 +19,28 @@ export default async function Layout({
     }
 
     return (
-        <div className="items-cente flex min-h-screen flex-col ">
-            <AuthHeader />
-            <div className="relative isolate flex w-full flex-1 flex-col items-center justify-center">
-                <img
-                    src="/images/auth-pattern.svg"
-                    alt=""
-                    className="pointer-events-none absolute left-1/2 top-1/2 -z-10 w-full max-w-[1140px] -translate-x-1/2 -translate-y-1/2 object-contain"
-                    width="824"
-                    height="318"
-                />
-                {children}
+        <div
+            className="grid min-h-screen lg:grid-cols-[minmax(0,1fr),500px] xl:grid-cols-[minmax(0,1fr),596px] min-[1440px]:grid-cols-[minmax(0,844fr),minmax(0,596fr)]"
+            style={{
+                background:
+                    "linear-gradient(180deg, #CA5F16 0%, #DC6818 25%, #E97D35 50%, #F1AC7E 75%, #F9DCC8 100%), #FFFFFF",
+            }}
+        >
+            <div className="flex h-full flex-col p-1.5 lg:p-2 lg:pr-0">
+                <div className="flex flex-1 flex-col rounded-2xl bg-bg-white-0 px-3.5 lg:px-11 lg:py-6">
+                    <AuthHeader />
+                    <div className="flex flex-1 flex-col py-6 lg:py-[100px] [@media_(min-height:901px)]:justify-center">
+                        <div className="mx-auto flex w-full max-w-[392px] flex-col gap-6 md:translate-x-1.5">
+                            {children}
+                        </div>
+                    </div>
+                    <AuthFooter />
+                </div>
             </div>
-            <AuthFooter />
+
+            <div className="hidden lg:block">
+                <CarouselWrapper />
+            </div>
         </div>
     );
 }
