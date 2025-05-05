@@ -1,10 +1,12 @@
 import { seed } from "drizzle-seed";
+import { ulid } from "ulid";
+
+import { USER_ROLES } from "@/constants/roles";
+
 import { db } from "../index";
 import { user, account, session, verification } from "../schema/auth-schema";
 import { notificationSettings } from "../schema/notification-settings";
 import { userPreferences } from "../schema/user-preferences";
-import { USER_ROLES } from "@/constants/roles";
-import { ulid } from "ulid";
 
 const main = async () => {
     // Valeurs possibles
@@ -23,9 +25,6 @@ const main = async () => {
         { length: 5 },
         (_, i) => `https://i.pravatar.cc/150?img=${i + 1}`
     );
-
-    // Valeurs booléennes
-    const booleanOptions = [true, false];
 
     // Dates de référence
     const now = new Date();
