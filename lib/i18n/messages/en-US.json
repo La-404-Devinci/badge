@@ -28,11 +28,6 @@
             "previous": "Previous",
             "next": "Next",
             "page": "Page"
-        },
-        "buttons": {
-            "signInWithgoogle": "Se connecter avec Google",
-            "signInWithdiscord": "Se connecter avec Discord",
-            "signInWithgithub": "Se connecter avec GitHub"
         }
     },
     "components": {
