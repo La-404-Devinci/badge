@@ -30,7 +30,9 @@
             "page": "Page"
         },
         "buttons": {
-            "signInWithGoogle": "Sign in with Google"
+            "signInWithGoogle": "Sign in with Google",
+            "signInWithDiscord": "Sign in with Discord",
+            "signInWithGithub": "Sign in with GitHub"
         }
     },
     "components": {

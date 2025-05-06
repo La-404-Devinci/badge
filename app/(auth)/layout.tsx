@@ -23,7 +23,7 @@ export default async function Layout({
             className="grid min-h-screen lg:grid-cols-[minmax(0,1fr),500px] xl:grid-cols-[minmax(0,1fr),596px] min-[1440px]:grid-cols-[minmax(0,844fr),minmax(0,596fr)]"
             style={{
                 background:
-                    "linear-gradient(180deg, #CA5F16 0%, #DC6818 25%, #E97D35 50%, #F1AC7E 75%, #F9DCC8 100%), #FFFFFF",
+                    "linear-gradient(180deg, #3D16CA 0%, #2918DC 25%, #3538E9 50%, #7E7EF1 75%, #C8CBF9 100%)",
             }}
         >
             <div className="flex h-full flex-col p-1.5 lg:p-2 lg:pr-0">

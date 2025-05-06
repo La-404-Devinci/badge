@@ -31,6 +31,7 @@ export const socialButtonVariants = tv({
             linkedin: {},
             github: {},
             dropbox: {},
+            discord: {},
         },
         mode: {
             filled: {
@@ -138,6 +139,18 @@ export const socialButtonVariants = tv({
                 root: [
                     // base
                     "bg-[#3984ff]",
+                    // before
+                    "before:bg-static-black/[.16]",
+                ],
+            },
+        },
+        {
+            brand: "discord",
+            mode: "filled",
+            class: {
+                root: [
+                    // base
+                    "bg-[#7289da]",
                     // before
                     "before:bg-static-black/[.16]",
                 ],
