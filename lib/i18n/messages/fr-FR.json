@@ -28,6 +28,11 @@
             "previous": "Précédent",
             "next": "Suivant",
             "page": "Page"
+        },
+        "buttons": {
+            "signInWithgoogle": "Se connecter avec Google",
+            "signInWithdiscord": "Se connecter avec Discord",
+            "signInWithgithub": "Se connecter avec GitHub"
         }
     },
     "components": {
@@ -401,14 +406,15 @@
                 "resendCode": "Renvoyer le code",
                 "resending": "Réenvoi...",
                 "privacyPolicy": "Politique de confidentialité",
-                "signInWithGoogle": "Se connecter avec Google",
-                "signInWithDiscord": "Se connecter avec Discord",
-                "signInWithGithub": "Se connecter avec GitHub"
+                "signInWithgoogle": "Se connecter avec Google",
+                "signInWithdiscord": "Se connecter avec Discord",
+                "signInWithgithub": "Se connecter avec GitHub"
             },
             "labels": {
                 "email": "Adresse email",
                 "password": "Mot de passe",
                 "fullName": "Nom complet",
+                "username": "Nom d'utilisateur",
                 "newPassword": "Nouveau mot de passe",
                 "confirmPassword": "Confirmer le mot de passe",
                 "rememberMe": "Rester connecté"

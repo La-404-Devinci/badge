@@ -6,6 +6,7 @@ export const AUTH_PAGES = {
     RESET_PASSWORD: "/reset-password",
     CONFIRM_ACCESS: "/confirm-2fa",
     WAITLIST: "/waitlist",
+    ONBOARDING: "/onboarding",
 };
 
 export const APPLICATION_PAGES = {

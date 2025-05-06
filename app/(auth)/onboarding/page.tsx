@@ -1,3 +1,17 @@
+"use client";
+
+import PersonalStep from "./_components/personal-step";
+import { useStepStore } from "./_components/store";
+
 export default function Onboarding() {
-    return;
+    const { activeStep } = useStepStore();
+    return (
+        <div className="w-full">
+            <div className="flex flex-col gap-6 mt-12">
+                {activeStep === 0 && <PersonalStep />}
+                {activeStep === 1 && <div>Step 2</div>}
+                {activeStep === 2 && <div>Step 3</div>}
+            </div>
+        </div>
+    );
 }

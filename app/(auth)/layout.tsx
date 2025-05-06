@@ -1,8 +1,3 @@
-import { redirect } from "next/navigation";
-
-import { PAGES } from "@/constants/pages";
-import { getServerSession } from "@/lib/auth/utils";
-
 import CarouselWrapper from "./_components/carousel-wrapper";
 import AuthFooter from "./_components/footer";
 import AuthHeader from "./_components/header";
@@ -12,12 +7,6 @@ export default async function Layout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const session = await getServerSession();
-
-    if (session) {
-        redirect(PAGES.DASHBOARD);
-    }
-
     return (
         <div
             className="grid min-h-screen lg:grid-cols-[minmax(0,1fr),500px] xl:grid-cols-[minmax(0,1fr),596px] min-[1440px]:grid-cols-[minmax(0,844fr),minmax(0,596fr)]"
@@ -29,8 +18,8 @@ export default async function Layout({
             <div className="flex h-full flex-col p-1.5 lg:p-2 lg:pr-0">
                 <div className="flex flex-1 flex-col rounded-2xl bg-bg-white-0 px-3.5 lg:px-11 lg:py-6">
                     <AuthHeader />
-                    <div className="flex flex-1 flex-col py-6 lg:py-[100px] [@media_(min-height:901px)]:justify-center">
-                        <div className="mx-auto flex w-full max-w-[392px] flex-col gap-6 md:translate-x-1.5">
+                    <div className="flex flex-1 flex-col py-6 lg:py-12 [@media_(min-height:901px)]:justify-center">
+                        <div className="mx-auto flex w-full flex-col gap-6 md:translate-x-1.5">
                             {children}
                         </div>
                     </div>

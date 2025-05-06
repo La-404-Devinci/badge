@@ -30,9 +30,9 @@
             "page": "Page"
         },
         "buttons": {
-            "signInWithGoogle": "Sign in with Google",
-            "signInWithDiscord": "Sign in with Discord",
-            "signInWithGithub": "Sign in with GitHub"
+            "signInWithgoogle": "Sign in with Google",
+            "signInWithdiscord": "Sign in with Discord",
+            "signInWithgithub": "Sign in with GitHub"
         }
     },
     "components": {
@@ -406,12 +406,14 @@
                 "resendCode": "Resend code",
                 "resending": "Resending...",
                 "privacyPolicy": "Privacy Policy",
-                "signInWithGoogle": "Sign in with Google"
+                "signInWithGoogle": "Sign in with Google",
+                "signInWithDiscord": ""
             },
             "labels": {
                 "email": "Email Address",
                 "password": "Password",
                 "fullName": "Full Name",
+                "username": "Username",
                 "newPassword": "New Password",
                 "confirmPassword": "Confirm Password",
                 "rememberMe": "Keep me logged in"
