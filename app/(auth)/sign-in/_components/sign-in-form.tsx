@@ -23,28 +23,22 @@ type SocialProvider =
 
 export function SignInForm() {
     const t = useTranslations("auth");
-    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSignIn = (provider: SocialProvider) => {
+    const handleSignIn = async (provider: SocialProvider) => {
         setIsLoading(true);
 
-        authClient.signIn.social(
-            {
-                provider,
-                newUserCallbackURL: PAGES.ONBOARDING,
-                callbackURL: PAGES.DASHBOARD,
-                errorCallbackURL: PAGES.SIGN_IN,
-            },
-            {
-                onSuccess() {
-                    router.push(PAGES.DASHBOARD);
-                },
-                onError() {
-                    setIsLoading(false);
-                },
-            }
-        );
+        const res = await authClient.signIn.social({
+            provider,
+            newUserCallbackURL: PAGES.ONBOARDING,
+            callbackURL: PAGES.DASHBOARD,
+            errorCallbackURL: PAGES.SIGN_IN,
+        });
+        setIsLoading(false);
+        if (res.error) {
+            console.error(res.error);
+            return;
+        }
     };
 
     const providers: Array<{
