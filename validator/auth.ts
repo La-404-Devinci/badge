@@ -63,8 +63,3 @@ export const changePasswordSchema = z
         message: "Passwords don't match",
         path: ["confirmPassword"],
     });
-
-export const personalSchema = z.object({
-    fullName: z.string().min(3, "Name must be at least 3 characters long"),
-    username: z.string().min(3, "Username must be at least 3 characters long"),
-});

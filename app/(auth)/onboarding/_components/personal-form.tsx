@@ -14,9 +14,9 @@ import { FormMessage } from "@/components/ui/form";
 import * as Input from "@/components/ui/input";
 import * as Label from "@/components/ui/label";
 import { PROJECT } from "@/constants/project";
-import { personalSchema } from "@/validator/auth";
+import { personalSchema } from "@/validator/onboarding";
 
-import { useStepStore } from "./store";
+import { useStepStore, useOnboardingStore } from "./store";
 
 export function PersonalForm() {
     const t = useTranslations("auth");
@@ -31,11 +31,20 @@ export function PersonalForm() {
         },
     });
 
+    const { setOnboardingStore } = useOnboardingStore();
+
     const { nextStep } = useStepStore();
 
     const onSubmit = async (values: z.infer<typeof personalSchema>) => {
         setIsLoading(true);
-        console.log(values);
+        const { username, fullName } = values;
+        setOnboardingStore({
+            personalInfo: {
+                username,
+                fullName,
+            },
+        });
+        nextStep();
     };
 
     return (
@@ -96,7 +105,6 @@ export function PersonalForm() {
                         variant="primary"
                         size="medium"
                         disabled={isLoading}
-                        onClick={() => nextStep()}
                     >
                         {isLoading && <StaggeredFadeLoader variant="muted" />}
                         {isLoading

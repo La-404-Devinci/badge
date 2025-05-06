@@ -12,6 +12,19 @@ interface StepState {
     setActiveStep: (step: number) => void;
 }
 
+interface OnboardingState {
+    personalInfo: {
+        fullName: string;
+        username: string;
+    };
+    role?: string;
+    position?: string;
+    biography?: string;
+    setOnboardingStore: (
+        data: Partial<Omit<OnboardingState, "setOnboardingStore">>
+    ) => void;
+}
+
 export const useStepStore = create<StepState>((set, get) => ({
     activeStep: 0,
     prevStep: () => {
@@ -25,4 +38,19 @@ export const useStepStore = create<StepState>((set, get) => ({
     setActiveStep: (step: number) => {
         set({ activeStep: step });
     },
+}));
+
+export const useOnboardingStore = create<OnboardingState>((set) => ({
+    personalInfo: {
+        fullName: "",
+        username: "",
+    },
+    role: "",
+    position: "",
+    biography: "",
+    setOnboardingStore: (data) =>
+        set((state) => ({
+            ...state,
+            ...data,
+        })),
 }));

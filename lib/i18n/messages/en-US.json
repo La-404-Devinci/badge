@@ -19,6 +19,12 @@
         "copy": "Copy",
         "copied": "Copied",
         "search": "Search",
+        "buttons": {
+            "continue": "Continue"
+        },
+        "loading": {
+            "submitting": "Submitting..."
+        },
         "pagination": {
             "showing": "Showing",
             "to": "to",
@@ -403,7 +409,8 @@
                 "privacyPolicy": "Privacy Policy",
                 "signInWithgoogle": "Sign in with Google",
                 "signInWithdiscord": "Sign in with Discord",
-                "signInWithgithub": "Sign in with GitHub"
+                "signInWithgithub": "Sign in with GitHub",
+                "continue": "Continue"
             },
             "labels": {
                 "email": "Email Address",
@@ -412,14 +419,16 @@
                 "username": "Username",
                 "newPassword": "New Password",
                 "confirmPassword": "Confirm Password",
-                "rememberMe": "Keep me logged in"
+                "rememberMe": "Keep me logged in",
+                "username": "Username"
             },
             "loading": {
                 "signingIn": "Signing in...",
                 "sendingEmail": "Sending email...",
                 "resetingPassword": "Resetting password...",
                 "verifying": "Verifying...",
-                "signingInWithGoogle": "Signing in with Google..."
+                "signingInWithGoogle": "Signing in with Google...",
+                "submitting": "Submitting..."
             }
         },
         "forms": {
@@ -562,6 +571,20 @@
             },
             "success": {
                 "authenticationSuccessful": "Authentication successful"
+            }
+        },
+        "onboarding": {
+            "roleSelection": {
+                "title": "Role Selection",
+                "description": "Choose your role within Synergy.",
+                "employee": {
+                    "title": "I am a 404 member",
+                    "description": "Join as an employee to access Synergy."
+                },
+                "employer": {
+                    "title": "I am an external user",
+                    "description": "Join as an employer to access Synergy."
+                }
             }
         }
     },
