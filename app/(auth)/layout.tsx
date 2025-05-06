@@ -18,8 +18,8 @@ export default async function Layout({
             <div className="flex h-full flex-col p-1.5 lg:p-2 lg:pr-0">
                 <div className="flex flex-1 flex-col rounded-2xl bg-bg-white-0 px-3.5 lg:px-11 lg:py-6">
                     <AuthHeader />
-                    <div className="flex flex-1 flex-col py-6 lg:py-12 [@media_(min-height:901px)]:justify-center">
-                        <div className="mx-auto flex w-full flex-col gap-6 md:translate-x-1.5">
+                    <div className="flex flex-1 flex-col py-6 lg:py-12 [@media_(min-height:901px)]:justify-center ">
+                        <div className="mx-auto flex w-full flex-col gap-6 md:translate-x-1.5 items-center">
                             {children}
                         </div>
                     </div>
