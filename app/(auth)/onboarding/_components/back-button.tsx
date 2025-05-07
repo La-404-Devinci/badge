@@ -11,13 +11,15 @@ export default function BackButton() {
     const { prevStep, activeStep } = useStepStore();
 
     return (
-        <>
+        <div className="mt-4">
             {activeStep === 0 ? (
                 <Button.Root
                     variant="neutral"
                     mode="stroke"
                     size="xsmall"
                     asChild
+                    disabled={true}
+                    className="cursor-not-allowed opacity-50"
                 >
                     <Link href="/onboarding">
                         <Button.Icon as={RiArrowLeftSLine} />
@@ -35,6 +37,6 @@ export default function BackButton() {
                     Back
                 </Button.Root>
             )}
-        </>
+        </div>
     );
 }
