@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { StaggeredFadeLoader } from "@/components/staggered-fade-loader";
