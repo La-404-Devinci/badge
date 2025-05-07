@@ -13,7 +13,7 @@ import { ExerciceActions } from "./actions";
 
 // Define the exercice interface from our schema
 export type Exercice =
-    RouterOutput["exercice"]["listExercices"]["exercices"][number];
+    RouterOutput["exercice"]["listAdminExercices"]["exercices"][number];
 
 export function getExercicesColumns(
     t: ReturnType<typeof useTranslations<"admin.exercices">>

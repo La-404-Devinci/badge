@@ -8,23 +8,32 @@ import {
     generateExercice,
     updateExerciceStatus,
 } from "./mutations/index";
-import { listExercices } from "./queries/index";
+import { listAdminExercices, getAdminExercice } from "./queries/index";
 import {
     batchDeleteExercicesSchema,
     batchUpdateExerciceStatusSchema,
     deleteExerciceSchema,
-    listExercicesSchema,
+    getAdminExerciceSchema,
+    listAdminExercicesSchema,
     updateExerciceStatusSchema,
 } from "./validators";
 
 export const exerciceRouter = router({
     // Queries
-    listExercices: protectedProcedure
+    getAdminExercice: protectedProcedure
         .meta({ roles: ["admin"] })
-        .input(listExercicesSchema)
+        .input(getAdminExerciceSchema)
         .query(async ({ ctx, input }) => {
             const { db } = ctx;
-            return await listExercices({ input, db });
+            return await getAdminExercice({ input, db });
+        }),
+
+    listAdminExercices: protectedProcedure
+        .meta({ roles: ["admin"] })
+        .input(listAdminExercicesSchema)
+        .query(async ({ ctx, input }) => {
+            const { db } = ctx;
+            return await listAdminExercices({ input, db });
         }),
 
     // Mutations

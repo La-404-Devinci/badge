@@ -79,7 +79,7 @@ export function ExercicesTable() {
 
     // Use tRPC to fetch exercices with filters
     const { data, isLoading } = useQuery(
-        trpc.exercice.listExercices.queryOptions(
+        trpc.exercice.listAdminExercices.queryOptions(
             {
                 page: page,
                 limit: limit,

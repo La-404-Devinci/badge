@@ -8,7 +8,7 @@ export function useInvalidateExerciceList() {
 
     const invalidateExerciceList = () => {
         queryClient.invalidateQueries({
-            queryKey: trpc.exercice.listExercices.queryKey(),
+            queryKey: trpc.exercice.listAdminExercices.queryKey(),
         });
     };
 

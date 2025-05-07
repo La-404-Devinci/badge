@@ -2,9 +2,13 @@ import { z } from "zod";
 
 import { Database } from "@/db";
 
-import { listExercicesSchema } from "../validators";
+import {
+    getAdminExerciceSchema,
+    listAdminExercicesSchema,
+} from "../validators";
 
-export type ListExercicesInput = z.infer<typeof listExercicesSchema>;
+export type listAdminExercicesInput = z.infer<typeof listAdminExercicesSchema>;
+export type getAdminExerciceInput = z.infer<typeof getAdminExerciceSchema>;
 
 export interface InputQueryContext<T> {
     input: T;

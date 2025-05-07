@@ -2,12 +2,12 @@ import { and, asc, count, desc, eq, like, ne, or } from "drizzle-orm";
 
 import { exercice } from "@/db/schema";
 
-import { InputQueryContext, ListExercicesInput } from "./types";
+import { InputQueryContext, listAdminExercicesInput } from "./types";
 
-export const listExercices = async ({
+export const listAdminExercices = async ({
     input,
     db,
-}: InputQueryContext<ListExercicesInput>) => {
+}: InputQueryContext<listAdminExercicesInput>) => {
     // Build database filters for exercices
     const exerciceFilters = [];
 

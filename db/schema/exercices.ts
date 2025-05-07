@@ -29,7 +29,7 @@ export const exercice = pgTable("exercice", {
 
     // Problem statement
     problem: text("problem").notNull(),
-    hints: jsonb("hints").$type<string[]>().default([]),
+    hints: jsonb("hints").$type<string[]>().notNull().default([]),
     response: text("response").notNull(),
     exampleInputs: jsonb("example_inputs").$type<string[]>().notNull(),
     validationInputs: jsonb("validation_inputs").$type<string[]>().notNull(),
@@ -49,3 +49,10 @@ export const exercice = pgTable("exercice", {
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+
+export type Exercice = typeof exercice.$inferSelect;
+
+export type PublicExercice = Pick<
+    Exercice,
+    "id" | "title" | "description" | "problem" | "exampleInputs" | "difficulty"
+>;
