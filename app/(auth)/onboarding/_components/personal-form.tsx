@@ -13,7 +13,6 @@ import * as FancyButton from "@/components/ui/fancy-button";
 import { FormMessage } from "@/components/ui/form";
 import * as Input from "@/components/ui/input";
 import * as Label from "@/components/ui/label";
-import { PROJECT } from "@/constants/project";
 import { personalSchema } from "@/validator/onboarding";
 
 import { useStepStore, useOnboardingStore } from "./store";
@@ -67,7 +66,9 @@ export function PersonalForm() {
                                         id="username"
                                         type="text"
                                         autoComplete="username"
-                                        placeholder={`hello@${PROJECT.DOMAIN}`}
+                                        placeholder={t(
+                                            "common.labels.username"
+                                        )}
                                         required
                                     />
                                 </Input.Wrapper>
@@ -108,8 +109,8 @@ export function PersonalForm() {
                     >
                         {isLoading && <StaggeredFadeLoader variant="muted" />}
                         {isLoading
-                            ? t("common.loading.signingIn")
-                            : t("common.buttons.signIn")}
+                            ? t("common.loading.submitting")
+                            : t("common.buttons.continue")}
                     </FancyButton.Root>
                 </form>
             </section>
