@@ -1,5 +1,5 @@
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
-import { task } from "@trigger.dev/sdk/v3";
+import { logger, task } from "@trigger.dev/sdk/v3";
 import { generateText } from "ai";
 import { addDays } from "date-fns";
 import { desc } from "drizzle-orm";
@@ -223,6 +223,8 @@ export const dailyTask = task({
 
     run: async (payload: { createdBy: string | null }) => {
         // Get last exercices
+        logger.info("Getting last exercices");
+
         const lastExercices = await db.query.exercice.findMany({
             orderBy: [desc(exercice.createdAt)],
             limit: 20,
@@ -232,9 +234,13 @@ export const dailyTask = task({
             },
         });
 
+        logger.info(`Found ${lastExercices.length} exercices`);
+
         const openrouter = createOpenRouter({
             apiKey: process.env.OPENROUTER_API_KEY,
         });
+
+        logger.info("Generating text");
 
         const { text } = await generateText({
             model: openrouter.chat(process.env.OPENROUTER_MODEL!),
@@ -243,10 +249,14 @@ export const dailyTask = task({
             }),
         });
 
+        logger.info(`Text generated (${text.length} characters)`);
+
         // Parse the output
         const output = parseOutput(text);
 
-        console.log(output);
+        logger.info(
+            `Parsed output, found tags: ${Object.keys(output).join(", ")}`
+        );
 
         // Create a new exercise in the database if we have all required fields
         if (
@@ -264,6 +274,8 @@ export const dailyTask = task({
                 processedAt: new Date().toISOString(),
             };
         }
+
+        logger.info("Adding new exercise to the database");
 
         const newExercise = await db
             .insert(exercice)
@@ -294,6 +306,10 @@ export const dailyTask = task({
                 updatedAt: new Date(),
             })
             .returning();
+
+        logger.info(
+            `New exercise added to the database with id: ${newExercise[0].id}`
+        );
 
         return {
             status: "completed",

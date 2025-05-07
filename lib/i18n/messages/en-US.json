@@ -619,6 +619,7 @@
         "items": {
             "dashboard": "Dashboard",
             "users": "Manage Users",
+            "exercices": "Manage Exercices",
             "waitlist": "Manage Waitlist",
             "settings": "Application Settings"
         },
@@ -632,6 +633,92 @@
                 "updated": "updated",
                 "updateSuccess": "User access {status}",
                 "updateError": "Failed to update user access status"
+            }
+        },
+        "exercices": {
+            "columns": {
+                "title": "Title",
+                "difficulty": "Difficulty",
+                "status": "Status",
+                "source": "Source",
+                "createdAt": "Created"
+            },
+            "filters": {
+                "search": "Search",
+                "searchPlaceholder": "Search by title or description",
+                "status": "Status",
+                "statusPlaceholder": "Filter by status",
+                "difficulty": "Difficulty",
+                "difficultyPlaceholder": "Filter by difficulty",
+                "all": "All",
+                "unarchived": "Unarchived",
+                "draft": "Draft",
+                "published": "Published",
+                "archived": "Archived",
+                "easy": "Easy",
+                "medium": "Medium",
+                "hard": "Hard",
+                "unknown": "Unknown"
+            },
+            "actions": {
+                "menuLabel": "Actions menu",
+                "edit": "Edit exercice",
+                "publish": "Publish",
+                "draft": "Set to draft",
+                "archive": "Archive",
+                "delete": "Delete",
+                "create": "Create exercice",
+                "generate": "Generate with AI",
+                "generating": "Generating...",
+                "publishSuccess": "Exercice published successfully",
+                "publishError": "Failed to publish exercice",
+                "publishLoading": "Publishing exercice...",
+                "draftSuccess": "Exercice set to draft successfully",
+                "draftError": "Failed to set exercice to draft",
+                "draftLoading": "Setting exercice to draft...",
+                "archiveSuccess": "Exercice archived successfully",
+                "archiveError": "Failed to archive exercice",
+                "archiveLoading": "Archiving exercice...",
+                "deleteSuccess": "Exercice deleted successfully",
+                "deleteError": "Failed to delete exercice",
+                "deleteLoading": "Deleting exercice...",
+                "generateSuccess": "Exercice generation task started",
+                "generateError": "Failed to start exercice generation task",
+                "generateLoading": "Starting exercice generation...",
+                "batchPublishSuccess": "{count, plural, =1 {Exercice} other {# exercices}} published successfully",
+                "batchPublishError": "Failed to publish exercices",
+                "batchPublishLoading": "Publishing {count} exercices...",
+                "batchDraftSuccess": "{count, plural, =1 {Exercice} other {# exercices}} set to draft successfully",
+                "batchDraftError": "Failed to set exercices to draft",
+                "batchDraftLoading": "Setting {count} exercices to draft...",
+                "batchArchiveSuccess": "{count, plural, =1 {Exercice} other {# exercices}} archived successfully",
+                "batchArchiveError": "Failed to archive exercices",
+                "batchArchiveLoading": "Archiving {count} exercices...",
+                "batchDeleteSuccess": "{count, plural, =1 {Exercice} other {# exercices}} deleted successfully",
+                "batchDeleteError": "Failed to delete exercices",
+                "batchDeleteLoading": "Deleting {count} exercices..."
+            },
+            "empty": {
+                "title": "No exercices found",
+                "description": "Try adjusting your search or filters"
+            },
+            "confirmations": {
+                "delete": {
+                    "title": "Delete exercice?",
+                    "description": "Are you sure you want to delete {count, plural, =1 {this exercice} other {these # exercices}}? This action cannot be undone.",
+                    "confirm": "Delete",
+                    "cancel": "Cancel"
+                }
+            },
+            "selection": {
+                "count": "{count, plural, =1 {# exercice} other {# exercices}} selected"
+            },
+            "source": {
+                "system": "AI Generated",
+                "user": "User Created"
+            },
+            "pagination": {
+                "exercices": "exercices"
             }
         }
     },
