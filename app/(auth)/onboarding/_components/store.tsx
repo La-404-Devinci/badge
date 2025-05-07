@@ -17,7 +17,6 @@ interface OnboardingState {
         fullName: string;
         username: string;
     };
-    role?: string;
     position?: string;
     biography?: string;
     setOnboardingStore: (
@@ -45,7 +44,6 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
         fullName: "",
         username: "",
     },
-    role: "",
     position: "",
     biography: "",
     setOnboardingStore: (data) =>

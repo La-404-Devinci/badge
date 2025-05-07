@@ -9,9 +9,8 @@ import { RadioCard, RadioCardGroup } from "@/components/custom/radio-card";
 import { StaggeredFadeLoader } from "@/components/staggered-fade-loader";
 import * as FancyButton from "@/components/ui/fancy-button";
 import { USER_ROLES } from "@/constants/roles";
-import { useUserData } from "@/hooks/use-user-data";
 
-import { useOnboardingStore, useStepStore } from "./store";
+import { useStepStore } from "./store";
 
 const ROLES = [
     {
@@ -21,7 +20,7 @@ const ROLES = [
         icon: <RiUser3Line className="h-6 w-6 text-primary-base" />,
     },
     {
-        value: USER_ROLES.USER,
+        value: USER_ROLES.EXTERNAL,
         title: "onboarding.roleSelection.employer.title",
         description: "onboarding.roleSelection.employer.description",
         icon: <RiBriefcase3Line className="h-6 w-6 text-primary-base" />,
@@ -31,40 +30,20 @@ const ROLES = [
 export function RoleSelection() {
     const t = useTranslations("auth");
     const [isLoading, setIsLoading] = useState(false);
-    const [selectedRole, setSelectedRole] = useState<string>("");
+    const [selectedRole, setSelectedRole] = useState<string>(
+        USER_ROLES.EXTERNAL
+    );
 
-    const { setOnboardingStore } = useOnboardingStore();
     const { nextStep } = useStepStore();
 
-    const { user } = useUserData();
-
     const handleContinue = () => {
-        if (!selectedRole) return;
+        if (selectedRole === USER_ROLES.MEMBER) {
+            // TODO: connect discord account
+        } else {
+        }
 
         setIsLoading(true);
-        setOnboardingStore({
-            role: selectedRole,
-        });
         nextStep();
-    };
-
-    const handleCardClick = (role: string) => {
-        setSelectedRole(role);
-
-        if (role === USER_ROLES.MEMBER) {
-            const providerAccount = user?.accounts[0].providerId;
-
-            // if the user is not a discord user, create an integration with discord to get the discord id of the user
-            if (providerAccount !== "discord") {
-            } else {
-                // if the user is a discord user, check if the user is a member of 404
-                /* const isMember = await checkIfUserIsMemberOf404(); */
-            }
-        } else {
-            setOnboardingStore({
-                role: USER_ROLES.USER,
-            });
-        }
     };
 
     return (
@@ -77,7 +56,7 @@ export function RoleSelection() {
                 {ROLES.map((role) => (
                     <div
                         key={role.value}
-                        onClick={() => handleCardClick(role.value)}
+                        onClick={() => setSelectedRole(role.value)}
                     >
                         <RadioCard
                             value={role.value}

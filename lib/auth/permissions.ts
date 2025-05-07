@@ -14,12 +14,12 @@ const baseUserPermissions = {
     member: ["view"] as ["view"],
 } as const;
 
-export const member = ac.newRole(baseUserPermissions);
-
 export const admin = ac.newRole({
     ...adminAc.statements,
 });
 
-export const user = ac.newRole(baseUserPermissions);
+export const member = ac.newRole(baseUserPermissions);
+export const external = ac.newRole(baseUserPermissions);
+export const unknown = ac.newRole(baseUserPermissions);
 
 export { ac };
