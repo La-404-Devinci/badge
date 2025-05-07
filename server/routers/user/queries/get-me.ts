@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 
-import { user } from "@/db/schema/auth-schema";
+import { user } from "@/db/schema";
 
 import type { UserQueryContext } from "./types";
 
