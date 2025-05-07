@@ -8,18 +8,20 @@ import { useTranslations } from "next-intl";
 import { RadioCard, RadioCardGroup } from "@/components/custom/radio-card";
 import { StaggeredFadeLoader } from "@/components/staggered-fade-loader";
 import * as FancyButton from "@/components/ui/fancy-button";
+import { USER_ROLES } from "@/constants/roles";
+import { useUserData } from "@/hooks/use-user-data";
 
 import { useOnboardingStore, useStepStore } from "./store";
 
 const ROLES = [
     {
-        value: "employee",
+        value: USER_ROLES.MEMBER,
         title: "onboarding.roleSelection.employee.title",
         description: "onboarding.roleSelection.employee.description",
         icon: <RiUser3Line className="h-6 w-6 text-primary-base" />,
     },
     {
-        value: "employer",
+        value: USER_ROLES.USER,
         title: "onboarding.roleSelection.employer.title",
         description: "onboarding.roleSelection.employer.description",
         icon: <RiBriefcase3Line className="h-6 w-6 text-primary-base" />,
@@ -34,6 +36,8 @@ export function RoleSelection() {
     const { setOnboardingStore } = useOnboardingStore();
     const { nextStep } = useStepStore();
 
+    const { user } = useUserData();
+
     const handleContinue = () => {
         if (!selectedRole) return;
 
@@ -46,6 +50,21 @@ export function RoleSelection() {
 
     const handleCardClick = (role: string) => {
         setSelectedRole(role);
+
+        if (role === USER_ROLES.MEMBER) {
+            const providerAccount = user?.accounts[0].providerId;
+
+            // if the user is not a discord user, create an integration with discord to get the discord id of the user
+            if (providerAccount !== "discord") {
+            } else {
+                // if the user is a discord user, check if the user is a member of 404
+                /* const isMember = await checkIfUserIsMemberOf404(); */
+            }
+        } else {
+            setOnboardingStore({
+                role: USER_ROLES.USER,
+            });
+        }
     };
 
     return (
