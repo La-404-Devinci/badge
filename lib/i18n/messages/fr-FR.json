@@ -22,9 +22,6 @@
         "buttons": {
             "continue": "Continuer"
         },
-        "loading": {
-            "submitting": "Soumission en cours..."
-        },
         "pagination": {
             "showing": "Affichage",
             "to": "à",
@@ -395,17 +392,39 @@
     },
     "auth": {
         "common": {
-            "labels": {
-                "username": "Nom d'utilisateur",
-                "fullName": "Nom complet"
-            },
             "buttons": {
-                "signIn": "Se connecter",
+                "signIn": "Sign in",
+                "register": "Register",
+                "resetPassword": "Reset Password",
+                "contactUs": "Contact us",
+                "goBack": "Go Back",
+                "goBackToLogin": "Retour à la connexion",
+                "termsOfService": "Conditions d'utilisation",
+                "submitCode": "Soumettre le code",
+                "resendCode": "Renvoyer le code",
+                "resending": "Renvoyant...",
+                "privacyPolicy": "Politique de confidentialité",
+                "signInWithgoogle": "Se connecter avec Google",
+                "signInWithdiscord": "Se connecter avec Discord",
+                "signInWithgithub": "Se connecter avec GitHub",
                 "continue": "Continuer"
             },
+            "labels": {
+                "email": "Adresse email",
+                "password": "Mot de passe",
+                "fullName": "Nom complet",
+                "username": "Nom d'utilisateur",
+                "newPassword": "Nouveau mot de passe",
+                "confirmPassword": "Confirmer le mot de passe",
+                "rememberMe": "Me souvenir de moi"
+            },
             "loading": {
-                "signingIn": "Connexion en cours...",
-                "submitting": "Soumission en cours..."
+                "signingIn": "Connexion...",
+                "sendingEmail": "Envoi de l'email...",
+                "resetingPassword": "Réinitialisation du mot de passe...",
+                "verifying": "Vérification...",
+                "signingInWithGoogle": "Connexion avec Google...",
+                "submitting": "Soumission..."
             }
         },
         "onboarding": {
@@ -420,6 +439,36 @@
                     "title": "Je suis un externe",
                     "description": "Rejoignez en tant qu'employeur pour accéder à Synergy."
                 }
+            }
+        },
+        "header": {
+            "signIn": {
+                "text": "Vous n'avez pas de compte ?",
+                "link": "Créer un compte"
+            },
+            "signUp": {
+                "text": "Vous avez déjà un compte ?",
+                "link": "Se connecter"
+            },
+            "forgotPassword": {
+                "text": "Vous avez changé d'avis ?",
+                "link": "Retour à la connexion"
+            },
+            "verification": {
+                "text": "Vous avez changé d'avis ?",
+                "link": "Retour à la connexion"
+            },
+            "resetPassword": {
+                "text": "Vous avez changé d'avis ?",
+                "link": "Retour à la connexion"
+            },
+            "confirmAccess": {
+                "text": "Vous avez changé d'avis ?",
+                "link": "Retour"
+            },
+            "waitlist": {
+                "text": "Vous avez déjà un compte ?",
+                "link": "Se connecter"
             }
         }
     },

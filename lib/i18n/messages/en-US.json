@@ -419,8 +419,7 @@
                 "username": "Username",
                 "newPassword": "New Password",
                 "confirmPassword": "Confirm Password",
-                "rememberMe": "Keep me logged in",
-                "username": "Username"
+                "rememberMe": "Keep me logged in"
             },
             "loading": {
                 "signingIn": "Signing in...",
@@ -431,6 +430,7 @@
                 "submitting": "Submitting..."
             }
         },
+
         "forms": {
             "signIn": {
                 "title": "Login to your account",
@@ -512,65 +512,6 @@
             "waitlist": {
                 "text": "Already have an account?",
                 "link": "Sign in"
-            }
-        },
-        "twoFactor": {
-            "title": "Two-Factor Authentication",
-            "description": "Verify your identity to continue",
-            "steps": {
-                "totp": {
-                    "title": "Authenticator Verification",
-                    "description": "Enter the 6-digit code from your authenticator app",
-                    "noAccessMessage": "Don't have access to your authenticator app?",
-                    "rememberDevice": "Remember this device for 60 days"
-                },
-                "backup": {
-                    "title": "Backup Code Verification",
-                    "description": "Enter one of your backup codes. Each code can only be used once.",
-                    "codeLabel": "Backup Code",
-                    "codePlaceholder": "Enter your backup code"
-                },
-                "email": {
-                    "title": "Email Verification",
-                    "description": "We'll send a verification code to your email address",
-                    "codeSent": "We've sent a verification code to your email address. Enter the code below."
-                },
-                "recovery": {
-                    "title": "Account Recovery",
-                    "description": "Choose an alternative method to verify your identity",
-                    "options": {
-                        "backup": {
-                            "title": "Backup Code",
-                            "description": "Use one of your backup codes"
-                        },
-                        "email": {
-                            "title": "Email Code",
-                            "description": "Receive a one-time code via email"
-                        }
-                    }
-                }
-            },
-            "actions": {
-                "verify": "Verify",
-                "verifying": "Verifying...",
-                "sendVerificationCode": "Send verification code",
-                "resendCode": "Resend code",
-                "resendCodeWithTimer": "Resend code ({seconds}s)",
-                "sending": "Sending...",
-                "tryAnotherMethod": "Try another method",
-                "backToAuthenticator": "Back to authenticator",
-                "backToRecoveryOptions": "Back to recovery options"
-            },
-            "errors": {
-                "unknown": "An unknown error occurred. Please try again.",
-                "invalidCode": "Invalid verification code. Please try again.",
-                "userNotFound": "User not found. Please contact support.",
-                "invalidTwoFactorCookie": "Your two-factor session has expired. Please sign in again.",
-                "invalidBackupCode": "Invalid backup code. Please try again.",
-                "retrySignIn": "Your two-factor session has expired. Please sign in again."
-            },
-            "success": {
-                "authenticationSuccessful": "Authentication successful"
             }
         },
         "onboarding": {
