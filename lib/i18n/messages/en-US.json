@@ -97,6 +97,9 @@
         "application": {
             "createRequest": {
                 "label": "Create Request"
+            },
+            "createProject": {
+                "label": "Create Project"
             }
         }
     },
