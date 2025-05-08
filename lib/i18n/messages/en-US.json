@@ -191,6 +191,8 @@
             "accountSettings": "account settings",
             "myAccountSettings": {
                 "name": "Name",
+                "username": "Username",
+                "biography": "Biography",
                 "emailAddress": "Email Address",
                 "phoneNumber": "Phone Number",
                 "sessionError": "Session Error",
@@ -201,7 +203,9 @@
                 "emailVerificationSent": "We've sent you a verification email to confirm your new email address.",
                 "phoneTooltip": "Enter your phone number without the country code, as it is selected separately. Only numbers are allowed.",
                 "nameValidation": "Name must be at least 2 characters",
-                "emailValidation": "Please enter a valid email address"
+                "emailValidation": "Please enter a valid email address",
+                "usernameValidation": "Username must be at least 3 characters",
+                "biographyValidation": "Biography must be at least 2 characters"
             },
             "languageRegionSettings": {
                 "title": "Language & Region",

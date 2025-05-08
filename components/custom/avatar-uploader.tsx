@@ -242,9 +242,10 @@ export function AvatarUploader({
                                 <Button.Root
                                     variant="primary"
                                     onClick={handleCropAndUpload}
-                                    disabled={!croppedAreaPixels || isUploading}
+                                    /* disabled={!croppedAreaPixels || isUploading} */
                                     size="small"
                                     className="w-full"
+                                    disabled={true}
                                 >
                                     {isUploading ? (
                                         <>

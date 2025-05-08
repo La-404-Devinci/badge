@@ -191,6 +191,8 @@
             "accountSettings": "paramètres compte",
             "myAccountSettings": {
                 "name": "Nom",
+                "username": "Nom d'utilisateur",
+                "biography": "Biographie",
                 "emailAddress": "Adresse e-mail",
                 "phoneNumber": "Numéro de téléphone",
                 "sessionError": "Erreur de session",
@@ -201,7 +203,9 @@
                 "emailVerificationSent": "Nous vous avons envoyé un email de vérification pour confirmer votre nouvelle adresse email.",
                 "phoneTooltip": "Entrez votre numéro de téléphone sans l'indicatif du pays, car il est sélectionné séparément. Seuls les chiffres sont autorisés.",
                 "nameValidation": "Le nom doit comporter au moins 2 caractères",
-                "emailValidation": "Veuillez entrer une adresse email valide"
+                "emailValidation": "Veuillez entrer une adresse email valide",
+                "usernameValidation": "Le nom d'utilisateur doit comporter au moins 3 caractères",
+                "biographyValidation": "La biographie doit comporter au moins 2 caractères"
             },
             "languageRegionSettings": {
                 "title": "Langue & Région",
