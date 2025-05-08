@@ -11,9 +11,6 @@ export async function updateUserProfile({
 }: UserMutationContext<UpdateUserProfileInput>) {
     const { fullName, image, position, biography, username } = input;
     const userId = session.user.id;
-
-    console.log(fullName, image, position, biography, username);
-    console.log(userId);
     await db
         .update(user)
         .set({

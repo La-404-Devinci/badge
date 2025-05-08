@@ -5,6 +5,7 @@ import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RiErrorWarningLine, RiMailCheckFill } from "@remixicon/react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,6 +17,7 @@ import * as Divider from "@/components/ui/divider";
 import { FormGlobalMessage, FormMessage } from "@/components/ui/form";
 import * as Input from "@/components/ui/input";
 import * as Label from "@/components/ui/label";
+import * as Textarea from "@/components/ui/textarea";
 import { AUTH_ERRORS } from "@/constants/auth-errors";
 import { PROJECT } from "@/constants/project";
 import { authClient } from "@/lib/auth/client";
@@ -28,10 +30,27 @@ const profileUpdateSchema = (
     z.object({
         name: z.string().min(2, t("nameValidation")),
         email: z.string().email(t("emailValidation")),
-        phone: z.string().optional(),
+        username: z.string().min(2, t("usernameValidation")),
+        biography: z.string().min(2, t("biographyValidation")),
     });
 
 type ProfileFormValues = z.infer<ReturnType<typeof profileUpdateSchema>>;
+
+type UserWithProfile = {
+    id: string;
+    name: string;
+    email: string;
+    emailVerified: boolean;
+    image: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+    role: string | null;
+    banned: boolean | null;
+    banReason: string | null;
+    banExpires: Date | null;
+    username: string;
+    biography: string;
+};
 
 export default function MyAccountSettings() {
     // Get the tRPC client
@@ -39,9 +58,11 @@ export default function MyAccountSettings() {
     const queryClient = useQueryClient();
 
     // Use suspense query to get session data (prefetched in page.tsx)
-    const { data: user, error: sessionError } = useSuspenseQuery(
+    const { data: userRaw, error: sessionError } = useSuspenseQuery(
         trpc.user.getMe.queryOptions()
     );
+    // Cast pour inclure username et biography
+    const user = userRaw as UserWithProfile;
 
     const commonT = useTranslations("common");
     const t = useTranslations("settings.account.myAccountSettings");
@@ -55,6 +76,8 @@ export default function MyAccountSettings() {
         () => ({
             name: user?.name ?? "",
             email: user?.email ?? "",
+            username: user?.username ?? "",
+            biography: user?.biography ?? "",
         }),
         [user]
     );
@@ -67,11 +90,28 @@ export default function MyAccountSettings() {
             queryKey: [["organization"]],
         });
     };
-    const { register, handleSubmit, reset, formState, setError } =
-        useForm<ProfileFormValues>({
-            resolver: zodResolver(profileUpdateSchema(t)),
-            defaultValues: initialValues,
-        });
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState,
+        setError,
+        watch,
+        setValue,
+    } = useForm<ProfileFormValues>({
+        resolver: zodResolver(profileUpdateSchema(t)),
+        defaultValues: initialValues,
+    });
+
+    const biography = watch("biography") || "";
+
+    // Ajout des mutations tRPC pour username et update profile
+    const { mutateAsync: checkUsernameExists } = useMutation(
+        trpc.user.checkUsernameExists.mutationOptions()
+    );
+    const { mutateAsync: updateUserProfile } = useMutation(
+        trpc.user.updateUserProfile.mutationOptions()
+    );
 
     const handleSave = async (values: ProfileFormValues) => {
         setGlobalError(null);
@@ -86,11 +126,11 @@ export default function MyAccountSettings() {
                     },
                     {
                         onSuccess() {
-                            // Reset form only on success
                             reset({
                                 name: values.name,
                                 email: values.email,
-                                phone: values.phone,
+                                username: values.username,
+                                biography: values.biography,
                             });
 
                             setMessage(t("emailVerificationSent"));
@@ -119,24 +159,31 @@ export default function MyAccountSettings() {
                     }
                 );
             } else {
-                await authClient.updateUser(
-                    {
-                        name: values.name,
-                    },
-                    {
-                        onSuccess() {
-                            reset({
-                                name: values.name,
-                                email: values.email,
-                            });
-                        },
-                        onError({ error }) {
-                            setGlobalError(
-                                `Please contact ${PROJECT.HELP_EMAIL} with error code: ${error.code}`
-                            );
-                        },
+                // Vérification du username si modifié
+                if (formState.dirtyFields.username) {
+                    const usernameExists = await checkUsernameExists({
+                        username: values.username,
+                    });
+                    if (usernameExists) {
+                        setError("username", {
+                            message: t("usernameAlreadyInUse"),
+                        });
+                        setIsSubmitting(false);
+                        return;
                     }
-                );
+                }
+                // Appel mutation tRPC pour mettre à jour le profil
+                await updateUserProfile({
+                    fullName: values.name,
+                    username: values.username,
+                    biography: values.biography,
+                });
+                reset({
+                    name: values.name,
+                    email: values.email,
+                    username: values.username,
+                    biography: values.biography,
+                });
             }
 
             invalidateQueries();
@@ -158,6 +205,8 @@ export default function MyAccountSettings() {
             reset({
                 name: user.name || "",
                 email: user.email || "",
+                username: user.username || "",
+                biography: user.biography || "",
             });
         }
     };
@@ -241,6 +290,46 @@ export default function MyAccountSettings() {
                         </Input.Root>
                         <FormMessage>
                             {formState.errors.name?.message}
+                        </FormMessage>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        <Label.Root htmlFor={`${uniqueId}-username`}>
+                            {t("username")} <Label.Asterisk />
+                        </Label.Root>
+
+                        <Input.Root hasError={!!formState.errors.username}>
+                            <Input.Wrapper>
+                                <Input.Input
+                                    id={`${uniqueId}-username`}
+                                    {...register("username")}
+                                />
+                            </Input.Wrapper>
+                        </Input.Root>
+                        <FormMessage>
+                            {formState.errors.username?.message}
+                        </FormMessage>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        <Label.Root htmlFor={`${uniqueId}-biography`}>
+                            {t("biography")}
+                        </Label.Root>
+
+                        <Textarea.Root
+                            placeholder="Jot down your thoughts..."
+                            value={biography}
+                            onChange={(e) =>
+                                setValue("biography", e.target.value, {
+                                    shouldDirty: true,
+                                })
+                            }
+                        >
+                            <Textarea.CharCounter
+                                current={biography.length}
+                                max={200}
+                            />
+                        </Textarea.Root>
+                        <FormMessage>
+                            {formState.errors.biography?.message}
                         </FormMessage>
                     </div>
 
