@@ -407,7 +407,8 @@
                 "signInWithgoogle": "Sign in with Google",
                 "signInWithdiscord": "Sign in with Discord",
                 "signInWithgithub": "Sign in with GitHub",
-                "continue": "Continue"
+                "continue": "Continue",
+                "cancel": "Cancel"
             },
             "labels": {
                 "email": "Email Address",
@@ -458,6 +459,10 @@
             },
             "errors": {
                 "usernameExists": "This username is already taken."
+            },
+            "connexionModal": {
+                "title": "Connexion to Discord",
+                "description": "Connect to Discord to access Synergy."
             }
         },
 
