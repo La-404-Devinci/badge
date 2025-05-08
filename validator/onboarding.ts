@@ -5,6 +5,9 @@ export const personalSchema = z.object({
     username: z.string().min(3, "Username must be at least 3 characters long"),
 });
 
-export const roleSchema = z.object({
-    role: z.string().min(3, "Role must be at least 3 characters long"),
+export const positionSchema = z.object({
+    position: z.string().nonempty("Veuillez sélectionner un poste"),
+    biography: z
+        .string()
+        .min(3, "Biography must be at least 3 characters long"),
 });

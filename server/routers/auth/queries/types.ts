@@ -3,11 +3,9 @@ import { z } from "zod";
 
 import { Database } from "@/db";
 
-import { listUsersSchema, listWaitlistSchema } from "../validators";
+import { listUsersSchema } from "../validators";
 
 export type ListUsersInput = z.infer<typeof listUsersSchema>;
-
-export type ListWaitlistInput = z.infer<typeof listWaitlistSchema>;
 
 export interface UserQueryContext {
     currentUser: User;

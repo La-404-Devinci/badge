@@ -13,10 +13,8 @@ interface StepState {
 }
 
 interface OnboardingState {
-    personalInfo: {
-        fullName: string;
-        username: string;
-    };
+    fullName: string;
+    username: string;
     position?: string;
     biography?: string;
     setOnboardingStore: (
@@ -40,10 +38,8 @@ export const useStepStore = create<StepState>((set, get) => ({
 }));
 
 export const useOnboardingStore = create<OnboardingState>((set) => ({
-    personalInfo: {
-        fullName: "",
-        username: "",
-    },
+    fullName: "",
+    username: "",
     position: "",
     biography: "",
     setOnboardingStore: (data) =>
