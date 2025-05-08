@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RiUserLine } from "@remixicon/react";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,6 +14,7 @@ import * as FancyButton from "@/components/ui/fancy-button";
 import { FormMessage } from "@/components/ui/form";
 import * as Input from "@/components/ui/input";
 import * as Label from "@/components/ui/label";
+import { useTRPC } from "@/trpc/client";
 import { personalSchema } from "@/validator/onboarding";
 
 import { useStepStore, useOnboardingStore } from "./store";
@@ -22,7 +24,7 @@ export function PersonalForm() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const { register, handleSubmit, formState } = useForm({
+    const { register, handleSubmit, formState, setError } = useForm({
         resolver: zodResolver(personalSchema),
         defaultValues: {
             username: "",
@@ -34,14 +36,30 @@ export function PersonalForm() {
 
     const { nextStep } = useStepStore();
 
+    const trpc = useTRPC();
+
+    const { mutateAsync: checkUsernameExists } = useMutation(
+        trpc.user.checkUsernameExists.mutationOptions()
+    );
+
     const onSubmit = async (values: z.infer<typeof personalSchema>) => {
         setIsLoading(true);
         const { username, fullName } = values;
+
+        const exists = await checkUsernameExists({ username });
+
+        if (exists) {
+            setIsLoading(false);
+            setError("username", {
+                type: "manual",
+                message: t("onboarding.errors.usernameExists"),
+            });
+            return;
+        }
+
         setOnboardingStore({
-            personalInfo: {
-                username,
-                fullName,
-            },
+            username,
+            fullName,
         });
         nextStep();
     };
