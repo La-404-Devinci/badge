@@ -156,7 +156,7 @@ export default function AuthSlider() {
 
     return (
         <div className="relative flex h-full flex-col items-center justify-center">
-            <div className="absolute right-0 top-0 size-full bg-gradient-to-br from-orange-400 to-orange-600 opacity-40" />
+            <div className="absolute right-0 top-0 size-full opacity-40" />
 
             <section className="embla relative w-full max-w-[452px] select-none pb-11">
                 <div

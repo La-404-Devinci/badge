@@ -8,3 +8,7 @@ export const accountRelations = relations(account, ({ one }) => ({
         references: [user.id],
     }),
 }));
+
+export const userRelations = relations(user, ({ many }) => ({
+    accounts: many(account),
+}));

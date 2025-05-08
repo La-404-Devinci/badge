@@ -19,6 +19,9 @@
         "copy": "Copier",
         "copied": "Copié",
         "search": "Rechercher",
+        "buttons": {
+            "continue": "Continuer"
+        },
         "pagination": {
             "showing": "Affichage",
             "to": "à",
@@ -390,92 +393,82 @@
     "auth": {
         "common": {
             "buttons": {
-                "signIn": "Se connecter",
-                "register": "S'inscrire",
-                "resetPassword": "Réinitialiser le mot de passe",
-                "contactUs": "Nous contacter",
-                "goBack": "Retour",
+                "signIn": "Sign in",
+                "register": "Register",
+                "resetPassword": "Reset Password",
+                "contactUs": "Contact us",
+                "goBack": "Go Back",
                 "goBackToLogin": "Retour à la connexion",
                 "termsOfService": "Conditions d'utilisation",
                 "submitCode": "Soumettre le code",
                 "resendCode": "Renvoyer le code",
-                "resending": "Réenvoi...",
+                "resending": "Renvoyant...",
                 "privacyPolicy": "Politique de confidentialité",
-                "signInWithGoogle": "Se connecter avec Google"
+                "signInWithgoogle": "Se connecter avec Google",
+                "signInWithdiscord": "Se connecter avec Discord",
+                "signInWithgithub": "Se connecter avec GitHub",
+                "continue": "Continuer",
+                "cancel": "Annuler"
             },
             "labels": {
                 "email": "Adresse email",
                 "password": "Mot de passe",
                 "fullName": "Nom complet",
+                "username": "Nom d'utilisateur",
                 "newPassword": "Nouveau mot de passe",
                 "confirmPassword": "Confirmer le mot de passe",
-                "rememberMe": "Rester connecté"
+                "rememberMe": "Me souvenir de moi"
             },
             "loading": {
-                "signingIn": "Connexion en cours...",
+                "signingIn": "Connexion...",
                 "sendingEmail": "Envoi de l'email...",
                 "resetingPassword": "Réinitialisation du mot de passe...",
                 "verifying": "Vérification...",
-                "signingInWithGoogle": "Connexion avec Google en cours..."
+                "signingInWithGoogle": "Connexion avec Google...",
+                "submitting": "Soumission..."
             }
         },
-        "forms": {
-            "signIn": {
-                "title": "Connectez-vous",
-                "subtitle": "Entrez vos identifiants pour vous connecter.",
-                "forgotPassword": "Mot de passe oublié ?",
-                "errors": {
-                    "invalidCredentials": "Email ou mot de passe invalide"
+        "onboarding": {
+            "roleSelection": {
+                "title": "Sélection du rôle",
+                "description": "Choisissez votre rôle au sein de Synergy.",
+                "employee": {
+                    "title": "Je suis membre de la 404",
+                    "description": "Rejoignez en tant qu'employé pour accéder à Synergy."
+                },
+                "employer": {
+                    "title": "Je suis un externe",
+                    "description": "Rejoignez en tant qu'employeur pour accéder à Synergy."
                 }
             },
-            "signUp": {
-                "title": "Créer un nouveau compte",
-                "subtitle": "Entrez vos informations pour vous inscrire.",
-                "passwordRequirements": "Doit contenir 1 majuscule, 1 chiffre, min. 8 caractères.",
-                "termsAgreement": "En cliquant sur S'inscrire, vous acceptez nos",
-                "errors": {
-                    "userExists": "Cette adresse email est déjà utilisée, veuillez vous connecter.",
-                    "waitlistDisabled": "L'inscription est actuellement désactivée.",
-                    "notWhitelisted": "Cet email n'est pas autorisé pour l'inscription."
+            "personal": {
+                "title": "Informations personnelles",
+                "description": "Veuillez entrer vos informations personnelles.",
+                "labels": {
+                    "fullName": "Nom complet",
+                    "username": "Nom d'utilisateur"
                 }
             },
-            "forgotPassword": {
-                "title": "Réinitialiser le mot de passe",
-                "subtitle": "Entrez votre email pour réinitialiser votre mot de passe.",
-                "successMessage": "Si cette adresse email est associée à un compte, nous vous avons envoyé un email pour réinitialiser votre mot de passe.",
-                "noAccess": "Vous n'avez plus accès ?"
-            },
-            "resetPassword": {
-                "title": "Réinitialiser le mot de passe",
-                "subtitle": "Créez un nouveau mot de passe pour votre compte.",
-                "successMessage": "Votre mot de passe a été modifié",
-                "passwordCriteria": {
-                    "intro": "Doit contenir au moins ;",
-                    "uppercase": "Au moins 1 majuscule",
-                    "number": "Au moins 1 chiffre",
-                    "length": "Au moins 8 caractères"
+            "position": {
+                "title": "Qu'est-ce que vous faites ?",
+                "description": "Veuillez entrer votre position.",
+                "labels": {
+                    "position": "Position",
+                    "biography": "Biographie"
                 }
             },
-            "verification": {
-                "title": "Entrez le code de vérification",
-                "subtitle": "Nous avons envoyé un code à",
-                "issues": "Problèmes pour recevoir le code ?",
-                "successMessage": "Votre email a été vérifié. Vous pouvez maintenant vous connecter à votre compte."
+            "errors": {
+                "usernameExists": "Ce nom d'utilisateur est déjà pris."
             },
-            "waitlist": {
-                "title": "Rejoignez notre liste d'attente",
-                "subtitle": "Entrez votre email pour rejoindre notre liste d'attente et être parmi les premiers à être informés lors de notre lancement.",
-                "submit": "Rejoindre la liste",
-                "privacyNotice": "En rejoignant notre liste d'attente, vous acceptez la politique de {projectName}",
-                "successTitle": "Vous êtes sur la liste !",
-                "successSubtitle": "Merci pour votre intérêt. Nous vous informerons lors de notre lancement.",
-                "alreadyHaveAccess": "Vous avez déjà un compte ?"
+            "connexionModal": {
+                "title": "Connexion à Discord",
+                "description": "Connectez-vous à Discord pour accéder à Synergy."
             }
         },
         "header": {
             "signIn": {
                 "text": "Vous n'avez pas de compte ?",
-                "link": "S'inscrire"
+                "link": "Créer un compte"
             },
             "signUp": {
                 "text": "Vous avez déjà un compte ?",
@@ -500,65 +493,6 @@
             "waitlist": {
                 "text": "Vous avez déjà un compte ?",
                 "link": "Se connecter"
-            }
-        },
-        "twoFactor": {
-            "title": "Authentification à Deux Facteurs",
-            "description": "Vérifiez votre identité pour continuer",
-            "steps": {
-                "totp": {
-                    "title": "Vérification par Authentificateur",
-                    "description": "Saisissez le code à 6 chiffres de votre application d'authentification",
-                    "noAccessMessage": "Vous n'avez pas accès à votre application d'authentification ?",
-                    "rememberDevice": "Se souvenir de cet appareil pour 60 jours"
-                },
-                "backup": {
-                    "title": "Vérification par Code de Secours",
-                    "description": "Saisissez l'un de vos codes de secours. Chaque code ne peut être utilisé qu'une seule fois.",
-                    "codeLabel": "Code de Secours",
-                    "codePlaceholder": "Saisissez votre code de secours"
-                },
-                "email": {
-                    "title": "Vérification par Email",
-                    "description": "Nous allons envoyer un code de vérification à votre adresse email",
-                    "codeSent": "Nous avons envoyé un code de vérification à votre adresse email. Saisissez le code ci-dessous."
-                },
-                "recovery": {
-                    "title": "Récupération de Compte",
-                    "description": "Choisissez une méthode alternative pour vérifier votre identité",
-                    "options": {
-                        "backup": {
-                            "title": "Code de Secours",
-                            "description": "Utilisez l'un de vos codes de secours"
-                        },
-                        "email": {
-                            "title": "Code par Email",
-                            "description": "Recevez un code à usage unique par email"
-                        }
-                    }
-                }
-            },
-            "actions": {
-                "verify": "Vérifier",
-                "verifying": "Vérification en cours...",
-                "sendVerificationCode": "Envoyer le code de vérification",
-                "resendCode": "Renvoyer le code",
-                "resendCodeWithTimer": "Renvoyer le code ({seconds}s)",
-                "sending": "Envoi en cours...",
-                "tryAnotherMethod": "Essayer une autre méthode",
-                "backToAuthenticator": "Retour à l'authentificateur",
-                "backToRecoveryOptions": "Retour aux options de récupération"
-            },
-            "errors": {
-                "unknown": "Une erreur inconnue s'est produite. Veuillez réessayer.",
-                "invalidCode": "Code de vérification invalide. Veuillez réessayer.",
-                "userNotFound": "Utilisateur non trouvé. Veuillez contacter le support.",
-                "invalidTwoFactorCookie": "Votre session d'authentification à deux facteurs a expiré. Veuillez vous reconnecter.",
-                "invalidBackupCode": "Code de secours invalide. Veuillez réessayer.",
-                "retrySignIn": "Votre session d'authentification à deux facteurs a expiré. Veuillez vous reconnecter."
-            },
-            "success": {
-                "authenticationSuccessful": "Authentification réussie"
             }
         }
     },

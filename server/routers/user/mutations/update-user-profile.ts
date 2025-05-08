@@ -9,14 +9,19 @@ export async function updateUserProfile({
     session,
     input,
 }: UserMutationContext<UpdateUserProfileInput>) {
-    const { fullName, image } = input;
+    const { fullName, image, position, biography, username } = input;
     const userId = session.user.id;
 
+    console.log(fullName, image, position, biography, username);
+    console.log(userId);
     await db
         .update(user)
         .set({
             name: fullName,
             image: image,
+            position: position,
+            biography: biography,
+            username: username,
             updatedAt: new Date(),
         })
         .where(eq(user.id, userId));
