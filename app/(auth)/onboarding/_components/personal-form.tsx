@@ -14,6 +14,7 @@ import * as FancyButton from "@/components/ui/fancy-button";
 import { FormMessage } from "@/components/ui/form";
 import * as Input from "@/components/ui/input";
 import * as Label from "@/components/ui/label";
+import { useUserData } from "@/hooks/use-user-data";
 import { useTRPC } from "@/trpc/client";
 import { personalSchema } from "@/validator/onboarding";
 
@@ -24,11 +25,13 @@ export function PersonalForm() {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const { user } = useUserData();
+
     const { register, handleSubmit, formState, setError } = useForm({
         resolver: zodResolver(personalSchema),
         defaultValues: {
-            username: "",
-            fullName: "",
+            username: user?.username || "",
+            fullName: user?.name || "",
         },
     });
 

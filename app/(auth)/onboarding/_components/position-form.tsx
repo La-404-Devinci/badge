@@ -37,7 +37,7 @@ export function PositionForm() {
     });
 
     const onboardingStore = useOnboardingStore.getState();
-    const { setOnboardingStore } = useOnboardingStore();
+    const { setOnboardingStore, resetOnboardingStore } = useOnboardingStore();
 
     const { mutateAsync: updateUser } = useMutation(
         trpc.user.updateUserProfile.mutationOptions({
@@ -58,7 +58,11 @@ export function PositionForm() {
 
         await updateUser({
             ...onboardingStore,
+            position,
+            biography,
         });
+
+        resetOnboardingStore();
     };
 
     const positionOptions = [

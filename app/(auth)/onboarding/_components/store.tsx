@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 import { ONBOARDING_STEPS } from "../layout";
 
@@ -17,9 +18,13 @@ interface OnboardingState {
     username: string;
     position?: string;
     biography?: string;
+    role: boolean;
     setOnboardingStore: (
-        data: Partial<Omit<OnboardingState, "setOnboardingStore">>
+        data: Partial<
+            Omit<OnboardingState, "setOnboardingStore" | "resetOnboardingStore">
+        >
     ) => void;
+    resetOnboardingStore: () => void;
 }
 
 export const useStepStore = create<StepState>((set, get) => ({
@@ -37,14 +42,32 @@ export const useStepStore = create<StepState>((set, get) => ({
     },
 }));
 
-export const useOnboardingStore = create<OnboardingState>((set) => ({
-    fullName: "",
-    username: "",
-    position: "",
-    biography: "",
-    setOnboardingStore: (data) =>
-        set((state) => ({
-            ...state,
-            ...data,
-        })),
-}));
+export const useOnboardingStore = create<OnboardingState>()(
+    persist(
+        (set) => ({
+            fullName: "",
+            username: "",
+            position: "",
+            biography: "",
+            role: false,
+            setOnboardingStore: (data) =>
+                set((state) => ({
+                    ...state,
+                    ...data,
+                })),
+            resetOnboardingStore: () =>
+                set((state) => ({
+                    ...state,
+                    fullName: "",
+                    username: "",
+                    position: "",
+                    biography: "",
+                    role: false,
+                })),
+        }),
+        {
+            name: "onboarding",
+            storage: createJSONStorage(() => localStorage),
+        }
+    )
+);

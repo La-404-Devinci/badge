@@ -10,7 +10,8 @@ import { StaggeredFadeLoader } from "@/components/staggered-fade-loader";
 import * as FancyButton from "@/components/ui/fancy-button";
 import { USER_ROLES } from "@/constants/roles";
 
-import { useStepStore } from "./store";
+import { ConnexionModal } from "./connexion-modal";
+import { useStepStore, useOnboardingStore } from "./store";
 
 const ROLES = [
     {
@@ -34,17 +35,23 @@ export function RoleSelection() {
         USER_ROLES.EXTERNAL
     );
 
-    const { nextStep } = useStepStore();
+    const [showDiscordModal, setShowDiscordModal] = useState(false);
+
+    const { nextStep, setActiveStep } = useStepStore();
+    const { role } = useOnboardingStore();
 
     const handleContinue = () => {
         if (selectedRole === USER_ROLES.MEMBER) {
-            // TODO: connect discord account
+            setShowDiscordModal(true);
         } else {
+            setIsLoading(true);
+            nextStep();
         }
-
-        setIsLoading(true);
-        nextStep();
     };
+
+    if (role) {
+        setActiveStep(1);
+    }
 
     return (
         <div className="flex w-full flex-col items-center gap-8">
@@ -81,6 +88,11 @@ export function RoleSelection() {
                     ? t("common.loading.submitting")
                     : t("common.buttons.continue")}
             </FancyButton.Root>
+
+            <ConnexionModal
+                open={showDiscordModal}
+                onOpenChange={setShowDiscordModal}
+            />
         </div>
     );
 }
