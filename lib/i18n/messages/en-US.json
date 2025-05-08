@@ -22,9 +22,6 @@
         "buttons": {
             "continue": "Continue"
         },
-        "loading": {
-            "submitting": "Submitting..."
-        },
         "pagination": {
             "showing": "Showing",
             "to": "to",
@@ -430,6 +427,39 @@
                 "submitting": "Submitting..."
             }
         },
+        "onboarding": {
+            "roleSelection": {
+                "title": "Role Selection",
+                "description": "Choose your role within Synergy.",
+                "employee": {
+                    "title": "I am a 404 member",
+                    "description": "Join as an employee to access Synergy."
+                },
+                "employer": {
+                    "title": "I am an external user",
+                    "description": "Join as an employer to access Synergy."
+                }
+            },
+            "personal": {
+                "title": "Personal Information",
+                "description": "Please enter your personal information.",
+                "labels": {
+                    "fullName": "Full Name",
+                    "username": "Username"
+                }
+            },
+            "position": {
+                "title": "What do you do?",
+                "description": "Please enter your position.",
+                "labels": {
+                    "position": "Position",
+                    "biography": "Biography"
+                }
+            },
+            "errors": {
+                "usernameExists": "This username is already taken."
+            }
+        },
 
         "forms": {
             "signIn": {
@@ -512,20 +542,6 @@
             "waitlist": {
                 "text": "Already have an account?",
                 "link": "Sign in"
-            }
-        },
-        "onboarding": {
-            "roleSelection": {
-                "title": "Role Selection",
-                "description": "Choose your role within Synergy.",
-                "employee": {
-                    "title": "I am a 404 member",
-                    "description": "Join as an employee to access Synergy."
-                },
-                "employer": {
-                    "title": "I am an external user",
-                    "description": "Join as an employer to access Synergy."
-                }
             }
         }
     },

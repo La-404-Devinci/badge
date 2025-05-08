@@ -439,6 +439,25 @@
                     "title": "Je suis un externe",
                     "description": "Rejoignez en tant qu'employeur pour accéder à Synergy."
                 }
+            },
+            "personal": {
+                "title": "Informations personnelles",
+                "description": "Veuillez entrer vos informations personnelles.",
+                "labels": {
+                    "fullName": "Nom complet",
+                    "username": "Nom d'utilisateur"
+                }
+            },
+            "position": {
+                "title": "Qu'est-ce que vous faites ?",
+                "description": "Veuillez entrer votre position.",
+                "labels": {
+                    "position": "Position",
+                    "biography": "Biographie"
+                }
+            },
+            "errors": {
+                "usernameExists": "Ce nom d'utilisateur est déjà pris."
             }
         },
         "header": {
