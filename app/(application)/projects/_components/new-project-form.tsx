@@ -27,15 +27,7 @@ const schema = z.object({
     title: z.string().min(2, "projectForm.errors.title"),
     description: z.string().min(5, "projectForm.errors.description"),
     badgeName: z.string().min(2, "projectForm.errors.badgeName"),
-    badgeImage: z
-        .string()
-        .url("projectForm.errors.badgeImage")
-        .optional()
-        .or(
-            z.literal(
-                "https://www.anthropics.com/portraitpro/img/page-images/homepage/v24/out-now.jpg"
-            )
-        ),
+    badgeImage: z.string().url("projectForm.errors.badgeImage"),
 });
 
 type ProjectFormValues = z.infer<typeof schema>;
