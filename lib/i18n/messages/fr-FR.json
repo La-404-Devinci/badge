@@ -807,6 +807,7 @@
                 },
                 "success": "Projet créé avec succès !",
                 "globalError": "Erreur lors de la création du projet.",
+                "error": "Une erreur s'est produite",
                 "errors": {
                     "type": "Type de projet requis",
                     "startDate": "Date de début requise",

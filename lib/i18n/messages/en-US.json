@@ -890,6 +890,7 @@
                 },
                 "success": "Project created successfully!",
                 "globalError": "Error while creating the project.",
+                "error": "An error occurred",
                 "errors": {
                     "type": "Project type required",
                     "startDate": "Start date required",
