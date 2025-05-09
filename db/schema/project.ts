@@ -12,6 +12,14 @@ export const projectTypeEnum = pgEnum("project_type", [
     "other",
 ]);
 
+export const projectStatusEnum = pgEnum("project_status", [
+    "review",
+    "active",
+    "inactive",
+    "completed",
+    "cancelled",
+]);
+
 export type ProjectType = (typeof projectTypeEnum.enumValues)[number];
 export const project = pgTable("project", {
     id: text("id")
@@ -28,6 +36,7 @@ export const project = pgTable("project", {
     endDate: timestamp("end_date").notNull(),
     badgeName: text("badge_name").notNull(),
     badgeImage: text("badge_image"),
+    status: projectStatusEnum("status").notNull().default("review"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
