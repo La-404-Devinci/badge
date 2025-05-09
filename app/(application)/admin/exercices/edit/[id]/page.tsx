@@ -1,3 +1,7 @@
+import { notFound } from "next/navigation";
+
+import { api } from "@/trpc/server";
+
 import ExerciceEditor from "./_components/editor";
 
 interface EditExercicePageProps {
@@ -9,5 +13,11 @@ export default async function EditExercicePage({
 }: EditExercicePageProps) {
     const { id } = await params;
 
-    return <ExerciceEditor id={id} />;
+    const exercice = await api.exercice.getAdminExercice({ id });
+
+    if (!exercice) {
+        return notFound();
+    }
+
+    return <ExerciceEditor exercice={exercice} />;
 }

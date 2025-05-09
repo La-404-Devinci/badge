@@ -643,6 +643,38 @@
                 "source": "Source",
                 "createdAt": "Created"
             },
+            "editor": {
+                "title": "Exercice Editor",
+                "labels": {
+                    "title": "Title",
+                    "description": "Description",
+                    "problem": "Problem",
+                    "hints": "Hints",
+                    "hint": "Hint #{index}",
+                    "response": "Response",
+                    "exampleInputs": "Example Inputs",
+                    "exampleInput": "Example Input #{index}",
+                    "validationInputs": "Validation Inputs",
+                    "validationInput": "Validation Input #{index}",
+                    "dailyChallengeDate": "Daily Challenge Date",
+                    "difficulty": "Difficulty"
+                },
+                "buttons": {
+                    "addHint": "Add Hint",
+                    "addExampleInput": "Add Example Input",
+                    "addValidationInput": "Add Validation Input",
+                    "save": "Save",
+                    "saving": "Saving...",
+                    "discard": "Discard",
+                    "execute": "Execute"
+                },
+                "success": "Exercice updated successfully",
+                "difficulty": {
+                    "easy": "Easy",
+                    "medium": "Medium",
+                    "hard": "Hard"
+                }
+            },
             "filters": {
                 "search": "Search",
                 "searchPlaceholder": "Search by title or description",
@@ -670,6 +702,7 @@
                 "create": "Create exercice",
                 "generate": "Generate with AI",
                 "generating": "Generating...",
+                "generatingInProgress": "{count, plural, =0 {No task in progress} =1 {Generating in progress (# task)} other {Generating in progress (# tasks)}}",
                 "publishSuccess": "Exercice published successfully",
                 "publishError": "Failed to publish exercice",
                 "publishLoading": "Publishing exercice...",

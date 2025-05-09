@@ -33,3 +33,23 @@ export const batchUpdateExerciceStatusSchema = z.object({
 export const batchDeleteExercicesSchema = z.object({
     ids: z.array(z.string()).min(1),
 });
+
+export const executeCodeSchema = z.object({
+    code: z.string().min(1),
+    call: z.string().min(1),
+});
+
+export const updateExerciceSchema = z.object({
+    id: z.string(),
+    title: z.string().min(1).max(255).optional(),
+    description: z.string().min(1).max(255).optional(),
+    problem: z.string().min(1).optional(),
+    hints: z.array(z.string()).optional(),
+    response: z.string().min(1).optional(),
+    exampleInputs: z.array(z.string()).min(1).optional(),
+    validationInputs: z.array(z.string()).min(1).optional(),
+    difficulty: z.string().optional(),
+    status: z.enum(["draft", "published", "archived"]).optional(),
+    dailyChallengeDate: z.string().optional(),
+    systemCreated: z.boolean().optional(),
+});

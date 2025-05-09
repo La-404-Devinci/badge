@@ -8,6 +8,8 @@ import {
     RiMagicFill,
     RiSearchLine,
 } from "@remixicon/react";
+import { keepPreviousData } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useQueryState } from "nuqs";
 import { useDebounceValue } from "usehooks-ts";
@@ -17,6 +19,8 @@ import * as Button from "@/components/ui/button";
 import * as Input from "@/components/ui/input";
 import * as Label from "@/components/ui/label";
 import * as Select from "@/components/ui/select";
+import * as Tooltip from "@/components/ui/tooltip";
+import { useTRPC } from "@/trpc/client";
 
 import { useExerciceTableActions } from "../_hooks/use-exercice-table-actions";
 import { adminExercicesParsers } from "../searchParams";
@@ -27,6 +31,7 @@ type DifficultyType = "easy" | "medium" | "hard" | "unknown" | "all";
 export function Filters() {
     const t = useTranslations("admin.exercices");
     const id = useId();
+    const trpc = useTRPC();
 
     // Query parameters
     const [search, setSearch] = useQueryState(
@@ -75,12 +80,23 @@ export function Filters() {
         setDebouncedValue("");
     }, [setSearch, setDebouncedValue]);
 
+    // List generate queue
+    const { data: generateQueue, refetch: refetchGenerateQueue } = useQuery(
+        trpc.exercice.listGenerateQueue.queryOptions(undefined, {
+            placeholderData: keepPreviousData,
+            refetchInterval: 10000,
+        })
+    );
+
+    console.log(generateQueue);
+
     // Handle generate exercice
-    const { isActionLoading, generateExercice } = useExerciceTableActions();
+    const { generateExercice } = useExerciceTableActions();
 
     const handleGenerateExercice = useCallback(async () => {
         await generateExercice();
-    }, [generateExercice]);
+        await refetchGenerateQueue();
+    }, [generateExercice, refetchGenerateQueue]);
 
     return (
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -176,25 +192,44 @@ export function Filters() {
             </div>
 
             <div className="flex flex-col gap-4 md:flex-row">
-                <Button.Root
-                    variant="neutral"
-                    mode="stroke"
-                    size="small"
-                    onClick={handleGenerateExercice}
-                    disabled={isActionLoading.generate}
-                >
-                    {isActionLoading.generate ? (
-                        <>
-                            <StaggeredFadeLoader className="h-4 w-4" />
-                            <span>{t("actions.generating")}</span>
-                        </>
-                    ) : (
-                        <>
-                            <Button.Icon as={RiMagicFill} />
-                            <span>{t("actions.generate")}</span>
-                        </>
-                    )}
-                </Button.Root>
+                <Tooltip.Provider>
+                    <Tooltip.Root delayDuration={0}>
+                        <Tooltip.Trigger asChild>
+                            <div>
+                                <Button.Root
+                                    variant="neutral"
+                                    mode="stroke"
+                                    size="small"
+                                    onClick={handleGenerateExercice}
+                                    disabled={
+                                        (generateQueue?.runs.length ?? 0) >= 5
+                                    }
+                                >
+                                    {(generateQueue?.runs.length ?? 0) >= 5 ? (
+                                        <>
+                                            <StaggeredFadeLoader className="h-4 w-4" />
+                                            <span>
+                                                {t("actions.generating")}
+                                            </span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Button.Icon as={RiMagicFill} />
+                                            <span>{t("actions.generate")}</span>
+                                        </>
+                                    )}
+                                </Button.Root>
+                            </div>
+                        </Tooltip.Trigger>
+                        <Tooltip.Content>
+                            <p>
+                                {t("actions.generatingInProgress", {
+                                    count: generateQueue?.runs.length ?? 0,
+                                })}
+                            </p>
+                        </Tooltip.Content>
+                    </Tooltip.Root>
+                </Tooltip.Provider>
                 <Button.Root
                     variant="primary"
                     mode="filled"

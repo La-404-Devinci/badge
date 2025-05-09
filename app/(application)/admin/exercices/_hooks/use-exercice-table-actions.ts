@@ -91,18 +91,13 @@ export function useExerciceTableActions() {
     // Generate exercice using trigger.dev
     const { mutateAsync: generateExercice } = useMutation(
         trpc.exercice.generateExercice.mutationOptions({
-            onMutate: () => {
-                setIsActionLoading((prev) => ({ ...prev, generate: true }));
-            },
             onSuccess: () => {
                 invalidateList();
                 toast.success(t("actions.generateSuccess"));
-                setIsActionLoading((prev) => ({ ...prev, generate: false }));
             },
             onError: (error) => {
                 console.error(error);
                 toast.error(t("actions.generateError"));
-                setIsActionLoading((prev) => ({ ...prev, generate: false }));
             },
         })
     );

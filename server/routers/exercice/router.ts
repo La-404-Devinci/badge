@@ -5,16 +5,24 @@ import {
     batchDeleteExercices,
     batchUpdateExerciceStatus,
     deleteExercice,
+    executeCode,
     generateExercice,
+    updateExercice,
     updateExerciceStatus,
 } from "./mutations/index";
-import { listAdminExercices, getAdminExercice } from "./queries/index";
+import {
+    listAdminExercices,
+    getAdminExercice,
+    listGenerateQueue,
+} from "./queries/index";
 import {
     batchDeleteExercicesSchema,
     batchUpdateExerciceStatusSchema,
     deleteExerciceSchema,
+    executeCodeSchema,
     getAdminExerciceSchema,
     listAdminExercicesSchema,
+    updateExerciceSchema,
     updateExerciceStatusSchema,
 } from "./validators";
 
@@ -34,6 +42,12 @@ export const exerciceRouter = router({
         .query(async ({ ctx, input }) => {
             const { db } = ctx;
             return await listAdminExercices({ input, db });
+        }),
+
+    listGenerateQueue: protectedProcedure
+        .meta({ roles: ["admin"] })
+        .query(async () => {
+            return await listGenerateQueue();
         }),
 
     // Mutations
@@ -74,5 +88,21 @@ export const exerciceRouter = router({
         .mutation(async ({ ctx }) => {
             const { db, session } = ctx;
             return await generateExercice({ db, input: session.user.id });
+        }),
+
+    executeCode: protectedProcedure
+        .meta({ roles: ["admin"] })
+        .input(executeCodeSchema)
+        .mutation(async ({ ctx, input }) => {
+            const { db } = ctx;
+            return await executeCode({ input, db });
+        }),
+
+    updateExercice: protectedProcedure
+        .meta({ roles: ["admin"] })
+        .input(updateExerciceSchema)
+        .mutation(async ({ ctx, input }) => {
+            const { db } = ctx;
+            return await updateExercice({ input, db });
         }),
 });

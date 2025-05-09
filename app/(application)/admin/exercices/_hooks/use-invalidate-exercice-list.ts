@@ -10,6 +10,10 @@ export function useInvalidateExerciceList() {
         queryClient.invalidateQueries({
             queryKey: trpc.exercice.listAdminExercices.queryKey(),
         });
+
+        queryClient.invalidateQueries({
+            queryKey: trpc.exercice.listGenerateQueue.queryKey(),
+        });
     };
 
     return invalidateExerciceList;

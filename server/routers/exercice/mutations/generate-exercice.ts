@@ -7,18 +7,12 @@ import { InputMutationContext } from "./types";
 export const generateExercice = async ({
     input,
 }: InputMutationContext<string>) => {
-    const task = await tasks.triggerAndPoll<typeof dailyTask>(
-        dailyTask.id,
-        {
-            createdBy: input,
-        },
-        {
-            pollIntervalMs: 750,
-        }
-    );
+    // Trigger task without waiting for completion
+    const handle = await tasks.trigger(dailyTask.id, {
+        createdBy: input,
+    });
 
     return {
-        success: task.isSuccess,
-        id: task.id,
+        id: handle.id,
     };
 };
