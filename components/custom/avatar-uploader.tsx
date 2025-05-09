@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { RiUser6Line } from "@remixicon/react";
-import { upload } from "@vercel/blob/client";
 import { useTranslations } from "next-intl";
 import { ulid } from "ulid";
 
@@ -12,6 +11,7 @@ import { ImageDropzone } from "@/components/custom/image-dropzone";
 import * as Avatar from "@/components/ui/avatar";
 import * as Button from "@/components/ui/button";
 import * as Modal from "@/components/ui/modal";
+import { getPresignedUrls, handleUpload } from "@/lib/minio/client";
 import { cn } from "@/lib/utils/cn";
 
 import { StaggeredFadeLoader } from "../staggered-fade-loader";
@@ -136,17 +136,17 @@ export function AvatarUploader({
             const filename = `user-avatar/${ulid()}.jpg`;
             const file = new File([blob], filename, { type: "image/jpeg" });
 
-            // Upload the optimized image to Vercel Blob using client-side upload
-            const { url } = await upload(filename, file, {
-                access: "public",
-                handleUploadUrl: "/api/upload/avatars",
+            // 1. Obtenir une presigned URL pour ce fichier
+            const presignedUrls = await getPresignedUrls([
+                { originalFileName: filename, fileSize: file.size },
+            ]);
+
+            // 2. Uploader le fichier sur Minio via la presigned URL
+            await handleUpload([file], presignedUrls, () => {
+                setIsAvatarUpdating(true);
+                // 3. Appeler le callback avec l'URL publique du fichier
+                onAvatarChange(presignedUrls[0].url);
             });
-
-            // Set updating state before calling the callback
-            setIsAvatarUpdating(true);
-
-            // Call the callback with the new avatar URL from Vercel Blob
-            onAvatarChange(url);
 
             // Clean up
             setIsModalOpen(false);
