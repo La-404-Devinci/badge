@@ -768,5 +768,55 @@
             "cancel": "Annuler",
             "addUser": "Ajouter un utilisateur"
         }
+    },
+    "project": {
+        "create": {
+            "title": "Créer un projet",
+            "description": "Crée un nouveau projet pour commencer.",
+            "label": {
+                "create": "Créer un projet"
+            },
+            "projectForm": {
+                "fields": {
+                    "title": "Titre du projet",
+                    "description": "Description du projet",
+                    "type": "Type de projet",
+                    "exclusive404": "Projet exclusif aux membres 404",
+                    "startDate": "Date de début",
+                    "endDate": "Date de fin",
+                    "badgeName": "Nom du badge",
+                    "badgeImage": "Image du badge",
+                    "badgeUrl": "URL du badge"
+                },
+                "placeholders": {
+                    "title": "Titre du projet",
+                    "description": "Décris ton projet...",
+                    "type": "Choisir un type",
+                    "startDate": "Sélectionner une date",
+                    "endDate": "Sélectionner une date",
+                    "badgeName": "Nom du badge"
+                },
+                "types": {
+                    "uxui": "UX/UI",
+                    "dev": "Développement",
+                    "marketing": "Marketing",
+                    "other": "Autre"
+                },
+                "actions": {
+                    "create": "Créer le projet"
+                },
+                "success": "Projet créé avec succès !",
+                "globalError": "Erreur lors de la création du projet.",
+                "errors": {
+                    "type": "Type de projet requis",
+                    "startDate": "Date de début requise",
+                    "endDate": "Date de fin requise",
+                    "title": "Titre requis",
+                    "description": "Description requise",
+                    "badgeName": "Nom du badge requis",
+                    "badgeImage": "Image du badge requise"
+                }
+            }
+        }
     }
 }

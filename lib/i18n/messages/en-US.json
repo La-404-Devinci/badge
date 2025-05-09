@@ -851,5 +851,55 @@
             "cancel": "Cancel",
             "addUser": "Add User"
         }
+    },
+    "project": {
+        "create": {
+            "title": "Create Project",
+            "description": "Create a new project to get started.",
+            "label": {
+                "create": "Create Project"
+            },
+            "projectForm": {
+                "fields": {
+                    "title": "Project title",
+                    "description": "Project description",
+                    "type": "Project type",
+                    "exclusive404": "Project exclusive to 404 members",
+                    "startDate": "Start date",
+                    "endDate": "End date",
+                    "badgeName": "Badge name",
+                    "badgeImage": "Badge image",
+                    "badgeUrl": "Badge URL"
+                },
+                "placeholders": {
+                    "title": "Project title",
+                    "description": "Describe your project...",
+                    "type": "Choose a type",
+                    "startDate": "Select a date",
+                    "endDate": "Select a date",
+                    "badgeName": "Badge name"
+                },
+                "types": {
+                    "uxui": "UX/UI",
+                    "dev": "Development",
+                    "marketing": "Marketing",
+                    "other": "Other"
+                },
+                "actions": {
+                    "create": "Create project"
+                },
+                "success": "Project created successfully!",
+                "globalError": "Error while creating the project.",
+                "errors": {
+                    "type": "Project type required",
+                    "startDate": "Start date required",
+                    "endDate": "End date required",
+                    "title": "Title required",
+                    "description": "Description required",
+                    "badgeName": "Badge name required",
+                    "badgeImage": "Badge image required"
+                }
+            }
+        }
     }
 }
