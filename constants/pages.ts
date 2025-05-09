@@ -10,6 +10,10 @@ export const AUTH_PAGES = {
 
 export const APPLICATION_PAGES = {
     DASHBOARD: "/dashboard",
+    DAILY_CHALLENGE: "/daily-challenge",
+    LEADERBOARD: "/leaderboard",
+    EXPLORE: "/explore",
+    PROJECTS: "/projects",
 };
 
 export const SETTINGS_PAGES = {

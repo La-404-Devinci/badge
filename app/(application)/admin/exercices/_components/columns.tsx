@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import * as Badge from "@/components/ui/badge";
 import * as Checkbox from "@/components/ui/checkbox";
 import { formatRelativeDate } from "@/lib/utils/dates/format-relative-date";
+import { formatRelativeDays } from "@/lib/utils/dates/format-relative-days";
 import { getSortingIcon } from "@/lib/utils/table/get-sorting-icon";
 import { RouterOutput } from "@/trpc/client";
 
@@ -16,7 +17,8 @@ export type Exercice =
     RouterOutput["exercice"]["listAdminExercices"]["exercices"][number];
 
 export function getExercicesColumns(
-    t: ReturnType<typeof useTranslations<"admin.exercices">>
+    t: ReturnType<typeof useTranslations<"admin.exercices">>,
+    tTime: ReturnType<typeof useTranslations<"common.time">>
 ): ColumnDef<Exercice, unknown>[] {
     return [
         {
@@ -205,6 +207,44 @@ export function getExercicesColumns(
                 return (
                     <div className="whitespace-nowrap text-paragraph-sm text-text-sub-600">
                         {formatRelativeDate(exercice.createdAt)}
+                    </div>
+                );
+            },
+        },
+        {
+            id: "dailyChallengeDate",
+            accessorKey: "dailyChallengeDate",
+            header: ({ column }) => (
+                <div className="flex items-center gap-0.5">
+                    {t("columns.dailyChallengeDate")}
+                    <button
+                        type="button"
+                        onClick={() =>
+                            column.toggleSorting(column.getIsSorted() === "asc")
+                        }
+                    >
+                        {getSortingIcon(column.getIsSorted())}
+                    </button>
+                </div>
+            ),
+            cell: ({ row }) => {
+                const exercice = row.original;
+                if (!exercice) return null;
+
+                return (
+                    <div className="flex flex-col gap-0.5">
+                        <div className="whitespace-nowrap text-paragraph-sm text-text-sub-600">
+                            {exercice.dailyChallengeDate ?? "-"}
+                        </div>
+
+                        <div className="text-paragraph-xs text-text-soft-400">
+                            {exercice.dailyChallengeDate
+                                ? formatRelativeDays(
+                                      new Date(exercice.dailyChallengeDate),
+                                      tTime
+                                  )
+                                : "-"}
+                        </div>
                     </div>
                 );
             },

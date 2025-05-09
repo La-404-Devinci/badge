@@ -38,6 +38,7 @@ import { getExercicesColumns, Exercice } from "./columns";
 
 export function ExercicesTable() {
     const t = useTranslations("admin.exercices");
+    const tTime = useTranslations("common.time");
 
     // State for delete confirmation dialog
     const [showDeleteDialog, setShowDeleteDialog] = React.useState(false);
@@ -100,7 +101,10 @@ export function ExercicesTable() {
         [sortBy, sortOrder]
     );
 
-    const columns = React.useMemo(() => getExercicesColumns(t), [t]);
+    const columns = React.useMemo(
+        () => getExercicesColumns(t, tTime),
+        [t, tTime]
+    );
 
     const tableData = React.useMemo(() => {
         return isLoading ? [] : (data?.exercices ?? []);

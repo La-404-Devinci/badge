@@ -5,9 +5,20 @@ import {
     parseAsStringEnum,
 } from "nuqs/server";
 
-const sortableColumns = ["title", "status", "difficulty", "createdAt"];
+const sortableColumns = [
+    "title",
+    "status",
+    "difficulty",
+    "createdAt",
+    "dailyChallengeDate",
+];
 
-export type SortableColumn = "title" | "status" | "difficulty" | "createdAt";
+export type SortableColumn =
+    | "title"
+    | "status"
+    | "difficulty"
+    | "createdAt"
+    | "dailyChallengeDate";
 
 export const adminExercicesParsers = {
     // Filters

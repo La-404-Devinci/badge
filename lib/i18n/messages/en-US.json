@@ -33,6 +33,13 @@
             "signInWithGoogle": "Sign in with Google",
             "signInWithDiscord": "Sign in with Discord",
             "signInWithGithub": "Sign in with GitHub"
+        },
+        "time": {
+            "daysAgo": "{days} days ago",
+            "inDays": "in {days} days",
+            "today": "Today",
+            "yesterday": "Yesterday",
+            "tomorrow": "Tomorrow"
         }
     },
     "components": {
@@ -66,13 +73,10 @@
             "navigation": {
                 "main": "Main",
                 "dashboard": "Dashboard",
-                "calendar": "Calendar",
+                "dailyChallenge": "Daily Challenge",
+                "leaderboard": "Leaderboard",
+                "explore": "Explore",
                 "projects": "Projects",
-                "teams": "Teams",
-                "integrations": "Integrations",
-                "benefits": "Benefits",
-                "documents": "Documents",
-                "favorites": "Favorites",
                 "search": "Search...",
                 "mobileMenu": "Mobile Menu",
                 "mobileMenuDescription": "This menu provides mobile navigation options, including access to main navigation links, favorite projects, search, and user settings."
@@ -80,7 +84,6 @@
             "settings": {
                 "title": "Others",
                 "settingsLink": "Settings",
-                "support": "Support",
                 "admin": "Admin"
             },
             "favorites": {
@@ -97,9 +100,8 @@
             "clearFilters": "Clear Filters"
         },
         "application": {
-            "createRequest": {
-                "label": "Create Request"
-            }
+            "createProject": "Submit Project",
+            "createPost": "Create Post"
         }
     },
     "landing": {
@@ -641,7 +643,8 @@
                 "difficulty": "Difficulty",
                 "status": "Status",
                 "source": "Source",
-                "createdAt": "Created"
+                "createdAt": "Created",
+                "dailyChallengeDate": "Daily Challenge"
             },
             "editor": {
                 "title": "Exercice Editor",
@@ -980,6 +983,24 @@
             "emailPlaceholder": "Enter email address",
             "cancel": "Cancel",
             "addUser": "Add User"
+        }
+    },
+    "dashboard": {
+        "dailyChallenge": {
+            "title": "Today's Challenge",
+            "description": "Complete the daily challenge to earn rewards",
+            "noChallenge": "Oh no!",
+            "noChallengeDescription": "It's seems that there is no challenge today...",
+            "difficulty": {
+                "easy": "Easy",
+                "medium": "Medium",
+                "hard": "Hard",
+                "unknown": "Unknown"
+            },
+            "startChallenge": "Start Challenge"
+        },
+        "header": {
+            "welcomeBack": "Welcome back to {projectName} 👋🏻"
         }
     }
 }

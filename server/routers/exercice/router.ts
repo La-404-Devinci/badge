@@ -14,6 +14,7 @@ import {
     listAdminExercices,
     getAdminExercice,
     listGenerateQueue,
+    getDailyChallenge,
 } from "./queries/index";
 import {
     batchDeleteExercicesSchema,
@@ -49,6 +50,11 @@ export const exerciceRouter = router({
         .query(async () => {
             return await listGenerateQueue();
         }),
+
+    getDailyChallenge: protectedProcedure.query(async ({ ctx }) => {
+        const { db } = ctx;
+        return await getDailyChallenge({ db });
+    }),
 
     // Mutations
     updateExerciceStatus: protectedProcedure

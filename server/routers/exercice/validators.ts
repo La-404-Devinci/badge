@@ -8,7 +8,13 @@ export const listAdminExercicesSchema = z.object({
     page: z.number().default(1),
     limit: z.number().min(1).max(100).default(25),
     sortBy: z
-        .enum(["title", "status", "difficulty", "createdAt"])
+        .enum([
+            "title",
+            "status",
+            "difficulty",
+            "createdAt",
+            "dailyChallengeDate",
+        ])
         .default("createdAt"),
     sortOrder: z.enum(["asc", "desc"]).default("desc"),
     search: z.string().nullable(),

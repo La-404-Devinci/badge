@@ -5,13 +5,13 @@ import { useTranslations } from "next-intl";
 
 import * as Button from "@/components/ui/button";
 
-export function CreateRequestButton({ className }: { className?: string }) {
-    const t = useTranslations("components.application.createRequest");
+export function CreateProjectButton({ className }: { className?: string }) {
+    const t = useTranslations("components.application");
 
     return (
         <Button.Root className={className}>
             <Button.Icon as={RiAddLine} />
-            {t("label")}
+            {t("createProject")}
         </Button.Root>
     );
 }
