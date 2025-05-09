@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import * as Select from "@/components/ui/select";
 import * as TabMenuHorizontal from "@/components/ui/tab-menu-horizontal";
+import { cn } from "@/lib/utils";
 
 export type AdminItem = {
     label: string;
@@ -42,33 +43,33 @@ export default function AdminLayoutClient({
                     <Select.Value />
                 </Select.Trigger>
                 <Select.Content>
-                    {items
-                        .filter((item) => !item.disabled)
-                        .map((item) => (
-                            <Select.Item
-                                key={item.key}
-                                value={item.href}
-                                disabled={item.disabled}
-                            >
-                                {item.label}
-                            </Select.Item>
-                        ))}
+                    {items.map((item) => (
+                        <Select.Item
+                            key={item.key}
+                            value={item.href}
+                            disabled={item.disabled}
+                        >
+                            {item.label}
+                        </Select.Item>
+                    ))}
                 </Select.Content>
             </Select.Root>
 
             <TabMenuHorizontal.Root defaultValue={selectedPathname}>
                 <TabMenuHorizontal.List className="hidden md:flex">
-                    {items
-                        .filter((item) => !item.disabled)
-                        .map(({ label, href, key }) => (
-                            <TabMenuHorizontal.Trigger
-                                key={key}
-                                value={href}
-                                asChild
-                            >
-                                <Link href={href}>{label}</Link>
-                            </TabMenuHorizontal.Trigger>
-                        ))}
+                    {items.map(({ label, href, key, disabled }) => (
+                        <TabMenuHorizontal.Trigger
+                            key={key}
+                            value={href}
+                            asChild
+                            disabled={disabled}
+                            className={cn(
+                                disabled && "opacity-50 pointer-events-none"
+                            )}
+                        >
+                            <Link href={href}>{label}</Link>
+                        </TabMenuHorizontal.Trigger>
+                    ))}
                 </TabMenuHorizontal.List>
             </TabMenuHorizontal.Root>
 

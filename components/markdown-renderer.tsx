@@ -41,7 +41,7 @@ const PureMarkdownRenderer = ({ children, className }: MarkdownProps) => {
                 return (
                     <pre
                         className={cn(
-                            "text-paragraph-sm w-full overflow-x-auto p-4 bg-zinc-50 dark:bg-zinc-900 rounded-lg my-4",
+                            "text-paragraph-sm w-full overflow-x-auto p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg my-4",
                             className
                         )}
                         {...props}
@@ -52,7 +52,7 @@ const PureMarkdownRenderer = ({ children, className }: MarkdownProps) => {
             }
             return (
                 <code
-                    className="text-paragraph-sm bg-zinc-100 dark:bg-zinc-800 py-0.5 px-1 rounded-md"
+                    className="text-paragraph-sm bg-neutral-100 dark:bg-neutral-800 py-0.5 px-1 rounded-md"
                     {...props}
                 >
                     {children}
@@ -97,7 +97,7 @@ const PureMarkdownRenderer = ({ children, className }: MarkdownProps) => {
         ),
         blockquote: ({ children, ...props }) => (
             <blockquote
-                className="border-l-4 border-zinc-300 dark:border-zinc-700 pl-4 my-4 italic"
+                className="border-l-4 border-neutral-300 dark:border-neutral-700 pl-4 my-4 italic"
                 {...props}
             >
                 {children}
@@ -106,7 +106,7 @@ const PureMarkdownRenderer = ({ children, className }: MarkdownProps) => {
         table: ({ children, ...props }) => (
             <div className="overflow-x-auto my-4">
                 <table
-                    className="min-w-full divide-y divide-zinc-200 dark:divide-zinc-700"
+                    className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700"
                     {...props}
                 >
                     {children}
@@ -116,7 +116,7 @@ const PureMarkdownRenderer = ({ children, className }: MarkdownProps) => {
         thead: ({ children, ...props }) => <thead {...props}>{children}</thead>,
         tbody: ({ children, ...props }) => (
             <tbody
-                className="divide-y divide-zinc-200 dark:divide-zinc-700"
+                className="divide-y divide-neutral-200 dark:divide-neutral-700"
                 {...props}
             >
                 {children}
@@ -125,7 +125,7 @@ const PureMarkdownRenderer = ({ children, className }: MarkdownProps) => {
         tr: ({ children, ...props }) => <tr {...props}>{children}</tr>,
         th: ({ children, ...props }) => (
             <th
-                className="px-3 py-2 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider"
+                className="px-3 py-2 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider"
                 {...props}
             >
                 {children}
@@ -133,7 +133,7 @@ const PureMarkdownRenderer = ({ children, className }: MarkdownProps) => {
         ),
         td: ({ children, ...props }) => (
             <td
-                className="px-3 py-2 whitespace-nowrap text-sm text-zinc-900 dark:text-zinc-100"
+                className="px-3 py-2 whitespace-nowrap text-sm text-neutral-900 dark:text-neutral-100"
                 {...props}
             >
                 {children}

@@ -42,9 +42,15 @@ export default async function AdminLayout({
                         href: PAGES.ADMIN_USERS,
                     },
                     {
+                        label: t("items.exercices"),
+                        key: "exercices",
+                        href: PAGES.ADMIN_EXERCISES,
+                    },
+                    {
                         label: t("items.waitlist"),
                         key: "waitlist",
                         href: PAGES.ADMIN_WAITLIST,
+                        disabled: true,
                     },
                     {
                         label: t("items.settings"),
