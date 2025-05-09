@@ -1,161 +1,297 @@
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 
-import { useOnboardingStore } from "@/app/(auth)/onboarding/_components/store";
-import { StaggeredFadeLoader } from "@/components/staggered-fade-loader";
-import * as FancyButton from "@/components/ui/fancy-button";
-import { FormMessage } from "@/components/ui/form";
+import { AvatarUploader } from "@/components/custom/avatar-uploader";
+import * as Button from "@/components/ui/button";
+import * as Checkbox from "@/components/ui/checkbox";
+import * as Divider from "@/components/ui/divider";
+import { FormGlobalMessage, FormMessage } from "@/components/ui/form";
+import * as Input from "@/components/ui/input";
 import * as Label from "@/components/ui/label";
 import * as Select from "@/components/ui/select";
 import * as Textarea from "@/components/ui/textarea";
-import { PAGES } from "@/constants/pages";
-import { useTRPC } from "@/trpc/client";
-import { positionSchema } from "@/validator/onboarding";
+
+const schema = z.object({
+    type: z.string().min(1, "projectForm.errors.type"),
+    startDate: z.string().min(1, "projectForm.errors.startDate"),
+    endDate: z.string().min(1, "projectForm.errors.endDate"),
+    exclusive404: z.boolean(),
+    title: z.string().min(2, "projectForm.errors.title"),
+    description: z.string().min(5, "projectForm.errors.description"),
+    badgeName: z.string().min(2, "projectForm.errors.badgeName"),
+    badgeImage: z.string().url("projectForm.errors.badgeImage").optional(),
+    badgeUrl: z.string().url("projectForm.errors.badgeUrl").optional(),
+});
+
+type ProjectFormValues = z.infer<typeof schema>;
 
 export function NewProjectForm() {
-    const t = useTranslations("auth");
-    const router = useRouter();
-    const trpc = useTRPC();
+    const t = useTranslations("project.create.projectForm");
+    const commonT = useTranslations("common");
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [globalError, setGlobalError] = React.useState<string | null>(null);
+    const [message, setMessage] = React.useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-    const { handleSubmit, formState, setValue, watch } = useForm({
-        resolver: zodResolver(positionSchema),
-        defaultValues: {
-            position: "",
-            biography: "",
-        },
+    const initialValues = React.useMemo(
+        () => ({
+            type: "",
+            startDate: "",
+            endDate: "",
+            exclusive404: false,
+            title: "",
+            description: "",
+            badgeName: "",
+            badgeImage: "",
+        }),
+        []
+    );
+
+    const {
+        control,
+        register,
+        handleSubmit,
+        reset,
+        formState,
+        watch,
+        setValue,
+    } = useForm<ProjectFormValues>({
+        resolver: zodResolver(schema, {
+            errorMap: (error) => ({
+                message: t(error.message || ""),
+            }),
+        }),
+        defaultValues: initialValues,
     });
 
-    const onboardingStore = useOnboardingStore.getState();
-    const { setOnboardingStore, resetOnboardingStore } = useOnboardingStore();
+    const badgeName = watch("badgeName") || "";
 
-    const { mutateAsync: updateUser } = useMutation(
-        trpc.user.updateUserProfile.mutationOptions({
-            onSuccess: () => {
-                setIsLoading(false);
-                router.push(PAGES.DASHBOARD);
-            },
-        })
-    );
-    const onSubmit = async (values: z.infer<typeof positionSchema>) => {
-        setIsLoading(true);
-        const { position, biography } = values;
-        console.log(position);
-        setOnboardingStore({
-            position,
-            biography,
-        });
+    const handleSave = async (values: ProjectFormValues) => {
+        setGlobalError(null);
+        setIsSubmitting(true);
 
-        await updateUser({
-            ...onboardingStore,
-            position,
-            biography,
-        });
-
-        resetOnboardingStore();
+        try {
+            // await createProject(values);
+            setMessage(t("success"));
+            reset(values);
+        } catch (error) {
+            console.error(error);
+            setGlobalError(t("globalError"));
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
-    const positionOptions = [
-        { label: "Developer", value: "developer" },
-        { label: "Designer", value: "designer" },
-        { label: "Student", value: "student" },
-        { label: "QA", value: "qa" },
-        { label: "Product Manager", value: "product-manager" },
-        { label: "Project Manager", value: "project-manager" },
-        { label: "Sales", value: "sales" },
-        { label: "Marketing", value: "marketing" },
-        { label: "HR", value: "hr" },
-        { label: "Other", value: "other" },
+    const handleDiscard = () => {
+        reset(initialValues);
+        setGlobalError(null);
+        setMessage(null);
+    };
+
+    const projectTypes = [
+        { label: t("types.uxui"), value: "uxui" },
+        { label: t("types.dev"), value: "dev" },
+        { label: t("types.marketing"), value: "marketing" },
+        { label: t("types.other"), value: "autre" },
     ];
 
-    const position = watch("position");
-    const biography = watch("biography");
-
     return (
-        <div className="w-full px-4">
-            <section>
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="flex w-full flex-col gap-6"
-                >
-                    <div className="flex flex-col gap-3">
-                        <div className="flex flex-col gap-1">
-                            <Label.Root htmlFor="position">
-                                {t("onboarding.position.labels.position")}
-                                <Label.Asterisk />
-                            </Label.Root>
-
-                            <Select.Root
-                                value={position}
-                                onValueChange={(value) =>
-                                    setValue("position", value)
-                                }
-                                hasError={!!formState.errors.position}
-                            >
-                                <Select.Trigger>
-                                    <Select.Value placeholder="Select a position" />
-                                </Select.Trigger>
-                                <Select.Content>
-                                    {positionOptions.map((option) => (
-                                        <Select.Item
-                                            key={option.value}
-                                            value={option.value}
-                                        >
-                                            {option.label}
-                                        </Select.Item>
-                                    ))}
-                                </Select.Content>
-                            </Select.Root>
-                            <FormMessage>
-                                {formState.errors.position?.message}
-                            </FormMessage>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-3">
-                        <div className="flex flex-col gap-1">
-                            <Label.Root htmlFor="fullName">
-                                {t("common.labels.fullName")} <Label.Asterisk />
-                            </Label.Root>
-                            <Textarea.Root
-                                placeholder="Jot down your thoughts..."
-                                value={biography}
-                                onChange={(e) =>
-                                    setValue("biography", e.target.value)
-                                }
-                            >
-                                <Textarea.CharCounter
-                                    current={biography.length}
-                                    max={200}
+        <div className="flex w-full flex-col gap-6">
+            <form
+                onSubmit={handleSubmit(handleSave)}
+                className="flex flex-col gap-4"
+            >
+                <div className="flex flex-col gap-3">
+                    <div>
+                        <Label.Root>{t("fields.title")}</Label.Root>
+                        <Input.Root hasError={!!formState.errors.title}>
+                            <Input.Wrapper>
+                                <Input.Input
+                                    {...register("title")}
+                                    placeholder={t("placeholders.title")}
                                 />
-                            </Textarea.Root>
-
-                            <FormMessage>
-                                {formState.errors.biography?.message}
-                            </FormMessage>
-                        </div>
+                            </Input.Wrapper>
+                        </Input.Root>
+                        <FormMessage>
+                            {formState.errors.title?.message}
+                        </FormMessage>
                     </div>
+                    <div>
+                        <Label.Root>{t("fields.description")}</Label.Root>
+                        <Textarea.Root
+                            {...register("description")}
+                            placeholder={t("placeholders.description")}
+                        />
+                        <FormMessage>
+                            {formState.errors.description?.message}
+                        </FormMessage>
+                    </div>
+                </div>
 
-                    <FancyButton.Root
-                        variant="primary"
-                        size="medium"
-                        disabled={isLoading}
+                <Divider.Root variant="line-spacing" />
+
+                <div className="flex flex-col gap-3">
+                    <div>
+                        <Label.Root>{t("fields.type")}</Label.Root>
+                        <Controller
+                            name="type"
+                            control={control}
+                            render={({ field }) => (
+                                <Select.Root
+                                    value={field.value}
+                                    onValueChange={field.onChange}
+                                >
+                                    <Select.Trigger>
+                                        <Select.Value
+                                            placeholder={t("placeholders.type")}
+                                        />
+                                    </Select.Trigger>
+                                    <Select.Content>
+                                        {projectTypes.map((option) => (
+                                            <Select.Item
+                                                key={option.value}
+                                                value={option.value}
+                                            >
+                                                {option.label}
+                                            </Select.Item>
+                                        ))}
+                                    </Select.Content>
+                                </Select.Root>
+                            )}
+                        />
+                        <FormMessage>
+                            {formState.errors.type?.message}
+                        </FormMessage>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Controller
+                            name="exclusive404"
+                            control={control}
+                            render={({ field }) => (
+                                <Checkbox.Root
+                                    id="exclusive404"
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                />
+                            )}
+                        />
+                        <Label.Root
+                            className="text-paragraph-sm"
+                            htmlFor="exclusive404"
+                        >
+                            {t("fields.exclusive404")}
+                        </Label.Root>
+                    </div>
+                </div>
+
+                <Divider.Root variant="line-spacing" />
+
+                <div className="flex gap-4">
+                    <div className="flex-1">
+                        <Label.Root>{t("fields.startDate")}</Label.Root>
+                        <Input.Root hasError={!!formState.errors.startDate}>
+                            <Input.Wrapper>
+                                <Input.Input
+                                    type="date"
+                                    {...register("startDate")}
+                                    placeholder={t("placeholders.startDate")}
+                                />
+                            </Input.Wrapper>
+                        </Input.Root>
+                        <FormMessage>
+                            {formState.errors.startDate?.message}
+                        </FormMessage>
+                    </div>
+                    <div className="flex-1">
+                        <Label.Root>{t("fields.endDate")}</Label.Root>
+                        <Input.Root hasError={!!formState.errors.endDate}>
+                            <Input.Wrapper>
+                                <Input.Input
+                                    type="date"
+                                    {...register("endDate")}
+                                    placeholder={t("placeholders.endDate")}
+                                />
+                            </Input.Wrapper>
+                        </Input.Root>
+                        <FormMessage>
+                            {formState.errors.endDate?.message}
+                        </FormMessage>
+                    </div>
+                </div>
+
+                <Divider.Root variant="line-spacing" />
+
+                <div className="flex flex-col gap-3">
+                    <div>
+                        <Label.Root>{t("fields.badgeName")}</Label.Root>
+                        <Input.Root hasError={!!formState.errors.badgeName}>
+                            <Input.Wrapper>
+                                <Input.Input
+                                    {...register("badgeName")}
+                                    placeholder={t("placeholders.badgeName")}
+                                />
+                            </Input.Wrapper>
+                        </Input.Root>
+                        <FormMessage>
+                            {formState.errors.badgeName?.message}
+                        </FormMessage>
+                    </div>
+                    <div>
+                        <Label.Root>{t("fields.badgeImage")}</Label.Root>
+                        <Controller
+                            name="badgeImage"
+                            control={control}
+                            render={({ field }) => (
+                                <AvatarUploader
+                                    username={
+                                        badgeName || t("placeholders.badgeName")
+                                    }
+                                    currentAvatar={field.value}
+                                    onAvatarChange={(url: string) => {
+                                        setValue("badgeImage", url, {
+                                            shouldDirty: true,
+                                        });
+                                    }}
+                                    size="64"
+                                />
+                            )}
+                        />
+                        <FormMessage>
+                            {formState.errors.badgeImage?.message}
+                        </FormMessage>
+                    </div>
+                </div>
+
+                <FormGlobalMessage variant="error">
+                    {globalError}
+                </FormGlobalMessage>
+                {message && !globalError && (
+                    <FormGlobalMessage variant="success">
+                        {message}
+                    </FormGlobalMessage>
+                )}
+
+                <div className="mt-1 grid grid-cols-2 gap-3">
+                    <Button.Root
+                        variant="neutral"
+                        mode="stroke"
+                        type="button"
+                        disabled={!formState.isDirty || isSubmitting}
+                        onClick={handleDiscard}
                     >
-                        {isLoading && <StaggeredFadeLoader variant="muted" />}
-                        {isLoading
-                            ? t("common.loading.submitting")
-                            : t("common.buttons.continue")}
-                    </FancyButton.Root>
-                </form>
-            </section>
+                        {commonT("discard")}
+                    </Button.Root>
+                    <Button.Root type="submit" disabled={isSubmitting}>
+                        {t("actions.create")}
+                    </Button.Root>
+                </div>
+            </form>
         </div>
     );
 }

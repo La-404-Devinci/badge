@@ -13,9 +13,9 @@ import * as Modal from "@/components/ui/modal";
 import { NewProjectForm } from "./new-project-form";
 
 export function CreateProjectButton({ className }: { className?: string }) {
-    const t = useTranslations("components.application.createProject");
-    const [open, setOpen] = React.useState(false);
+    const t = useTranslations("project.create");
 
+    const [open, setOpen] = React.useState(false);
     return (
         <Modal.Root open={open} onOpenChange={setOpen}>
             <Modal.Trigger asChild>
@@ -26,13 +26,13 @@ export function CreateProjectButton({ className }: { className?: string }) {
                     className={`w-full ${className}`}
                 >
                     <Button.Icon as={RiAddLine} />
-                    {t("label")}
+                    {t("label.create")}
                 </Button.Root>
             </Modal.Trigger>
 
-            <Modal.Content className="max-w-[840px]">
+            <Modal.Content className="max-w-[840px] max-h-[80vh] overflow-y-auto">
                 <VisuallyHidden>
-                    <Modal.Title>Create Project</Modal.Title>
+                    <Modal.Title>{t("title")}</Modal.Title>
                 </VisuallyHidden>
                 <Modal.Body className="flex flex-col justify-start items-start gap-4">
                     <div className="flex items-start gap-4">
@@ -41,30 +41,15 @@ export function CreateProjectButton({ className }: { className?: string }) {
                         </div>
                         <div className="space-y-1">
                             <div className="text-label-md text-text-strong-950">
-                                Create Project
+                                {t("title")}
                             </div>
                             <div className="text-paragraph-sm text-text-sub-600">
-                                Create a new project to get started.
+                                {t("description")}
                             </div>
                         </div>
                     </div>
                     <NewProjectForm />
                 </Modal.Body>
-                <Modal.Footer>
-                    <Modal.Close asChild>
-                        <Button.Root
-                            variant="neutral"
-                            mode="stroke"
-                            size="small"
-                            className="w-full"
-                        >
-                            Cancel
-                        </Button.Root>
-                    </Modal.Close>
-                    <Button.Root size="small" className="w-full">
-                        View Receipt
-                    </Button.Root>
-                </Modal.Footer>
             </Modal.Content>
         </Modal.Root>
     );

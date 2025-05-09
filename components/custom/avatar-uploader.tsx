@@ -22,7 +22,7 @@ import type { Area } from "react-easy-crop";
 type AvatarSize = "20" | "24" | "32" | "40" | "48" | "56" | "64" | "72" | "80";
 
 interface AvatarUploaderProps {
-    username: string;
+    username?: string;
     currentAvatar?: string | null;
     onAvatarChange: (avatarUrl: string) => void;
     size?: AvatarSize;
