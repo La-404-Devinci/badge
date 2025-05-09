@@ -11,6 +11,7 @@ export const AUTH_PAGES = {
 
 export const APPLICATION_PAGES = {
     DASHBOARD: "/dashboard",
+    PROJECTS: "/projects",
 };
 
 export const SETTINGS_PAGES = {

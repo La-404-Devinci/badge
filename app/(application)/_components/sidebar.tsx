@@ -48,8 +48,7 @@ export function getNavigationLinks(
         {
             icon: RiFoldersLine,
             label: t("projects"),
-            href: "#",
-            disabled: true,
+            href: PAGES.PROJECTS,
         },
         { icon: RiGroupLine, label: t("teams"), href: "#", disabled: true },
         {
