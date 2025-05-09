@@ -8,7 +8,7 @@ export const storeProjectSchema = z.object({
     startDate: z.string().min(1),
     endDate: z.string().min(1),
     badgeName: z.string().min(1),
-    badgeImage: z.string().url().optional(),
+    badgeImage: z.string().url(),
 });
 
 export type StoreProjectInput = z.infer<typeof storeProjectSchema>;
