@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createProjectSchema = z.object({
+export const storeProjectSchema = z.object({
     title: z.string().min(1),
     description: z.string().min(1),
     type: z.string().min(1),
@@ -8,7 +8,7 @@ export const createProjectSchema = z.object({
     startDate: z.string().min(1),
     endDate: z.string().min(1),
     badgeName: z.string().min(1),
-    badgeUrl: z.string().url().optional(),
+    badgeImage: z.string().url().optional(),
 });
 
-export type CreateProjectInput = z.infer<typeof createProjectSchema>;
+export type StoreProjectInput = z.infer<typeof storeProjectSchema>;

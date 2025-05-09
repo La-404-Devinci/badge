@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
@@ -16,6 +17,7 @@ import * as Input from "@/components/ui/input";
 import * as Label from "@/components/ui/label";
 import * as Select from "@/components/ui/select";
 import * as Textarea from "@/components/ui/textarea";
+import { useTRPC } from "@/trpc/client";
 
 const schema = z.object({
     type: z.string().min(1, "projectForm.errors.type"),
@@ -25,13 +27,24 @@ const schema = z.object({
     title: z.string().min(2, "projectForm.errors.title"),
     description: z.string().min(5, "projectForm.errors.description"),
     badgeName: z.string().min(2, "projectForm.errors.badgeName"),
-    badgeImage: z.string().url("projectForm.errors.badgeImage").optional(),
-    badgeUrl: z.string().url("projectForm.errors.badgeUrl").optional(),
+    badgeImage: z
+        .string()
+        .url("projectForm.errors.badgeImage")
+        .optional()
+        .or(
+            z.literal(
+                "https://www.anthropics.com/portraitpro/img/page-images/homepage/v24/out-now.jpg"
+            )
+        ),
 });
 
 type ProjectFormValues = z.infer<typeof schema>;
 
-export function NewProjectForm() {
+export function NewProjectForm({
+    setCloseModal,
+}: {
+    setCloseModal: (closeModal: boolean) => void;
+}) {
     const t = useTranslations("project.create.projectForm");
     const commonT = useTranslations("common");
 
@@ -48,38 +61,36 @@ export function NewProjectForm() {
             title: "",
             description: "",
             badgeName: "",
-            badgeImage: "",
+            badgeImage:
+                "https://www.anthropics.com/portraitpro/img/page-images/homepage/v24/out-now.jpg",
         }),
         []
     );
 
-    const {
-        control,
-        register,
-        handleSubmit,
-        reset,
-        formState,
-        watch,
-        setValue,
-    } = useForm<ProjectFormValues>({
-        resolver: zodResolver(schema, {
-            errorMap: (error) => ({
-                message: t(error.message || ""),
+    const { control, register, handleSubmit, reset, formState } =
+        useForm<ProjectFormValues>({
+            resolver: zodResolver(schema, {
+                errorMap: (error) => ({
+                    message: t(error.message || ""),
+                }),
             }),
-        }),
-        defaultValues: initialValues,
-    });
+            defaultValues: initialValues,
+        });
 
-    const badgeName = watch("badgeName") || "";
+    const trpc = useTRPC();
+    const { mutateAsync: storeProject } = useMutation({
+        ...trpc.project.storeProject.mutationOptions(),
+    });
 
     const handleSave = async (values: ProjectFormValues) => {
         setGlobalError(null);
         setIsSubmitting(true);
 
         try {
-            // await createProject(values);
+            await storeProject(values);
             setMessage(t("success"));
             reset(values);
+            setCloseModal(false);
         } catch (error) {
             console.error(error);
             setGlobalError(t("globalError"));
@@ -92,13 +103,14 @@ export function NewProjectForm() {
         reset(initialValues);
         setGlobalError(null);
         setMessage(null);
+        setCloseModal(false);
     };
 
     const projectTypes = [
         { label: t("types.uxui"), value: "uxui" },
         { label: t("types.dev"), value: "dev" },
         { label: t("types.marketing"), value: "marketing" },
-        { label: t("types.other"), value: "autre" },
+        { label: t("types.other"), value: "other" },
     ];
 
     return (
@@ -250,13 +262,12 @@ export function NewProjectForm() {
                             render={({ field }) => (
                                 <AvatarUploader
                                     username={
-                                        badgeName || t("placeholders.badgeName")
+                                        field.value ||
+                                        t("placeholders.badgeName")
                                     }
                                     currentAvatar={field.value}
                                     onAvatarChange={(url: string) => {
-                                        setValue("badgeImage", url, {
-                                            shouldDirty: true,
-                                        });
+                                        field.onChange(url);
                                     }}
                                     size="64"
                                 />
@@ -282,7 +293,7 @@ export function NewProjectForm() {
                         variant="neutral"
                         mode="stroke"
                         type="button"
-                        disabled={!formState.isDirty || isSubmitting}
+                        disabled={isSubmitting}
                         onClick={handleDiscard}
                     >
                         {commonT("discard")}

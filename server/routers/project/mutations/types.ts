@@ -3,9 +3,9 @@ import { z } from "zod";
 import { Database } from "@/db";
 import { Session } from "@/lib/auth/types";
 
-import { createProjectSchema } from "../validators";
+import { storeProjectSchema } from "../validators";
 
-export type CreateProjectInput = z.infer<typeof createProjectSchema>;
+export type StoreProjectInput = z.infer<typeof storeProjectSchema>;
 
 export interface ProjectMutationContext<T> {
     input: T;

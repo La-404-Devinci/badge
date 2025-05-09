@@ -1,15 +1,15 @@
 import { TRPCError } from "@trpc/server";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 
 import { project, ProjectType } from "@/db/schema";
 
-import type { CreateProjectInput, ProjectMutationContext } from "./types";
+import type { StoreProjectInput, ProjectMutationContext } from "./types";
 
 export async function storeProject({
     db,
     session,
     input,
-}: ProjectMutationContext<CreateProjectInput>) {
+}: ProjectMutationContext<StoreProjectInput>) {
     const userId = session.user.id;
 
     try {
@@ -17,7 +17,9 @@ export async function storeProject({
         const [existingProject] = await db
             .select({ id: project.id })
             .from(project)
-            .where(eq(project.userId, userId));
+            .where(
+                and(eq(project.userId, userId), eq(project.title, input.title))
+            );
 
         if (!existingProject) {
             // If not, create new project
@@ -33,27 +35,17 @@ export async function storeProject({
                 .returning();
 
             return { success: true, data: newProject };
-        } else {
-            // If yes, update existing project
-            const [updatedProject] = await db
-                .update(project)
-                .set({
-                    ...input,
-                    type: input.type as ProjectType,
-                    startDate: new Date(input.startDate),
-                    endDate: new Date(input.endDate),
-                    updatedAt: new Date(),
-                })
-                .where(eq(project.userId, userId))
-                .returning();
-
-            return { success: true, data: updatedProject };
         }
+
+        throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Project already exists",
+        });
     } catch (error) {
-        console.error("Error updating project:", error);
+        console.error("Error storing project:", error);
         throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
-            message: "Failed to update project",
+            message: "Failed to store project",
         });
     }
 }

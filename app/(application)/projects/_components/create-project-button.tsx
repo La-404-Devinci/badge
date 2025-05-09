@@ -48,7 +48,7 @@ export function CreateProjectButton({ className }: { className?: string }) {
                             </div>
                         </div>
                     </div>
-                    <NewProjectForm />
+                    <NewProjectForm setCloseModal={setOpen} />
                 </Modal.Body>
             </Modal.Content>
         </Modal.Root>
