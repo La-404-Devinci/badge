@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { RiUser6Line } from "@remixicon/react";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { ulid } from "ulid";
 
@@ -11,8 +12,9 @@ import { ImageDropzone } from "@/components/custom/image-dropzone";
 import * as Avatar from "@/components/ui/avatar";
 import * as Button from "@/components/ui/button";
 import * as Modal from "@/components/ui/modal";
-import { getPresignedUrls, handleUpload } from "@/lib/minio/client";
+import { handleUpload } from "@/lib/minio/client";
 import { cn } from "@/lib/utils/cn";
+import { useTRPC } from "@/trpc/client";
 
 import { StaggeredFadeLoader } from "../staggered-fade-loader";
 
@@ -51,7 +53,11 @@ export function AvatarUploader({
         string | null | undefined
     >(null);
 
-    // Track avatar update status
+    const trpc = useTRPC();
+    const { mutateAsync: storeFile } = useMutation(
+        trpc.file.storeFile.mutationOptions()
+    );
+
     useEffect(() => {
         if (previousAvatar !== currentAvatar) {
             setIsAvatarUpdating(false);
@@ -59,7 +65,6 @@ export function AvatarUploader({
         setPreviousAvatar(currentAvatar);
     }, [currentAvatar, previousAvatar]);
 
-    // Handle image drop from dropzone
     const handleDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
             const file = acceptedFiles[0];
@@ -68,12 +73,10 @@ export function AvatarUploader({
         }
     }, []);
 
-    // Handle crop complete
     const handleCropComplete = useCallback((croppedArea: Area) => {
         setCroppedAreaPixels(croppedArea);
     }, []);
 
-    // Handle remove selected image
     const handleRemoveImage = useCallback(() => {
         if (selectedImage) {
             URL.revokeObjectURL(selectedImage);
@@ -82,33 +85,27 @@ export function AvatarUploader({
         setCroppedAreaPixels(null);
     }, [selectedImage]);
 
-    // Handle crop and upload
     const handleCropAndUpload = async () => {
         if (!selectedImage || !croppedAreaPixels) return;
 
         setIsUploading(true);
 
         try {
-            // Create an image element from the selected image
             const image = new Image();
             image.src = selectedImage;
             await new Promise((resolve) => {
                 image.onload = resolve;
             });
 
-            // Create a canvas to draw the cropped image
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
             if (!ctx) return;
 
-            // Target dimensions for the avatar (400x400 as recommended)
             const TARGET_SIZE = 400;
 
-            // Set canvas dimensions to the target size
             canvas.width = TARGET_SIZE;
             canvas.height = TARGET_SIZE;
 
-            // Draw the cropped image on the canvas with resizing
             ctx.drawImage(
                 image,
                 croppedAreaPixels.x,
@@ -121,34 +118,28 @@ export function AvatarUploader({
                 TARGET_SIZE
             );
 
-            // Convert canvas to blob with quality optimization
             const blob = await new Promise<Blob>((resolve) => {
                 canvas.toBlob(
                     (blob) => {
                         if (blob) resolve(blob);
                     },
                     "image/jpeg",
-                    0.85 // Slightly reduced quality for better file size
+                    0.85
                 );
             });
 
-            // Create a File object from the blob with a unique name
             const filename = `user-avatar/${ulid()}.jpg`;
             const file = new File([blob], filename, { type: "image/jpeg" });
 
-            // 1. Obtenir une presigned URL pour ce fichier
-            const presignedUrls = await getPresignedUrls([
-                { originalFileName: filename, fileSize: file.size },
-            ]);
-
-            // 2. Uploader le fichier sur Minio via la presigned URL
-            await handleUpload([file], presignedUrls, () => {
-                setIsAvatarUpdating(true);
-                // 3. Appeler le callback avec l'URL publique du fichier
-                onAvatarChange(presignedUrls[0].url);
+            const storeFileDb = await storeFile({
+                files: [{ originalFileName: filename, fileSize: file.size }],
             });
 
-            // Clean up
+            await handleUpload([file], storeFileDb.publicUrls, () => {
+                setIsAvatarUpdating(true);
+                onAvatarChange(storeFileDb.file[0].url);
+            });
+
             setIsModalOpen(false);
             if (selectedImage) {
                 URL.revokeObjectURL(selectedImage);
@@ -242,10 +233,9 @@ export function AvatarUploader({
                                 <Button.Root
                                     variant="primary"
                                     onClick={handleCropAndUpload}
-                                    /* disabled={!croppedAreaPixels || isUploading} */
+                                    disabled={!croppedAreaPixels || isUploading}
                                     size="small"
                                     className="w-full"
-                                    disabled={true}
                                 >
                                     {isUploading ? (
                                         <>
