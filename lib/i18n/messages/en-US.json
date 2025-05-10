@@ -1016,6 +1016,6 @@
         "expected": "Expected:",
         "got": "Got:",
         "error": "Error:",
-        "run": "Run"
+        "test": "Test"
     }
 }

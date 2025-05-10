@@ -97,7 +97,7 @@ export default function DailyChallenge() {
                                         <Button.Icon
                                             as={RiArrowRightCircleLine}
                                         />
-                                        {t("run")}
+                                        {t("test")}
                                     </Button.Root>
                                     <Input.Root className="font-mono">
                                         <Input.Wrapper>
