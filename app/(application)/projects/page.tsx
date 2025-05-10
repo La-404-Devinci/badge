@@ -7,6 +7,7 @@ import { CreateProjectButton } from "./_components/create-project-button";
 import Header from "../_components/header";
 import { ScheduleButton } from "../_components/schedule-button";
 import ActiveProjects from "./_components/active-projects";
+import YourProjects from "./_components/your-projects";
 
 export default async function ProjectsPage() {
     const session = await getServerSession();
@@ -32,7 +33,15 @@ export default async function ProjectsPage() {
             </Header>
 
             <HydrateClient>
-                <ActiveProjects />
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                    <div className="lg:col-span-8">
+                        <ActiveProjects />
+                    </div>
+
+                    <div className="lg:col-span-3 lg:border-l border-neutral-200">
+                        <YourProjects />
+                    </div>
+                </div>
             </HydrateClient>
         </>
     );
