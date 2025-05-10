@@ -5,22 +5,6 @@ export const MAX_FILE_SIZE_S3_ENDPOINT = 100;
 export const FILE_NUMBER_LIMIT = 10;
 
 /**
- * Gets presigned urls for uploading files to S3
- * @param formData form data with files to upload
- * @returns
- */
-export const getPresignedUrls = async (files: ShortFileProp[]) => {
-    const response = await fetch("/api/s3/presigned", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(files),
-    });
-    return (await response.json()) as PresignedUrlProp[];
-};
-
-/**
  * Uploads files to S3 and saves file info in DB
  * @param files files to upload
  * @param presignedUrls  presigned urls for uploading
