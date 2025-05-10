@@ -7,7 +7,6 @@ import { useUserData } from "@/hooks/use-user-data";
 import { useTRPC } from "@/trpc/client";
 
 import { ProjectCard } from "./card";
-
 export default function ActiveProjects() {
     const { user } = useUserData();
 
@@ -36,8 +35,9 @@ export default function ActiveProjects() {
                     {data?.data.map((project) => (
                         <ProjectCard
                             key={project.id}
-                            {...project}
+                            project={project}
                             user={user!}
+                            isContributor={false}
                         />
                     ))}
                 </div>

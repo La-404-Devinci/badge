@@ -38,7 +38,7 @@ export default async function ProjectsPage() {
                         <ActiveProjects />
                     </div>
 
-                    <div className="lg:col-span-3 lg:border-l border-neutral-200">
+                    <div className="lg:col-span-4 lg:border-l border-neutral-200">
                         <YourProjects />
                     </div>
                 </div>

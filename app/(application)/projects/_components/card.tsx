@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import {
     RiClockwise2Fill,
@@ -10,59 +10,61 @@ import {
     RiFileTextLine,
     RiArrowUpFill,
     RiArrowDownFill,
+    RiCalendarLine,
+    RiUserLine,
 } from "@remixicon/react";
+import { useMutation } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
 
-/* import * as     Avatar from "@/components/ui/avatar";*/
+import * as Avatar from "@/components/ui/avatar";
 import * as Badge from "@/components/ui/badge";
 import * as Button from "@/components/ui/button";
+import * as Divider from "@/components/ui/divider";
 import * as ProgressBar from "@/components/ui/progress-bar";
+import * as Textarea from "@/components/ui/textarea";
 import * as Tooltip from "@/components/ui/tooltip";
 import { USER_ROLES } from "@/constants/roles";
-import { User } from "@/db/schema";
-interface ProjectStatusCardProps {
-    title: string;
-    /*     contributors: Array<{ name: string; image?: string }> | null;
-    skills: Array<{ title: string; completed: boolean }> | null; */
-    id: string;
-    description: string;
-    badgeName: string;
-    badgeImage: string;
-    startDate: Date;
-    endDate: Date;
-    type: string;
-    exclusive404: boolean;
-    status: string;
-    user: User;
-}
+import { useTRPC } from "@/trpc/client";
+
+import { ProjectStatusCardProps } from "./types";
 
 export function ProjectCard({
-    title,
-    endDate,
-    /*     contributors,
-    skills, */
-    description,
-    badgeName,
-    badgeImage,
-    startDate,
-    type,
-    exclusive404,
-    id,
+    project,
     user,
+    isContributor,
 }: ProjectStatusCardProps) {
-    const [isExpanded, setIsExpanded] = React.useState(false);
+    const [isExpanded, setIsExpanded] = useState<boolean>(false);
     const toggleExpand = () => setIsExpanded((prev) => !prev);
     const contentRef = useRef<HTMLDivElement>(null);
 
     const now = new Date().getTime();
-    const total = endDate.getTime() - startDate.getTime();
-    const elapsed = now - startDate.getTime();
+    const total = project.endDate.getTime() - project.startDate.getTime();
+    const elapsed = now - project.startDate.getTime();
     const progress = Math.max(
         0,
         Math.min(100, Math.round((elapsed / total) * 100))
     );
+
+    console.log(project, "project card");
+    const trpc = useTRPC();
+
+    const { mutateAsync: storeContributor } = useMutation(
+        trpc.project.storeContributor.mutationOptions({
+            onSuccess: () => {
+                toast.success("Contributor added");
+            },
+            onError: () => {
+                toast.error("Failed to add contributor");
+            },
+        })
+    );
+
+    const handleParticipate = () => {
+        storeContributor({ projectId: project.id });
+    };
 
     return (
         <div>
@@ -78,34 +80,32 @@ export function ProjectCard({
                                         : "bg-blue-100 text-blue-600"
                                 }
                             >
-                                {progress === 100 ? "Completed" : "In Progress"}
+                                {project.startDate > new Date()
+                                    ? "Upcoming"
+                                    : progress === 100
+                                      ? "Completed"
+                                      : "In Progress"}
                             </Badge.Root>
-                            <h3 className="text-2xl font-semibold">{title}</h3>
+                            <h3 className="text-2xl font-semibold">
+                                {project.title}
+                            </h3>
                         </div>
                         <div className="flex items-center gap-2">
                             <Tooltip.Root>
                                 <Tooltip.Trigger asChild>
                                     <Image
-                                        src={badgeImage}
-                                        alt={badgeName}
+                                        src={project.badgeImage}
+                                        alt={project.badgeName}
                                         width={64}
                                         height={64}
                                         className="size-9 rounded-md"
                                     />
                                 </Tooltip.Trigger>
                                 <Tooltip.Content>
-                                    {type === "uxui" ? (
-                                        <p>UX/UI</p>
-                                    ) : type === "dev" ? (
-                                        <p>Dev</p>
-                                    ) : type === "marketing" ? (
-                                        <p>Marketing</p>
-                                    ) : (
-                                        <p>Other</p>
-                                    )}
+                                    {project.badgeName}
                                 </Tooltip.Content>
                             </Tooltip.Root>
-                            {exclusive404 && (
+                            {project.exclusive404 && (
                                 <Tooltip.Root>
                                     <Tooltip.Trigger asChild>
                                         <Button.Root
@@ -128,7 +128,7 @@ export function ProjectCard({
                                         mode="lighter"
                                         size="small"
                                     >
-                                        {type === "dev" ? (
+                                        {project.type === "dev" ? (
                                             <RiGithubLine className="size-4" />
                                         ) : (
                                             <RiFileTextLine className="size-4" />
@@ -136,10 +136,14 @@ export function ProjectCard({
                                     </Button.Root>
                                 </Tooltip.Trigger>
                                 <Tooltip.Content>
-                                    {type === "dev" ? (
-                                        <p>View on GitHub</p>
+                                    {project.type === "uxui" ? (
+                                        <p>UX/UI</p>
+                                    ) : project.type === "dev" ? (
+                                        <p>Dev</p>
+                                    ) : project.type === "marketing" ? (
+                                        <p>Marketing</p>
                                     ) : (
-                                        <p>View on Figma</p>
+                                        <p>Other</p>
                                     )}
                                 </Tooltip.Content>
                             </Tooltip.Root>
@@ -155,7 +159,7 @@ export function ProjectCard({
                         </div>
                         <ProgressBar.Root value={progress} className="h-2" />
                         <Button.Root
-                            variant="neutral"
+                            variant="primary"
                             mode="stroke"
                             className="w-full"
                             onClick={toggleExpand}
@@ -190,31 +194,49 @@ export function ProjectCard({
                                         exit={{ opacity: 0 }}
                                         className="space-y-4 pt-2"
                                     >
-                                        <div className="flex items-center justify-between text-sm text-gray-600">
-                                            <div className="flex items-center">
-                                                <RiClockwise2Fill className="h-4 w-4 mr-2" />
+                                        <div className="flex items-center gap-4 text-sm text-blue-600">
+                                            <div className="flex items-center gap-1">
+                                                <RiCalendarLine className="h-4 w-4" />
                                                 <span>
-                                                    Due{" "}
-                                                    {endDate.toLocaleDateString()}
+                                                    Début :{" "}
+                                                    <span className="font-medium">
+                                                        {project.startDate.toLocaleDateString()}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                                <RiClockwise2Fill className="h-4 w-4" />
+                                                <span>
+                                                    Fin :{" "}
+                                                    <span className="font-medium">
+                                                        {project.endDate.toLocaleDateString()}
+                                                    </span>
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="flex items-center justify-between text-sm text-gray-600">
-                                            <div className="flex items-center">
-                                                <RiFileTextLine className="h-4 w-4 mr-2" />
-                                                <span>{description}</span>
-                                            </div>
+                                        <div className="relative text-gray-700 text-sm leading-relaxed mb-2">
+                                            <p className="text-gray-700">
+                                                Description :
+                                            </p>
+                                            <Textarea.Root
+                                                className="line-clamp-2 disabled:opacity-100 text-gray-700"
+                                                value={project.description}
+                                                disabled
+                                            />
+                                            {/* Optionnel : bouton voir plus si description longue */}
+                                            {/* <button className="absolute right-0 bottom-0 text-xs text-primary underline bg-gradient-to-l from-white pl-2">Voir plus</button> */}
                                         </div>
-                                        {/*
+                                        <Divider.Root className="my-2 border-neutral-100" />
+
                                         <div className="space-y-2">
-                                           
                                             <h4 className="font-medium text-sm flex items-center">
                                                 <RiUserLine className="h-4 w-4 mr-2" />
                                                 Contributors
                                             </h4>
-                                            <div className="flex -space-x-2">
-                                                {contributors &&
-                                                    contributors.map(
+
+                                            {project.projectContributors && (
+                                                <div className="flex -space-x-2">
+                                                    {project.projectContributors.map(
                                                         (
                                                             contributor,
                                                             index
@@ -228,29 +250,35 @@ export function ProjectCard({
                                                                     <Avatar.Root className="border-2 border-white size-8">
                                                                         <Avatar.Image
                                                                             src={
-                                                                                contributor.image ||
-                                                                                `/placeholder.svg?height=32&width=32&text=${contributor.name[0]}`
+                                                                                contributor
+                                                                                    .user
+                                                                                    .image ||
+                                                                                `/placeholder.svg?height=32&width=32&text=${contributor.user.name}`
                                                                             }
                                                                             alt={
-                                                                                contributor.name
+                                                                                contributor
+                                                                                    .user
+                                                                                    .name
                                                                             }
-                                                                            className="size-8"
                                                                         />
                                                                     </Avatar.Root>
                                                                 </Tooltip.Trigger>
                                                                 <Tooltip.Content>
                                                                     <p className="text-sm">
                                                                         {
-                                                                            contributor.name
+                                                                            contributor
+                                                                                .user
+                                                                                .name
                                                                         }
                                                                     </p>
                                                                 </Tooltip.Content>
                                                             </Tooltip.Root>
                                                         )
                                                     )}
-                                            </div>
+                                                </div>
+                                            )}
                                         </div>
-
+                                        {/*
                                          <div className="space-y-2">
                                             <h4 className="font-medium text-sm">
                                                 Skills required
@@ -270,30 +298,36 @@ export function ProjectCard({
                                                     </div>
                                                 ))}
                                         </div> */}
-
                                         <div className="space-y-2 flex flex-col gap-2">
                                             <Button.Root
                                                 className={`w-full`}
                                                 variant="neutral"
                                                 mode="stroke"
                                                 disabled={
-                                                    exclusive404
+                                                    project.exclusive404
                                                         ? user.role !==
                                                           USER_ROLES.MEMBER
                                                         : false
                                                 }
+                                                onClick={handleParticipate}
                                             >
-                                                Want to participate?
+                                                {isContributor
+                                                    ? "Leave project"
+                                                    : "Want to participate?"}
                                             </Button.Root>
-                                            <Button.Root
-                                                className="w-full"
-                                                asChild
-                                            >
-                                                <Link href={`/projects/${id}`}>
-                                                    <RiMessage2Line className="h-4 w-4 mr-2" />
-                                                    View Discussion
-                                                </Link>
-                                            </Button.Root>
+                                            {isContributor && (
+                                                <Button.Root
+                                                    className="w-full"
+                                                    asChild
+                                                >
+                                                    <Link
+                                                        href={`/projects/${project.id}`}
+                                                    >
+                                                        <RiMessage2Line className="h-4 w-4 mr-2" />
+                                                        View Discussion
+                                                    </Link>
+                                                </Button.Root>
+                                            )}
                                         </div>
                                     </motion.div>
                                 )}
