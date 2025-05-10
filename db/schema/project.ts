@@ -1,4 +1,4 @@
-// notificationSettings.ts
+// project.ts
 import { boolean, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { ulid } from "ulid";
@@ -51,6 +51,7 @@ export const project = pgTable("project", {
 
 // Type exports
 export type Project = typeof project.$inferSelect;
+export type ProjectContributor = typeof projectContributor.$inferSelect;
 
 export const projectSchema = createInsertSchema(project).omit({
     userId: true,

@@ -11,4 +11,14 @@ export const storeProjectSchema = z.object({
     badgeImage: z.string().url(),
 });
 
+export const storeContributorSchema = z.object({
+    projectId: z.string().min(1),
+});
+
+export const getProjectSchema = z.object({
+    projectId: z.string().min(1),
+});
+
 export type StoreProjectInput = z.infer<typeof storeProjectSchema>;
+export type StoreContributorInput = z.infer<typeof storeContributorSchema>;
+export type GetProjectInput = z.infer<typeof getProjectSchema>;
