@@ -53,8 +53,7 @@ export function NewProjectForm({
             title: "",
             description: "",
             badgeName: "",
-            badgeImage:
-                "https://www.anthropics.com/portraitpro/img/page-images/homepage/v24/out-now.jpg",
+            badgeImage: "",
         }),
         []
     );

@@ -43,6 +43,7 @@ export function ProjectCard({
     endDate,
     /*     contributors,
     skills, */
+    description,
     badgeName,
     badgeImage,
     startDate,
@@ -82,24 +83,14 @@ export function ProjectCard({
                             <h3 className="text-2xl font-semibold">{title}</h3>
                         </div>
                         <div className="flex items-center gap-2">
-                            {exclusive404 && (
-                                <Tooltip.Root>
-                                    <Tooltip.Trigger asChild>
-                                        <RiDiscordFill className="size-4" />
-                                    </Tooltip.Trigger>
-                                    <Tooltip.Content>
-                                        <span>404</span>
-                                    </Tooltip.Content>
-                                </Tooltip.Root>
-                            )}
                             <Tooltip.Root>
                                 <Tooltip.Trigger asChild>
                                     <Image
                                         src={badgeImage}
                                         alt={badgeName}
-                                        width={32}
-                                        height={32}
-                                        className="size-8"
+                                        width={64}
+                                        height={64}
+                                        className="size-9 rounded-md"
                                     />
                                 </Tooltip.Trigger>
                                 <Tooltip.Content>
@@ -114,9 +105,29 @@ export function ProjectCard({
                                     )}
                                 </Tooltip.Content>
                             </Tooltip.Root>
+                            {exclusive404 && (
+                                <Tooltip.Root>
+                                    <Tooltip.Trigger asChild>
+                                        <Button.Root
+                                            variant="neutral"
+                                            mode="lighter"
+                                            size="small"
+                                        >
+                                            <RiDiscordFill className="size-4 " />
+                                        </Button.Root>
+                                    </Tooltip.Trigger>
+                                    <Tooltip.Content>
+                                        <span>404</span>
+                                    </Tooltip.Content>
+                                </Tooltip.Root>
+                            )}
                             <Tooltip.Root>
                                 <Tooltip.Trigger asChild>
-                                    <Button.Root variant="neutral" size="small">
+                                    <Button.Root
+                                        variant="neutral"
+                                        mode="lighter"
+                                        size="small"
+                                    >
                                         {type === "dev" ? (
                                             <RiGithubLine className="size-4" />
                                         ) : (
@@ -186,6 +197,12 @@ export function ProjectCard({
                                                     Due{" "}
                                                     {endDate.toLocaleDateString()}
                                                 </span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center justify-between text-sm text-gray-600">
+                                            <div className="flex items-center">
+                                                <RiFileTextLine className="h-4 w-4 mr-2" />
+                                                <span>{description}</span>
                                             </div>
                                         </div>
                                         {/*
