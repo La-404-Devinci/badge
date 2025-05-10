@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -17,8 +17,8 @@ export function useExerciceTableActions() {
         Record<string, boolean>
     >({});
 
-    // Publish exercice
-    const { mutateAsync: updateExercice } = useMutation(
+    // Update exercice status
+    const { mutateAsync: updateExerciceStatus } = useMutation(
         trpc.exercice.updateExerciceStatus.mutationOptions({
             onMutate: (variables) => {
                 setIsActionLoading((prev) => ({
@@ -28,7 +28,7 @@ export function useExerciceTableActions() {
             },
             onSuccess: (_, variables) => {
                 invalidateList();
-                toast.success(t("actions.publishSuccess"));
+                toast.success(t("actions.updateSuccess"));
                 setIsActionLoading((prev) => ({
                     ...prev,
                     [variables.id]: false,
@@ -36,7 +36,7 @@ export function useExerciceTableActions() {
             },
             onError: (error, variables) => {
                 console.error(error);
-                toast.error(t("actions.publishError"));
+                toast.error(t("actions.updateError"));
                 setIsActionLoading((prev) => ({
                     ...prev,
                     [variables.id]: false,
@@ -45,20 +45,18 @@ export function useExerciceTableActions() {
         })
     );
 
-    const publishExercice = useCallback(
-        (id: string) => updateExercice({ id, status: "published" }),
-        [updateExercice]
-    );
+    // Publish exercice
+    const publishExercice = async (id: string) => {
+        await updateExerciceStatus({ id, status: "published" });
+    };
 
-    const draftExercice = useCallback(
-        (id: string) => updateExercice({ id, status: "draft" }),
-        [updateExercice]
-    );
+    // Draft exercice
+    const draftExercice = (id: string) =>
+        updateExerciceStatus({ id, status: "draft" });
 
-    const archiveExercice = useCallback(
-        (id: string) => updateExercice({ id, status: "archived" }),
-        [updateExercice]
-    );
+    // Archive exercice
+    const archiveExercice = (id: string) =>
+        updateExerciceStatus({ id, status: "archived" });
 
     // Delete exercice
     const { mutateAsync: deleteExercice } = useMutation(

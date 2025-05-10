@@ -732,7 +732,10 @@
                 "batchArchiveLoading": "Archiving {count} exercices...",
                 "batchDeleteSuccess": "{count, plural, =1 {Exercice} other {# exercices}} deleted successfully",
                 "batchDeleteError": "Failed to delete exercices",
-                "batchDeleteLoading": "Deleting {count} exercices..."
+                "batchDeleteLoading": "Deleting {count} exercices...",
+                "publishConfirmation": "Publishing this exercise will generate outputs for all example and validation inputs. This may take a moment. Do you want to continue?",
+                "updateSuccess": "Exercise status updated successfully",
+                "updateError": "Failed to update exercise status"
             },
             "empty": {
                 "title": "No exercices found",
@@ -1002,5 +1005,17 @@
         "header": {
             "welcomeBack": "Welcome back to {projectName} 👋🏻"
         }
+    },
+    "daily": {
+        "emptyState": {
+            "title": "Oh no!",
+            "description": "It's seems that there is no challenge today...",
+            "button": "Go to dashboard"
+        },
+        "examples": "Examples",
+        "expected": "Expected:",
+        "got": "Got:",
+        "error": "Error:",
+        "run": "Run"
     }
 }

@@ -3,6 +3,7 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 
+import DifficultyBadge from "@/components/custom/difficulty-badge";
 import * as Badge from "@/components/ui/badge";
 import * as Checkbox from "@/components/ui/checkbox";
 import { formatRelativeDate } from "@/lib/utils/dates/format-relative-date";
@@ -101,21 +102,12 @@ export function getExercicesColumns(
                 const exercice = row.original;
                 if (!exercice) return null;
 
-                const difficulty = exercice.difficulty;
-                const color =
-                    difficulty === "easy"
-                        ? "green"
-                        : difficulty === "medium"
-                          ? "yellow"
-                          : difficulty === "hard"
-                            ? "red"
-                            : "blue";
-
                 return (
                     <div className="flex items-center gap-3">
-                        <Badge.Root variant="lighter" color={color}>
-                            {difficulty ? difficulty : t("filters.unknown")}
-                        </Badge.Root>
+                        <DifficultyBadge
+                            difficulty={exercice.difficulty ?? ""}
+                            variant="lighter"
+                        />
                     </div>
                 );
             },

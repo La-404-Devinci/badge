@@ -10,7 +10,7 @@ export const AUTH_PAGES = {
 
 export const APPLICATION_PAGES = {
     DASHBOARD: "/dashboard",
-    DAILY_CHALLENGE: "/daily-challenge",
+    DAILY_CHALLENGE: "/daily",
     LEADERBOARD: "/leaderboard",
     EXPLORE: "/explore",
     PROJECTS: "/projects",

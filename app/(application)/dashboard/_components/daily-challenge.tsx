@@ -5,8 +5,9 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-import * as Badge from "@/components/ui/badge";
+import DifficultyBadge from "@/components/custom/difficulty-badge";
 import * as Button from "@/components/ui/button";
+import { PAGES } from "@/constants/pages";
 import { cn } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
 
@@ -46,13 +47,12 @@ export default function DailyChallenge() {
                 {dailyChallenge ? (
                     <>
                         <div className="flex flex-col gap-0.5">
-                            <Badge.Root
+                            <DifficultyBadge
                                 size="small"
-                                color="green"
+                                difficulty={dailyChallenge.difficulty ?? ""}
+                                variant="lighter"
                                 className="w-fit mb-1"
-                            >
-                                {t(`difficulty.${dailyChallenge.difficulty}`)}
-                            </Badge.Root>
+                            />
 
                             <h3 className="text-paragraph-sm font-bold">
                                 {dailyChallenge.title}
@@ -69,21 +69,21 @@ export default function DailyChallenge() {
                             className="ms-auto mt-auto"
                             asChild
                         >
-                            <Link href={`/daily-challenge`}>
+                            <Link href={PAGES.DAILY_CHALLENGE}>
                                 {t("startChallenge")}
                                 <Button.Icon as={RiArrowRightLine} />
                             </Link>
                         </Button.Root>
                     </>
                 ) : (
-                    <>
+                    <div className="flex flex-col items-center justify-center gap-0.5">
                         <h3 className="text-paragraph-sm font-bold">
                             {t("noChallenge")}
                         </h3>
                         <p className="text-paragraph-xs">
                             {t("noChallengeDescription")}
                         </p>
-                    </>
+                    </div>
                 )}
             </div>
         </div>

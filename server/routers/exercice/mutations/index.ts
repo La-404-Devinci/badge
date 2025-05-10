@@ -6,3 +6,4 @@ export { batchDeleteExercices } from "./batch-delete-exercices";
 export { generateExercice } from "./generate-exercice";
 export { updateExercice } from "./update-exercice";
 export { executeCode } from "./execute-code";
+export { generateOutputs } from "./generate-outputs";

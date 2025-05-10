@@ -34,6 +34,10 @@ export const exercice = pgTable("exercice", {
     exampleInputs: jsonb("example_inputs").$type<string[]>().notNull(),
     validationInputs: jsonb("validation_inputs").$type<string[]>().notNull(),
 
+    // Outputs (generated on publish)
+    exampleOutputs: jsonb("example_outputs").$type<string[]>(),
+    validationOutputs: jsonb("validation_outputs").$type<string[]>(),
+
     // Difficulty
     difficulty: varchar("difficulty", { length: 50 }).default("medium"),
 
@@ -54,5 +58,11 @@ export type Exercice = typeof exercice.$inferSelect;
 
 export type PublicExercice = Pick<
     Exercice,
-    "id" | "title" | "description" | "problem" | "exampleInputs" | "difficulty"
+    | "id"
+    | "title"
+    | "description"
+    | "problem"
+    | "exampleInputs"
+    | "exampleOutputs"
+    | "difficulty"
 >;

@@ -44,7 +44,6 @@ export function getNavigationLinks(
             label: t("dailyChallenge"),
             href: PAGES.DAILY_CHALLENGE,
             suffix: <StreakBadge />,
-            disabled: true,
         },
         {
             icon: RiTrophyLine,
@@ -208,10 +207,11 @@ function NavigationMenu({ collapsed }: { collapsed: boolean }) {
                                 <div className="flex-1 text-label-sm">
                                     {label}
                                 </div>
-                                {suffix}
-                                {pathname === href && (
-                                    <RiArrowRightSLine className="size-5 text-text-sub-600" />
-                                )}
+                                {suffix
+                                    ? suffix
+                                    : pathname === href && (
+                                          <RiArrowRightSLine className="size-5 text-text-sub-600" />
+                                      )}
                             </div>
                         </Link>
                     )
