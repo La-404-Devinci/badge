@@ -1,7 +1,11 @@
 import protectedProcedure from "@/server/procedures/protected-procedure";
 import { router } from "@/server/trpc";
 
-import { storeProject, storeContributor } from "./mutations/index";
+import {
+    storeProject,
+    storeContributor,
+    deleteContributor,
+} from "./mutations/index";
 import {
     getProjects,
     getContributorProjects,
@@ -27,6 +31,13 @@ export const projectRouter = router({
         .mutation(async ({ ctx, input }) => {
             const { db, session } = ctx;
             return await storeContributor({ db, session, input });
+        }),
+
+    deleteContributor: protectedProcedure
+        .input(storeContributorSchema)
+        .mutation(async ({ ctx, input }) => {
+            const { db, session } = ctx;
+            return await deleteContributor({ db, session, input });
         }),
 
     // Queries

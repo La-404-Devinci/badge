@@ -21,8 +21,18 @@ export async function getProjects({ db, userId }: GetProjectsQueryContext) {
             ),
             with: {
                 projectContributors: {
+                    columns: {
+                        id: true,
+                        userId: true,
+                    },
                     with: {
-                        user: true,
+                        user: {
+                            columns: {
+                                id: true,
+                                username: true,
+                                image: true,
+                            },
+                        },
                     },
                 },
             },
