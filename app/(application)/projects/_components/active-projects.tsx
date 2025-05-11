@@ -13,7 +13,9 @@ export default function ActiveProjects() {
     const trpc = useTRPC();
 
     const { data, isLoading } = useQuery({
-        ...trpc.project.getProjects.queryOptions(),
+        ...trpc.project.getProjects.queryOptions(undefined, {
+            staleTime: 0,
+        }),
     });
 
     return (

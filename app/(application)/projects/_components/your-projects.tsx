@@ -15,7 +15,9 @@ export default function YourProjects() {
     const { user } = useUserData();
 
     const { data: projects, isLoading } = useQuery({
-        ...trpc.project.getContributorProjects.queryOptions(),
+        ...trpc.project.getContributorProjects.queryOptions(undefined, {
+            staleTime: 0,
+        }),
     });
 
     const hasProjects = projects?.data && projects.data.length > 0;

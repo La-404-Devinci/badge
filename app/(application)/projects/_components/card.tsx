@@ -30,7 +30,6 @@ import { USER_ROLES } from "@/constants/roles";
 import { useTRPC } from "@/trpc/client";
 
 import { ProjectStatusCardProps } from "./types";
-
 export function ProjectCard({
     project,
     user,
@@ -47,8 +46,6 @@ export function ProjectCard({
         0,
         Math.min(100, Math.round((elapsed / total) * 100))
     );
-
-    console.log(project, "project card");
     const trpc = useTRPC();
 
     const { mutateAsync: storeContributor } = useMutation(
@@ -62,8 +59,23 @@ export function ProjectCard({
         })
     );
 
-    const handleParticipate = () => {
-        storeContributor({ projectId: project.id });
+    const { mutateAsync: deleteContributor } = useMutation(
+        trpc.project.deleteContributor.mutationOptions({
+            onSuccess: () => {
+                toast.success("Contributor deleted");
+            },
+            onError: () => {
+                toast.error("Failed to delete contributor");
+            },
+        })
+    );
+    const handleParticipate = (action: "leave" | "participate") => {
+        console.log(action, "action");
+        if (action === "leave") {
+            deleteContributor({ projectId: project.id });
+        } else {
+            storeContributor({ projectId: project.id });
+        }
     };
 
     return (
@@ -253,12 +265,13 @@ export function ProjectCard({
                                                                                 contributor
                                                                                     .user
                                                                                     .image ||
-                                                                                `/placeholder.svg?height=32&width=32&text=${contributor.user.name}`
+                                                                                `/placeholder.svg?height=32&width=32&text=${contributor.user.username}`
                                                                             }
                                                                             alt={
                                                                                 contributor
                                                                                     .user
-                                                                                    .name
+                                                                                    .username ||
+                                                                                "Contributor"
                                                                             }
                                                                         />
                                                                     </Avatar.Root>
@@ -268,7 +281,7 @@ export function ProjectCard({
                                                                         {
                                                                             contributor
                                                                                 .user
-                                                                                .name
+                                                                                .username
                                                                         }
                                                                     </p>
                                                                 </Tooltip.Content>
@@ -309,7 +322,13 @@ export function ProjectCard({
                                                           USER_ROLES.MEMBER
                                                         : false
                                                 }
-                                                onClick={handleParticipate}
+                                                onClick={() =>
+                                                    handleParticipate(
+                                                        isContributor
+                                                            ? "leave"
+                                                            : "participate"
+                                                    )
+                                                }
                                             >
                                                 {isContributor
                                                     ? "Leave project"

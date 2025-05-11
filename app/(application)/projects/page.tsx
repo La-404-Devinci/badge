@@ -13,7 +13,7 @@ export default async function ProjectsPage() {
     const session = await getServerSession();
 
     prefetch(trpc.project.getProjects.queryOptions());
-
+    prefetch(trpc.project.getContributorProjects.queryOptions());
     return (
         <>
             <Header

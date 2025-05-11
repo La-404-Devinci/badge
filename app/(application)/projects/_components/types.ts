@@ -2,11 +2,14 @@ import { User } from "@/db/schema";
 
 export type ProjectContributor = {
     id: string;
-    projectId: string;
     userId: string;
-    user: User;
-    updatedAt: Date;
-    createdAt: Date;
+    user: {
+        id: string;
+        username: string | null;
+        image: string | null;
+        role?: string;
+        position?: string;
+    };
 };
 
 export interface ProjectStatusCardProps {
@@ -22,7 +25,6 @@ export interface ProjectStatusCardProps {
         exclusive404: boolean;
         status: string;
         projectContributors: ProjectContributor[];
-        // Ajoute d'autres champs si besoin
     };
     user: User;
     isContributor: boolean;
