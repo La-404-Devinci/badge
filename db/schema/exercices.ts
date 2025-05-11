@@ -7,6 +7,7 @@ import {
     boolean,
     date,
     pgEnum,
+    integer,
 } from "drizzle-orm/pg-core";
 import { ulid } from "ulid";
 
@@ -26,6 +27,7 @@ export const exercice = pgTable("exercice", {
     // Metadata
     title: varchar("title", { length: 255 }).notNull().unique(),
     description: varchar("description", { length: 255 }).notNull(),
+    score: integer("score").notNull(),
 
     // Problem statement
     problem: text("problem").notNull(),

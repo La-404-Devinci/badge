@@ -88,8 +88,6 @@ export function Filters() {
         })
     );
 
-    console.log(generateQueue);
-
     // Handle generate exercice
     const { generateExercice } = useExerciceTableActions();
 

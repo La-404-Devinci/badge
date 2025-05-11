@@ -1015,7 +1015,16 @@
         "examples": "Examples",
         "expected": "Expected:",
         "got": "Got:",
+        "logs": "Logs:",
         "error": "Error:",
-        "test": "Test"
+        "test": "Test",
+        "submit": "Submit",
+        "submitError": {
+            "title": "Validation failed",
+            "call": "Call:",
+            "expectedOutput": "Expected output:",
+            "output": "Output:",
+            "logs": "Logs:"
+        }
     }
 }

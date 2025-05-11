@@ -59,3 +59,16 @@ export const updateExerciceSchema = z.object({
     dailyChallengeDate: z.string().optional(),
     systemCreated: z.boolean().optional(),
 });
+
+export const getChallengeSchema = z.object({
+    id: z.string(),
+});
+
+export const getUserStreakSchema = z.object({
+    userId: z.string().optional(),
+});
+
+export const submitExerciceSchema = z.object({
+    exerciceId: z.string(),
+    code: z.string(),
+});

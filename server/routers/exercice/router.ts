@@ -7,6 +7,7 @@ import {
     deleteExercice,
     executeCode,
     generateExercice,
+    submitExercice,
     updateExercice,
     updateExerciceStatus,
 } from "./mutations/index";
@@ -14,7 +15,8 @@ import {
     listAdminExercices,
     getAdminExercice,
     listGenerateQueue,
-    getDailyChallenge,
+    getChallenge,
+    getUserStreak,
 } from "./queries/index";
 import {
     batchDeleteExercicesSchema,
@@ -25,6 +27,9 @@ import {
     listAdminExercicesSchema,
     updateExerciceSchema,
     updateExerciceStatusSchema,
+    getChallengeSchema,
+    submitExerciceSchema,
+    getUserStreakSchema,
 } from "./validators";
 
 export const exerciceRouter = router({
@@ -33,16 +38,16 @@ export const exerciceRouter = router({
         .meta({ roles: ["admin"] })
         .input(getAdminExerciceSchema)
         .query(async ({ ctx, input }) => {
-            const { db } = ctx;
-            return await getAdminExercice({ input, db });
+            const { db, session } = ctx;
+            return await getAdminExercice({ input, db, session });
         }),
 
     listAdminExercices: protectedProcedure
         .meta({ roles: ["admin"] })
         .input(listAdminExercicesSchema)
         .query(async ({ ctx, input }) => {
-            const { db } = ctx;
-            return await listAdminExercices({ input, db });
+            const { db, session } = ctx;
+            return await listAdminExercices({ input, db, session });
         }),
 
     listGenerateQueue: protectedProcedure
@@ -51,10 +56,23 @@ export const exerciceRouter = router({
             return await listGenerateQueue();
         }),
 
-    getDailyChallenge: protectedProcedure.query(async ({ ctx }) => {
-        const { db } = ctx;
-        return await getDailyChallenge({ db });
-    }),
+    getChallenge: protectedProcedure
+        .input(getChallengeSchema)
+        .query(async ({ ctx, input }) => {
+            const { db, session } = ctx;
+            return await getChallenge({ input, db, session });
+        }),
+
+    getUserStreak: protectedProcedure
+        .input(getUserStreakSchema)
+        .query(async ({ ctx, input }) => {
+            const { db, session } = ctx;
+            return await getUserStreak({
+                db,
+                input,
+                session,
+            });
+        }),
 
     // Mutations
     updateExerciceStatus: protectedProcedure
@@ -110,5 +128,16 @@ export const exerciceRouter = router({
         .mutation(async ({ ctx, input }) => {
             const { db } = ctx;
             return await updateExercice({ input, db });
+        }),
+
+    submitExercice: protectedProcedure
+        .input(submitExerciceSchema)
+        .mutation(async ({ ctx, input }) => {
+            const { db, session } = ctx;
+            return await submitExercice({
+                input,
+                db,
+                session,
+            });
         }),
 });

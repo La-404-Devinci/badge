@@ -16,7 +16,7 @@ export default function DailyChallenge() {
     const trpc = useTRPC();
 
     const { data: dailyChallenge } = useSuspenseQuery(
-        trpc.exercice.getDailyChallenge.queryOptions()
+        trpc.exercice.getChallenge.queryOptions({ id: "daily" })
     );
 
     return (

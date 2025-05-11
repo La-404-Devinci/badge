@@ -4,7 +4,7 @@ import { ulid } from "ulid";
 import { USER_ROLES } from "@/constants/roles";
 
 import { db } from "../index";
-import { user, account, session, verification } from "../schema/auth-schema";
+import { user, account, verification } from "../schema/auth-schema";
 import { notificationSettings } from "../schema/notification-settings";
 import { userPreferences } from "../schema/user-preferences";
 
@@ -33,8 +33,6 @@ const main = async () => {
 
     // IDs utilisateurs générés à l'avance pour maintenir la cohérence des FK
     const userIds = Array.from({ length: 10 }, () => ulid());
-    // Tokens de session uniques
-    const sessionTokens = Array.from({ length: 5 }, () => ulid());
 
     try {
         // 1) Seed users
@@ -112,33 +110,7 @@ const main = async () => {
             },
         }));
 
-        // 3) Seed sessions
-        await seed(db, { session }).refine((funcs) => ({
-            session: {
-                count: 5,
-                columns: {
-                    expiresAt: funcs.default({ defaultValue: futureDate }),
-                    // Utiliser tokens uniques pré-générés
-                    token: funcs.valuesFromArray({
-                        values: sessionTokens,
-                        isUnique: true,
-                    }),
-                    createdAt: funcs.default({ defaultValue: now }),
-                    updatedAt: funcs.default({ defaultValue: now }),
-                    ipAddress: funcs.default({ defaultValue: "127.0.0.1" }),
-                    userAgent: funcs.default({
-                        defaultValue:
-                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
-                    }),
-                    userId: funcs.valuesFromArray({
-                        values: userIds.slice(0, 5),
-                    }),
-                    impersonatedBy: funcs.default({ defaultValue: null }),
-                },
-            },
-        }));
-
-        // 4) Seed verifications
+        // 3) Seed verifications
         await seed(db, { verification }).refine((funcs) => ({
             verification: {
                 count: 5,
@@ -152,7 +124,7 @@ const main = async () => {
             },
         }));
 
-        // 5) Seed user preferences
+        // 4) Seed user preferences
         await seed(db, { userPreferences }).refine((funcs) => ({
             userPreferences: {
                 count: userIds.length,
@@ -171,7 +143,7 @@ const main = async () => {
             },
         }));
 
-        // 6) Seed notification settings
+        // 5) Seed notification settings
         await seed(db, { notificationSettings }).refine((funcs) => ({
             notificationSettings: {
                 count: userIds.length,

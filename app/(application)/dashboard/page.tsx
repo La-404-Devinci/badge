@@ -4,7 +4,7 @@ import DailyChallenge from "./_components/daily-challenge";
 import DashboardHeader from "./_components/header";
 
 export default function DashboardPage() {
-    prefetch(trpc.exercice.getDailyChallenge.queryOptions());
+    prefetch(trpc.exercice.getChallenge.queryOptions({ id: "daily" }));
 
     return (
         <>

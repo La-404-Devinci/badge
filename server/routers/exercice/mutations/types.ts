@@ -6,6 +6,7 @@ import {
     batchDeleteExercicesSchema,
     batchUpdateExerciceStatusSchema,
     deleteExerciceSchema,
+    submitExerciceSchema,
     updateExerciceSchema,
     updateExerciceStatusSchema,
 } from "../validators";
@@ -21,7 +22,7 @@ export type BatchUpdateExerciceStatusInput = z.infer<
 export type BatchDeleteExercicesInput = z.infer<
     typeof batchDeleteExercicesSchema
 >;
-
+export type SubmitExerciceInput = z.infer<typeof submitExerciceSchema>;
 export interface InputMutationContext<T> {
     input: T;
     db: Database;
@@ -31,8 +32,24 @@ export type ExecuteCodeOutput =
     | {
           success: true;
           result: string;
+          logs: string;
       }
     | {
           success: false;
           error: string;
+          logs: string;
       };
+
+export type ValidationErrorResult = {
+    success: false;
+    call: string;
+    output: string;
+    expectedOutput: string;
+    logs: string;
+};
+
+export type ValidationResult =
+    | {
+          success: true;
+      }
+    | ValidationErrorResult;

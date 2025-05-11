@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Editor } from "@monaco-editor/react";
-import { RiArrowRightCircleLine } from "@remixicon/react";
+import { RiArrowRightCircleLine, RiCloseLine } from "@remixicon/react";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 
@@ -14,7 +14,10 @@ import * as Button from "@/components/ui/button";
 import * as Divider from "@/components/ui/divider";
 import * as Input from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { ExecuteCodeOutput } from "@/server/routers/exercice/mutations";
+import {
+    ExecuteCodeOutput,
+    ValidationErrorResult,
+} from "@/server/routers/exercice/mutations/types";
 import { useTRPC } from "@/trpc/client";
 
 import EmptyState from "./empty-state";
@@ -28,12 +31,19 @@ export default function DailyChallenge() {
     >({});
     const [code, setCode] = useState("");
 
+    const [submitResult, setSubmitResult] =
+        useState<ValidationErrorResult | null>(null);
+
     const { data: dailyChallenge } = useSuspenseQuery(
-        trpc.exercice.getDailyChallenge.queryOptions()
+        trpc.exercice.getChallenge.queryOptions({ id: "daily" })
     );
 
     const { mutateAsync: executeCode } = useMutation(
         trpc.exercice.executeCode.mutationOptions()
+    );
+
+    const { mutateAsync: submitExercice } = useMutation(
+        trpc.exercice.submitExercice.mutationOptions()
     );
 
     const handleRunExample = async (index: number) => {
@@ -48,6 +58,21 @@ export default function DailyChallenge() {
             ...prev,
             [index]: result,
         }));
+    };
+
+    const handleSubmitExercice = async () => {
+        if (!dailyChallenge) return;
+
+        const result = await submitExercice({
+            code: code,
+            exerciceId: dailyChallenge.id,
+        });
+
+        if (!result.success) {
+            setSubmitResult(result);
+        }
+
+        // TODO: confetti !
     };
 
     useEffect(() => {
@@ -117,30 +142,44 @@ export default function DailyChallenge() {
                                     </code>
                                 </p>
                                 {exampleTests[index] && (
-                                    <p className="text-paragraph-sm text-text-sub-600">
-                                        {exampleTests[index].success
-                                            ? t("got")
-                                            : t("error")}
-                                        <code
-                                            className={cn(
-                                                "text-paragraph-sm bg-bg-soft-200 rounded-md p-1 ms-2",
-                                                exampleTests[index]?.success
+                                    <>
+                                        <p className="text-paragraph-sm text-text-sub-600">
+                                            {exampleTests[index].success
+                                                ? t("got")
+                                                : t("error")}
+                                            <code
+                                                className={cn(
+                                                    "text-paragraph-sm bg-bg-soft-200 rounded-md p-1 ms-2",
+                                                    exampleTests[index]?.success
+                                                        ? exampleTests[index]
+                                                              ?.result ==
+                                                          dailyChallenge
+                                                              .exampleOutputs?.[
+                                                              index
+                                                          ]
+                                                            ? "text-success-base"
+                                                            : "text-warning-base"
+                                                        : "text-error-base"
+                                                )}
+                                            >
+                                                {exampleTests[index]?.success
                                                     ? exampleTests[index]
-                                                          ?.result ==
-                                                      dailyChallenge
-                                                          .exampleOutputs?.[
-                                                          index
-                                                      ]
-                                                        ? "text-success-base"
-                                                        : "text-warning-base"
-                                                    : "text-error-base"
-                                            )}
-                                        >
-                                            {exampleTests[index]?.success
-                                                ? exampleTests[index]?.result
-                                                : exampleTests[index]?.error}
-                                        </code>
-                                    </p>
+                                                          ?.result
+                                                    : exampleTests[index]
+                                                          ?.error}
+                                            </code>
+                                        </p>
+                                        {exampleTests[index]?.logs && (
+                                            <>
+                                                <p className="text-paragraph-sm text-text-sub-600">
+                                                    {t("logs")}
+                                                </p>
+                                                <pre className="text-paragraph-xs text-text-sub-600 bg-bg-soft-200 rounded-md p-2">
+                                                    {exampleTests[index]?.logs}
+                                                </pre>
+                                            </>
+                                        )}
+                                    </>
                                 )}
                             </div>
 
@@ -154,18 +193,81 @@ export default function DailyChallenge() {
             </div>
             <ResponsiveDivider />
             <div className="flex flex-col">
-                <Editor
-                    height="100%"
-                    width="auto"
-                    defaultLanguage="typescript"
-                    value={code}
-                    onChange={(value) => setCode(value ?? "")}
-                    options={{
-                        minimap: {
-                            enabled: false,
-                        },
-                    }}
-                />
+                <div className="flex flex-col flex-1">
+                    <Editor
+                        height="100%"
+                        width="auto"
+                        defaultLanguage="typescript"
+                        value={code}
+                        onChange={(value) => setCode(value ?? "")}
+                        options={{
+                            minimap: {
+                                enabled: false,
+                            },
+                        }}
+                    />
+                </div>
+
+                <div className="border-t border-bg-soft-200 p-2 relative">
+                    <Button.Root
+                        variant="primary"
+                        mode="stroke"
+                        className="w-full"
+                        onClick={handleSubmitExercice}
+                    >
+                        <Button.Icon as={RiArrowRightCircleLine} />
+                        {t("submit")}
+                    </Button.Root>
+
+                    {submitResult && (
+                        <div className="absolute flex flex-col bottom-[calc(100%+1px)] left-0 right-0 bg-white border-t border-bg-soft-200 p-2 gap-2">
+                            <div className="flex items-center justify-between">
+                                <p className="text-paragraph-md font-bold text-text-sub-600">
+                                    {t("submitError.title")}
+                                </p>
+                                <Button.Root
+                                    variant="neutral"
+                                    mode="ghost"
+                                    onClick={() => setSubmitResult(null)}
+                                >
+                                    <Button.Icon as={RiCloseLine} />
+                                </Button.Root>
+                            </div>
+
+                            <p className="text-paragraph-sm text-text-sub-600">
+                                {t("submitError.call")}
+                            </p>
+                            <code className="text-paragraph-sm text-text-sub-600 bg-bg-soft-200 rounded-md p-1 mb-2">
+                                {submitResult.call}
+                            </code>
+
+                            <p className="text-paragraph-sm text-text-sub-600">
+                                {t("submitError.expectedOutput")}
+                            </p>
+                            <code className="text-paragraph-sm text-text-sub-600 bg-bg-soft-200 rounded-md p-1 mb-2">
+                                {submitResult.expectedOutput}
+                            </code>
+
+                            <p className="text-paragraph-sm text-text-sub-600">
+                                {t("submitError.output")}
+                            </p>
+                            <code className="text-paragraph-sm text-text-sub-600 bg-bg-soft-200 rounded-md p-1 mb-2">
+                                {submitResult.output}
+                            </code>
+
+                            {submitResult.logs && (
+                                <>
+                                    <p className="text-paragraph-sm text-text-sub-600">
+                                        {t("submitError.logs")}
+                                    </p>
+                                    <pre className="text-paragraph-xs text-text-sub-600 bg-bg-soft-200 rounded-md p-2">
+                                        {submitResult.logs}
+                                    </pre>
+                                </>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

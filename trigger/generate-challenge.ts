@@ -6,6 +6,8 @@ import { desc } from "drizzle-orm";
 
 import { db } from "@/db";
 import { exercice } from "@/db/schema";
+import { env } from "@/env";
+import { difficultyToScore } from "@/server/routers/exercice/utils/difficulty-to-score";
 
 const getPrompt = (props: {
     oldExercises: { title: string; description: string }[];
@@ -237,13 +239,13 @@ export const dailyTask = task({
         logger.info(`Found ${lastExercices.length} exercices`);
 
         const openrouter = createOpenRouter({
-            apiKey: process.env.OPENROUTER_API_KEY,
+            apiKey: env.OPENROUTER_API_KEY,
         });
 
         logger.info("Generating text");
 
         const { text } = await generateText({
-            model: openrouter.chat(process.env.OPENROUTER_MODEL!),
+            model: openrouter.chat(env.OPENROUTER_MODEL),
             prompt: getPrompt({
                 oldExercises: lastExercices,
             }),
@@ -282,6 +284,7 @@ export const dailyTask = task({
             .values({
                 title: output.title[0].trim(),
                 description: output.description[0].trim(),
+                score: difficultyToScore(output.difficulty?.[0]?.trim()),
 
                 problem: output.problem[0].trim(),
                 hints: output.hint?.map((hint) => hint.trim()) || [],

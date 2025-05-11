@@ -1,25 +1,30 @@
-import console from "console";
-
 import { format } from "date-fns";
 import { and, eq } from "drizzle-orm";
 
-import { Database } from "@/db";
 import { exercice } from "@/db/schema/exercices";
 
+import { InputQueryContext, getChallengeInput } from "./types";
+import { isSolved } from "../utils/is-solved";
 /**
  * Gets the daily challenge for today
  */
-export const getDailyChallenge = async ({ db }: { db: Database }) => {
+export const getChallenge = async ({
+    db,
+    input,
+    session,
+}: InputQueryContext<getChallengeInput>) => {
     const today = new Date();
     const formattedDate = format(today, "yyyy-MM-dd");
 
-    console.log("formattedDate", formattedDate);
+    // If the id is "daily", we get the daily challenge
+    // Otherwise, we get the challenge by id
+    const idCondition =
+        input.id === "daily"
+            ? eq(exercice.dailyChallengeDate, formattedDate)
+            : eq(exercice.id, input.id);
 
-    const dailyChallenge = await db.query.exercice.findFirst({
-        where: and(
-            eq(exercice.dailyChallengeDate, formattedDate),
-            eq(exercice.status, "published")
-        ),
+    const challenge = await db.query.exercice.findFirst({
+        where: and(idCondition, eq(exercice.status, "published")),
         columns: {
             id: true,
             title: true,
@@ -32,10 +37,9 @@ export const getDailyChallenge = async ({ db }: { db: Database }) => {
         },
     });
 
-    if (!dailyChallenge) return null;
+    if (!challenge) return null;
 
-    const { response, ...daily } = dailyChallenge;
-
+    const { response, ...challengeData } = challenge;
     const functionSignature = response.split("{")[0].trim();
 
     const returnStatements = [
@@ -60,8 +64,11 @@ export const getDailyChallenge = async ({ db }: { db: Database }) => {
 
     const defaultCode = `${functionSignature} {\n\treturn ${randomReturnStatement};\n}`;
 
+    const solved = await isSolved(session.user.id, challenge.id);
+
     return {
-        ...daily,
-        defaultCode,
+        ...challengeData,
+        defaultCode: defaultCode,
+        isSolved: solved,
     };
 };

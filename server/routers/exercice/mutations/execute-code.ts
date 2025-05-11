@@ -61,20 +61,27 @@ export const executeCode = async ({
 
         // Execute the user-provided code
         const script = await isolate.compileScript(jsCode);
-        await script.run(context, { timeout: 5000 });
+        await script.run(context, { timeout: 500 });
 
         // Execute the function call
         const callScript = await isolate.compileScript(`
             (function() {
+                global.output = '';
+                console.log = function (message) {
+                  global.output += JSON.stringify(message) + "\\n";
+                }
+
                 try {
                     return JSON.stringify({
                         success: true,
-                        result: JSON.stringify(${call})
+                        result: JSON.stringify(${call}),
+                        logs: global.output
                     });
                 } catch (error) {
                     return JSON.stringify({
                         success: false,
-                        error: error.message || 'Unknown error occurred'
+                        error: error.message || 'Unknown error occurred',
+                        logs: global.output
                     });
                 }
             })();
@@ -82,6 +89,8 @@ export const executeCode = async ({
 
         // Run with timeout
         const resultJson = await callScript.run(context, { timeout: 5000 });
+
+        console.log(resultJson);
 
         // Parse the result
         const result = JSON.parse(resultJson) as ExecuteCodeOutput;
@@ -98,6 +107,7 @@ export const executeCode = async ({
                 error instanceof Error
                     ? error.message
                     : "Unknown error occurred",
+            logs: "",
         };
     }
 };
