@@ -95,12 +95,12 @@ export function UserActions({ user }: UserActionsProps) {
                                 </Dropdown.Item>
                                 <Dropdown.Item
                                     onClick={() =>
-                                        handleChangeRole(USER_ROLES.USER)
+                                        handleChangeRole(USER_ROLES.MEMBER)
                                     }
-                                    disabled={user.role === USER_ROLES.USER}
+                                    disabled={user.role === USER_ROLES.MEMBER}
                                 >
                                     <Dropdown.ItemIcon as={RiUserFill} />
-                                    {t("roles.user")}
+                                    {t("roles.member")}
                                 </Dropdown.Item>
                             </Dropdown.MenuSubContent>
                         </Dropdown.MenuSub>

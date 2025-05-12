@@ -3,7 +3,9 @@
  */
 export const USER_ROLES = {
     ADMIN: "admin",
-    USER: "user",
+    MEMBER: "member",
+    EXTERNAL: "external",
+    UNKNOWN: "unknown",
 } as const;
 
 /**

@@ -19,6 +19,9 @@ export const user = pgTable("user", {
     banReason: text("ban_reason"),
     banExpires: timestamp("ban_expires"),
     score: integer("score"),
+    position: text("position"),
+    biography: text("biography"),
+    username: text("username").unique(),
 });
 
 export const account = pgTable("account", {

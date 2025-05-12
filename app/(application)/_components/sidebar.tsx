@@ -43,7 +43,12 @@ export function getNavigationLinks(
             icon: RiFlashlightLine,
             label: t("dailyChallenge"),
             href: PAGES.DAILY_CHALLENGE,
+        },
+        {
             suffix: <StreakBadge />,
+            icon: RiFoldersLine,
+            label: t("projects"),
+            href: PAGES.PROJECTS,
         },
         {
             icon: RiTrophyLine,
