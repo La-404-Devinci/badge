@@ -7,6 +7,7 @@ import {
     RiArrowRightSLine,
     RiArtboardLine,
     RiFlashlightLine,
+    RiFoldersLine,
     RiGroupLine,
     RiHomeHeartLine,
     RiSettings2Line,
