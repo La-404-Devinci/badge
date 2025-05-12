@@ -37,9 +37,15 @@ export const getUserStreak = async ({
 
     // Get the cached streak if it exists
     const cachedStreak = await redis.get(REDIS_KEYS.USER_STREAK(userId));
+    const cachedHasTodayStreak = await redis.get(
+        REDIS_KEYS.HAS_STREAK_TODAY(userId)
+    );
 
     if (cachedStreak !== null) {
-        return parseInt(cachedStreak, 10);
+        return {
+            streak: parseInt(cachedStreak, 10),
+            hasTodayStreak: cachedHasTodayStreak === "true",
+        };
     }
 
     // Recalculate the streak from submission history
@@ -55,6 +61,12 @@ export const getUserStreak = async ({
     });
 
     const streak = calculateStreak(submissions);
+    const hasTodayStreak =
+        streak > 0 &&
+        differenceInDays(
+            startOfDay(submissions[0].createdAt),
+            startOfDay(new Date())
+        ) === 0;
 
     // Cache the streak for the rest of the day
     const diffInSeconds = differenceInSeconds(endOfToday(), new Date());
@@ -65,5 +77,5 @@ export const getUserStreak = async ({
         diffInSeconds
     );
 
-    return streak;
+    return { streak, hasTodayStreak };
 };

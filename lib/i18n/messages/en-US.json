@@ -1019,6 +1019,7 @@
         "error": "Error:",
         "test": "Test",
         "submit": "Submit",
+        "solved": "Solved",
         "submitError": {
             "title": "Validation failed",
             "call": "Call:",
