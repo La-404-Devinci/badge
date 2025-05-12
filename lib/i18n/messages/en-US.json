@@ -19,9 +19,6 @@
         "copy": "Copy",
         "copied": "Copied",
         "search": "Search",
-        "buttons": {
-            "continue": "Continue"
-        },
         "pagination": {
             "showing": "Showing",
             "to": "to",
@@ -35,7 +32,8 @@
         "buttons": {
             "signInWithGoogle": "Sign in with Google",
             "signInWithDiscord": "Sign in with Discord",
-            "signInWithGithub": "Sign in with GitHub"
+            "signInWithGithub": "Sign in with GitHub",
+            "continue": "Continue"
         },
         "time": {
             "daysAgo": "{days} days ago",
@@ -985,7 +983,7 @@
             "title": "Today's Challenge",
             "description": "Complete the daily challenge to earn rewards",
             "noChallenge": "Oh no!",
-            "noChallengeDescription": "It's seems that there is no challenge today...",
+            "noChallengeDescription": "It seems that there is no challenge today...",
             "difficulty": {
                 "easy": "Easy",
                 "medium": "Medium",
@@ -1001,7 +999,7 @@
     "daily": {
         "emptyState": {
             "title": "Oh no!",
-            "description": "It's seems that there is no challenge today...",
+            "description": "It seems that there is no challenge today...",
             "button": "Go to dashboard"
         },
         "examples": "Examples",

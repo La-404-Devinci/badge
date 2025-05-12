@@ -44,7 +44,7 @@ export default async function AdminLayout({
                     {
                         label: t("items.exercices"),
                         key: "exercices",
-                        href: PAGES.ADMIN_EXERCISES,
+                        href: PAGES.ADMIN_EXERCICES,
                     },
                     {
                         label: t("items.waitlist"),

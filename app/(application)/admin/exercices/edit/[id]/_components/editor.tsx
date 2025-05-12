@@ -128,7 +128,7 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
         <div className="flex flex-col gap-2 relative">
             <div className="flex gap-2 sticky top-2 p-2 border border-bg-soft-200 shadow-regular-sm rounded-xl items-center z-20 bg-white/80 backdrop-blur-sm">
                 <Button.Root variant="neutral" mode="ghost" asChild>
-                    <Link href={PAGES.ADMIN_EXERCISES}>
+                    <Link href={PAGES.ADMIN_EXERCICES}>
                         <Button.Icon as={RiArrowLeftLine} />
                     </Link>
                 </Button.Root>

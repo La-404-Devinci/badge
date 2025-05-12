@@ -60,7 +60,7 @@ export function ExerciceActions({ exercice }: ExerciceActionsProps) {
 
     const handleEdit = React.useCallback(() => {
         if (!exercice) return;
-        router.push(`${ADMIN_PAGES.ADMIN_EXERCISES}/edit/${exercice.id}`);
+        router.push(`${ADMIN_PAGES.ADMIN_EXERCICES}/edit/${exercice.id}`);
     }, [exercice, router]);
 
     // Status-dependent actions
