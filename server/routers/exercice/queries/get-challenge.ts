@@ -40,7 +40,7 @@ export const getChallenge = async ({
     if (!challenge) return null;
 
     const { response, ...challengeData } = challenge;
-    const functionSignature = response.split("{")[0].trim();
+    const functionSignature = response.split("\n")[0].trim();
 
     const returnStatements = [
         "'Owo'",
@@ -62,7 +62,7 @@ export const getChallenge = async ({
     const randomReturnStatement =
         returnStatements[Math.floor(Math.random() * returnStatements.length)];
 
-    const defaultCode = `${functionSignature} {\n\treturn ${randomReturnStatement};\n}`;
+    const defaultCode = `${functionSignature}\n\treturn ${randomReturnStatement};\n}`;
 
     const solved = await isSolved(session.user.id, challenge.id);
 
