@@ -25,6 +25,7 @@
     "generate:auth": "pnpx @better-auth/cli generate -y --output ./db/schema/auth-schema.ts && prettier --write ./db/schema/auth-schema.ts",
     "trigger:deploy": "pnpx trigger.dev@latest deploy",
     "precommit": "pnpm typecheck && pnpm lint && pnpm format",
+    "prepush": "pnpm generate:auth && pnpm db:generate && pnpm precommit",
     "env:pull": "vercel env pull .env"
   },
   "dependencies": {
