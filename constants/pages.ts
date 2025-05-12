@@ -11,6 +11,9 @@ export const AUTH_PAGES = {
 
 export const APPLICATION_PAGES = {
     DASHBOARD: "/dashboard",
+    DAILY_CHALLENGE: "/daily",
+    LEADERBOARD: "/leaderboard",
+    EXPLORE: "/explore",
     PROJECTS: "/projects",
 };
 
@@ -22,6 +25,7 @@ export const SETTINGS_PAGES = {
 
 export const ADMIN_PAGES = {
     ADMIN_USERS: "/admin/users",
+    ADMIN_EXERCISES: "/admin/exercises",
     ADMIN_WAITLIST: "/admin/waitlist",
     ADMIN_SETTINGS: "/admin/settings",
 };

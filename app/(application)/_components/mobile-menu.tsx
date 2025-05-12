@@ -17,13 +17,14 @@ import { useTranslations } from "next-intl";
 import { useMediaQuery } from "usehooks-ts";
 
 import { CompanySwitchMobile } from "@/app/(application)/_components/company-switch";
-import { CreateRequestButton } from "@/app/(application)/_components/create-request-button";
-import { ScheduleButton } from "@/app/(application)/_components/schedule-button";
 import { getNavigationLinks } from "@/app/(application)/_components/sidebar";
 import { UserButtonMobile } from "@/app/(application)/_components/user-button";
 import * as TopbarItemButton from "@/components/topbar-item-button";
 import { PAGES } from "@/constants/pages";
 import { cn } from "@/lib/utils/cn";
+
+import { CreatePostButton } from "./create-post-button";
+import { CreateProjectButton } from "./create-project-button";
 
 export default function MobileMenu() {
     const lg = useMediaQuery("(min-width: 1024px)");
@@ -112,7 +113,13 @@ export default function MobileMenu() {
                             <div className="flex flex-col gap-5 px-5">
                                 {navigationLinks.map(
                                     (
-                                        { icon: Icon, label, href, disabled },
+                                        {
+                                            icon: Icon,
+                                            label,
+                                            href,
+                                            disabled,
+                                            suffix,
+                                        },
                                         i
                                     ) => (
                                         <Link
@@ -138,6 +145,7 @@ export default function MobileMenu() {
                                             <div className="flex-1 text-label-md">
                                                 {label}
                                             </div>
+                                            {suffix}
                                             <div
                                                 className={cn(
                                                     "absolute left-0 top-1/2 h-5 w-1 origin-left -translate-y-1/2 rounded-r-full bg-primary-base transition duration-200 ease-out",
@@ -155,8 +163,8 @@ export default function MobileMenu() {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 border-y border-stroke-soft-200 p-4">
-                            <ScheduleButton />
-                            <CreateRequestButton />
+                            <CreateProjectButton />
+                            <CreatePostButton />
                         </div>
 
                         <div className="p-2">
