@@ -61,14 +61,13 @@ export const getUserStreak = async ({
     });
 
     const streak = calculateStreak(submissions);
-const streak = calculateStreak(submissions);
-const hasTodayStreak =
-    streak > 0 &&
-    submissions.length > 0 &&
-    differenceInDays(
-        startOfDay(submissions[0].createdAt),
-        startOfDay(new Date())
-    ) === 0;
+    const hasTodayStreak =
+        streak > 0 &&
+        submissions.length > 0 &&
+        differenceInDays(
+            startOfDay(submissions[0].createdAt),
+            startOfDay(new Date())
+        ) === 0;
 
     // Cache the streak for the rest of the day
     const diffInSeconds = differenceInSeconds(endOfToday(), new Date());
