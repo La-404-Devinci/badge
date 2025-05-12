@@ -2,7 +2,7 @@ import { createContext } from "@/server/context";
 import { createCallerFactory, router } from "@/server/trpc";
 
 import { authRouter } from "./auth/router";
-import { exerciceRouter } from "./exercice/router";
+import { exerciseRouter } from "./exercise/router";
 import { fileRouter } from "./file/router";
 import { notificationRouter } from "./notification/router";
 import { projectRouter } from "./project/router";
@@ -11,7 +11,7 @@ export const appRouter = router({
     auth: authRouter,
     user: userRouter,
     notification: notificationRouter,
-    exercice: exerciceRouter,
+    exercise: exerciseRouter,
     project: projectRouter,
     file: fileRouter,
 });

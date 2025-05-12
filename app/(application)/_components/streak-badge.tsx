@@ -10,7 +10,7 @@ export default function StreakBadge() {
     const trpc = useTRPC();
 
     const { data: streakData } = useQuery(
-        trpc.exercice.getUserStreak.queryOptions({})
+        trpc.exercise.getUserStreak.queryOptions({})
     );
 
     return (

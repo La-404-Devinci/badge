@@ -5,9 +5,9 @@ import { addDays } from "date-fns";
 import { desc } from "drizzle-orm";
 
 import { db } from "@/db";
-import { exercice } from "@/db/schema";
+import { exercise } from "@/db/schema";
 import { env } from "@/env";
-import { difficultyToScore } from "@/server/routers/exercice/utils/difficulty-to-score";
+import { difficultyToScore } from "@/server/routers/exercise/utils/difficulty-to-score";
 
 const getPrompt = (props: {
     oldExercises: { title: string; description: string }[];
@@ -224,11 +224,11 @@ export const dailyTask = task({
     description: "Generates a daily challenge",
 
     run: async (payload: { createdBy: string | null }) => {
-        // Get last exercices
-        logger.info("Getting last exercices");
+        // Get last exercises
+        logger.info("Getting last exercises");
 
-        const lastExercices = await db.query.exercice.findMany({
-            orderBy: [desc(exercice.createdAt)],
+        const lastExercises = await db.query.exercise.findMany({
+            orderBy: [desc(exercise.createdAt)],
             limit: 20,
             columns: {
                 title: true,
@@ -236,7 +236,7 @@ export const dailyTask = task({
             },
         });
 
-        logger.info(`Found ${lastExercices.length} exercices`);
+        logger.info(`Found ${lastExercises.length} exercises`);
 
         const openrouter = createOpenRouter({
             apiKey: env.OPENROUTER_API_KEY,
@@ -247,7 +247,7 @@ export const dailyTask = task({
         const { text } = await generateText({
             model: openrouter.chat(env.OPENROUTER_MODEL),
             prompt: getPrompt({
-                oldExercises: lastExercices,
+                oldExercises: lastExercises,
             }),
         });
 
@@ -280,7 +280,7 @@ export const dailyTask = task({
         logger.info("Adding new exercise to the database");
 
         const newExercise = await db
-            .insert(exercice)
+            .insert(exercise)
             .values({
                 title: output.title[0].trim(),
                 description: output.description[0].trim(),

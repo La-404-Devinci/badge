@@ -4,16 +4,16 @@ import { toast } from "sonner";
 
 import { useTRPC } from "@/trpc/client";
 
-import { useInvalidateExerciceList } from "./use-invalidate-exercice-list";
+import { useInvalidateExerciseList } from "./use-invalidate-exercise-list";
 
-export function useBatchExerciceActions() {
-    const t = useTranslations("admin.exercices");
+export function useBatchExerciseActions() {
+    const t = useTranslations("admin.exercises");
     const trpc = useTRPC();
-    const invalidateList = useInvalidateExerciceList();
+    const invalidateList = useInvalidateExerciseList();
 
-    // Batch publish exercices
-    const { mutateAsync: publishMultipleExercices } = useMutation(
-        trpc.exercice.batchUpdateExerciceStatus.mutationOptions({
+    // Batch publish exercises
+    const { mutateAsync: publishMultipleExercises } = useMutation(
+        trpc.exercise.batchUpdateExerciseStatus.mutationOptions({
             onSuccess: (_, variables) => {
                 invalidateList();
                 toast.success(
@@ -29,9 +29,9 @@ export function useBatchExerciceActions() {
         })
     );
 
-    // Batch draft exercices
-    const { mutateAsync: draftMultipleExercices } = useMutation(
-        trpc.exercice.batchUpdateExerciceStatus.mutationOptions({
+    // Batch draft exercises
+    const { mutateAsync: draftMultipleExercises } = useMutation(
+        trpc.exercise.batchUpdateExerciseStatus.mutationOptions({
             onSuccess: (_, variables) => {
                 invalidateList();
                 toast.success(
@@ -47,9 +47,9 @@ export function useBatchExerciceActions() {
         })
     );
 
-    // Batch archive exercices
-    const { mutateAsync: archiveMultipleExercices } = useMutation(
-        trpc.exercice.batchUpdateExerciceStatus.mutationOptions({
+    // Batch archive exercises
+    const { mutateAsync: archiveMultipleExercises } = useMutation(
+        trpc.exercise.batchUpdateExerciseStatus.mutationOptions({
             onSuccess: (_, variables) => {
                 invalidateList();
                 toast.success(
@@ -65,9 +65,9 @@ export function useBatchExerciceActions() {
         })
     );
 
-    // Batch delete exercices
-    const { mutateAsync: deleteMultipleExercices } = useMutation(
-        trpc.exercice.batchDeleteExercices.mutationOptions({
+    // Batch delete exercises
+    const { mutateAsync: deleteMultipleExercises } = useMutation(
+        trpc.exercise.batchDeleteExercises.mutationOptions({
             onSuccess: (_, variables) => {
                 invalidateList();
                 toast.success(
@@ -84,13 +84,13 @@ export function useBatchExerciceActions() {
     );
 
     return {
-        publishMultipleExercices: (ids: string[]) =>
-            publishMultipleExercices({ ids, status: "published" }),
-        draftMultipleExercices: (ids: string[]) =>
-            draftMultipleExercices({ ids, status: "draft" }),
-        archiveMultipleExercices: (ids: string[]) =>
-            archiveMultipleExercices({ ids, status: "archived" }),
-        deleteMultipleExercices: (ids: string[]) =>
-            deleteMultipleExercices({ ids }),
+        publishMultipleExercises: (ids: string[]) =>
+            publishMultipleExercises({ ids, status: "published" }),
+        draftMultipleExercises: (ids: string[]) =>
+            draftMultipleExercises({ ids, status: "draft" }),
+        archiveMultipleExercises: (ids: string[]) =>
+            archiveMultipleExercises({ ids, status: "archived" }),
+        deleteMultipleExercises: (ids: string[]) =>
+            deleteMultipleExercises({ ids }),
     };
 }

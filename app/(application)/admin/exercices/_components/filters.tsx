@@ -22,33 +22,33 @@ import * as Select from "@/components/ui/select";
 import * as Tooltip from "@/components/ui/tooltip";
 import { useTRPC } from "@/trpc/client";
 
-import { useExerciceTableActions } from "../_hooks/use-exercice-table-actions";
-import { adminExercicesParsers } from "../searchParams";
+import { useExerciseTableActions } from "../_hooks/use-exercise-table-actions";
+import { adminExercisesParsers } from "../searchParams";
 
 type StatusType = "draft" | "published" | "archived" | "unarchived";
 type DifficultyType = "easy" | "medium" | "hard" | "unknown" | "all";
 
 export function Filters() {
-    const t = useTranslations("admin.exercices");
+    const t = useTranslations("admin.exercises");
     const id = useId();
     const trpc = useTRPC();
 
     // Query parameters
     const [search, setSearch] = useQueryState(
         "search",
-        adminExercicesParsers.search
+        adminExercisesParsers.search
     );
     const [status, setStatus] = useQueryState(
         "status",
-        adminExercicesParsers.status
+        adminExercisesParsers.status
     );
     const [difficulty, setDifficulty] = useQueryState(
         "difficulty",
-        adminExercicesParsers.difficulty
+        adminExercisesParsers.difficulty
     );
 
     // Reset page number when filters change
-    const [, setPage] = useQueryState("page", adminExercicesParsers.page);
+    const [, setPage] = useQueryState("page", adminExercisesParsers.page);
     useEffect(() => {
         setPage(1);
     }, [search, status, difficulty, setPage]);
@@ -82,19 +82,19 @@ export function Filters() {
 
     // List generate queue
     const { data: generateQueue, refetch: refetchGenerateQueue } = useQuery(
-        trpc.exercice.listGenerateQueue.queryOptions(undefined, {
+        trpc.exercise.listGenerateQueue.queryOptions(undefined, {
             placeholderData: keepPreviousData,
             refetchInterval: 10000,
         })
     );
 
-    // Handle generate exercice
-    const { generateExercice } = useExerciceTableActions();
+    // Handle generate exercise
+    const { generateExercise } = useExerciseTableActions();
 
-    const handleGenerateExercice = useCallback(async () => {
-        await generateExercice();
+    const handleGenerateExercise = useCallback(async () => {
+        await generateExercise();
         await refetchGenerateQueue();
-    }, [generateExercice, refetchGenerateQueue]);
+    }, [generateExercise, refetchGenerateQueue]);
 
     return (
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -198,7 +198,7 @@ export function Filters() {
                                     variant="neutral"
                                     mode="stroke"
                                     size="small"
-                                    onClick={handleGenerateExercice}
+                                    onClick={handleGenerateExercise}
                                     disabled={
                                         (generateQueue?.runs.length ?? 0) >= 5
                                     }

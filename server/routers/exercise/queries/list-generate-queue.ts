@@ -2,7 +2,7 @@ import { runs } from "@trigger.dev/sdk/v3";
 
 import { dailyTask } from "@/trigger/generate-challenge";
 
-// Get a list of running generate exercice tasks
+// Get a list of running generate exercise tasks
 export const listGenerateQueue = async () => {
     try {
         const runsList = await runs.list({

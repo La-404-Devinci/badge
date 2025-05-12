@@ -2,52 +2,52 @@ import protectedProcedure from "@/server/procedures/protected-procedure";
 import { router } from "@/server/trpc";
 
 import {
-    batchDeleteExercices,
-    batchUpdateExerciceStatus,
-    deleteExercice,
+    batchDeleteExercises,
+    batchUpdateExerciseStatus,
+    deleteExercise,
     executeCode,
-    generateExercice,
-    submitExercice,
-    updateExercice,
-    updateExerciceStatus,
+    generateExercise,
+    submitExercise,
+    updateExercise,
+    updateExerciseStatus,
 } from "./mutations/index";
 import {
-    listAdminExercices,
-    getAdminExercice,
+    listAdminExercises,
+    getAdminExercise,
     listGenerateQueue,
     getChallenge,
     getUserStreak,
 } from "./queries/index";
 import {
-    batchDeleteExercicesSchema,
-    batchUpdateExerciceStatusSchema,
-    deleteExerciceSchema,
+    batchDeleteExercisesSchema,
+    batchUpdateExerciseStatusSchema,
+    deleteExerciseSchema,
     executeCodeSchema,
-    getAdminExerciceSchema,
-    listAdminExercicesSchema,
-    updateExerciceSchema,
-    updateExerciceStatusSchema,
+    getAdminExerciseSchema,
+    listAdminExercisesSchema,
+    updateExerciseSchema,
+    updateExerciseStatusSchema,
     getChallengeSchema,
-    submitExerciceSchema,
+    submitExerciseSchema,
     getUserStreakSchema,
 } from "./validators";
 
-export const exerciceRouter = router({
+export const exerciseRouter = router({
     // Queries
-    getAdminExercice: protectedProcedure
+    getAdminExercise: protectedProcedure
         .meta({ roles: ["admin"] })
-        .input(getAdminExerciceSchema)
+        .input(getAdminExerciseSchema)
         .query(async ({ ctx, input }) => {
             const { db, session } = ctx;
-            return await getAdminExercice({ input, db, session });
+            return await getAdminExercise({ input, db, session });
         }),
 
-    listAdminExercices: protectedProcedure
+    listAdminExercises: protectedProcedure
         .meta({ roles: ["admin"] })
-        .input(listAdminExercicesSchema)
+        .input(listAdminExercisesSchema)
         .query(async ({ ctx, input }) => {
             const { db, session } = ctx;
-            return await listAdminExercices({ input, db, session });
+            return await listAdminExercises({ input, db, session });
         }),
 
     listGenerateQueue: protectedProcedure
@@ -75,43 +75,43 @@ export const exerciceRouter = router({
         }),
 
     // Mutations
-    updateExerciceStatus: protectedProcedure
+    updateExerciseStatus: protectedProcedure
         .meta({ roles: ["admin"] })
-        .input(updateExerciceStatusSchema)
+        .input(updateExerciseStatusSchema)
         .mutation(async ({ ctx, input }) => {
             const { db } = ctx;
-            return await updateExerciceStatus({ input, db });
+            return await updateExerciseStatus({ input, db });
         }),
 
-    deleteExercice: protectedProcedure
+    deleteExercise: protectedProcedure
         .meta({ roles: ["admin"] })
-        .input(deleteExerciceSchema)
+        .input(deleteExerciseSchema)
         .mutation(async ({ ctx, input }) => {
             const { db } = ctx;
-            return await deleteExercice({ input, db });
+            return await deleteExercise({ input, db });
         }),
 
-    batchUpdateExerciceStatus: protectedProcedure
+    batchUpdateExerciseStatus: protectedProcedure
         .meta({ roles: ["admin"] })
-        .input(batchUpdateExerciceStatusSchema)
+        .input(batchUpdateExerciseStatusSchema)
         .mutation(async ({ ctx, input }) => {
             const { db } = ctx;
-            return await batchUpdateExerciceStatus({ input, db });
+            return await batchUpdateExerciseStatus({ input, db });
         }),
 
-    batchDeleteExercices: protectedProcedure
+    batchDeleteExercises: protectedProcedure
         .meta({ roles: ["admin"] })
-        .input(batchDeleteExercicesSchema)
+        .input(batchDeleteExercisesSchema)
         .mutation(async ({ ctx, input }) => {
             const { db } = ctx;
-            return await batchDeleteExercices({ input, db });
+            return await batchDeleteExercises({ input, db });
         }),
 
-    generateExercice: protectedProcedure
+    generateExercise: protectedProcedure
         .meta({ roles: ["admin"] })
         .mutation(async ({ ctx }) => {
             const { db, session } = ctx;
-            return await generateExercice({ db, input: session.user.id });
+            return await generateExercise({ db, input: session.user.id });
         }),
 
     executeCode: protectedProcedure
@@ -122,19 +122,19 @@ export const exerciceRouter = router({
             return await executeCode({ input, db });
         }),
 
-    updateExercice: protectedProcedure
+    updateExercise: protectedProcedure
         .meta({ roles: ["admin"] })
-        .input(updateExerciceSchema)
+        .input(updateExerciseSchema)
         .mutation(async ({ ctx, input }) => {
             const { db } = ctx;
-            return await updateExercice({ input, db });
+            return await updateExercise({ input, db });
         }),
 
-    submitExercice: protectedProcedure
-        .input(submitExerciceSchema)
+    submitExercise: protectedProcedure
+        .input(submitExerciseSchema)
         .mutation(async ({ ctx, input }) => {
             const { db, session } = ctx;
-            return await submitExercice({
+            return await submitExercise({
                 input,
                 db,
                 session,

@@ -17,59 +17,59 @@ import * as Button from "@/components/ui/button";
 import * as Dropdown from "@/components/ui/dropdown";
 import { ADMIN_PAGES } from "@/constants/pages";
 
-import { Exercice } from "./columns";
-import { useExerciceTableActions } from "../_hooks/use-exercice-table-actions";
+import { Exercise } from "./columns";
+import { useExerciseTableActions } from "../_hooks/use-exercise-table-actions";
 
-interface ExerciceActionsProps {
-    exercice: Exercice;
+interface ExerciseActionsProps {
+    exercise: Exercise;
 }
 
-export function ExerciceActions({ exercice }: ExerciceActionsProps) {
-    const t = useTranslations("admin.exercices");
+export function ExerciseActions({ exercise }: ExerciseActionsProps) {
+    const t = useTranslations("admin.exercises");
     const router = useRouter();
 
     const {
         isActionLoading,
-        publishExercice,
-        draftExercice,
-        archiveExercice,
-        deleteExercice,
-    } = useExerciceTableActions();
+        publishExercise,
+        draftExercise,
+        archiveExercise,
+        deleteExercise,
+    } = useExerciseTableActions();
 
-    const isLoading = isActionLoading[exercice?.id ?? ""];
+    const isLoading = isActionLoading[exercise?.id ?? ""];
 
     const handlePublish = React.useCallback(() => {
-        if (!exercice) return;
-        publishExercice(exercice.id);
-    }, [exercice, publishExercice]);
+        if (!exercise) return;
+        publishExercise(exercise.id);
+    }, [exercise, publishExercise]);
 
     const handleDraft = React.useCallback(() => {
-        if (!exercice) return;
-        draftExercice(exercice.id);
-    }, [exercice, draftExercice]);
+        if (!exercise) return;
+        draftExercise(exercise.id);
+    }, [exercise, draftExercise]);
 
     const handleArchive = React.useCallback(() => {
-        if (!exercice) return;
-        archiveExercice(exercice.id);
-    }, [exercice, archiveExercice]);
+        if (!exercise) return;
+        archiveExercise(exercise.id);
+    }, [exercise, archiveExercise]);
 
     const handleDelete = React.useCallback(() => {
-        if (!exercice) return;
-        deleteExercice({ id: exercice.id });
-    }, [exercice, deleteExercice]);
+        if (!exercise) return;
+        deleteExercise({ id: exercise.id });
+    }, [exercise, deleteExercise]);
 
     const handleEdit = React.useCallback(() => {
-        if (!exercice) return;
-        router.push(`${ADMIN_PAGES.ADMIN_EXERCICES}/edit/${exercice.id}`);
-    }, [exercice, router]);
+        if (!exercise) return;
+        router.push(`${ADMIN_PAGES.ADMIN_EXERCISES}/edit/${exercise.id}`);
+    }, [exercise, router]);
 
     // Status-dependent actions
     const showPublishAction =
-        exercice?.status === "draft" || exercice?.status === "archived";
+        exercise?.status === "draft" || exercise?.status === "archived";
     const showDraftAction =
-        exercice?.status === "published" || exercice?.status === "archived";
+        exercise?.status === "published" || exercise?.status === "archived";
     const showArchiveAction =
-        exercice?.status === "published" || exercice?.status === "draft";
+        exercise?.status === "published" || exercise?.status === "draft";
 
     return (
         <Dropdown.Root>

@@ -4,7 +4,7 @@ import { dailyTask } from "@/trigger/generate-challenge";
 
 import { InputMutationContext } from "./types";
 
-export const generateExercice = async ({
+export const generateExercise = async ({
     input,
 }: InputMutationContext<string>) => {
     // Trigger task without waiting for completion

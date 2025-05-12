@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 import {
     ExecuteCodeOutput,
     ValidationResult,
-} from "@/server/routers/exercice/mutations/types";
+} from "@/server/routers/exercise/mutations/types";
 import { useTRPC } from "@/trpc/client";
 
 import EmptyState from "./empty-state";
@@ -43,15 +43,15 @@ export default function DailyChallenge() {
     );
 
     const { data: dailyChallenge } = useSuspenseQuery(
-        trpc.exercice.getChallenge.queryOptions({ id: "daily" })
+        trpc.exercise.getChallenge.queryOptions({ id: "daily" })
     );
 
     const { mutateAsync: executeCode } = useMutation(
-        trpc.exercice.executeCode.mutationOptions()
+        trpc.exercise.executeCode.mutationOptions()
     );
 
-    const { mutateAsync: submitExercice } = useMutation(
-        trpc.exercice.submitExercice.mutationOptions()
+    const { mutateAsync: submitExercise } = useMutation(
+        trpc.exercise.submitExercise.mutationOptions()
     );
 
     const handleRunExample = async (index: number) => {
@@ -68,19 +68,19 @@ export default function DailyChallenge() {
         }));
     };
 
-    const handleSubmitExercice = async () => {
+    const handleSubmitExercise = async () => {
         if (!dailyChallenge) return;
 
-        const result = await submitExercice({
+        const result = await submitExercise({
             code: code,
-            exerciceId: dailyChallenge.id,
+            exerciseId: dailyChallenge.id,
         });
 
         if (result.success) {
             // Invalidate user streak on success
             if (result.isStreak) {
                 queryClient.invalidateQueries({
-                    queryKey: trpc.exercice.getUserStreak.queryKey({}),
+                    queryKey: trpc.exercise.getUserStreak.queryKey({}),
                 });
             }
 
@@ -268,7 +268,7 @@ export default function DailyChallenge() {
                             variant="primary"
                             mode="stroke"
                             className="w-full"
-                            onClick={handleSubmitExercice}
+                            onClick={handleSubmitExercise}
                         >
                             <Button.Icon as={RiArrowRightCircleLine} />
                             {t("submit")}

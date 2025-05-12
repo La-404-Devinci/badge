@@ -2,22 +2,22 @@ import { notFound } from "next/navigation";
 
 import { api } from "@/trpc/server";
 
-import ExerciceEditor from "./_components/editor";
+import ExerciseEditor from "./_components/editor";
 
-interface EditExercicePageProps {
+interface EditExercisePageProps {
     params: Promise<{ id: string }>;
 }
 
-export default async function EditExercicePage({
+export default async function EditExercisePage({
     params,
-}: EditExercicePageProps) {
+}: EditExercisePageProps) {
     const { id } = await params;
 
-    const exercice = await api.exercice.getAdminExercice({ id });
+    const exercise = await api.exercise.getAdminExercise({ id });
 
-    if (!exercice) {
+    if (!exercise) {
         return notFound();
     }
 
-    return <ExerciceEditor exercice={exercice} />;
+    return <ExerciseEditor exercise={exercise} />;
 }

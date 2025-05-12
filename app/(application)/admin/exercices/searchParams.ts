@@ -20,7 +20,7 @@ export type SortableColumn =
     | "createdAt"
     | "dailyChallengeDate";
 
-export const adminExercicesParsers = {
+export const adminExercisesParsers = {
     // Filters
     search: parseAsString,
     status: parseAsStringEnum([
@@ -46,6 +46,6 @@ export const adminExercicesParsers = {
     sortOrder: parseAsStringEnum(["asc", "desc"]).withDefault("desc"),
 };
 
-export const adminExercicesSearchParamsCache = createSearchParamsCache(
-    adminExercicesParsers
+export const adminExercisesSearchParamsCache = createSearchParamsCache(
+    adminExercisesParsers
 );

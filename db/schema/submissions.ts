@@ -2,7 +2,7 @@ import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
 import { ulid } from "ulid";
 
 import { user } from "./auth-schema";
-import { exercice } from "./exercices";
+import { exercise } from "./exercises";
 
 export const submission = pgTable("submission", {
     id: text("id")
@@ -15,9 +15,9 @@ export const submission = pgTable("submission", {
         .references(() => user.id, {
             onDelete: "cascade",
         }),
-    exerciceId: text("exercice_id")
+    exerciseId: text("exercise_id")
         .notNull()
-        .references(() => exercice.id, {
+        .references(() => exercise.id, {
             onDelete: "cascade",
         }),
 

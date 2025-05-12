@@ -611,7 +611,7 @@
         "items": {
             "dashboard": "Dashboard",
             "users": "Manage Users",
-            "exercices": "Manage Exercices",
+            "exercises": "Manage Exercises",
             "waitlist": "Manage Waitlist",
             "settings": "Application Settings"
         },
@@ -627,7 +627,7 @@
                 "updateError": "Failed to update user access status"
             }
         },
-        "exercices": {
+        "exercises": {
             "columns": {
                 "title": "Title",
                 "difficulty": "Difficulty",
@@ -637,7 +637,7 @@
                 "dailyChallengeDate": "Daily Challenge"
             },
             "editor": {
-                "title": "Exercice Editor",
+                "title": "Exercise Editor",
                 "labels": {
                     "title": "Title",
                     "description": "Description",
@@ -661,7 +661,7 @@
                     "discard": "Discard",
                     "execute": "Execute"
                 },
-                "success": "Exercice updated successfully",
+                "success": "Exercise updated successfully",
                 "difficulty": {
                     "easy": "Easy",
                     "medium": "Medium",
@@ -687,67 +687,67 @@
             },
             "actions": {
                 "menuLabel": "Actions menu",
-                "edit": "Edit exercice",
+                "edit": "Edit exercise",
                 "publish": "Publish",
                 "draft": "Set to draft",
                 "archive": "Archive",
                 "delete": "Delete",
-                "create": "Create exercice",
+                "create": "Create exercise",
                 "generate": "Generate with AI",
                 "generating": "Generating...",
                 "generatingInProgress": "{count, plural, =0 {No task in progress} =1 {Generating in progress (# task)} other {Generating in progress (# tasks)}}",
-                "publishSuccess": "Exercice published successfully",
-                "publishError": "Failed to publish exercice",
-                "publishLoading": "Publishing exercice...",
-                "draftSuccess": "Exercice set to draft successfully",
-                "draftError": "Failed to set exercice to draft",
-                "draftLoading": "Setting exercice to draft...",
-                "archiveSuccess": "Exercice archived successfully",
-                "archiveError": "Failed to archive exercice",
-                "archiveLoading": "Archiving exercice...",
-                "deleteSuccess": "Exercice deleted successfully",
-                "deleteError": "Failed to delete exercice",
-                "deleteLoading": "Deleting exercice...",
-                "generateSuccess": "Exercice generation task started",
-                "generateError": "Failed to start exercice generation task",
-                "generateLoading": "Starting exercice generation...",
-                "batchPublishSuccess": "{count, plural, =1 {Exercice} other {# exercices}} published successfully",
-                "batchPublishError": "Failed to publish exercices",
-                "batchPublishLoading": "Publishing {count} exercices...",
-                "batchDraftSuccess": "{count, plural, =1 {Exercice} other {# exercices}} set to draft successfully",
-                "batchDraftError": "Failed to set exercices to draft",
-                "batchDraftLoading": "Setting {count} exercices to draft...",
-                "batchArchiveSuccess": "{count, plural, =1 {Exercice} other {# exercices}} archived successfully",
-                "batchArchiveError": "Failed to archive exercices",
-                "batchArchiveLoading": "Archiving {count} exercices...",
-                "batchDeleteSuccess": "{count, plural, =1 {Exercice} other {# exercices}} deleted successfully",
-                "batchDeleteError": "Failed to delete exercices",
-                "batchDeleteLoading": "Deleting {count} exercices...",
+                "publishSuccess": "Exercise published successfully",
+                "publishError": "Failed to publish exercise",
+                "publishLoading": "Publishing exercise...",
+                "draftSuccess": "Exercise set to draft successfully",
+                "draftError": "Failed to set exercise to draft",
+                "draftLoading": "Setting exercise to draft...",
+                "archiveSuccess": "Exercise archived successfully",
+                "archiveError": "Failed to archive exercise",
+                "archiveLoading": "Archiving exercise...",
+                "deleteSuccess": "Exercise deleted successfully",
+                "deleteError": "Failed to delete exercise",
+                "deleteLoading": "Deleting exercise...",
+                "generateSuccess": "Exercise generation task started",
+                "generateError": "Failed to start exercise generation task",
+                "generateLoading": "Starting exercise generation...",
+                "batchPublishSuccess": "{count, plural, =1 {Exercise} other {# exercises}} published successfully",
+                "batchPublishError": "Failed to publish exercises",
+                "batchPublishLoading": "Publishing {count} exercises...",
+                "batchDraftSuccess": "{count, plural, =1 {Exercise} other {# exercises}} set to draft successfully",
+                "batchDraftError": "Failed to set exercises to draft",
+                "batchDraftLoading": "Setting {count} exercises to draft...",
+                "batchArchiveSuccess": "{count, plural, =1 {Exercise} other {# exercises}} archived successfully",
+                "batchArchiveError": "Failed to archive exercises",
+                "batchArchiveLoading": "Archiving {count} exercises...",
+                "batchDeleteSuccess": "{count, plural, =1 {Exercise} other {# exercises}} deleted successfully",
+                "batchDeleteError": "Failed to delete exercises",
+                "batchDeleteLoading": "Deleting {count} exercises...",
                 "publishConfirmation": "Publishing this exercise will generate outputs for all example and validation inputs. This may take a moment. Do you want to continue?",
                 "updateSuccess": "Exercise status updated successfully",
                 "updateError": "Failed to update exercise status"
             },
             "empty": {
-                "title": "No exercices found",
+                "title": "No exercises found",
                 "description": "Try adjusting your search or filters"
             },
             "confirmations": {
                 "delete": {
-                    "title": "Delete exercice?",
-                    "description": "Are you sure you want to delete {count, plural, =1 {this exercice} other {these # exercices}}? This action cannot be undone.",
+                    "title": "Delete exercise?",
+                    "description": "Are you sure you want to delete {count, plural, =1 {this exercise} other {these # exercises}}? This action cannot be undone.",
                     "confirm": "Delete",
                     "cancel": "Cancel"
                 }
             },
             "selection": {
-                "count": "{count, plural, =1 {# exercice} other {# exercices}} selected"
+                "count": "{count, plural, =1 {# exercise} other {# exercises}} selected"
             },
             "source": {
                 "system": "AI Generated",
                 "user": "User Created"
             },
             "pagination": {
-                "exercices": "exercices"
+                "exercises": "exercises"
             }
         }
     },

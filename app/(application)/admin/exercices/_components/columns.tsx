@@ -11,16 +11,16 @@ import { formatRelativeDays } from "@/lib/utils/dates/format-relative-days";
 import { getSortingIcon } from "@/lib/utils/table/get-sorting-icon";
 import { RouterOutput } from "@/trpc/client";
 
-import { ExerciceActions } from "./actions";
+import { ExerciseActions } from "./actions";
 
-// Define the exercice interface from our schema
-export type Exercice =
-    RouterOutput["exercice"]["listAdminExercices"]["exercices"][number];
+// Define the exercise interface from our schema
+export type Exercise =
+    RouterOutput["exercise"]["listAdminExercises"]["exercises"][number];
 
-export function getExercicesColumns(
-    t: ReturnType<typeof useTranslations<"admin.exercices">>,
+export function getExercisesColumns(
+    t: ReturnType<typeof useTranslations<"admin.exercises">>,
     tTime: ReturnType<typeof useTranslations<"common.time">>
-): ColumnDef<Exercice, unknown>[] {
+): ColumnDef<Exercise, unknown>[] {
     return [
         {
             id: "select",
@@ -64,16 +64,16 @@ export function getExercicesColumns(
             ),
             enableSorting: true,
             cell: ({ row }) => {
-                const exercice = row.original;
-                if (!exercice) return null;
+                const exercise = row.original;
+                if (!exercise) return null;
 
                 return (
                     <div className="flex flex-col">
                         <div className="font-medium text-text-strong-950">
-                            {exercice.title}
+                            {exercise.title}
                         </div>
                         <div className="text-paragraph-xs text-text-soft-400">
-                            {exercice.description}
+                            {exercise.description}
                         </div>
                     </div>
                 );
@@ -99,13 +99,13 @@ export function getExercicesColumns(
                 </div>
             ),
             cell: ({ row }) => {
-                const exercice = row.original;
-                if (!exercice) return null;
+                const exercise = row.original;
+                if (!exercise) return null;
 
                 return (
                     <div className="flex items-center gap-3">
                         <DifficultyBadge
-                            difficulty={exercice.difficulty ?? ""}
+                            difficulty={exercise.difficulty ?? ""}
                             variant="lighter"
                         />
                     </div>
@@ -129,10 +129,10 @@ export function getExercicesColumns(
                 </div>
             ),
             cell: ({ row }) => {
-                const exercice = row.original;
-                if (!exercice) return null;
+                const exercise = row.original;
+                if (!exercise) return null;
 
-                const status = exercice.status;
+                const status = exercise.status;
                 const color =
                     status === "published"
                         ? "green"
@@ -158,17 +158,17 @@ export function getExercicesColumns(
                 </div>
             ),
             cell: ({ row }) => {
-                const exercice = row.original;
-                if (!exercice) return null;
+                const exercise = row.original;
+                if (!exercise) return null;
 
                 return (
                     <div className="flex items-center gap-3">
                         <Badge.Root
-                            color={exercice.systemCreated ? "blue" : "green"}
+                            color={exercise.systemCreated ? "blue" : "green"}
                             variant="light"
                             size="medium"
                         >
-                            {exercice.systemCreated
+                            {exercise.systemCreated
                                 ? t("source.system")
                                 : t("source.user")}
                         </Badge.Root>
@@ -193,12 +193,12 @@ export function getExercicesColumns(
                 </div>
             ),
             cell: ({ row }) => {
-                const exercice = row.original;
-                if (!exercice) return null;
+                const exercise = row.original;
+                if (!exercise) return null;
 
                 return (
                     <div className="whitespace-nowrap text-paragraph-sm text-text-sub-600">
-                        {formatRelativeDate(exercice.createdAt)}
+                        {formatRelativeDate(exercise.createdAt)}
                     </div>
                 );
             },
@@ -220,19 +220,19 @@ export function getExercicesColumns(
                 </div>
             ),
             cell: ({ row }) => {
-                const exercice = row.original;
-                if (!exercice) return null;
+                const exercise = row.original;
+                if (!exercise) return null;
 
                 return (
                     <div className="flex flex-col gap-0.5">
                         <div className="whitespace-nowrap text-paragraph-sm text-text-sub-600">
-                            {exercice.dailyChallengeDate ?? "-"}
+                            {exercise.dailyChallengeDate ?? "-"}
                         </div>
 
                         <div className="text-paragraph-xs text-text-soft-400">
-                            {exercice.dailyChallengeDate
+                            {exercise.dailyChallengeDate
                                 ? formatRelativeDays(
-                                      new Date(exercice.dailyChallengeDate),
+                                      new Date(exercise.dailyChallengeDate),
                                       tTime
                                   )
                                 : "-"}
@@ -244,9 +244,9 @@ export function getExercicesColumns(
         {
             id: "actions",
             cell: ({ row }) => {
-                const exercice = row.original;
+                const exercise = row.original;
 
-                return <ExerciceActions exercice={exercice} />;
+                return <ExerciseActions exercise={exercise} />;
             },
         },
     ];

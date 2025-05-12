@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { and, eq } from "drizzle-orm";
 
-import { exercice } from "@/db/schema/exercices";
+import { exercise } from "@/db/schema/exercises";
 
 import { InputQueryContext, getChallengeInput } from "./types";
 import { isSolved } from "../utils/is-solved";
@@ -20,11 +20,11 @@ export const getChallenge = async ({
     // Otherwise, we get the challenge by id
     const idCondition =
         input.id === "daily"
-            ? eq(exercice.dailyChallengeDate, formattedDate)
-            : eq(exercice.id, input.id);
+            ? eq(exercise.dailyChallengeDate, formattedDate)
+            : eq(exercise.id, input.id);
 
-    const challenge = await db.query.exercice.findFirst({
-        where: and(idCondition, eq(exercice.status, "published")),
+    const challenge = await db.query.exercise.findFirst({
+        where: and(idCondition, eq(exercise.status, "published")),
         columns: {
             id: true,
             title: true,

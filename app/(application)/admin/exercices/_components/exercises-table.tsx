@@ -32,55 +32,55 @@ import {
 } from "@/lib/utils/table/sorting-state";
 import { useTRPC } from "@/trpc/client";
 
-import { useBatchExerciceActions } from "../_hooks/use-batch-exercice-actions";
-import { adminExercicesParsers, SortableColumn } from "../searchParams";
-import { getExercicesColumns, Exercice } from "./columns";
+import { useBatchExerciseActions } from "../_hooks/use-batch-exercise-actions";
+import { adminExercisesParsers, SortableColumn } from "../searchParams";
+import { getExercisesColumns, Exercise } from "./columns";
 
-export function ExercicesTable() {
-    const t = useTranslations("admin.exercices");
+export function ExercisesTable() {
+    const t = useTranslations("admin.exercises");
     const tTime = useTranslations("common.time");
 
     // State for delete confirmation dialog
     const [showDeleteDialog, setShowDeleteDialog] = React.useState(false);
-    const [selectedExerciceIds, setSelectedExerciceIds] = React.useState<
+    const [selectedExerciseIds, setSelectedExerciseIds] = React.useState<
         string[]
     >([]);
 
     // Get query params for filters
-    const [search] = useQueryState("search", adminExercicesParsers.search);
-    const [status] = useQueryState("status", adminExercicesParsers.status);
+    const [search] = useQueryState("search", adminExercisesParsers.search);
+    const [status] = useQueryState("status", adminExercisesParsers.status);
     const [difficulty] = useQueryState(
         "difficulty",
-        adminExercicesParsers.difficulty
+        adminExercisesParsers.difficulty
     );
     const [sortBy, setSortBy] = useQueryState(
         "sortBy",
-        adminExercicesParsers.sortBy
+        adminExercisesParsers.sortBy
     );
     const [sortOrder, setSortOrder] = useQueryState(
         "sortOrder",
-        adminExercicesParsers.sortOrder
+        adminExercisesParsers.sortOrder
     );
 
     // Pagination
-    const [page, setPage] = useQueryState("page", adminExercicesParsers.page);
+    const [page, setPage] = useQueryState("page", adminExercisesParsers.page);
     const [limit, setLimit] = useQueryState(
         "limit",
-        adminExercicesParsers.limit
+        adminExercisesParsers.limit
     );
 
     // tRPC
     const trpc = useTRPC();
     const {
-        deleteMultipleExercices,
-        publishMultipleExercices,
-        draftMultipleExercices,
-        archiveMultipleExercices,
-    } = useBatchExerciceActions();
+        deleteMultipleExercises,
+        publishMultipleExercises,
+        draftMultipleExercises,
+        archiveMultipleExercises,
+    } = useBatchExerciseActions();
 
-    // Use tRPC to fetch exercices with filters
+    // Use tRPC to fetch exercises with filters
     const { data, isLoading } = useQuery(
-        trpc.exercice.listAdminExercices.queryOptions(
+        trpc.exercise.listAdminExercises.queryOptions(
             {
                 page: page,
                 limit: limit,
@@ -102,15 +102,15 @@ export function ExercicesTable() {
     );
 
     const columns = React.useMemo(
-        () => getExercicesColumns(t, tTime),
+        () => getExercisesColumns(t, tTime),
         [t, tTime]
     );
 
     const tableData = React.useMemo(() => {
-        return isLoading ? [] : (data?.exercices ?? []);
-    }, [data?.exercices, isLoading]);
+        return isLoading ? [] : (data?.exercises ?? []);
+    }, [data?.exercises, isLoading]);
 
-    const table = useReactTable<Exercice>({
+    const table = useReactTable<Exercise>({
         data: tableData,
         columns: columns,
         getCoreRowModel: getCoreRowModel(),
@@ -132,61 +132,61 @@ export function ExercicesTable() {
 
     // Batch action handlers
     const handleDelete = React.useCallback(() => {
-        const selectedExercices = table
+        const selectedExercises = table
             .getSelectedRowModel()
-            .rows.map((row) => row.original) as Exercice[];
+            .rows.map((row) => row.original) as Exercise[];
 
-        if (selectedExercices.length === 0) return;
+        if (selectedExercises.length === 0) return;
 
-        setSelectedExerciceIds(
-            selectedExercices.map((exercice) => exercice.id)
+        setSelectedExerciseIds(
+            selectedExercises.map((exercise) => exercise.id)
         );
         setShowDeleteDialog(true);
     }, [table]);
 
     const handleConfirmDelete = React.useCallback(() => {
-        if (selectedExerciceIds.length === 0) return;
+        if (selectedExerciseIds.length === 0) return;
 
-        deleteMultipleExercices(selectedExerciceIds);
+        deleteMultipleExercises(selectedExerciseIds);
         table.resetRowSelection();
         setShowDeleteDialog(false);
-    }, [deleteMultipleExercices, selectedExerciceIds, table]);
+    }, [deleteMultipleExercises, selectedExerciseIds, table]);
 
     const handlePublish = React.useCallback(() => {
-        const selectedExercices = table
+        const selectedExercises = table
             .getSelectedRowModel()
-            .rows.map((row) => row.original) as Exercice[];
+            .rows.map((row) => row.original) as Exercise[];
 
-        if (selectedExercices.length === 0) return;
+        if (selectedExercises.length === 0) return;
 
-        const ids = selectedExercices.map((exercice) => exercice.id);
-        publishMultipleExercices(ids);
+        const ids = selectedExercises.map((exercise) => exercise.id);
+        publishMultipleExercises(ids);
         table.resetRowSelection();
-    }, [publishMultipleExercices, table]);
+    }, [publishMultipleExercises, table]);
 
     const handleDraft = React.useCallback(() => {
-        const selectedExercices = table
+        const selectedExercises = table
             .getSelectedRowModel()
-            .rows.map((row) => row.original) as Exercice[];
+            .rows.map((row) => row.original) as Exercise[];
 
-        if (selectedExercices.length === 0) return;
+        if (selectedExercises.length === 0) return;
 
-        const ids = selectedExercices.map((exercice) => exercice.id);
-        draftMultipleExercices(ids);
+        const ids = selectedExercises.map((exercise) => exercise.id);
+        draftMultipleExercises(ids);
         table.resetRowSelection();
-    }, [draftMultipleExercices, table]);
+    }, [draftMultipleExercises, table]);
 
     const handleArchive = React.useCallback(() => {
-        const selectedExercices = table
+        const selectedExercises = table
             .getSelectedRowModel()
-            .rows.map((row) => row.original) as Exercice[];
+            .rows.map((row) => row.original) as Exercise[];
 
-        if (selectedExercices.length === 0) return;
+        if (selectedExercises.length === 0) return;
 
-        const ids = selectedExercices.map((exercice) => exercice.id);
-        archiveMultipleExercices(ids);
+        const ids = selectedExercises.map((exercise) => exercise.id);
+        archiveMultipleExercises(ids);
         table.resetRowSelection();
-    }, [archiveMultipleExercices, table]);
+    }, [archiveMultipleExercises, table]);
 
     const { shortcutComponents } = useIslandShortcuts(
         [
@@ -290,7 +290,7 @@ export function ExercicesTable() {
                     limit={limit}
                     onPageChange={setPage}
                     onLimitChange={setLimit}
-                    itemName={t("pagination.exercices")}
+                    itemName={t("pagination.exercises")}
                 />
             )}
 
@@ -323,7 +323,7 @@ export function ExercicesTable() {
                 onOpenChange={setShowDeleteDialog}
                 title={t("confirmations.delete.title")}
                 description={t("confirmations.delete.description", {
-                    count: selectedExerciceIds.length,
+                    count: selectedExerciseIds.length,
                 })}
                 onConfirm={handleConfirmDelete}
                 confirmText={t("confirmations.delete.confirm")}

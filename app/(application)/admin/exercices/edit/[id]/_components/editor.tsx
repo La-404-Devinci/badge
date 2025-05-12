@@ -23,78 +23,78 @@ import * as Input from "@/components/ui/input";
 import * as Label from "@/components/ui/label";
 import * as Select from "@/components/ui/select";
 import { PAGES } from "@/constants/pages";
-import { Exercice } from "@/db/schema";
+import { Exercise } from "@/db/schema";
 import { useTRPC } from "@/trpc/client";
 
 import Executable from "./executable";
 
-interface ExerciceEditorProps {
-    exercice: Exercice;
+interface ExerciseEditorProps {
+    exercise: Exercise;
 }
 
-export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
-    const t = useTranslations("admin.exercices.editor");
+export default function ExerciseEditor({ exercise }: ExerciseEditorProps) {
+    const t = useTranslations("admin.exercises.editor");
     const trpc = useTRPC();
     const queryClient = useQueryClient();
 
     const [isSaving, setIsSaving] = useState(false);
-    const [draftExercice, setDraftExercice] = useState(exercice);
+    const [draftExercise, setDraftExercise] = useState(exercise);
 
-    const updateExercice = useCallback(
+    const updateExercise = useCallback(
         (
-            key: keyof Exercice,
-            value: (typeof draftExercice)[keyof Exercice]
+            key: keyof Exercise,
+            value: (typeof draftExercise)[keyof Exercise]
         ) => {
-            setDraftExercice((prev) => ({
+            setDraftExercise((prev) => ({
                 ...prev,
                 [key]: value,
             }));
         },
-        [setDraftExercice]
+        [setDraftExercise]
     );
 
     const handleAddValue = useCallback(
-        (key: keyof Exercice) => {
-            setDraftExercice((prev) => ({
+        (key: keyof Exercise) => {
+            setDraftExercise((prev) => ({
                 ...prev,
                 [key]: [...(prev[key] as string[]), ""],
             }));
         },
-        [setDraftExercice]
+        [setDraftExercise]
     );
 
     const handleRemoveValue = useCallback(
-        (key: keyof Exercice, index: number) => {
-            setDraftExercice((prev) => ({
+        (key: keyof Exercise, index: number) => {
+            setDraftExercise((prev) => ({
                 ...prev,
                 [key]: (prev[key] as string[]).filter((_, i) => i !== index),
             }));
         },
-        [setDraftExercice]
+        [setDraftExercise]
     );
 
     const handleUpdateValue = useCallback(
-        (key: keyof Exercice, index: number, value: string) => {
-            setDraftExercice((prev) => ({
+        (key: keyof Exercise, index: number, value: string) => {
+            setDraftExercise((prev) => ({
                 ...prev,
                 [key]: (prev[key] as string[]).map((v, i) =>
                     i === index ? value : v
                 ),
             }));
         },
-        [setDraftExercice]
+        [setDraftExercise]
     );
 
-    const { mutateAsync: updateExerciceMutation } = useMutation(
-        trpc.exercice.updateExercice.mutationOptions({
+    const { mutateAsync: updateExerciseMutation } = useMutation(
+        trpc.exercise.updateExercise.mutationOptions({
             onSuccess: () => {
                 queryClient.invalidateQueries({
-                    queryKey: trpc.exercice.listAdminExercices.queryKey(),
+                    queryKey: trpc.exercise.listAdminExercises.queryKey(),
                 });
 
                 queryClient.invalidateQueries({
-                    queryKey: trpc.exercice.getAdminExercice.queryKey({
-                        id: exercice.id!,
+                    queryKey: trpc.exercise.getAdminExercise.queryKey({
+                        id: exercise.id!,
                     }),
                 });
 
@@ -104,31 +104,31 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
     );
 
     const handleDiscard = useCallback(() => {
-        setDraftExercice(exercice);
-    }, [exercice, setDraftExercice]);
+        setDraftExercise(exercise);
+    }, [exercise, setDraftExercise]);
 
     const handleSave = useCallback(async () => {
         setIsSaving(true);
 
         const payload = Object.fromEntries(
-            Object.entries(draftExercice).filter(
+            Object.entries(draftExercise).filter(
                 ([_, value]) => value !== null && value !== undefined
             )
         );
 
-        await updateExerciceMutation({
+        await updateExerciseMutation({
             ...payload,
-            id: exercice.id!,
+            id: exercise.id!,
         });
 
         setIsSaving(false);
-    }, [draftExercice, exercice.id, updateExerciceMutation]);
+    }, [draftExercise, exercise.id, updateExerciseMutation]);
 
     return (
         <div className="flex flex-col gap-2 relative">
             <div className="flex gap-2 sticky top-2 p-2 border border-bg-soft-200 shadow-regular-sm rounded-xl items-center z-20 bg-white/80 backdrop-blur-sm">
                 <Button.Root variant="neutral" mode="ghost" asChild>
-                    <Link href={PAGES.ADMIN_EXERCICES}>
+                    <Link href={PAGES.ADMIN_EXERCISES}>
                         <Button.Icon as={RiArrowLeftLine} />
                     </Link>
                 </Button.Root>
@@ -171,11 +171,11 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                     <Input.Wrapper>
                         <Input.Input
                             id="title"
-                            value={draftExercice.title}
+                            value={draftExercise.title}
                             onChange={(e) => {
-                                updateExercice("title", e.target.value);
+                                updateExercise("title", e.target.value);
                             }}
-                            placeholder={exercice.title}
+                            placeholder={exercise.title}
                         />
                     </Input.Wrapper>
                 </Input.Root>
@@ -189,11 +189,11 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                     <Input.Wrapper>
                         <Input.Input
                             id="description"
-                            value={draftExercice.description}
+                            value={draftExercise.description}
                             onChange={(e) => {
-                                updateExercice("description", e.target.value);
+                                updateExercise("description", e.target.value);
                             }}
-                            placeholder={exercice.description}
+                            placeholder={exercise.description}
                         />
                     </Input.Wrapper>
                 </Input.Root>
@@ -207,9 +207,9 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                         {t("labels.difficulty")}
                     </Label.Root>
                     <Select.Root
-                        value={draftExercice.difficulty ?? undefined}
+                        value={draftExercise.difficulty ?? undefined}
                         onValueChange={(value) => {
-                            updateExercice("difficulty", value ?? "unknown");
+                            updateExercise("difficulty", value ?? "unknown");
                         }}
                     >
                         <Select.Trigger>
@@ -237,9 +237,9 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                         <Input.Wrapper>
                             <Input.Input
                                 id="dailyChallengeDate"
-                                value={draftExercice.dailyChallengeDate ?? ""}
+                                value={draftExercise.dailyChallengeDate ?? ""}
                                 onChange={(e) => {
-                                    updateExercice(
+                                    updateExercise(
                                         "dailyChallengeDate",
                                         e.target.value
                                     );
@@ -255,18 +255,18 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
             <div className="flex flex-col gap-0.5">
                 <Label.Root htmlFor="problem">{t("labels.problem")}</Label.Root>
                 <MarkdownEditor
-                    value={draftExercice.problem}
+                    value={draftExercise.problem}
                     onChange={(value) => {
-                        updateExercice("problem", value);
+                        updateExercise("problem", value);
                     }}
-                    placeholder={exercice.problem}
+                    placeholder={exercise.problem}
                     id="problem"
                 />
             </div>
 
             <div className="flex flex-col gap-0.5 mt-2">
                 <Label.Root htmlFor="hints">{t("labels.hints")}</Label.Root>
-                {draftExercice.hints.map((hint, index) => (
+                {draftExercise.hints.map((hint, index) => (
                     <div key={index} className="flex flex-col gap-0.5 mb-2">
                         <div className="flex flex-row gap-2 mb-1 mt-2">
                             <Label.Root htmlFor={`hint-${index}`}>
@@ -291,7 +291,7 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                             onChange={(value) => {
                                 handleUpdateValue("hints", index, value);
                             }}
-                            placeholder={exercice.hints[index]}
+                            placeholder={exercise.hints[index]}
                             rows={2}
                         />
                     </div>
@@ -317,9 +317,9 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                     <Editor
                         height="300px"
                         defaultLanguage="typescript"
-                        value={draftExercice.response}
+                        value={draftExercise.response}
                         onChange={(value) => {
-                            updateExercice("response", value ?? "");
+                            updateExercise("response", value ?? "");
                         }}
                     />
                 </div>
@@ -332,7 +332,7 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                     {t("labels.exampleInputs")}
                 </Label.Root>
 
-                {draftExercice.exampleInputs.map((exampleInput, index) => (
+                {draftExercise.exampleInputs.map((exampleInput, index) => (
                     <div className="flex flex-col gap-0.5" key={index}>
                         <div className="flex flex-row gap-2 mb-1 mt-2">
                             <Label.Root htmlFor={`exampleInput-${index}`}>
@@ -369,7 +369,7 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                         </Input.Root>
 
                         <Executable
-                            code={draftExercice.response}
+                            code={draftExercise.response}
                             call={exampleInput}
                         />
                     </div>
@@ -392,7 +392,7 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                     {t("labels.validationInputs")}
                 </Label.Root>
 
-                {draftExercice.validationInputs.map(
+                {draftExercise.validationInputs.map(
                     (validationInput, index) => (
                         <div className="flex flex-col gap-0.5" key={index}>
                             <div className="flex flex-row gap-2 mb-1 mt-2">
@@ -437,7 +437,7 @@ export default function ExerciceEditor({ exercice }: ExerciceEditorProps) {
                             </Input.Root>
 
                             <Executable
-                                code={draftExercice.response}
+                                code={draftExercise.response}
                                 call={validationInput}
                             />
                         </div>

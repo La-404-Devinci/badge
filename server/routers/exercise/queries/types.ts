@@ -4,14 +4,14 @@ import { Database } from "@/db";
 import { Session } from "@/lib/auth/types";
 
 import {
-    getAdminExerciceSchema,
-    listAdminExercicesSchema,
+    getAdminExerciseSchema,
+    listAdminExercisesSchema,
     getChallengeSchema,
     getUserStreakSchema,
 } from "../validators";
 
-export type listAdminExercicesInput = z.infer<typeof listAdminExercicesSchema>;
-export type getAdminExerciceInput = z.infer<typeof getAdminExerciceSchema>;
+export type listAdminExercisesInput = z.infer<typeof listAdminExercisesSchema>;
+export type getAdminExerciseInput = z.infer<typeof getAdminExerciseSchema>;
 export type getChallengeInput = z.infer<typeof getChallengeSchema>;
 export type getUserStreakInput = z.infer<typeof getUserStreakSchema>;
 export interface InputQueryContext<T> {

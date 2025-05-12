@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-export const getAdminExerciceSchema = z.object({
+export const getAdminExerciseSchema = z.object({
     id: z.string(),
 });
 
-export const listAdminExercicesSchema = z.object({
+export const listAdminExercisesSchema = z.object({
     page: z.number().default(1),
     limit: z.number().min(1).max(100).default(25),
     sortBy: z
@@ -22,21 +22,21 @@ export const listAdminExercicesSchema = z.object({
     difficulty: z.enum(["easy", "medium", "hard", "unknown", "all"]).optional(),
 });
 
-export const updateExerciceStatusSchema = z.object({
+export const updateExerciseStatusSchema = z.object({
     id: z.string(),
     status: z.enum(["draft", "published", "archived"]),
 });
 
-export const deleteExerciceSchema = z.object({
+export const deleteExerciseSchema = z.object({
     id: z.string(),
 });
 
-export const batchUpdateExerciceStatusSchema = z.object({
+export const batchUpdateExerciseStatusSchema = z.object({
     ids: z.array(z.string()).min(1),
     status: z.enum(["draft", "published", "archived"]),
 });
 
-export const batchDeleteExercicesSchema = z.object({
+export const batchDeleteExercisesSchema = z.object({
     ids: z.array(z.string()).min(1),
 });
 
@@ -45,7 +45,7 @@ export const executeCodeSchema = z.object({
     call: z.string().min(1),
 });
 
-export const updateExerciceSchema = z.object({
+export const updateExerciseSchema = z.object({
     id: z.string(),
     title: z.string().min(1).max(255).optional(),
     description: z.string().min(1).max(255).optional(),
@@ -68,7 +68,7 @@ export const getUserStreakSchema = z.object({
     userId: z.string().optional(),
 });
 
-export const submitExerciceSchema = z.object({
-    exerciceId: z.string(),
+export const submitExerciseSchema = z.object({
+    exerciseId: z.string(),
     code: z.string(),
 });

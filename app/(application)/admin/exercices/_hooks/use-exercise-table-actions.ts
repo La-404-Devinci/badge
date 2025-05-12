@@ -6,20 +6,20 @@ import { toast } from "sonner";
 
 import { useTRPC } from "@/trpc/client";
 
-import { useInvalidateExerciceList } from "./use-invalidate-exercice-list";
+import { useInvalidateExerciseList } from "./use-invalidate-exercise-list";
 
-export function useExerciceTableActions() {
-    const t = useTranslations("admin.exercices");
+export function useExerciseTableActions() {
+    const t = useTranslations("admin.exercises");
     const trpc = useTRPC();
-    const invalidateList = useInvalidateExerciceList();
+    const invalidateList = useInvalidateExerciseList();
 
     const [isActionLoading, setIsActionLoading] = useState<
         Record<string, boolean>
     >({});
 
-    // Update exercice status
-    const { mutateAsync: updateExerciceStatus } = useMutation(
-        trpc.exercice.updateExerciceStatus.mutationOptions({
+    // Update exercise status
+    const { mutateAsync: updateExerciseStatus } = useMutation(
+        trpc.exercise.updateExerciseStatus.mutationOptions({
             onMutate: (variables) => {
                 setIsActionLoading((prev) => ({
                     ...prev,
@@ -45,22 +45,22 @@ export function useExerciceTableActions() {
         })
     );
 
-    // Publish exercice
-    const publishExercice = async (id: string) => {
-        await updateExerciceStatus({ id, status: "published" });
+    // Publish exercise
+    const publishExercise = async (id: string) => {
+        await updateExerciseStatus({ id, status: "published" });
     };
 
-    // Draft exercice
-    const draftExercice = (id: string) =>
-        updateExerciceStatus({ id, status: "draft" });
+    // Draft exercise
+    const draftExercise = (id: string) =>
+        updateExerciseStatus({ id, status: "draft" });
 
-    // Archive exercice
-    const archiveExercice = (id: string) =>
-        updateExerciceStatus({ id, status: "archived" });
+    // Archive exercise
+    const archiveExercise = (id: string) =>
+        updateExerciseStatus({ id, status: "archived" });
 
-    // Delete exercice
-    const { mutateAsync: deleteExercice } = useMutation(
-        trpc.exercice.deleteExercice.mutationOptions({
+    // Delete exercise
+    const { mutateAsync: deleteExercise } = useMutation(
+        trpc.exercise.deleteExercise.mutationOptions({
             onMutate: (variables) => {
                 setIsActionLoading((prev) => ({
                     ...prev,
@@ -86,9 +86,9 @@ export function useExerciceTableActions() {
         })
     );
 
-    // Generate exercice using trigger.dev
-    const { mutateAsync: generateExercice } = useMutation(
-        trpc.exercice.generateExercice.mutationOptions({
+    // Generate exercise using trigger.dev
+    const { mutateAsync: generateExercise } = useMutation(
+        trpc.exercise.generateExercise.mutationOptions({
             onSuccess: () => {
                 invalidateList();
                 toast.success(t("actions.generateSuccess"));
@@ -102,10 +102,10 @@ export function useExerciceTableActions() {
 
     return {
         isActionLoading,
-        publishExercice,
-        draftExercice,
-        archiveExercice,
-        deleteExercice,
-        generateExercice,
+        publishExercise,
+        draftExercise,
+        archiveExercise,
+        deleteExercise,
+        generateExercise,
     };
 }

@@ -13,13 +13,13 @@ import { ulid } from "ulid";
 
 import { user } from "./auth-schema";
 
-export const exerciceStatusEnum = pgEnum("exercice_status", [
+export const exerciseStatusEnum = pgEnum("exercise_status", [
     "draft",
     "published",
     "archived",
 ]);
 
-export const exercice = pgTable("exercice", {
+export const exercise = pgTable("exercise", {
     id: text("id")
         .primaryKey()
         .$defaultFn(() => ulid()),
@@ -44,7 +44,7 @@ export const exercice = pgTable("exercice", {
     difficulty: varchar("difficulty", { length: 50 }).default("medium"),
 
     // Daily challenge
-    status: exerciceStatusEnum("status").default("draft"),
+    status: exerciseStatusEnum("status").default("draft"),
     dailyChallengeDate: date("daily_challenge_date"),
 
     // Tracking
@@ -56,10 +56,10 @@ export const exercice = pgTable("exercice", {
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export type Exercice = typeof exercice.$inferSelect;
+export type Exercise = typeof exercise.$inferSelect;
 
-export type PublicExercice = Pick<
-    Exercice,
+export type PublicExercise = Pick<
+    Exercise,
     | "id"
     | "title"
     | "description"

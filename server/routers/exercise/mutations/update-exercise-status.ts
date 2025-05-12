@@ -1,11 +1,11 @@
 import { eq } from "drizzle-orm";
 
-import { exercice } from "@/db/schema";
+import { exercise } from "@/db/schema";
 
 import { generateOutputs } from "./generate-outputs";
 import { InputMutationContext } from "./types";
 
-export const updateExerciceStatus = async ({
+export const updateExerciseStatus = async ({
     input,
     db,
 }: InputMutationContext<{
@@ -16,8 +16,8 @@ export const updateExerciceStatus = async ({
 
     // If publishing, first fetch the exercise to generate outputs
     if (status === "published") {
-        const exerciseToPublish = await db.query.exercice.findFirst({
-            where: eq(exercice.id, id),
+        const exerciseToPublish = await db.query.exercise.findFirst({
+            where: eq(exercise.id, id),
             columns: {
                 response: true,
                 exampleInputs: true,
@@ -42,15 +42,15 @@ export const updateExerciceStatus = async ({
 
         // Update exercise with outputs and status
         const result = await db
-            .update(exercice)
+            .update(exercise)
             .set({
                 status,
                 exampleOutputs,
                 validationOutputs,
                 updatedAt: new Date(),
             })
-            .where(eq(exercice.id, id))
-            .returning({ id: exercice.id });
+            .where(eq(exercise.id, id))
+            .returning({ id: exercise.id });
 
         if (result.length === 0) {
             throw new Error("Exercise not found");
@@ -61,13 +61,13 @@ export const updateExerciceStatus = async ({
 
     // For non-publish status updates
     const result = await db
-        .update(exercice)
+        .update(exercise)
         .set({
             status,
             updatedAt: new Date(),
         })
-        .where(eq(exercice.id, id))
-        .returning({ id: exercice.id });
+        .where(eq(exercise.id, id))
+        .returning({ id: exercise.id });
 
     if (result.length === 0) {
         throw new Error("Exercise not found");

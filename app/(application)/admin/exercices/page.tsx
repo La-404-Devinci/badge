@@ -5,25 +5,25 @@ import { SearchParams } from "nuqs/server";
 import { CursorLoader } from "@/components/ui/cursor-loader";
 import { HydrateClient } from "@/trpc/server";
 
-import { ExercicesTable } from "./_components/exercices-table";
+import { ExercisesTable } from "./_components/exercises-table";
 import { Filters } from "./_components/filters";
-import { adminExercicesSearchParamsCache } from "./searchParams";
+import { adminExercisesSearchParamsCache } from "./searchParams";
 
-interface ExercicesPageProps {
+interface ExercisesPageProps {
     searchParams: Promise<SearchParams>;
 }
 
-export default async function ExercicesPage({
+export default async function ExercisesPage({
     searchParams,
-}: ExercicesPageProps) {
-    await adminExercicesSearchParamsCache.parse(searchParams);
+}: ExercisesPageProps) {
+    await adminExercisesSearchParamsCache.parse(searchParams);
 
     return (
         <HydrateClient>
             <Suspense fallback={<CursorLoader />}>
                 <div className="flex w-full flex-1 flex-col gap-4">
                     <Filters />
-                    <ExercicesTable />
+                    <ExercisesTable />
                 </div>
             </Suspense>
         </HydrateClient>

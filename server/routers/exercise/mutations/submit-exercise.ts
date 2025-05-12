@@ -4,12 +4,12 @@ import { eq, sql } from "drizzle-orm";
 import { Database } from "@/db";
 import { redis, REDIS_KEYS } from "@/db/redis";
 import { user } from "@/db/schema/auth-schema";
-import { exercice } from "@/db/schema/exercices";
+import { exercise } from "@/db/schema/exercises";
 import { submission } from "@/db/schema/submissions";
 import { Session } from "@/lib/auth/types";
 
 import { executeCode } from "./execute-code";
-import { InputMutationContext, SubmitExerciceInput } from "./types";
+import { InputMutationContext, SubmitExerciseInput } from "./types";
 import { ValidationResult } from "./types";
 import { isSolved } from "../utils/is-solved";
 
@@ -54,18 +54,18 @@ const validateSubmission = async (
     return { success: true };
 };
 
-export const submitExercice = async ({
+export const submitExercise = async ({
     input,
     db,
     session,
-}: InputMutationContext<SubmitExerciceInput> & {
+}: InputMutationContext<SubmitExerciseInput> & {
     session: Session;
 }) => {
-    const { exerciceId, code } = input;
+    const { exerciseId, code } = input;
 
     // Get the exercise
-    const exerciseToSubmit = await db.query.exercice.findFirst({
-        where: eq(exercice.id, exerciceId),
+    const exerciseToSubmit = await db.query.exercise.findFirst({
+        where: eq(exercise.id, exerciseId),
     });
 
     if (!exerciseToSubmit) {
@@ -81,7 +81,7 @@ export const submitExercice = async ({
     );
 
     // Check if user already solved this exercise correctly
-    const solved = await isSolved(session.user.id, exerciceId);
+    const solved = await isSolved(session.user.id, exerciseId);
     const isStreak =
         !(await redis.get(REDIS_KEYS.HAS_STREAK_TODAY(session.user.id))) &&
         result.success;
@@ -91,7 +91,7 @@ export const submitExercice = async ({
         .insert(submission)
         .values({
             userId: session.user.id,
-            exerciceId: exerciceId,
+            exerciseId: exerciseId,
             submittedCode: code,
             isCorrect: result.success,
             isStreak: isStreak,

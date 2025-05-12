@@ -2,19 +2,19 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useTRPC } from "@/trpc/client";
 
-export function useInvalidateExerciceList() {
+export function useInvalidateExerciseList() {
     const queryClient = useQueryClient();
     const trpc = useTRPC();
 
-    const invalidateExerciceList = () => {
+    const invalidateExerciseList = () => {
         queryClient.invalidateQueries({
-            queryKey: trpc.exercice.listAdminExercices.queryKey(),
+            queryKey: trpc.exercise.listAdminExercises.queryKey(),
         });
 
         queryClient.invalidateQueries({
-            queryKey: trpc.exercice.listGenerateQueue.queryKey(),
+            queryKey: trpc.exercise.listGenerateQueue.queryKey(),
         });
     };
 
-    return invalidateExerciceList;
+    return invalidateExerciseList;
 }
