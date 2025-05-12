@@ -1,7 +1,11 @@
 import protectedProcedure from "@/server/procedures/protected-procedure";
 import { router } from "@/server/trpc";
 
-import { saveUserPreferences, updateUserProfile } from "./mutations/index";
+import {
+    saveUserPreferences,
+    updateUserProfile,
+    checkUsernameExists,
+} from "./mutations/index";
 import {
     exportUserData,
     getMe,
@@ -13,6 +17,7 @@ import {
     exportUserDataSchema,
     updateUserProfileSchema,
     userPreferencesSchema,
+    checkUsernameExistsSchema,
 } from "./validators";
 
 // User router
@@ -43,6 +48,13 @@ export const userRouter = router({
         .query(async ({ ctx, input }) => {
             const { db, session } = ctx;
             return await exportUserData({ db, session, input });
+        }),
+
+    checkUsernameExists: protectedProcedure
+        .input(checkUsernameExistsSchema)
+        .mutation(async ({ ctx, input }) => {
+            const { db, session } = ctx;
+            return await checkUsernameExists({ db, session, input });
         }),
 
     // Mutations

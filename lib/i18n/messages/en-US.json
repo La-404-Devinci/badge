@@ -19,6 +19,9 @@
         "copy": "Copy",
         "copied": "Copied",
         "search": "Search",
+        "buttons": {
+            "continue": "Continue"
+        },
         "pagination": {
             "showing": "Showing",
             "to": "to",
@@ -195,6 +198,8 @@
             "accountSettings": "account settings",
             "myAccountSettings": {
                 "name": "Name",
+                "username": "Username",
+                "biography": "Biography",
                 "emailAddress": "Email Address",
                 "phoneNumber": "Phone Number",
                 "sessionError": "Session Error",
@@ -205,7 +210,9 @@
                 "emailVerificationSent": "We've sent you a verification email to confirm your new email address.",
                 "phoneTooltip": "Enter your phone number without the country code, as it is selected separately. Only numbers are allowed.",
                 "nameValidation": "Name must be at least 2 characters",
-                "emailValidation": "Please enter a valid email address"
+                "emailValidation": "Please enter a valid email address",
+                "usernameValidation": "Username must be at least 3 characters",
+                "biographyValidation": "Biography must be at least 2 characters"
             },
             "languageRegionSettings": {
                 "title": "Language & Region",
@@ -408,12 +415,17 @@
                 "resendCode": "Resend code",
                 "resending": "Resending...",
                 "privacyPolicy": "Privacy Policy",
-                "signInWithGoogle": "Sign in with Google"
+                "signInWithgoogle": "Sign in with Google",
+                "signInWithdiscord": "Sign in with Discord",
+                "signInWithgithub": "Sign in with GitHub",
+                "continue": "Continue",
+                "cancel": "Cancel"
             },
             "labels": {
                 "email": "Email Address",
                 "password": "Password",
                 "fullName": "Full Name",
+                "username": "Username",
                 "newPassword": "New Password",
                 "confirmPassword": "Confirm Password",
                 "rememberMe": "Keep me logged in"
@@ -423,9 +435,48 @@
                 "sendingEmail": "Sending email...",
                 "resetingPassword": "Resetting password...",
                 "verifying": "Verifying...",
-                "signingInWithGoogle": "Signing in with Google..."
+                "signingInWithGoogle": "Signing in with Google...",
+                "submitting": "Submitting..."
             }
         },
+        "onboarding": {
+            "roleSelection": {
+                "title": "Role Selection",
+                "description": "Choose your role within Synergy.",
+                "employee": {
+                    "title": "I am a 404 member",
+                    "description": "Join as an employee to access Synergy."
+                },
+                "employer": {
+                    "title": "I am an external user",
+                    "description": "Join as an employer to access Synergy."
+                }
+            },
+            "personal": {
+                "title": "Personal Information",
+                "description": "Please enter your personal information.",
+                "labels": {
+                    "fullName": "Full Name",
+                    "username": "Username"
+                }
+            },
+            "position": {
+                "title": "What do you do?",
+                "description": "Please enter your position.",
+                "labels": {
+                    "position": "Position",
+                    "biography": "Biography"
+                }
+            },
+            "errors": {
+                "usernameExists": "This username is already taken."
+            },
+            "connexionModal": {
+                "title": "Connexion to Discord",
+                "description": "Connect to Discord to access Synergy."
+            }
+        },
+
         "forms": {
             "signIn": {
                 "title": "Login to your account",
@@ -507,65 +558,6 @@
             "waitlist": {
                 "text": "Already have an account?",
                 "link": "Sign in"
-            }
-        },
-        "twoFactor": {
-            "title": "Two-Factor Authentication",
-            "description": "Verify your identity to continue",
-            "steps": {
-                "totp": {
-                    "title": "Authenticator Verification",
-                    "description": "Enter the 6-digit code from your authenticator app",
-                    "noAccessMessage": "Don't have access to your authenticator app?",
-                    "rememberDevice": "Remember this device for 60 days"
-                },
-                "backup": {
-                    "title": "Backup Code Verification",
-                    "description": "Enter one of your backup codes. Each code can only be used once.",
-                    "codeLabel": "Backup Code",
-                    "codePlaceholder": "Enter your backup code"
-                },
-                "email": {
-                    "title": "Email Verification",
-                    "description": "We'll send a verification code to your email address",
-                    "codeSent": "We've sent a verification code to your email address. Enter the code below."
-                },
-                "recovery": {
-                    "title": "Account Recovery",
-                    "description": "Choose an alternative method to verify your identity",
-                    "options": {
-                        "backup": {
-                            "title": "Backup Code",
-                            "description": "Use one of your backup codes"
-                        },
-                        "email": {
-                            "title": "Email Code",
-                            "description": "Receive a one-time code via email"
-                        }
-                    }
-                }
-            },
-            "actions": {
-                "verify": "Verify",
-                "verifying": "Verifying...",
-                "sendVerificationCode": "Send verification code",
-                "resendCode": "Resend code",
-                "resendCodeWithTimer": "Resend code ({seconds}s)",
-                "sending": "Sending...",
-                "tryAnotherMethod": "Try another method",
-                "backToAuthenticator": "Back to authenticator",
-                "backToRecoveryOptions": "Back to recovery options"
-            },
-            "errors": {
-                "unknown": "An unknown error occurred. Please try again.",
-                "invalidCode": "Invalid verification code. Please try again.",
-                "userNotFound": "User not found. Please contact support.",
-                "invalidTwoFactorCookie": "Your two-factor session has expired. Please sign in again.",
-                "invalidBackupCode": "Invalid backup code. Please try again.",
-                "retrySignIn": "Your two-factor session has expired. Please sign in again."
-            },
-            "success": {
-                "authenticationSuccessful": "Authentication successful"
             }
         }
     },
@@ -1026,6 +1018,57 @@
             "expectedOutput": "Expected output:",
             "output": "Output:",
             "logs": "Logs:"
+        }
+    },
+    "project": {
+        "create": {
+            "title": "Create Project",
+            "description": "Create a new project to get started.",
+            "label": {
+                "create": "Create Project"
+            },
+            "projectForm": {
+                "fields": {
+                    "title": "Project title",
+                    "description": "Project description",
+                    "type": "Project type",
+                    "exclusive404": "Project exclusive to 404 members",
+                    "startDate": "Start date",
+                    "endDate": "End date",
+                    "badgeName": "Badge name",
+                    "badgeImage": "Badge image",
+                    "badgeUrl": "Badge URL"
+                },
+                "placeholders": {
+                    "title": "Project title",
+                    "description": "Describe your project...",
+                    "type": "Choose a type",
+                    "startDate": "Select a date",
+                    "endDate": "Select a date",
+                    "badgeName": "Badge name"
+                },
+                "types": {
+                    "uxui": "UX/UI",
+                    "dev": "Development",
+                    "marketing": "Marketing",
+                    "other": "Other"
+                },
+                "actions": {
+                    "create": "Create project"
+                },
+                "success": "Project created successfully!",
+                "globalError": "Error while creating the project.",
+                "error": "An error occurred",
+                "errors": {
+                    "type": "Project type required",
+                    "startDate": "Start date required",
+                    "endDate": "End date required",
+                    "title": "Title required",
+                    "description": "Description required",
+                    "badgeName": "Badge name required",
+                    "badgeImage": "Badge image required"
+                }
+            }
         }
     }
 }

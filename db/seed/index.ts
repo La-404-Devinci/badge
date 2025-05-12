@@ -26,6 +26,32 @@ const main = async () => {
         (_, i) => `https://i.pravatar.cc/150?img=${i + 1}`
     );
 
+    const biography = [
+        "I'm a software engineer",
+        "I'm a designer",
+        "I'm a developer",
+        "I'm a tester",
+        "I'm a manager",
+        "I'm a leader",
+        "I'm a developer",
+        "I'm a designer",
+        "I'm a software engineer",
+        "I'm a developer",
+    ];
+
+    const positions = [
+        "Software Engineer",
+        "Designer",
+        "Developer",
+        "Tester",
+        "Manager",
+        "Leader",
+        "Developer",
+        "Designer",
+        "Software Engineer",
+        "Developer",
+    ];
+
     // Dates de référence
     const now = new Date();
     const futureDate = new Date(now);
@@ -76,6 +102,13 @@ const main = async () => {
                             true,
                         ],
                     }),
+                    username: funcs.int({
+                        minValue: 10000,
+                        maxValue: 20000,
+                        isUnique: true,
+                    }),
+                    biography: funcs.valuesFromArray({ values: biography }),
+                    position: funcs.valuesFromArray({ values: positions }),
                     banReason: funcs.default({ defaultValue: null }),
                     banExpires: funcs.default({ defaultValue: null }),
                     createdAt: funcs.default({ defaultValue: now }),

@@ -5,3 +5,5 @@ export * from "./notification-settings";
 export * from "./user-preferences";
 export * from "./exercices";
 export * from "./submissions";
+export * from "./project";
+export * from "./file";
