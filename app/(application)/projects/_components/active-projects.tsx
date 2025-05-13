@@ -7,14 +7,15 @@ import { useUserData } from "@/hooks/use-user-data";
 import { useTRPC } from "@/trpc/client";
 
 import { ProjectCard } from "./card";
-
 export default function ActiveProjects() {
     const { user } = useUserData();
 
     const trpc = useTRPC();
 
     const { data, isLoading } = useQuery({
-        ...trpc.project.getProjects.queryOptions(),
+        ...trpc.project.getProjects.queryOptions(undefined, {
+            staleTime: 0,
+        }),
     });
 
     return (
@@ -36,8 +37,9 @@ export default function ActiveProjects() {
                     {data?.data.map((project) => (
                         <ProjectCard
                             key={project.id}
-                            {...project}
+                            project={project}
                             user={user!}
+                            isContributor={false}
                         />
                     ))}
                 </div>
