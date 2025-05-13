@@ -19,9 +19,6 @@
         "copy": "Copy",
         "copied": "Copied",
         "search": "Search",
-        "buttons": {
-            "continue": "Continue"
-        },
         "pagination": {
             "showing": "Showing",
             "to": "to",
@@ -31,6 +28,19 @@
             "previous": "Previous",
             "next": "Next",
             "page": "Page"
+        },
+        "buttons": {
+            "signInWithGoogle": "Sign in with Google",
+            "signInWithDiscord": "Sign in with Discord",
+            "signInWithGithub": "Sign in with GitHub",
+            "continue": "Continue"
+        },
+        "time": {
+            "daysAgo": "{days} days ago",
+            "inDays": "in {days} days",
+            "today": "Today",
+            "yesterday": "Yesterday",
+            "tomorrow": "Tomorrow"
         }
     },
     "components": {
@@ -64,13 +74,10 @@
             "navigation": {
                 "main": "Main",
                 "dashboard": "Dashboard",
-                "calendar": "Calendar",
+                "dailyChallenge": "Daily Challenge",
+                "leaderboard": "Leaderboard",
+                "explore": "Explore",
                 "projects": "Projects",
-                "teams": "Teams",
-                "integrations": "Integrations",
-                "benefits": "Benefits",
-                "documents": "Documents",
-                "favorites": "Favorites",
                 "search": "Search...",
                 "mobileMenu": "Mobile Menu",
                 "mobileMenuDescription": "This menu provides mobile navigation options, including access to main navigation links, favorite projects, search, and user settings."
@@ -78,7 +85,6 @@
             "settings": {
                 "title": "Others",
                 "settingsLink": "Settings",
-                "support": "Support",
                 "admin": "Admin"
             },
             "favorites": {
@@ -95,12 +101,8 @@
             "clearFilters": "Clear Filters"
         },
         "application": {
-            "createRequest": {
-                "label": "Create Request"
-            },
-            "createProject": {
-                "label": "Create Project"
-            }
+            "createProject": "Submit Project",
+            "createPost": "Create Post"
         }
     },
     "landing": {
@@ -609,6 +611,7 @@
         "items": {
             "dashboard": "Dashboard",
             "users": "Manage Users",
+            "exercises": "Manage Exercises",
             "waitlist": "Manage Waitlist",
             "settings": "Application Settings"
         },
@@ -622,6 +625,129 @@
                 "updated": "updated",
                 "updateSuccess": "User access {status}",
                 "updateError": "Failed to update user access status"
+            }
+        },
+        "exercises": {
+            "columns": {
+                "title": "Title",
+                "difficulty": "Difficulty",
+                "status": "Status",
+                "source": "Source",
+                "createdAt": "Created",
+                "dailyChallengeDate": "Daily Challenge"
+            },
+            "editor": {
+                "title": "Exercise Editor",
+                "labels": {
+                    "title": "Title",
+                    "description": "Description",
+                    "problem": "Problem",
+                    "hints": "Hints",
+                    "hint": "Hint #{index}",
+                    "response": "Response",
+                    "exampleInputs": "Example Inputs",
+                    "exampleInput": "Example Input #{index}",
+                    "validationInputs": "Validation Inputs",
+                    "validationInput": "Validation Input #{index}",
+                    "dailyChallengeDate": "Daily Challenge Date",
+                    "difficulty": "Difficulty"
+                },
+                "buttons": {
+                    "addHint": "Add Hint",
+                    "addExampleInput": "Add Example Input",
+                    "addValidationInput": "Add Validation Input",
+                    "save": "Save",
+                    "saving": "Saving...",
+                    "discard": "Discard",
+                    "execute": "Execute"
+                },
+                "success": "Exercise updated successfully",
+                "difficulty": {
+                    "easy": "Easy",
+                    "medium": "Medium",
+                    "hard": "Hard"
+                }
+            },
+            "filters": {
+                "search": "Search",
+                "searchPlaceholder": "Search by title or description",
+                "status": "Status",
+                "statusPlaceholder": "Filter by status",
+                "difficulty": "Difficulty",
+                "difficultyPlaceholder": "Filter by difficulty",
+                "all": "All",
+                "unarchived": "Unarchived",
+                "draft": "Draft",
+                "published": "Published",
+                "archived": "Archived",
+                "easy": "Easy",
+                "medium": "Medium",
+                "hard": "Hard",
+                "unknown": "Unknown"
+            },
+            "actions": {
+                "menuLabel": "Actions menu",
+                "edit": "Edit exercise",
+                "publish": "Publish",
+                "draft": "Set to draft",
+                "archive": "Archive",
+                "delete": "Delete",
+                "create": "Create exercise",
+                "generate": "Generate with AI",
+                "generating": "Generating...",
+                "generatingInProgress": "{count, plural, =0 {No task in progress} =1 {Generating in progress (# task)} other {Generating in progress (# tasks)}}",
+                "publishSuccess": "Exercise published successfully",
+                "publishError": "Failed to publish exercise",
+                "publishLoading": "Publishing exercise...",
+                "draftSuccess": "Exercise set to draft successfully",
+                "draftError": "Failed to set exercise to draft",
+                "draftLoading": "Setting exercise to draft...",
+                "archiveSuccess": "Exercise archived successfully",
+                "archiveError": "Failed to archive exercise",
+                "archiveLoading": "Archiving exercise...",
+                "deleteSuccess": "Exercise deleted successfully",
+                "deleteError": "Failed to delete exercise",
+                "deleteLoading": "Deleting exercise...",
+                "generateSuccess": "Exercise generation task started",
+                "generateError": "Failed to start exercise generation task",
+                "generateLoading": "Starting exercise generation...",
+                "batchPublishSuccess": "{count, plural, =1 {Exercise} other {# exercises}} published successfully",
+                "batchPublishError": "Failed to publish exercises",
+                "batchPublishLoading": "Publishing {count} exercises...",
+                "batchDraftSuccess": "{count, plural, =1 {Exercise} other {# exercises}} set to draft successfully",
+                "batchDraftError": "Failed to set exercises to draft",
+                "batchDraftLoading": "Setting {count} exercises to draft...",
+                "batchArchiveSuccess": "{count, plural, =1 {Exercise} other {# exercises}} archived successfully",
+                "batchArchiveError": "Failed to archive exercises",
+                "batchArchiveLoading": "Archiving {count} exercises...",
+                "batchDeleteSuccess": "{count, plural, =1 {Exercise} other {# exercises}} deleted successfully",
+                "batchDeleteError": "Failed to delete exercises",
+                "batchDeleteLoading": "Deleting {count} exercises...",
+                "publishConfirmation": "Publishing this exercise will generate outputs for all example and validation inputs. This may take a moment. Do you want to continue?",
+                "updateSuccess": "Exercise status updated successfully",
+                "updateError": "Failed to update exercise status"
+            },
+            "empty": {
+                "title": "No exercises found",
+                "description": "Try adjusting your search or filters"
+            },
+            "confirmations": {
+                "delete": {
+                    "title": "Delete exercise?",
+                    "description": "Are you sure you want to delete {count, plural, =1 {this exercise} other {these # exercises}}? This action cannot be undone.",
+                    "confirm": "Delete",
+                    "cancel": "Cancel"
+                }
+            },
+            "selection": {
+                "count": "{count, plural, =1 {# exercise} other {# exercises}} selected"
+            },
+            "source": {
+                "system": "AI Generated",
+                "user": "User Created"
+            },
+            "pagination": {
+                "exercises": "exercises"
             }
         }
     },
@@ -850,6 +976,46 @@
             "emailPlaceholder": "Enter email address",
             "cancel": "Cancel",
             "addUser": "Add User"
+        }
+    },
+    "dashboard": {
+        "dailyChallenge": {
+            "title": "Today's Challenge",
+            "description": "Complete the daily challenge to earn rewards",
+            "noChallenge": "Oh no!",
+            "noChallengeDescription": "It seems that there is no challenge today...",
+            "difficulty": {
+                "easy": "Easy",
+                "medium": "Medium",
+                "hard": "Hard",
+                "unknown": "Unknown"
+            },
+            "startChallenge": "Start Challenge"
+        },
+        "header": {
+            "welcomeBack": "Welcome back to {projectName} 👋🏻"
+        }
+    },
+    "daily": {
+        "emptyState": {
+            "title": "Oh no!",
+            "description": "It seems that there is no challenge today...",
+            "button": "Go to dashboard"
+        },
+        "examples": "Examples",
+        "expected": "Expected:",
+        "got": "Got:",
+        "logs": "Logs:",
+        "error": "Error:",
+        "test": "Test",
+        "submit": "Submit",
+        "solved": "Solved",
+        "submitError": {
+            "title": "Validation failed",
+            "call": "Call:",
+            "expectedOutput": "Expected output:",
+            "output": "Output:",
+            "logs": "Logs:"
         }
     },
     "project": {

@@ -5,15 +5,13 @@ import * as React from "react";
 import {
     RiAdminLine,
     RiArrowRightSLine,
-    RiCalendarLine,
-    RiEqualizerLine,
-    RiFileCloudLine,
+    RiArtboardLine,
+    RiFlashlightLine,
     RiFoldersLine,
     RiGroupLine,
-    RiHeadphoneLine,
-    RiLayoutGridLine,
+    RiHomeHeartLine,
     RiSettings2Line,
-    RiStarSmileLine,
+    RiTrophyLine,
 } from "@remixicon/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,46 +25,48 @@ import { PAGES } from "@/constants/pages";
 import { useUserData } from "@/hooks/use-user-data";
 import { cn } from "@/lib/utils/cn";
 
+import StreakBadge from "./streak-badge";
+
 type NavigationLink = {
     icon: React.ComponentType<{ className?: string }>;
     label: string;
     href: string;
     disabled?: boolean;
+    suffix?: React.ReactNode;
 };
 
 export function getNavigationLinks(
     t: ReturnType<typeof useTranslations<"components.sidebar.navigation">>
 ): NavigationLink[] {
     return [
-        { icon: RiLayoutGridLine, label: t("dashboard"), href: "/dashboard" },
+        { icon: RiHomeHeartLine, label: t("dashboard"), href: PAGES.DASHBOARD },
         {
-            icon: RiCalendarLine,
-            label: t("calendar"),
-            href: "#",
-            disabled: true,
+            icon: RiFlashlightLine,
+            label: t("dailyChallenge"),
+            href: PAGES.DAILY_CHALLENGE,
         },
         {
+            suffix: <StreakBadge />,
             icon: RiFoldersLine,
             label: t("projects"),
             href: PAGES.PROJECTS,
         },
-        { icon: RiGroupLine, label: t("teams"), href: "#", disabled: true },
         {
-            icon: RiEqualizerLine,
-            label: t("integrations"),
-            href: "#",
+            icon: RiTrophyLine,
+            label: t("leaderboard"),
+            href: PAGES.LEADERBOARD,
             disabled: true,
         },
         {
-            icon: RiStarSmileLine,
-            label: t("benefits"),
-            href: "#",
+            icon: RiGroupLine,
+            label: t("explore"),
+            href: PAGES.EXPLORE,
             disabled: true,
         },
         {
-            icon: RiFileCloudLine,
-            label: t("documents"),
-            href: "#",
+            icon: RiArtboardLine,
+            label: t("projects"),
+            href: PAGES.PROJECTS,
             disabled: true,
         },
     ];
@@ -169,7 +169,7 @@ function NavigationMenu({ collapsed }: { collapsed: boolean }) {
             </div>
             <div className="space-y-1">
                 {navigationLinks.map(
-                    ({ icon: Icon, label, href, disabled }, i) => (
+                    ({ icon: Icon, label, href, disabled, suffix }, i) => (
                         <Link
                             key={i}
                             href={href}
@@ -213,9 +213,11 @@ function NavigationMenu({ collapsed }: { collapsed: boolean }) {
                                 <div className="flex-1 text-label-sm">
                                     {label}
                                 </div>
-                                {pathname === href && (
-                                    <RiArrowRightSLine className="size-5 text-text-sub-600" />
-                                )}
+                                {suffix
+                                    ? suffix
+                                    : pathname === href && (
+                                          <RiArrowRightSLine className="size-5 text-text-sub-600" />
+                                      )}
                             </div>
                         </Link>
                     )
@@ -236,12 +238,6 @@ function SettingsAndSupport({ collapsed }: { collapsed: boolean }) {
             current: pathname.includes("/settings"),
             icon: RiSettings2Line,
             label: t("settingsLink"),
-        },
-        {
-            href: "#",
-            icon: RiHeadphoneLine,
-            label: t("support"),
-            disabled: true,
         },
         {
             href: PAGES.ADMIN_USERS,
@@ -272,54 +268,51 @@ function SettingsAndSupport({ collapsed }: { collapsed: boolean }) {
                         }
                         return true;
                     })
-                    .map(
-                        ({ href, icon: Icon, label, disabled, current }, i) => {
-                            return (
-                                <Link
-                                    key={i}
-                                    href={href}
-                                    aria-current={current ? "page" : undefined}
-                                    aria-disabled={disabled}
+                    .map(({ href, icon: Icon, label, current }, i) => {
+                        return (
+                            <Link
+                                key={i}
+                                href={href}
+                                aria-current={current ? "page" : undefined}
+                                className={cn(
+                                    "group relative flex items-center gap-2 whitespace-nowrap rounded-lg py-2 text-label-sm text-text-sub-600 transition duration-200 ease-out hover:bg-bg-weak-50",
+                                    "aria-[current=page]:bg-bg-weak-50",
+                                    "aria-[disabled]:pointer-events-none aria-[disabled]:opacity-50",
+                                    {
+                                        "w-9 px-2": collapsed,
+                                        "w-full px-3": !collapsed,
+                                    }
+                                )}
+                            >
+                                <div
                                     className={cn(
-                                        "group relative flex items-center gap-2 whitespace-nowrap rounded-lg py-2 text-label-sm text-text-sub-600 transition duration-200 ease-out hover:bg-bg-weak-50",
-                                        "aria-[current=page]:bg-bg-weak-50",
-                                        "aria-[disabled]:pointer-events-none aria-[disabled]:opacity-50",
+                                        "absolute top-1/2 h-5 w-1 origin-left -translate-y-1/2 rounded-r-full bg-primary-base transition duration-200 ease-out",
                                         {
-                                            "w-9 px-2": collapsed,
-                                            "w-full px-3": !collapsed,
+                                            "-left-[22px]": collapsed,
+                                            "-left-5": !collapsed,
+                                            "scale-100": current,
+                                            "scale-0": !current,
                                         }
                                     )}
+                                />
+                                <Icon
+                                    className={cn(
+                                        "size-5 shrink-0",
+                                        "group-aria-[current=page]:text-primary-base"
+                                    )}
+                                />
+                                <div
+                                    className="flex w-[180px] shrink-0 items-center gap-2"
+                                    data-hide-collapsed
                                 >
-                                    <div
-                                        className={cn(
-                                            "absolute top-1/2 h-5 w-1 origin-left -translate-y-1/2 rounded-r-full bg-primary-base transition duration-200 ease-out",
-                                            {
-                                                "-left-[22px]": collapsed,
-                                                "-left-5": !collapsed,
-                                                "scale-100": current,
-                                                "scale-0": !current,
-                                            }
-                                        )}
-                                    />
-                                    <Icon
-                                        className={cn(
-                                            "size-5 shrink-0",
-                                            "group-aria-[current=page]:text-primary-base"
-                                        )}
-                                    />
-                                    <div
-                                        className="flex w-[180px] shrink-0 items-center gap-2"
-                                        data-hide-collapsed
-                                    >
-                                        <span className="flex-1">{label}</span>
-                                        {current && (
-                                            <RiArrowRightSLine className="size-5 text-text-sub-600" />
-                                        )}
-                                    </div>
-                                </Link>
-                            );
-                        }
-                    )}
+                                    <span className="flex-1">{label}</span>
+                                    {current && (
+                                        <RiArrowRightSLine className="size-5 text-text-sub-600" />
+                                    )}
+                                </div>
+                            </Link>
+                        );
+                    })}
             </div>
         </div>
     );
