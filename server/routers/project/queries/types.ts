@@ -9,3 +9,14 @@ export interface ProjectQueryContext {
 export interface GetProjectsQueryContext extends ProjectQueryContext {
     userId: string;
 }
+
+export interface GetProjectQueryContext extends ProjectQueryContext {
+    input: {
+        projectId: string;
+    };
+}
+
+export interface GetContributorProjectsQueryContext
+    extends ProjectQueryContext {
+    userId: string;
+}

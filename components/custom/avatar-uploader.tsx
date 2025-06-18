@@ -123,13 +123,13 @@ export function AvatarUploader({
                     (blob) => {
                         if (blob) resolve(blob);
                     },
-                    "image/jpeg",
+                    "image/png",
                     0.85
                 );
             });
 
-            const filename = `user-avatar/${ulid()}.jpg`;
-            const file = new File([blob], filename, { type: "image/jpeg" });
+            const filename = `user-avatar/${ulid()}.png`;
+            const file = new File([blob], filename, { type: "image/png" });
 
             const storeFileDb = await storeFile({
                 files: [{ originalFileName: filename, fileSize: file.size }],
