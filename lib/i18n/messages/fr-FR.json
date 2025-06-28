@@ -59,8 +59,11 @@
             "navigation": {
                 "main": "Principal",
                 "dashboard": "Tableau de bord",
+                "dailyChallenge": "Défis Journalier",
+                "leaderboard": "Classement",
                 "calendar": "Calendrier",
                 "projects": "Projets",
+                "explore": "Explorer",
                 "teams": "Équipes",
                 "integrations": "Intégrations",
                 "benefits": "Avantages",
@@ -94,12 +97,8 @@
             "systemWithMode": "Système ({mode})"
         },
         "application": {
-            "createRequest": {
-                "label": "Créer une demande"
-            },
-            "createProject": {
-                "label": "Créer un projet"
-            }
+            "createProject": "Créer un projet",
+            "createPost": "Créer un post"
         }
     },
     "landing": {
@@ -110,6 +109,24 @@
         "description": "Nous utilisons des cookies de suivi pour comprendre comment vous utilisez le produit et améliorer votre expérience. Vous pouvez autoriser tous les cookies ou vous désinscrire.",
         "decline": "Non merci",
         "accept": "Autoriser tout"
+    },
+    "dashboard": {
+        "dailyChallenge": {
+            "title": "Challenge d'aujourd'hui",
+            "description": "Compléter le challenge pour recevoir des récompenses !",
+            "noChallenge": "Oh non !",
+            "noChallengeDescription": "On dirait qu'il n'y a pas de challenge pour ayjourd'hui !",
+            "difficulty": {
+                "easy": "Facile",
+                "medium": "Moyen",
+                "hard": "Difficile",
+                "unknown": "Inconnu"
+            },
+            "startChallenge": "Démarrer le challenge"
+        },
+        "header": {
+            "welcomeBack": "Bienvenue sur {projectName} 👋🏻"
+        }
     },
     "settings": {
         "title": "Page des paramètres",
