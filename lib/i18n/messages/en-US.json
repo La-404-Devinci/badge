@@ -888,6 +888,7 @@
         "roles": {
             "title": "Change Role",
             "admin": "Admin",
+            "banned": "Banned",
             "user": "User"
         }
     },
