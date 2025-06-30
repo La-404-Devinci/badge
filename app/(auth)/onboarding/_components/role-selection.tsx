@@ -8,7 +8,9 @@ import { useTranslations } from "next-intl";
 import { RadioCard, RadioCardGroup } from "@/components/custom/radio-card";
 import { StaggeredFadeLoader } from "@/components/staggered-fade-loader";
 import * as FancyButton from "@/components/ui/fancy-button";
+import { PAGES } from "@/constants/pages";
 import { USER_ROLES } from "@/constants/roles";
+import { authClient } from "@/lib/auth/client";
 
 import { useStepStore } from "./store";
 
@@ -26,6 +28,7 @@ const ROLES = [
         icon: <RiBriefcase3Line className="h-6 w-6 text-primary-base" />,
     },
 ];
+type DiscordProvider = "discord";
 
 export function RoleSelection() {
     const t = useTranslations("auth");
@@ -36,9 +39,23 @@ export function RoleSelection() {
 
     const { nextStep } = useStepStore();
 
+    const handleSignIn = async (provider: DiscordProvider) => {
+        setIsLoading(true);
+
+        const res = await authClient.linkSocial({
+            provider,
+            callbackURL: PAGES.DASHBOARD,
+        });
+        setIsLoading(false);
+        if (res.error) {
+            console.error(res.error);
+            return;
+        }
+    };
+
     const handleContinue = () => {
         if (selectedRole === USER_ROLES.MEMBER) {
-            // TODO: connect discord account
+            handleSignIn("discord");
         } else {
         }
 
