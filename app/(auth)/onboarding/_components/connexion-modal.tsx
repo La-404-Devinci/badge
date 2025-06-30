@@ -29,11 +29,11 @@ export function ConnexionModal({
     const handleSignIn = async () => {
         setIsLoading(true);
 
-        const res = await authClient.signIn.social({
+        const res = await authClient.linkSocial({
             provider: "discord" as const,
             callbackURL: PAGES.ONBOARDING,
-            errorCallbackURL: PAGES.ONBOARDING,
         });
+        console.log("Connexion successful", res);
         setIsLoading(false);
         if (res.error) {
             console.error(res.error);

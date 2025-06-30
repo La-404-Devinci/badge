@@ -63,7 +63,7 @@ export async function getRolesOfUser(user_id: string): Promise<string[]> {
     const roleOfMember: string[] = [];
 
     if (member === false) {
-        roleOfMember.push("USER");
+        roleOfMember.push("user");
         return roleOfMember;
     }
 
@@ -71,11 +71,11 @@ export async function getRolesOfUser(user_id: string): Promise<string[]> {
         if (member.roles) {
             member.roles.forEach((role: string) => {
                 if (role === "1156680510463037532") {
-                    roleOfMember.push("ADMIN");
+                    roleOfMember.push("admin");
                 } else if (role === "1157700899179855883") {
-                    roleOfMember.push("MEMBER");
+                    roleOfMember.push("member");
                 } else {
-                    roleOfMember.push("EXTERNE");
+                    roleOfMember.push("external");
                 }
             });
         }
