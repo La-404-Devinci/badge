@@ -6,7 +6,15 @@ import type { NextConfig } from "next";
 const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts");
 
 // Define the Next.js configuration
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+    images: {
+        remotePatterns: [
+            {
+                hostname: "**",
+            },
+        ],
+    },
+};
 
 // Apply next-intl plugin
 export default withNextIntl(nextConfig);

@@ -14,7 +14,7 @@ import { useStepStore } from "./store";
 import { ONBOARDING_STEPS } from "../layout";
 
 export default function Header() {
-    const { activeStep, setActiveStep } = useStepStore();
+    const { activeStep } = useStepStore();
 
     const getState = (index: number) => {
         if (activeStep > index) return "completed";
@@ -72,10 +72,7 @@ export default function Header() {
                     <HorizontalStepper.Root>
                         {ONBOARDING_STEPS.map((step, index) => (
                             <React.Fragment key={index}>
-                                <HorizontalStepper.Item
-                                    state={getState(index)}
-                                    onClick={() => setActiveStep(index)}
-                                >
+                                <HorizontalStepper.Item state={getState(index)}>
                                     <HorizontalStepper.ItemIndicator>
                                         {step.indicator}
                                     </HorizontalStepper.ItemIndicator>

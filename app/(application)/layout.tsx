@@ -38,9 +38,11 @@ export default async function ApplicationLayout({
                 )}
             >
                 <Sidebar showBanner={isImpersonating} />
-                <HeaderMobile />
-                <div className="mx-auto flex w-full max-w-[1360px] flex-1 flex-col">
-                    {children}
+                <div className="min-h-[inherit] max-h-[inherit] h-full flex flex-col">
+                    <HeaderMobile />
+                    <div className="mx-auto flex w-full max-w-[1360px] flex-1 flex-col">
+                        {children}
+                    </div>
                 </div>
             </div>
 

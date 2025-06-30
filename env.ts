@@ -3,14 +3,32 @@ import { z } from "zod";
 
 export const env = createEnv({
     server: {
+        // Database
         DATABASE_URL: z.string().url(),
+        REDIS_URL: z.string().url(),
+
+        // Authentication
         BETTER_AUTH_SECRET: z.string().min(1),
         BETTER_AUTH_URL: z.string().url(),
+        GOOGLE_CLIENT_ID: z.string().min(1),
+        GOOGLE_CLIENT_SECRET: z.string().min(1),
+        DISCORD_CLIENT_ID: z.string().min(1),
+        DISCORD_CLIENT_SECRET: z.string().min(1),
+        GITHUB_CLIENT_ID: z.string().min(1),
+        GITHUB_CLIENT_SECRET: z.string().min(1),
+
+        // Email
         RESEND_API_KEY: z.string().min(1),
         RESEND_FROM_EMAIL: z.string().min(1),
 
-        BLOB_READ_WRITE_TOKEN: z.string().min(1),
+        // OpenRouter
+        OPENROUTER_API_KEY: z.string().min(1),
+        OPENROUTER_MODEL: z.string().min(1),
 
+        // Trigger
+        TRIGGER_SECRET_KEY: z.string().min(1),
+
+        // Environment
         NODE_ENV: z.enum(["development", "production"]),
         VERCEL_URL: z.string().optional(),
     },

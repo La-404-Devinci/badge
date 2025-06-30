@@ -73,7 +73,6 @@
             "settings": {
                 "title": "Autres",
                 "settingsLink": "Paramètres",
-                "support": "Support",
                 "admin": "Admin"
             },
             "favorites": {
@@ -97,6 +96,9 @@
         "application": {
             "createRequest": {
                 "label": "Créer une demande"
+            },
+            "createProject": {
+                "label": "Créer un projet"
             }
         }
     },
@@ -191,6 +193,8 @@
             "accountSettings": "paramètres compte",
             "myAccountSettings": {
                 "name": "Nom",
+                "username": "Nom d'utilisateur",
+                "biography": "Biographie",
                 "emailAddress": "Adresse e-mail",
                 "phoneNumber": "Numéro de téléphone",
                 "sessionError": "Erreur de session",
@@ -201,7 +205,9 @@
                 "emailVerificationSent": "Nous vous avons envoyé un email de vérification pour confirmer votre nouvelle adresse email.",
                 "phoneTooltip": "Entrez votre numéro de téléphone sans l'indicatif du pays, car il est sélectionné séparément. Seuls les chiffres sont autorisés.",
                 "nameValidation": "Le nom doit comporter au moins 2 caractères",
-                "emailValidation": "Veuillez entrer une adresse email valide"
+                "emailValidation": "Veuillez entrer une adresse email valide",
+                "usernameValidation": "Le nom d'utilisateur doit comporter au moins 3 caractères",
+                "biographyValidation": "La biographie doit comporter au moins 2 caractères"
             },
             "languageRegionSettings": {
                 "title": "Langue & Région",
@@ -407,7 +413,8 @@
                 "signInWithgoogle": "Se connecter avec Google",
                 "signInWithdiscord": "Se connecter avec Discord",
                 "signInWithgithub": "Se connecter avec GitHub",
-                "continue": "Continuer"
+                "continue": "Continuer",
+                "cancel": "Annuler"
             },
             "labels": {
                 "email": "Adresse email",
@@ -437,15 +444,31 @@
                 },
                 "employer": {
                     "title": "Je suis un externe",
-                    "description": "Rejoignez en tant qu'externe pour accéder au 404System."
+                    "description": "Rejoignez en tant qu'employeur pour accéder à Synergy."
                 }
             },
-            "discordSelection": {
+            "personal": {
+                "title": "Informations personnelles",
+                "description": "Veuillez entrer vos informations personnelles.",
+                "labels": {
+                    "fullName": "Nom complet",
+                    "username": "Nom d'utilisateur"
+                }
+            },
+            "position": {
+                "title": "Qu'est-ce que vous faites ?",
+                "description": "Veuillez entrer votre position.",
+                "labels": {
+                    "position": "Position",
+                    "biography": "Biographie"
+                }
+            },
+            "errors": {
+                "usernameExists": "Ce nom d'utilisateur est déjà pris."
+            },
+            "connexionModal": {
                 "title": "Connexion à Discord",
-                "description": "Connectez-vous à votre compte Discord pour continuer.",
-                "connectDiscord": "Connecter Discord",
-                "discordConnected": "Discord connecté avec succès",
-                "discordNotConnected": "Discord non connecté"
+                "description": "Connectez-vous à Discord pour accéder à Synergy."
             }
         },
         "header": {
@@ -743,6 +766,57 @@
             "emailPlaceholder": "Entrez l'adresse e-mail",
             "cancel": "Annuler",
             "addUser": "Ajouter un utilisateur"
+        }
+    },
+    "project": {
+        "create": {
+            "title": "Créer un projet",
+            "description": "Crée un nouveau projet pour commencer.",
+            "label": {
+                "create": "Créer un projet"
+            },
+            "projectForm": {
+                "fields": {
+                    "title": "Titre du projet",
+                    "description": "Description du projet",
+                    "type": "Type de projet",
+                    "exclusive404": "Projet exclusif aux membres 404",
+                    "startDate": "Date de début",
+                    "endDate": "Date de fin",
+                    "badgeName": "Nom du badge",
+                    "badgeImage": "Image du badge",
+                    "badgeUrl": "URL du badge"
+                },
+                "placeholders": {
+                    "title": "Titre du projet",
+                    "description": "Décris ton projet...",
+                    "type": "Choisir un type",
+                    "startDate": "Sélectionner une date",
+                    "endDate": "Sélectionner une date",
+                    "badgeName": "Nom du badge"
+                },
+                "types": {
+                    "uxui": "UX/UI",
+                    "dev": "Développement",
+                    "marketing": "Marketing",
+                    "other": "Autre"
+                },
+                "actions": {
+                    "create": "Créer le projet"
+                },
+                "success": "Projet créé avec succès !",
+                "globalError": "Erreur lors de la création du projet.",
+                "error": "Une erreur s'est produite",
+                "errors": {
+                    "type": "Type de projet requis",
+                    "startDate": "Date de début requise",
+                    "endDate": "Date de fin requise",
+                    "title": "Titre requis",
+                    "description": "Description requise",
+                    "badgeName": "Nom du badge requis",
+                    "badgeImage": "Image du badge requise"
+                }
+            }
         }
     }
 }

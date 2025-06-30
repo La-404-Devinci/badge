@@ -12,7 +12,8 @@ import { PAGES } from "@/constants/pages";
 import { USER_ROLES } from "@/constants/roles";
 import { authClient } from "@/lib/auth/client";
 
-import { useStepStore } from "./store";
+import { ConnexionModal } from "./connexion-modal";
+import { useStepStore, useOnboardingStore } from "./store";
 
 const ROLES = [
     {
@@ -37,31 +38,23 @@ export function RoleSelection() {
         USER_ROLES.EXTERNAL
     );
 
-    const { nextStep } = useStepStore();
+    const [showDiscordModal, setShowDiscordModal] = useState(false);
 
-    const handleSignIn = async (provider: DiscordProvider) => {
-        setIsLoading(true);
-
-        const res = await authClient.linkSocial({
-            provider,
-            callbackURL: PAGES.DASHBOARD,
-        });
-        setIsLoading(false);
-        if (res.error) {
-            console.error(res.error);
-            return;
-        }
-    };
+    const { nextStep, setActiveStep } = useStepStore();
+    const { role } = useOnboardingStore();
 
     const handleContinue = () => {
         if (selectedRole === USER_ROLES.MEMBER) {
-            handleSignIn("discord");
+            setShowDiscordModal(true);
         } else {
+            setIsLoading(true);
+            nextStep();
         }
-
-        setIsLoading(true);
-        nextStep();
     };
+
+    if (role) {
+        setActiveStep(1);
+    }
 
     return (
         <div className="flex w-full flex-col items-center gap-8">
@@ -98,6 +91,11 @@ export function RoleSelection() {
                     ? t("common.loading.submitting")
                     : t("common.buttons.continue")}
             </FancyButton.Root>
+
+            <ConnexionModal
+                open={showDiscordModal}
+                onOpenChange={setShowDiscordModal}
+            />
         </div>
     );
 }

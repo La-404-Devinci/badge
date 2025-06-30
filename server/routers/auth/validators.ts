@@ -14,22 +14,6 @@ export const listUsersSchema = z.object({
         .optional(),
 });
 
-export const listWaitlistSchema = z.object({
-    page: z.number().default(1),
-    limit: z.number().min(1).max(100).default(25),
-    sortBy: z
-        .enum(["email", "waitlistStatus", "registrationStatus", "createdAt"])
-        .default("createdAt"),
-    sortOrder: z.enum(["asc", "desc"]).default("desc"),
-    search: z.string().nullable(),
-    waitlistStatus: z
-        .enum(["approved", "pending", "rejected", "all"])
-        .optional(),
-    registrationStatus: z
-        .enum(["registered", "unregistered", "all"])
-        .default("all"),
-});
-
 export const banMultipleUsersSchema = z.object({
     userIds: z.array(z.string()).min(1),
 });
