@@ -430,15 +430,22 @@
         "onboarding": {
             "roleSelection": {
                 "title": "Sélection du rôle",
-                "description": "Choisissez votre rôle au sein de Synergy.",
+                "description": "Choisissez votre rôle au sein de la 404.",
                 "employee": {
                     "title": "Je suis membre de la 404",
-                    "description": "Rejoignez en tant qu'employé pour accéder à Synergy."
+                    "description": "Rejoignez en tant que membre de la 404 pour accéder au 404System."
                 },
                 "employer": {
                     "title": "Je suis un externe",
-                    "description": "Rejoignez en tant qu'employeur pour accéder à Synergy."
+                    "description": "Rejoignez en tant qu'externe pour accéder au 404System."
                 }
+            },
+            "discordSelection": {
+                "title": "Connexion à Discord",
+                "description": "Connectez-vous à votre compte Discord pour continuer.",
+                "connectDiscord": "Connecter Discord",
+                "discordConnected": "Discord connecté avec succès",
+                "discordNotConnected": "Discord non connecté"
             }
         },
         "header": {
