@@ -1,23 +1,16 @@
 import { TRPCError } from "@trpc/server";
-import { eq, and, notInArray } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
-import { project, projectStatusEnum, projectContributor } from "@/db/schema";
+import { project, projectStatusEnum } from "@/db/schema";
 
-import type { GetProjectsQueryContext } from "./types";
+import type { GetProjectQueryContext } from "./types";
 
-export async function getProjects({ db, userId }: GetProjectsQueryContext) {
+export async function getProject({ db, input }: GetProjectQueryContext) {
     try {
-        const contributedProjectIds = await db
-            .select({ projectId: projectContributor.projectId })
-            .from(projectContributor)
-            .where(eq(projectContributor.userId, userId));
-
-        const excludedIds = contributedProjectIds.map((p) => p.projectId);
-
-        const getProjects = await db.query.project.findMany({
+        const [getProject] = await db.query.project.findMany({
             where: and(
-                eq(project.status, projectStatusEnum.enumValues[1]),
-                notInArray(project.id, excludedIds)
+                eq(project.id, input.projectId),
+                eq(project.status, projectStatusEnum.enumValues[1])
             ),
             with: {
                 projectContributors: {
@@ -31,14 +24,15 @@ export async function getProjects({ db, userId }: GetProjectsQueryContext) {
                                 id: true,
                                 username: true,
                                 image: true,
+                                role: true,
+                                position: true,
                             },
                         },
                     },
                 },
             },
         });
-
-        return { success: true, data: getProjects };
+        return { success: true, data: getProject };
     } catch (error) {
         console.error("Error storing project:", error);
         throw new TRPCError({

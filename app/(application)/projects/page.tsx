@@ -6,13 +6,14 @@ import { prefetch, trpc, HydrateClient } from "@/trpc/server";
 import { CreateProjectButton } from "./_components/create-project-button";
 import Header from "../_components/header";
 import ActiveProjects from "./_components/active-projects";
+import YourProjects from "./_components/your-projects";
 import { CreatePostButton } from "../_components/create-post-button";
 
 export default async function ProjectsPage() {
     const session = await getServerSession();
 
     prefetch(trpc.project.getProjects.queryOptions());
-
+    prefetch(trpc.project.getContributorProjects.queryOptions());
     return (
         <>
             <Header
@@ -32,7 +33,15 @@ export default async function ProjectsPage() {
             </Header>
 
             <HydrateClient>
-                <ActiveProjects />
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                    <div className="lg:col-span-8">
+                        <ActiveProjects />
+                    </div>
+
+                    <div className="lg:col-span-4 lg:border-l border-neutral-200">
+                        <YourProjects />
+                    </div>
+                </div>
             </HydrateClient>
         </>
     );
