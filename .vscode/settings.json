@@ -12,5 +12,13 @@
         "app/api/locale",
         "lib/i18n/messages"
     ],
-    "i18n-ally.keystyle": "nested"
+    "i18n-ally.keystyle": "nested",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "always",
+        "source.organizeImports": "never",
+        "source.removeUnusedImports": "always"
+    }
 }

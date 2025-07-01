@@ -31,6 +31,13 @@
             "previous": "Précédent",
             "next": "Suivant",
             "page": "Page"
+        },
+        "time": {
+            "daysAgo": "Il y a {days} jours",
+            "inDays": "Dans {days} jours",
+            "today": "Aujourd'hui",
+            "yesterday": "Hier",
+            "tomorrow": "Demain"
         }
     },
     "components": {
@@ -59,8 +66,11 @@
             "navigation": {
                 "main": "Principal",
                 "dashboard": "Tableau de bord",
+                "dailyChallenge": "Défis Journalier",
+                "leaderboard": "Classement",
                 "calendar": "Calendrier",
                 "projects": "Projets",
+                "explore": "Explorer",
                 "teams": "Équipes",
                 "integrations": "Intégrations",
                 "benefits": "Avantages",
@@ -94,12 +104,8 @@
             "systemWithMode": "Système ({mode})"
         },
         "application": {
-            "createRequest": {
-                "label": "Créer une demande"
-            },
-            "createProject": {
-                "label": "Créer un projet"
-            }
+            "createProject": "Créer un projet",
+            "createPost": "Créer un post"
         }
     },
     "landing": {
@@ -110,6 +116,24 @@
         "description": "Nous utilisons des cookies de suivi pour comprendre comment vous utilisez le produit et améliorer votre expérience. Vous pouvez autoriser tous les cookies ou vous désinscrire.",
         "decline": "Non merci",
         "accept": "Autoriser tout"
+    },
+    "dashboard": {
+        "dailyChallenge": {
+            "title": "Challenge d'aujourd'hui",
+            "description": "Compléter le challenge pour recevoir des récompenses !",
+            "noChallenge": "Oh non !",
+            "noChallengeDescription": "On dirait qu'il n'y a pas de challenge pour ayjourd'hui !",
+            "difficulty": {
+                "easy": "Facile",
+                "medium": "Moyen",
+                "hard": "Difficile",
+                "unknown": "Inconnu"
+            },
+            "startChallenge": "Démarrer le challenge"
+        },
+        "header": {
+            "welcomeBack": "Bienvenue sur {projectName} 👋🏻"
+        }
     },
     "settings": {
         "title": "Page des paramètres",
@@ -554,6 +578,7 @@
         "items": {
             "dashboard": "Tableau de bord",
             "users": "Gérer les utilisateurs",
+            "exercises": "Gérer les exercices",
             "settings": "Paramètres de l'application",
             "waitlist": "Gérer la liste d'attente"
         },
@@ -567,6 +592,129 @@
                 "updated": "mis à jour",
                 "updateSuccess": "Accès utilisateur {status}",
                 "updateError": "Échec de la mise à jour du statut d'accès de l'utilisateur"
+            }
+        },
+        "exercises": {
+            "columns": {
+                "title": "Titre",
+                "difficulty": "Difficulté",
+                "status": "Status",
+                "source": "Source",
+                "createdAt": "Date de création",
+                "dailyChallengeDate": "Date Défis Journalier"
+            },
+            "editor": {
+                "title": "Éditeur d'exercices",
+                "labels": {
+                    "title": "Titre",
+                    "description": "Description",
+                    "problem": "Problème",
+                    "hints": "Indices",
+                    "hint": "Indice #{index}",
+                    "response": "Réponse",
+                    "exampleInputs": "Exemples réponse",
+                    "exampleInput": "Exemple réponse #{index}",
+                    "validationInputs": "Validation Inputs",
+                    "validationInput": "Validation Input #{index}",
+                    "dailyChallengeDate": "Date Défis Journalier",
+                    "difficulty": "Difficulté"
+                },
+                "buttons": {
+                    "addHint": "Ajouter un indice",
+                    "addExampleInput": "Ajouter un indice d'exemple",
+                    "addValidationInput": "Add Validation Input",
+                    "save": "Sauvegarder",
+                    "saving": "Sauvegarde...",
+                    "discard": "Annuler",
+                    "execute": "Valider"
+                },
+                "success": "Exercice mis à jour avec succès",
+                "difficulty": {
+                    "easy": "Facile",
+                    "medium": "Moyen",
+                    "hard": "Difficile"
+                }
+            },
+            "filters": {
+                "search": "Rechercher",
+                "searchPlaceholder": "Rechercher par le titre ou la description",
+                "status": "Statut",
+                "statusPlaceholder": "Filtrer par statut",
+                "difficulty": "Difficulté",
+                "difficultyPlaceholder": "Filtrer par difficulté",
+                "all": "Tous",
+                "unarchived": "Non-archivé",
+                "draft": "Draft",
+                "published": "Publié",
+                "archived": "Archivé",
+                "easy": "Facile",
+                "medium": "Moyen",
+                "hard": "Difficile",
+                "unknown": "Inconnu"
+            },
+            "actions": {
+                "menuLabel": "Menu d'actions",
+                "edit": "Modifier l'exercice",
+                "publish": "Publier",
+                "draft": "Mettre en brouillon",
+                "archive": "Archiver",
+                "delete": "Supprimer",
+                "create": "Créer un exercice",
+                "generate": "Générer avec l'IA",
+                "generating": "Génération en cours...",
+                "generatingInProgress": "{count, plural, =0 {Aucune tâche en cours} =1 {Génération en cours (# tâche)} other {Génération en cours (# tâches)}}",
+                "publishSuccess": "Exercice publié avec succès",
+                "publishError": "Échec de la publication de l'exercice",
+                "publishLoading": "Publication de l'exercice en cours...",
+                "draftSuccess": "Exercice mis en brouillon avec succès",
+                "draftError": "Échec de la mise en brouillon de l'exercice",
+                "draftLoading": "Mise en brouillon de l'exercice en cours...",
+                "archiveSuccess": "Exercice archivé avec succès",
+                "archiveError": "Échec de l'archivage de l'exercice",
+                "archiveLoading": "Archivage de l'exercice en cours...",
+                "deleteSuccess": "Exercice supprimé avec succès",
+                "deleteError": "Échec de la suppression de l'exercice",
+                "deleteLoading": "Suppression de l'exercice en cours...",
+                "generateSuccess": "Tâche de génération d'exercice démarrée",
+                "generateError": "Échec du démarrage de la tâche de génération d'exercice",
+                "generateLoading": "Démarrage de la génération d'exercice...",
+                "batchPublishSuccess": "{count, plural, =1 {Exercice} other {# exercices}} publié(s) avec succès",
+                "batchPublishError": "Échec de la publication des exercices",
+                "batchPublishLoading": "Publication de {count} exercices en cours...",
+                "batchDraftSuccess": "{count, plural, =1 {Exercice} other {# exercices}} mis en brouillon avec succès",
+                "batchDraftError": "Échec de la mise en brouillon des exercices",
+                "batchDraftLoading": "Mise en brouillon de {count} exercices en cours...",
+                "batchArchiveSuccess": "{count, plural, =1 {Exercice} other {# exercices}} archivé(s) avec succès",
+                "batchArchiveError": "Échec de l'archivage des exercices",
+                "batchArchiveLoading": "Archivage de {count} exercices en cours...",
+                "batchDeleteSuccess": "{count, plural, =1 {Exercice} other {# exercices}} supprimé(s) avec succès",
+                "batchDeleteError": "Échec de la suppression des exercices",
+                "batchDeleteLoading": "Suppression de {count} exercices en cours...",
+                "publishConfirmation": "La publication de cet exercice générera des résultats pour tous les exemples et entrées de validation. Cela peut prendre un moment. Voulez-vous continuer ?",
+                "updateSuccess": "Statut de l'exercice mis à jour avec succès",
+                "updateError": "Échec de la mise à jour du statut de l'exercice"
+            },
+            "empty": {
+                "title": "Pas d'exercices trouvés.",
+                "description": "Essayer d'ajuster votre recherche ou vos filtres"
+            },
+            "confirmations": {
+                "delete": {
+                    "title": "Supprimer l'exercice ?",
+                    "description": "Êtes-vous sûr de vouloir supprimer {count, plural, =1 {this exercise} other {these # exercises}}? Cette action ne peut être changée.",
+                    "confirm": "Supprimer",
+                    "cancel": "Annuler"
+                }
+            },
+            "selection": {
+                "count": "{count, plural, =1 {# exercise} other {# exercises}} sélectionnés"
+            },
+            "source": {
+                "system": "AI Generated",
+                "user": "User créé"
+            },
+            "pagination": {
+                "exercises": "exercices"
             }
         }
     },
@@ -766,6 +914,28 @@
             "emailPlaceholder": "Entrez l'adresse e-mail",
             "cancel": "Annuler",
             "addUser": "Ajouter un utilisateur"
+        }
+    },
+    "daily": {
+        "emptyState": {
+            "title": "Oh non !",
+            "description": "On dirait qu'il n'y pas de challenge aujourd'hui...",
+            "button": "Aller au tableau de bord"
+        },
+        "examples": "Exemples",
+        "expected": "Attendu:",
+        "got": "Eu:",
+        "logs": "Logs:",
+        "error": "Erreur:",
+        "test": "Test",
+        "submit": "Soumettre",
+        "solved": "Résolu",
+        "submitError": {
+            "title": "Validation échouée",
+            "call": "Call:",
+            "expectedOutput": "Sortie attendue:",
+            "output": "Sortie:",
+            "logs": "Logs:"
         }
     },
     "project": {
