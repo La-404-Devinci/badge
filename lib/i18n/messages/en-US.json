@@ -228,6 +228,19 @@
                 "selectDateFormat": "Select a date format",
                 "12Hours": "12 hours",
                 "24Hours": "24 hours"
+            },
+            "linkAccount": "Link Account",
+            "linkAccountSettings": {
+                "title": "Link Account",
+                "description": "Connect your external accounts for a unified experience",
+                "linkedAccounts": "Linked Accounts",
+                "noLinkedAccounts": "No external accounts linked yet",
+                "connectWithGoogle": "Connect with Google",
+                "connectWithGitHub": "Connect with GitHub",
+                "connectWithDiscord": "Connect with Discord",
+                "discordConnected": "Connected with Discord",
+                "googleConnected": "Connected with Google",
+                "githubConnected": "Connected with GitHub"
             }
         },
         "appearanceSettings": {

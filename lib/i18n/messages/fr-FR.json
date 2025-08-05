@@ -249,6 +249,19 @@
                 "selectDateFormat": "Sélectionnez un format de date",
                 "12Hours": "12 heures",
                 "24Hours": "24 heures"
+            },
+            "linkAccount": "Lier un compte",
+            "linkAccountSettings": {
+                "title": "Lier un compte",
+                "description": "Connectez vos comptes externes pour une expérience unifiée",
+                "linkedAccounts": "Comptes liés",
+                "noLinkedAccounts": "Aucun compte externe lié pour le moment",
+                "connectWithGoogle": "Se connecter avec Google",
+                "connectWithGitHub": "Se connecter avec GitHub",
+                "connectWithDiscord": "Se connecter avec Discord",
+                "discordConnected": "Connecté avec Discord",
+                "googleConnected": "Connecté avec Google",
+                "githubConnected": "Connecté avec GitHub"
             }
         },
         "appearanceSettings": {

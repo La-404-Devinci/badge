@@ -29,7 +29,7 @@ export function useUserData() {
         refetch,
     } = useQuery(
         trpc.user.getMe.queryOptions(undefined, {
-            staleTime: 0,
+            staleTime: 1 * 60 * 1000, // ✅ 5 minutes au lieu de 0
             refetchOnWindowFocus: false,
             refetchOnMount: false,
             refetchOnReconnect: false,
