@@ -10,7 +10,7 @@ export async function getProjects({ db }: GetProjectsQueryContext) {
         const getProjects = await db
             .select()
             .from(project)
-            .where(eq(project.status, projectStatusEnum.enumValues[1]));
+            .where(eq(project.status, "active"));
 
         return { success: true, data: getProjects };
     } catch (error) {

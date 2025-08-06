@@ -26,6 +26,7 @@ export const SETTINGS_PAGES = {
 export const ADMIN_PAGES = {
     ADMIN_USERS: "/admin/users",
     ADMIN_EXERCISES: "/admin/exercises",
+    ADMIN_PROJECTS: "/admin/projects",
     ADMIN_WAITLIST: "/admin/waitlist",
     ADMIN_SETTINGS: "/admin/settings",
 };

@@ -1,11 +1,9 @@
 import type { Database } from "@/db";
-import type { Session } from "@/lib/auth/types";
+import type { ListAdminProjectsInput } from "../validators";
 
-export interface ProjectQueryContext {
+export interface ListAdminProjectsQueryContext<T> {
     db: Database;
-    session: Session;
+    input: T;
 }
 
-export interface GetProjectsQueryContext extends ProjectQueryContext {
-    userId: string;
-}
+export type { ListAdminProjectsInput };

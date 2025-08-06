@@ -592,6 +592,7 @@
             "dashboard": "Tableau de bord",
             "users": "Gérer les utilisateurs",
             "exercises": "Gérer les exercices",
+            "projects": "Gérer les projets",
             "settings": "Paramètres de l'application",
             "waitlist": "Gérer la liste d'attente"
         },
@@ -706,6 +707,89 @@
                 "publishConfirmation": "La publication de cet exercice générera des résultats pour tous les exemples et entrées de validation. Cela peut prendre un moment. Voulez-vous continuer ?",
                 "updateSuccess": "Statut de l'exercice mis à jour avec succès",
                 "updateError": "Échec de la mise à jour du statut de l'exercice"
+            },
+            "projects": {
+                "title": "Gestion des projets",
+                "description": "Gérez les projets de la plateforme",
+                "filters": {
+                    "search": "Rechercher",
+                    "searchPlaceholder": "Rechercher un projet...",
+                    "status": "Statut",
+                    "statusPlaceholder": "Tous les statuts",
+                    "allStatuses": "Tous les statuts",
+                    "review": "En révision",
+                    "active": "Actif",
+                    "inactive": "Inactif",
+                    "completed": "Terminé",
+                    "cancelled": "Annulé",
+                    "type": "Type",
+                    "typePlaceholder": "Tous les types",
+                    "allTypes": "Tous les types",
+                    "uxui": "UX/UI",
+                    "dev": "Développement",
+                    "marketing": "Marketing",
+                    "other": "Autre"
+                },
+                "table": {
+                    "error": "Erreur lors du chargement des projets",
+                    "noProjects": "Aucun projet trouvé",
+                    "columns": {
+                        "title": "Titre",
+                        "type": "Type",
+                        "status": "Statut",
+                        "startDate": "Date de début",
+                        "endDate": "Date de fin",
+                        "createdAt": "Créé le",
+                        "actions": "Actions"
+                    },
+                    "types": {
+                        "uxui": "UX/UI",
+                        "dev": "Développement",
+                        "marketing": "Marketing",
+                        "other": "Autre"
+                    },
+                    "statuses": {
+                        "review": "En révision",
+                        "active": "Actif",
+                        "inactive": "Inactif",
+                        "completed": "Terminé",
+                        "cancelled": "Annulé"
+                    }
+                },
+                "pagination": {
+                    "showing": "Affichage",
+                    "to": "à",
+                    "of": "de",
+                    "items": "éléments",
+                    "itemsPerPage": "Éléments par page",
+                    "page": "Page",
+                    "previous": "Précédent",
+                    "next": "Suivant"
+                },
+                "actions": {
+                    "edit": "Modifier",
+                    "accept": "Accepter",
+                    "reject": "Refuser",
+                    "acceptDialog": {
+                        "title": "Accepter le projet",
+                        "description": "Êtes-vous sûr de vouloir accepter le projet \"{title}\" ?",
+                        "confirm": "Accepter",
+                        "cancel": "Annuler"
+                    },
+                    "rejectDialog": {
+                        "title": "Refuser le projet",
+                        "description": "Êtes-vous sûr de vouloir refuser le projet \"{title}\" ?",
+                        "confirm": "Refuser",
+                        "cancel": "Annuler"
+                    },
+                    "delete": "Supprimer",
+                    "deleteDialog": {
+                        "title": "Supprimer le projet",
+                        "description": "Êtes-vous sûr de vouloir supprimer le projet \"{title}\" ? Cette action ne peut être annulée.",
+                        "confirm": "Supprimer",
+                        "cancel": "Annuler"
+                    }
+                }
             },
             "empty": {
                 "title": "Pas d'exercices trouvés.",

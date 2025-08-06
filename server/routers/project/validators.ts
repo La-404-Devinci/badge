@@ -11,4 +11,15 @@ export const storeProjectSchema = z.object({
     badgeImage: z.string().url(),
 });
 
+export const listAdminProjectsSchema = z.object({
+    search: z.string().optional(),
+    status: z
+        .enum(["all", "review", "active", "inactive", "completed", "cancelled"])
+        .optional(),
+    type: z.enum(["all", "uxui", "dev", "marketing", "other"]).optional(),
+    page: z.number().min(1).default(1),
+    limit: z.number().min(1).max(100).default(10),
+});
+
 export type StoreProjectInput = z.infer<typeof storeProjectSchema>;
+export type ListAdminProjectsInput = z.infer<typeof listAdminProjectsSchema>;

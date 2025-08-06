@@ -44,7 +44,7 @@ export const project = pgTable("project", {
     badgeName: text("badge_name").notNull(),
     badgeImage: text("badge_image").notNull(),
     skills: text("skills").array(),
-    status: projectStatusEnum("status").notNull().default("review"),
+    status: projectStatusEnum("status").notNull().default("active"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

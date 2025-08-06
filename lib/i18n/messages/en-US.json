@@ -625,6 +625,7 @@
             "dashboard": "Dashboard",
             "users": "Manage Users",
             "exercises": "Manage Exercises",
+            "projects": "Manage Projects",
             "waitlist": "Manage Waitlist",
             "settings": "Application Settings"
         },
@@ -739,6 +740,88 @@
                 "publishConfirmation": "Publishing this exercise will generate outputs for all example and validation inputs. This may take a moment. Do you want to continue?",
                 "updateSuccess": "Exercise status updated successfully",
                 "updateError": "Failed to update exercise status"
+            },
+            "projects": {
+                "title": "Project Management",
+                "description": "Manage platform projects",
+                "filters": {
+                    "search": "Search",
+                    "searchPlaceholder": "Search for a project...",
+                    "status": "Status",
+                    "statusPlaceholder": "All statuses",
+                    "allStatuses": "All statuses",
+                    "review": "In review",
+                    "active": "Active",
+                    "inactive": "Inactive",
+                    "completed": "Completed",
+                    "cancelled": "Cancelled",
+                    "type": "Type",
+                    "typePlaceholder": "All types",
+                    "allTypes": "All types",
+                    "uxui": "UX/UI",
+                    "dev": "Development",
+                    "marketing": "Marketing",
+                    "other": "Other"
+                },
+                "table": {
+                    "error": "Error loading projects",
+                    "noProjects": "No projects found",
+                    "columns": {
+                        "title": "Title",
+                        "type": "Type",
+                        "status": "Status",
+                        "startDate": "Start date",
+                        "endDate": "End date",
+                        "createdAt": "Created on"
+                    },
+                    "types": {
+                        "uxui": "UX/UI",
+                        "dev": "Development",
+                        "marketing": "Marketing",
+                        "other": "Other"
+                    },
+                    "statuses": {
+                        "review": "In review",
+                        "active": "Active",
+                        "inactive": "Inactive",
+                        "completed": "Completed",
+                        "cancelled": "Cancelled"
+                    },
+                    "actions": {
+                        "edit": "Edit",
+                        "accept": "Accept",
+                        "reject": "Reject",
+                        "acceptDialog": {
+                            "title": "Accept project",
+                            "description": "Are you sure you want to accept the project \"{title}\"?",
+                            "confirm": "Accept",
+                            "cancel": "Cancel"
+                        },
+                        "rejectDialog": {
+                            "title": "Reject project",
+                            "description": "Are you sure you want to reject the project \"{title}\"?",
+                            "confirm": "Reject",
+                            "cancel": "Cancel"
+                        },
+                        "delete": "Delete",
+                        "deleteDialog": {
+                            "title": "Delete project",
+                            "description": "Are you sure you want to delete the project \"{title}\"? This action cannot be undone.",
+                            "confirm": "Delete",
+                            "cancel": "Cancel"
+                        }
+                    }
+                },
+                "pagination": {
+                    "showing": "Showing",
+                    "to": "to",
+                    "of": "of",
+                    "items": "items",
+                    "itemsPerPage": "Items per page",
+                    "page": "Page",
+                    "previous": "Previous",
+                    "next": "Next"
+                }
             },
             "empty": {
                 "title": "No exercises found",
