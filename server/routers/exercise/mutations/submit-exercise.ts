@@ -1,62 +1,20 @@
 import { differenceInSeconds, endOfToday } from "date-fns";
 import { eq, sql } from "drizzle-orm";
 
-import { Database } from "@/db";
 import { redis, REDIS_KEYS } from "@/db/redis";
+import { submission } from "@/db/schema/submissions";
 import { user } from "@/db/schema/auth-schema";
 import { exercise } from "@/db/schema/exercises";
-import { submission } from "@/db/schema/submissions";
-import { Session } from "@/lib/auth/types";
+import { BadgeService } from "@/lib/badges/service";
 
-import { executeCode } from "./execute-code";
 import { InputMutationContext, SubmitExerciseInput } from "./types";
-import { ValidationResult } from "./types";
 import { isSolved } from "../utils/is-solved";
-
-const validateSubmission = async (
-    db: Database,
-    code: string,
-    calls: string[],
-    expectedOutputs: string[]
-): Promise<ValidationResult> => {
-    for (let index = 0; index < calls.length; index++) {
-        const call = calls[index];
-        const expectedOutput = expectedOutputs[index];
-
-        const result = await executeCode({
-            db,
-            input: {
-                code: code,
-                call: call,
-            },
-        });
-
-        if (!result.success)
-            return {
-                success: false,
-                call: call,
-                output: result.error,
-                expectedOutput: expectedOutput,
-                logs: result.logs,
-            };
-
-        if (result.result != expectedOutput) {
-            return {
-                success: false,
-                call: call,
-                output: result.result,
-                expectedOutput: expectedOutput,
-                logs: result.logs,
-            };
-        }
-    }
-
-    return { success: true };
-};
+import { validateSubmission } from "./validate-submission";
+import type { Session } from "@/lib/auth/types";
 
 export const submitExercise = async ({
     input,
-    db,
+    db: dbInstance,
     session,
 }: InputMutationContext<SubmitExerciseInput> & {
     session: Session;
@@ -64,7 +22,7 @@ export const submitExercise = async ({
     const { exerciseId, code } = input;
 
     // Get the exercise
-    const exerciseToSubmit = await db.query.exercise.findFirst({
+    const exerciseToSubmit = await dbInstance.query.exercise.findFirst({
         where: eq(exercise.id, exerciseId),
     });
 
@@ -74,7 +32,7 @@ export const submitExercise = async ({
 
     // Check the response validity
     const result = await validateSubmission(
-        db,
+        dbInstance,
         code,
         exerciseToSubmit.validationInputs,
         exerciseToSubmit.validationOutputs as string[]
@@ -87,7 +45,7 @@ export const submitExercise = async ({
         result.success;
 
     // Create a new submission
-    await db
+    await dbInstance
         .insert(submission)
         .values({
             userId: session.user.id,
@@ -102,7 +60,7 @@ export const submitExercise = async ({
 
     // Score
     if (!solved) {
-        await db
+        await dbInstance
             .update(user)
             .set({
                 score: sql`${user.score} + ${exerciseToSubmit.score}`,
@@ -131,6 +89,33 @@ export const submitExercise = async ({
                 (parseInt(cachedStatus) + 1).toString(),
                 ttl
             );
+        }
+    }
+
+    // Attribuer de l'expérience au badge "daily" si c'est un défi quotidien
+    if (exerciseToSubmit.dailyChallengeDate) {
+        try {
+            const badgeResult = await BadgeService.addExperience(
+                session.user.id,
+                "daily",
+                100, // Expérience de base pour un défi quotidien
+                "daily_challenge",
+                exerciseId,
+                `Défi quotidien réussi: ${exerciseToSubmit.title}`
+            );
+
+            // Si c'est un level up, on pourrait afficher une notification
+            if (badgeResult.levelUp) {
+                console.log(
+                    `Level up! Badge daily: ${badgeResult.previousLevel} → ${badgeResult.newLevel}`
+                );
+            }
+        } catch (error) {
+            console.error(
+                "Erreur lors de l'attribution d'expérience au badge:",
+                error
+            );
+            // Ne pas faire échouer la soumission si le badge échoue
         }
     }
 

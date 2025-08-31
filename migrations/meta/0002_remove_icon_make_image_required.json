@@ -1,0 +1,13 @@
+{
+    "version": "7",
+    "dialect": "postgresql",
+    "entries": [
+        {
+            "idx": 2,
+            "version": "7",
+            "when": 1755508964255,
+            "tag": "0002_remove_icon_make_image_required",
+            "breakpoints": true
+        }
+    ]
+}

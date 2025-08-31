@@ -7,3 +7,5 @@ export * from "./exercises";
 export * from "./submissions";
 export * from "./project";
 export * from "./file";
+export * from "./badges";
+export * from "./_badge-relations";

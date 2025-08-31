@@ -22,10 +22,10 @@ type SocialProvider =
 
 export function SignInForm() {
     const t = useTranslations("auth");
-    const [isLoading, setIsLoading] = useState(false);
+    const [loadingProviders, setLoadingProviders] = useState<Set<SocialProvider>>(new Set());
 
     const handleSignIn = async (provider: SocialProvider) => {
-        setIsLoading(true);
+        setLoadingProviders(prev => new Set(prev).add(provider));
 
         const res = await authClient.signIn.social({
             provider,
@@ -33,7 +33,13 @@ export function SignInForm() {
             callbackURL: PAGES.DASHBOARD,
             errorCallbackURL: PAGES.SIGN_IN,
         });
-        setIsLoading(false);
+
+        setLoadingProviders(prev => {
+            const newSet = new Set(prev);
+            newSet.delete(provider);
+            return newSet;
+        });
+
         if (res.error) {
             console.error(res.error);
             return;
@@ -44,43 +50,47 @@ export function SignInForm() {
         brand: SocialProvider;
         icon: React.ComponentType;
     }> = [
-        {
-            brand: "google",
-            icon: SocialIcons.Google,
-        },
-        {
-            brand: "discord",
-            icon: SocialIcons.Discord,
-        },
-        {
-            brand: "github",
-            icon: SocialIcons.Github,
-        },
-    ];
+            {
+                brand: "google",
+                icon: SocialIcons.Google,
+            },
+            {
+                brand: "discord",
+                icon: SocialIcons.Discord,
+            },
+            {
+                brand: "github",
+                icon: SocialIcons.Github,
+            },
+        ];
 
     return (
         <div className="w-full max-w-[472px] px-4">
             <section className="flex w-full flex-col gap-6 rounded-20 bg-bg-white-0 p-5 shadow-regular-xs ring-1 ring-inset ring-stroke-soft-200 md:p-8">
-                {providers.map((provider) => (
-                    <SocialButton.Root
-                        key={provider.brand}
-                        brand={provider.brand}
-                        mode="stroke"
-                        className="w-full"
-                        onClick={() => handleSignIn(provider.brand)}
-                        disabled={isLoading}
-                    >
-                        <SocialButton.Icon as={provider.icon} />
-                        {isLoading ? (
-                            <>
-                                <StaggeredFadeLoader variant="muted" />
-                                {t("common.loading.signingIn")}
-                            </>
-                        ) : (
-                            t(`common.buttons.signInWith${provider.brand}`)
-                        )}
-                    </SocialButton.Root>
-                ))}
+                {providers.map((provider) => {
+                    const isLoading = loadingProviders.has(provider.brand);
+
+                    return (
+                        <SocialButton.Root
+                            key={provider.brand}
+                            brand={provider.brand}
+                            mode="stroke"
+                            className="w-full"
+                            onClick={() => handleSignIn(provider.brand)}
+                            disabled={isLoading}
+                        >
+                            <SocialButton.Icon as={provider.icon} />
+                            {isLoading ? (
+                                <>
+                                    <StaggeredFadeLoader variant="muted" />
+                                    {t("common.loading.signingIn")}
+                                </>
+                            ) : (
+                                t(`common.buttons.signInWith${provider.brand}`)
+                            )}
+                        </SocialButton.Root>
+                    );
+                })}
             </section>
         </div>
     );

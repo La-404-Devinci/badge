@@ -52,10 +52,9 @@ export default async function AdminLayout({
                         href: PAGES.ADMIN_PROJECTS,
                     },
                     {
-                        label: t("items.waitlist"),
-                        key: "waitlist",
-                        href: PAGES.ADMIN_WAITLIST,
-                        disabled: true,
+                        label: t("items.badges"),
+                        key: "badges",
+                        href: PAGES.ADMIN_BADGES,
                     },
                     {
                         label: t("items.settings"),

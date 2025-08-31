@@ -98,6 +98,21 @@ export async function createPresignedUrlToUpload({
     return await MinioClient.presignedPutObject(bucketName, fileName, expiry);
 }
 
+export async function createPresignedUrlToRead({
+    bucketName,
+    fileName,
+    expiry = 24 * 60 * 60, // 24 hours by default for reading
+}: {
+    bucketName: string;
+    fileName: string;
+    expiry?: number;
+}) {
+    // Create bucket if it doesn't exist
+    await createBucketIfNotExists(bucketName);
+
+    return await MinioClient.presignedGetObject(bucketName, fileName, expiry);
+}
+
 export async function createPresignedUrlToDownload({
     bucketName,
     fileName,

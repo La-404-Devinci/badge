@@ -2,15 +2,19 @@ import { TRPCError } from "@trpc/server";
 import { nanoid } from "nanoid";
 
 import { file as fileTable } from "@/db/schema/file";
-import { createPresignedUrlToUpload } from "@/lib/minio/server";
+import {
+    createPresignedUrlToUpload,
+    createPresignedUrlToRead,
+} from "@/lib/minio/server";
 import type { ShortFileProp, PresignedUrlProp } from "@/lib/minio/server";
+import { env } from "@/env";
 
 import type { FileMutationContext } from "./types";
 
-const bucketName = process.env.MINIO_BUCKET_NAME!;
-const isSSL = process.env.MINIO_SSL === "true";
-const endpoint = process.env.MINIO_ENDPOINT!;
-const port = process.env.MINIO_PORT!;
+const bucketName = env.MINIO_BUCKET_NAME;
+const isSSL = env.MINIO_SSL === "true";
+const endpoint = env.MINIO_ENDPOINT;
+const port = env.MINIO_PORT;
 const expiry = 60 * 60;
 
 export async function storeFile({
@@ -44,12 +48,23 @@ export async function storeFile({
             })
         );
 
-        const publicUrls = presignedUrls.map((p) => ({
-            ...p,
-            publicUrl: `http${isSSL ? "s" : ""}://${endpoint}:${port}/${bucketName}/${p.fileNameInBucket}`,
-        }));
+        const publicUrls = presignedUrls.map(async (p) => {
+            const readUrl = await createPresignedUrlToRead({
+                bucketName,
+                fileName: p.fileNameInBucket,
+                expiry: 24 * 60 * 60, // 24 hours
+            });
 
-        const fileRecords = publicUrls.map((p) => ({
+            return {
+                ...p,
+                publicUrl: readUrl,
+            };
+        });
+
+        // Attendre que toutes les URLs de lecture soient générées
+        const resolvedPublicUrls = await Promise.all(publicUrls);
+
+        const fileRecords = resolvedPublicUrls.map((p) => ({
             id: nanoid(),
             name: p.originalFileName,
             bucket: bucketName,
@@ -64,7 +79,7 @@ export async function storeFile({
             .values(fileRecords)
             .returning();
 
-        return { publicUrls, file: insertedFiles };
+        return { publicUrls: resolvedPublicUrls, file: insertedFiles };
     } catch (error) {
         console.error("storeFile error:", error);
         throw new TRPCError({

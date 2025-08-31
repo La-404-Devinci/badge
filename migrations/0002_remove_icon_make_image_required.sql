@@ -1,0 +1,9 @@
+-- Migration pour supprimer le champ icon et rendre image obligatoire
+
+-- 1. Mettre à jour les badges existants avec une image par défaut
+UPDATE badge_type 
+SET image = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik02NCAzMkM0Ny4xODQ3IDMyIDMzLjUgNDUuNjg0NyAzMy41IDYyLjVDMzMuNSA3OS4zMTUzIDQ3LjE4NDcgOTMgNjQgOTNDODAuODE1MyA5MyA5NC41IDc5LjMxNTMgOTQuNSA2Mi41Qzk0LjUgNDUuNjg0NyA4MC44MTUzIDMyIDY0IDMyWiIgZmlsbD0iI0Q5RDBFQyIvPgo8L3N2Zz4K' 
+WHERE image IS NULL;
+
+-- 2. Supprimer le champ icon
+ALTER TABLE badge_type DROP COLUMN icon;

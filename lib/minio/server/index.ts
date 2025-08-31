@@ -4,6 +4,7 @@ import {
     getFileFromBucket,
     deleteFileFromBucket,
     createPresignedUrlToUpload,
+    createPresignedUrlToRead,
     createPresignedUrlToDownload,
 } from "./helpers";
 
@@ -17,5 +18,6 @@ export {
     getFileFromBucket,
     deleteFileFromBucket,
     createPresignedUrlToUpload,
+    createPresignedUrlToRead,
     createPresignedUrlToDownload,
 };

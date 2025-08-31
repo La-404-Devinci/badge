@@ -7,6 +7,7 @@ import { db } from "../index";
 import { user, account, verification } from "../schema/auth-schema";
 import { notificationSettings } from "../schema/notification-settings";
 import { userPreferences } from "../schema/user-preferences";
+import seedBadges from "./badges";
 
 const main = async () => {
     // Valeurs possibles
@@ -61,6 +62,9 @@ const main = async () => {
     const userIds = Array.from({ length: 10 }, () => ulid());
 
     try {
+        // 0) Seed des types de badges
+        await seedBadges();
+
         // 1) Seed users
         await seed(db, { user }).refine((funcs) => ({
             user: {

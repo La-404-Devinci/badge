@@ -593,8 +593,8 @@
             "users": "Gérer les utilisateurs",
             "exercises": "Gérer les exercices",
             "projects": "Gérer les projets",
-            "settings": "Paramètres de l'application",
-            "waitlist": "Gérer la liste d'attente"
+            "badges": "Gérer les badges",
+            "settings": "Paramètres de l'application"
         },
         "users": {
             "title": "Gestion des utilisateurs",
@@ -813,6 +813,118 @@
             "pagination": {
                 "exercises": "exercices"
             }
+        },
+        "badges": {
+            "filters": {
+                "search": "Rechercher",
+                "searchPlaceholder": "Rechercher un badge...",
+                "type": "Type",
+                "allTypes": "Tous les types",
+                "daily": "Défi quotidien",
+                "project": "Projet",
+                "streak": "Série",
+                "achievement": "Réussite",
+                "color": "Couleur",
+                "allColors": "Toutes les couleurs",
+                "blue": "Bleu",
+                "green": "Vert",
+                "purple": "Violet",
+                "orange": "Orange",
+                "red": "Rouge",
+                "yellow": "Jaune",
+                "pink": "Rose",
+                "teal": "Bleu-vert"
+            },
+            "edit": {
+                "title": "Modifier le badge",
+                "description": "Modifiez les informations du badge sélectionné.",
+                "form": {
+                    "name": "Nom",
+                    "namePlaceholder": "Entrez le nom du badge",
+                    "displayName": "Nom d'affichage",
+                    "displayNamePlaceholder": "Entrez le nom d'affichage",
+                    "description": "Description",
+                    "descriptionPlaceholder": "Entrez la description du badge",
+                    "color": "Couleur",
+                    "colorPlaceholder": "Entrez la couleur du badge",
+                    "image": "Image",
+                    "imageRequired": "L'image est obligatoire",
+                    "maxLevel": "Niveau maximum",
+                    "baseExp": "Expérience de base",
+                    "expMultiplier": "Multiplicateur d'expérience",
+                    "cancel": "Annuler",
+                    "update": "Mettre à jour",
+                    "updating": "Mise à jour..."
+                }
+            },
+            "table": {
+                "title": "Badges",
+                "description": "Gérez les types de badges disponibles dans votre application.",
+                "columns": {
+                    "name": "Nom",
+                    "image": "Image",
+                    "displayName": "Nom d'affichage",
+                    "description": "Description",
+                    "color": "Couleur",
+                    "maxLevel": "Niveau max",
+                    "baseExp": "Exp de base",
+                    "createdAt": "Créé le",
+                    "actions": "Actions"
+                },
+                "actions": {
+                    "edit": "Modifier",
+                    "delete": "Supprimer"
+                },
+                "empty": {
+                    "title": "Aucun badge trouvé",
+                    "description": "Aucun badge ne correspond à vos critères de recherche."
+                }
+            },
+            "delete": {
+                "title": "Supprimer le badge",
+                "description": "Êtes-vous sûr de vouloir supprimer ce badge ?",
+                "warning": "Cette action est irréversible. Le badge sera définitivement supprimé.",
+                "form": {
+                    "cancel": "Annuler",
+                    "delete": "Supprimer",
+                    "deleting": "Suppression..."
+                }
+            },
+            "actions": {
+                "create": "Créer un badge"
+            },
+            "create": {
+                "title": "Créer un badge",
+                "description": "Créez un nouveau type de badge pour votre application.",
+                "form": {
+                    "name": "Nom",
+                    "namePlaceholder": "Entrez le nom du badge",
+                    "displayName": "Nom d'affichage",
+                    "displayNamePlaceholder": "Entrez le nom d'affichage",
+                    "description": "Description",
+                    "descriptionPlaceholder": "Entrez la description du badge",
+                    "color": "Couleur",
+                    "colorPlaceholder": "Sélectionnez une couleur",
+                    "image": "Image",
+                    "imageRequired": "L'image est obligatoire",
+                    "maxLevel": "Niveau maximum",
+                    "baseExp": "Expérience de base",
+                    "expMultiplier": "Multiplicateur d'expérience",
+                    "cancel": "Annuler",
+                    "create": "Créer",
+                    "creating": "Création..."
+                },
+                "colors": {
+                    "blue": "Bleu",
+                    "green": "Vert",
+                    "purple": "Violet",
+                    "orange": "Orange",
+                    "red": "Rouge",
+                    "yellow": "Jaune",
+                    "pink": "Rose",
+                    "teal": "Bleu-vert"
+                }
+            }
         }
     },
     "adminUsers": {
@@ -924,6 +1036,113 @@
             "description": "Êtes-vous sûr de vouloir débannir {email} ? Cela permettra à l'utilisateur de se connecter à nouveau.",
             "confirm": "Débannir l'utilisateur",
             "cancel": "Annuler"
+        }
+    },
+    "admin": {
+        "items": {
+            "dashboard": "Tableau de bord",
+            "users": "Utilisateurs",
+            "exercises": "Exercices",
+            "projects": "Projets",
+            "badges": "Badges",
+            "settings": "Paramètres"
+        },
+        "badges": {
+            "filters": {
+                "search": "Recherche",
+                "searchPlaceholder": "Rechercher des badges...",
+                "type": "Type",
+                "allTypes": "Tous les types",
+                "color": "Couleur",
+                "allColors": "Toutes les couleurs"
+            },
+            "table": {
+                "columns": {
+                    "name": "Nom",
+                    "displayName": "Nom d'affichage",
+                    "description": "Description",
+                    "color": "Couleur",
+                    "maxLevel": "Niveau max",
+                    "baseExp": "Exp de base",
+                    "createdAt": "Créé le",
+                    "actions": "Actions"
+                },
+                "actions": {
+                    "edit": "Modifier",
+                    "delete": "Supprimer"
+                },
+                "empty": {
+                    "title": "Aucun badge trouvé",
+                    "description": "Aucun badge ne correspond à vos critères de recherche."
+                }
+            },
+            "actions": {
+                "create": "Créer un badge"
+            },
+            "create": {
+                "title": "Créer un badge",
+                "description": "Créez un nouveau type de badge pour votre application.",
+                "form": {
+                    "name": "Nom",
+                    "namePlaceholder": "Entrez le nom du badge",
+                    "displayName": "Nom d'affichage",
+                    "displayNamePlaceholder": "Entrez le nom d'affichage",
+                    "description": "Description",
+                    "descriptionPlaceholder": "Entrez la description du badge",
+                    "icon": "Icône",
+                    "iconPlaceholder": "Entrez l'icône du badge",
+                    "color": "Couleur",
+                    "colorPlaceholder": "Sélectionnez une couleur",
+                    "maxLevel": "Niveau maximum",
+                    "baseExp": "Expérience de base",
+                    "expMultiplier": "Multiplicateur d'expérience",
+                    "cancel": "Annuler",
+                    "create": "Créer",
+                    "creating": "Création..."
+                },
+                "colors": {
+                    "blue": "Bleu",
+                    "green": "Vert",
+                    "purple": "Violet",
+                    "orange": "Orange",
+                    "red": "Rouge",
+                    "yellow": "Jaune",
+                    "pink": "Rose",
+                    "teal": "Bleu-vert"
+                }
+            },
+            "edit": {
+                "title": "Modifier le badge",
+                "description": "Modifiez les informations du badge sélectionné.",
+                "form": {
+                    "name": "Nom",
+                    "namePlaceholder": "Entrez le nom du badge",
+                    "displayName": "Nom d'affichage",
+                    "displayNamePlaceholder": "Entrez le nom d'affichage",
+                    "description": "Description",
+                    "descriptionPlaceholder": "Entrez la description du badge",
+                    "icon": "Icône",
+                    "iconPlaceholder": "Entrez l'icône du badge",
+                    "color": "Couleur",
+                    "colorPlaceholder": "Entrez la couleur du badge",
+                    "maxLevel": "Niveau maximum",
+                    "baseExp": "Expérience de base",
+                    "expMultiplier": "Multiplicateur d'expérience",
+                    "cancel": "Annuler",
+                    "update": "Mettre à jour",
+                    "updating": "Mise à jour..."
+                }
+            },
+            "delete": {
+                "title": "Supprimer le badge",
+                "description": "Êtes-vous sûr de vouloir supprimer ce badge ?",
+                "warning": "Cette action est irréversible. Le badge sera définitivement supprimé.",
+                "form": {
+                    "cancel": "Annuler",
+                    "delete": "Supprimer",
+                    "deleting": "Suppression..."
+                }
+            }
         }
     },
     "adminWaitlist": {
@@ -1085,5 +1304,20 @@
                 }
             }
         }
+    },
+    "badges": {
+        "title": "Mes Badges",
+        "noBadges": "Aucun badge pour le moment",
+        "experience": "Expérience",
+        "totalExp": "Expérience totale",
+        "maxLevel": "Niveau maximum atteint"
+    },
+    "projectBadgeRewards": {
+        "title": "Récompenses de Badges",
+        "addReward": "Ajouter une récompense",
+        "noRewards": "Aucune récompense de badge configurée",
+        "addFirstReward": "Ajouter la première récompense",
+        "selectBadge": "Sélectionner un badge",
+        "expReward": "Récompense d'expérience"
     }
 }

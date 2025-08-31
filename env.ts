@@ -28,6 +28,14 @@ export const env = createEnv({
         // Trigger
         TRIGGER_SECRET_KEY: z.string().min(1),
 
+        // MinIO
+        MINIO_BUCKET_NAME: z.string().min(1),
+        MINIO_ENDPOINT: z.string().min(1),
+        MINIO_PORT: z.string().min(1),
+        MINIO_SSL: z.enum(["true", "false"]).default("false"),
+        MINIO_ACCESS_KEY: z.string().min(1),
+        MINIO_SECRET_KEY: z.string().min(1),
+
         // Environment
         NODE_ENV: z.enum(["development", "production"]),
         VERCEL_URL: z.string().optional(),

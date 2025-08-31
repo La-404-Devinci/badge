@@ -1,0 +1,303 @@
+{
+    "version": "5",
+    "dialect": "pg",
+    "id": "0001_badges_only",
+    "prevId": "0000_chubby_rocket_raccoon",
+    "tables": [
+        {
+            "name": "badge_type",
+            "schema": "public",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true,
+                    "notNull": true
+                },
+                {
+                    "name": "name",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "display_name",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "description",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "icon",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "color",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "max_level",
+                    "type": "integer",
+                    "notNull": true,
+                    "default": 100
+                },
+                {
+                    "name": "base_exp",
+                    "type": "integer",
+                    "notNull": true,
+                    "default": 100
+                },
+                {
+                    "name": "exp_multiplier",
+                    "type": "integer",
+                    "notNull": true,
+                    "default": 1
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp",
+                    "notNull": true,
+                    "default": "now()"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "timestamp",
+                    "notNull": true,
+                    "default": "now()"
+                }
+            ],
+            "indexes": [],
+            "foreignKeys": []
+        },
+        {
+            "name": "exp_gain",
+            "schema": "public",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true,
+                    "notNull": true
+                },
+                {
+                    "name": "user_id",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "badge_type_id",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "source_type",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "source_id",
+                    "type": "text"
+                },
+                {
+                    "name": "exp_amount",
+                    "type": "integer",
+                    "notNull": true
+                },
+                {
+                    "name": "previous_level",
+                    "type": "integer",
+                    "notNull": true
+                },
+                {
+                    "name": "new_level",
+                    "type": "integer",
+                    "notNull": true
+                },
+                {
+                    "name": "description",
+                    "type": "text"
+                },
+                {
+                    "name": "metadata",
+                    "type": "text"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp",
+                    "notNull": true,
+                    "default": "now()"
+                }
+            ],
+            "indexes": [],
+            "foreignKeys": [
+                {
+                    "name": "exp_gain_user_id_user_id_fk",
+                    "tableName": "exp_gain",
+                    "columns": ["user_id"],
+                    "referencedTableName": "user",
+                    "referencedColumns": ["id"],
+                    "onDelete": "cascade",
+                    "onUpdate": "no action"
+                },
+                {
+                    "name": "exp_gain_badge_type_id_badge_type_id_fk",
+                    "tableName": "exp_gain",
+                    "columns": ["badge_type_id"],
+                    "referencedTableName": "badge_type",
+                    "referencedColumns": ["id"],
+                    "onDelete": "cascade",
+                    "onUpdate": "no action"
+                }
+            ]
+        },
+        {
+            "name": "project_badge_reward",
+            "schema": "public",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true,
+                    "notNull": true
+                },
+                {
+                    "name": "project_id",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "badge_type_id",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "exp_reward",
+                    "type": "integer",
+                    "notNull": true
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp",
+                    "notNull": true,
+                    "default": "now()"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "timestamp",
+                    "notNull": true,
+                    "default": "now()"
+                }
+            ],
+            "indexes": [],
+            "foreignKeys": [
+                {
+                    "name": "project_badge_reward_project_id_project_id_fk",
+                    "tableName": "project_badge_reward",
+                    "columns": ["project_id"],
+                    "referencedTableName": "project",
+                    "referencedColumns": ["id"],
+                    "onDelete": "cascade",
+                    "onUpdate": "no action"
+                },
+                {
+                    "name": "project_badge_reward_badge_type_id_badge_type_id_fk",
+                    "tableName": "project_badge_reward",
+                    "columns": ["badge_type_id"],
+                    "referencedTableName": "badge_type",
+                    "referencedColumns": ["id"],
+                    "onDelete": "cascade",
+                    "onUpdate": "no action"
+                }
+            ]
+        },
+        {
+            "name": "user_badge",
+            "schema": "public",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true,
+                    "notNull": true
+                },
+                {
+                    "name": "user_id",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "badge_type_id",
+                    "type": "text",
+                    "notNull": true
+                },
+                {
+                    "name": "current_level",
+                    "type": "integer",
+                    "notNull": true,
+                    "default": 1
+                },
+                {
+                    "name": "current_exp",
+                    "type": "integer",
+                    "notNull": true,
+                    "default": 0
+                },
+                {
+                    "name": "total_exp",
+                    "type": "integer",
+                    "notNull": true,
+                    "default": 0
+                },
+                {
+                    "name": "exp_to_next_level",
+                    "type": "integer",
+                    "notNull": true,
+                    "default": 100
+                },
+                {
+                    "name": "last_updated",
+                    "type": "timestamp",
+                    "notNull": true,
+                    "default": "now()"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp",
+                    "notNull": true,
+                    "default": "now()"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "timestamp",
+                    "notNull": true,
+                    "default": "now()"
+                }
+            ],
+            "indexes": [],
+            "foreignKeys": [
+                {
+                    "name": "user_badge_user_id_user_id_fk",
+                    "tableName": "user_badge",
+                    "columns": ["user_id"],
+                    "referencedTableName": "user",
+                    "referencedColumns": ["id"],
+                    "onDelete": "cascade",
+                    "onUpdate": "no action"
+                },
+                {
+                    "name": "user_badge_badge_type_id_badge_type_id_fk",
+                    "tableName": "user_badge",
+                    "columns": ["badge_type_id"],
+                    "referencedTableName": "badge_type",
+                    "referencedColumns": ["id"],
+                    "onDelete": "cascade",
+                    "onUpdate": "no action"
+                }
+            ]
+        }
+    ]
+}
