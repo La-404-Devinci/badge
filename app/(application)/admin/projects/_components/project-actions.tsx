@@ -8,6 +8,7 @@ import {
   RiDeleteBinLine,
   RiEditLine,
   RiMore2Line,
+  RiSettings3Line,
 } from "@remixicon/react";
 import { useTranslations } from "next-intl";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -18,6 +19,7 @@ import * as Button from "@/components/ui/button";
 import * as Dropdown from "@/components/ui/dropdown";
 import { useTRPC } from "@/trpc/client";
 import type { Project } from "@/db/schema";
+import { ChangeStatusDialog } from "./change-status-dialog";
 
 export interface ProjectActionsProps {
   project: Project;
@@ -32,6 +34,7 @@ export function ProjectActions({ project }: ProjectActionsProps) {
   const [showAcceptDialog, setShowAcceptDialog] = useState(false);
   const [showRejectDialog, setShowRejectDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showChangeStatusDialog, setShowChangeStatusDialog] = useState(false);
 
   // Mutations
   const { mutateAsync: acceptProject } = useMutation({
@@ -52,15 +55,17 @@ export function ProjectActions({ project }: ProjectActionsProps) {
       await acceptProject({ projectId: project.id });
 
       // Invalidate and refetch projects list
-      queryClient.invalidateQueries({
-        queryKey: trpc.project.listAdminProjects.getQueryKey(),
-      });
+      queryClient.invalidateQueries();
 
-      toast.success("Project accepted successfully");
+      toast.success(t("acceptSuccess"));
       setShowAcceptDialog(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error accepting project:", error);
-      toast.error("Failed to accept project");
+      if (error?.data?.code === "FORBIDDEN") {
+        toast.error(t("completedProjectError"));
+      } else {
+        toast.error(t("acceptError"));
+      }
     }
   };
 
@@ -70,15 +75,17 @@ export function ProjectActions({ project }: ProjectActionsProps) {
       await rejectProject({ projectId: project.id });
 
       // Invalidate and refetch projects list
-      queryClient.invalidateQueries({
-        queryKey: trpc.project.listAdminProjects.getQueryKey(),
-      });
+      queryClient.invalidateQueries();
 
-      toast.success("Project rejected successfully");
+      toast.success(t("rejectSuccess"));
       setShowRejectDialog(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error rejecting project:", error);
-      toast.error("Failed to reject project");
+      if (error?.data?.code === "FORBIDDEN") {
+        toast.error(t("completedProjectError"));
+      } else {
+        toast.error(t("rejectError"));
+      }
     }
   };
 
@@ -88,15 +95,17 @@ export function ProjectActions({ project }: ProjectActionsProps) {
       await deleteProject({ projectId: project.id });
 
       // Invalidate and refetch projects list
-      queryClient.invalidateQueries({
-        queryKey: trpc.project.listAdminProjects.getQueryKey(),
-      });
+      queryClient.invalidateQueries();
 
-      toast.success("Project deleted successfully");
+      toast.success(t("deleteSuccess"));
       setShowDeleteDialog(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error deleting project:", error);
-      toast.error("Failed to delete project");
+      if (error?.data?.code === "FORBIDDEN") {
+        toast.error(t("completedProjectDeleteError"));
+      } else {
+        toast.error(t("deleteError"));
+      }
     }
   };
 
@@ -120,9 +129,20 @@ export function ProjectActions({ project }: ProjectActionsProps) {
           </Button.Root>
         </Dropdown.Trigger>
         <Dropdown.Content align="end" className="w-48">
-          <Dropdown.Item onClick={handleEditProject}>
+          <Dropdown.Item
+            onClick={handleEditProject}
+            disabled={project.status === "completed"}
+          >
             <Dropdown.ItemIcon as={RiEditLine} />
             {t("edit")}
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            onClick={() => setShowChangeStatusDialog(true)}
+            disabled={project.status === "completed"}
+          >
+            <Dropdown.ItemIcon as={RiSettings3Line} />
+            {t("changeStatus")}
           </Dropdown.Item>
 
           {project.status === "review" && (
@@ -148,6 +168,7 @@ export function ProjectActions({ project }: ProjectActionsProps) {
           <Dropdown.Item
             className="text-error-500"
             onClick={() => setShowDeleteDialog(true)}
+            disabled={project.status === "completed"}
           >
             <Dropdown.ItemIcon as={RiDeleteBinLine} />
             {t("delete")}
@@ -192,6 +213,13 @@ export function ProjectActions({ project }: ProjectActionsProps) {
         onConfirm={handleDeleteProject}
         variant="danger"
         icon={RiDeleteBinLine}
+      />
+
+      {/* Change Status Dialog */}
+      <ChangeStatusDialog
+        project={project}
+        open={showChangeStatusDialog}
+        onOpenChange={setShowChangeStatusDialog}
       />
     </>
   );

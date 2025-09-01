@@ -12,6 +12,28 @@ export async function rejectProject({
     try {
         const { projectId } = input;
 
+        // First, get the current project to check its status
+        const [currentProject] = await db
+            .select()
+            .from(project)
+            .where(eq(project.id, projectId))
+            .limit(1);
+
+        if (!currentProject) {
+            throw new TRPCError({
+                code: "NOT_FOUND",
+                message: "Project not found",
+            });
+        }
+
+        // Prevent modification of completed projects
+        if (currentProject.status === "completed") {
+            throw new TRPCError({
+                code: "FORBIDDEN",
+                message: "Impossible de modifier un projet terminé",
+            });
+        }
+
         // Update project status to cancelled
         const updatedProject = await db
             .update(project)
@@ -21,13 +43,6 @@ export async function rejectProject({
             })
             .where(eq(project.id, projectId))
             .returning();
-
-        if (!updatedProject || updatedProject.length === 0) {
-            throw new TRPCError({
-                code: "NOT_FOUND",
-                message: "Project not found",
-            });
-        }
 
         return {
             success: true,

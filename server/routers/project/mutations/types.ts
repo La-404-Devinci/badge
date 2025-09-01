@@ -36,3 +36,14 @@ export const deleteProjectSchema = z.object({
 
 export type DeleteProjectInput = z.infer<typeof deleteProjectSchema>;
 export type DeleteProjectMutationContext<T> = ProjectMutationContext<T>;
+
+// Change project status types
+export const changeProjectStatusSchema = z.object({
+    projectId: z.string(),
+    status: z.enum(["review", "active", "inactive", "completed", "cancelled"]),
+});
+
+export type ChangeProjectStatusInput = z.infer<
+    typeof changeProjectStatusSchema
+>;
+export type ChangeProjectStatusMutationContext<T> = ProjectMutationContext<T>;

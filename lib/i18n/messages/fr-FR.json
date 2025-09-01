@@ -770,8 +770,26 @@
                 },
                 "actions": {
                     "edit": "Modifier",
+                    "changeStatus": "Changer le statut",
                     "accept": "Accepter",
                     "reject": "Refuser",
+                    "changeStatusSuccess": "Statut du projet modifié avec succès",
+                    "changeStatusError": "Échec de la modification du statut du projet",
+                    "completedProjectError": "Impossible de modifier un projet terminé",
+                    "completedProjectDeleteError": "Impossible de supprimer un projet terminé",
+                    "acceptSuccess": "Projet accepté avec succès",
+                    "acceptError": "Échec de l'acceptation du projet",
+                    "rejectSuccess": "Projet refusé avec succès",
+                    "rejectError": "Échec du refus du projet",
+                    "deleteSuccess": "Projet supprimé avec succès",
+                    "deleteError": "Échec de la suppression du projet",
+                    "statuses": {
+                        "review": "En révision",
+                        "active": "Actif",
+                        "inactive": "Inactif",
+                        "completed": "Terminé",
+                        "cancelled": "Annulé"
+                    },
                     "acceptDialog": {
                         "title": "Accepter le projet",
                         "description": "Êtes-vous sûr de vouloir accepter le projet \"{title}\" ?",
@@ -789,6 +807,13 @@
                         "title": "Supprimer le projet",
                         "description": "Êtes-vous sûr de vouloir supprimer le projet \"{title}\" ? Cette action ne peut être annulée.",
                         "confirm": "Supprimer",
+                        "cancel": "Annuler"
+                    },
+                    "changeStatusDialog": {
+                        "title": "Changer le statut du projet",
+                        "description": "Modifiez le statut du projet \"{title}\"",
+                        "statusLabel": "Nouveau statut",
+                        "confirm": "Modifier",
                         "cancel": "Annuler"
                     }
                 }

@@ -12,18 +12,33 @@ export async function deleteProject({
     try {
         const { projectId } = input;
 
-        // Delete project
-        const deletedProject = await db
-            .delete(project)
+        // First, get the current project to check its status
+        const [currentProject] = await db
+            .select()
+            .from(project)
             .where(eq(project.id, projectId))
-            .returning();
+            .limit(1);
 
-        if (!deletedProject || deletedProject.length === 0) {
+        if (!currentProject) {
             throw new TRPCError({
                 code: "NOT_FOUND",
                 message: "Project not found",
             });
         }
+
+        // Prevent deletion of completed projects
+        if (currentProject.status === "completed") {
+            throw new TRPCError({
+                code: "FORBIDDEN",
+                message: "Impossible de supprimer un projet terminé",
+            });
+        }
+
+        // Delete project
+        const deletedProject = await db
+            .delete(project)
+            .where(eq(project.id, projectId))
+            .returning();
 
         return {
             success: true,

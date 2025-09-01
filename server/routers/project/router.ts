@@ -6,6 +6,7 @@ import {
     acceptProject,
     rejectProject,
     deleteProject,
+    changeProjectStatus,
 } from "./mutations/index";
 import { getProjects } from "./queries/get-projects";
 import { listAdminProjects } from "./queries/list-admin-projects";
@@ -14,6 +15,7 @@ import {
     acceptProjectSchema,
     rejectProjectSchema,
     deleteProjectSchema,
+    changeProjectStatusSchema,
 } from "./mutations/types";
 
 // Project router
@@ -48,6 +50,14 @@ export const projectRouter = router({
         .mutation(async ({ ctx, input }) => {
             const { db, session } = ctx;
             return await deleteProject({ db, session, input });
+        }),
+
+    changeProjectStatus: protectedProcedure
+        .meta({ roles: ["admin"] })
+        .input(changeProjectStatusSchema)
+        .mutation(async ({ ctx, input }) => {
+            const { db, session } = ctx;
+            return await changeProjectStatus({ db, session, input });
         }),
 
     // Queries

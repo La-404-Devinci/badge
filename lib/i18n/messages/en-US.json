@@ -791,8 +791,26 @@
                     },
                     "actions": {
                         "edit": "Edit",
+                        "changeStatus": "Change Status",
                         "accept": "Accept",
                         "reject": "Reject",
+                        "changeStatusSuccess": "Project status changed successfully",
+                        "changeStatusError": "Failed to change project status",
+                        "completedProjectError": "Cannot modify a completed project",
+                        "completedProjectDeleteError": "Cannot delete a completed project",
+                        "acceptSuccess": "Project accepted successfully",
+                        "acceptError": "Failed to accept project",
+                        "rejectSuccess": "Project rejected successfully",
+                        "rejectError": "Failed to reject project",
+                        "deleteSuccess": "Project deleted successfully",
+                        "deleteError": "Failed to delete project",
+                        "statuses": {
+                            "review": "In review",
+                            "active": "Active",
+                            "inactive": "Inactive",
+                            "completed": "Completed",
+                            "cancelled": "Cancelled"
+                        },
                         "acceptDialog": {
                             "title": "Accept project",
                             "description": "Are you sure you want to accept the project \"{title}\"?",
@@ -810,6 +828,13 @@
                             "title": "Delete project",
                             "description": "Are you sure you want to delete the project \"{title}\"? This action cannot be undone.",
                             "confirm": "Delete",
+                            "cancel": "Cancel"
+                        },
+                        "changeStatusDialog": {
+                            "title": "Change Project Status",
+                            "description": "Change the status of project \"{title}\"",
+                            "statusLabel": "New Status",
+                            "confirm": "Change",
                             "cancel": "Cancel"
                         }
                     }
