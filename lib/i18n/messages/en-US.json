@@ -709,7 +709,9 @@
                 "create": "Create exercise",
                 "generate": "Generate with AI",
                 "generating": "Generating...",
-                "generatingInProgress": "{count, plural, =0 {No task in progress} =1 {Generating in progress (# task)} other {Generating in progress (# tasks)}}",
+                "generatingInProgress": "{count, plural, =0 {No task in progress} =1 {Generating in progress (# task)} other {Generating in progress (# tasks)}}"
+            },
+            "toast": {
                 "publishSuccess": "Exercise published successfully",
                 "publishError": "Failed to publish exercise",
                 "publishLoading": "Publishing exercise...",
@@ -1249,113 +1251,6 @@
         "experience": "Experience",
         "totalExp": "Total experience",
         "maxLevel": "Maximum level reached"
-    },
-    "admin": {
-        "items": {
-            "dashboard": "Dashboard",
-            "users": "Users",
-            "exercises": "Exercises",
-            "projects": "Projects",
-            "badges": "Badges",
-            "settings": "Settings"
-        },
-        "badges": {
-            "filters": {
-                "search": "Search",
-                "searchPlaceholder": "Search badges...",
-                "type": "Type",
-                "allTypes": "All types",
-                "color": "Color",
-                "allColors": "All colors"
-            },
-            "table": {
-                "columns": {
-                    "name": "Name",
-                    "displayName": "Display Name",
-                    "description": "Description",
-                    "color": "Color",
-                    "maxLevel": "Max Level",
-                    "baseExp": "Base Exp",
-                    "createdAt": "Created At",
-                    "actions": "Actions"
-                },
-                "actions": {
-                    "edit": "Edit",
-                    "delete": "Delete"
-                },
-                "empty": {
-                    "title": "No badges found",
-                    "description": "No badges match your search criteria."
-                }
-            },
-            "actions": {
-                "create": "Create badge"
-            },
-            "create": {
-                "title": "Create Badge",
-                "description": "Create a new badge type for your application.",
-                "form": {
-                    "name": "Name",
-                    "namePlaceholder": "Enter badge name",
-                    "displayName": "Display Name",
-                    "displayNamePlaceholder": "Enter display name",
-                    "description": "Description",
-                    "descriptionPlaceholder": "Enter badge description",
-                    "icon": "Icon",
-                    "iconPlaceholder": "Enter badge icon",
-                    "color": "Color",
-                    "colorPlaceholder": "Select a color",
-                    "maxLevel": "Maximum Level",
-                    "baseExp": "Base Experience",
-                    "expMultiplier": "Experience Multiplier",
-                    "cancel": "Cancel",
-                    "create": "Create",
-                    "creating": "Creating..."
-                },
-                "colors": {
-                    "blue": "Blue",
-                    "green": "Green",
-                    "purple": "Purple",
-                    "orange": "Orange",
-                    "red": "Red",
-                    "yellow": "Yellow",
-                    "pink": "Pink",
-                    "teal": "Teal"
-                }
-            },
-            "edit": {
-                "title": "Edit Badge",
-                "description": "Modify the information of the selected badge.",
-                "form": {
-                    "name": "Name",
-                    "namePlaceholder": "Enter badge name",
-                    "displayName": "Display Name",
-                    "displayNamePlaceholder": "Enter display name",
-                    "description": "Description",
-                    "descriptionPlaceholder": "Enter badge description",
-                    "icon": "Icon",
-                    "iconPlaceholder": "Enter badge icon",
-                    "color": "Color",
-                    "colorPlaceholder": "Enter badge color",
-                    "maxLevel": "Maximum Level",
-                    "baseExp": "Base Experience",
-                    "expMultiplier": "Experience Multiplier",
-                    "cancel": "Cancel",
-                    "update": "Update",
-                    "updating": "Updating..."
-                }
-            },
-            "delete": {
-                "title": "Delete Badge",
-                "description": "Are you sure you want to delete this badge?",
-                "warning": "This action is irreversible. The badge will be permanently deleted.",
-                "form": {
-                    "cancel": "Cancel",
-                    "delete": "Delete",
-                    "deleting": "Deleting..."
-                }
-            }
-        }
     },
     "projectBadgeRewards": {
         "title": "Badge Rewards",
