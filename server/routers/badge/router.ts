@@ -3,7 +3,7 @@ import { z } from "zod";
 import protectedProcedure from "@/server/procedures/protected-procedure";
 import { router } from "@/server/trpc";
 
-import { listAdminBadges } from "./queries";
+import { listAdminBadges, listBadgesForProjects } from "./queries";
 import { createBadge, updateBadge, deleteBadge } from "./mutations";
 
 const listAdminBadgesSchema = z.object({
@@ -60,6 +60,10 @@ export const badgeRouter = router({
         .query(async ({ ctx, input }) => {
             return listAdminBadges(ctx, input);
         }),
+
+    listBadgesForProjects: protectedProcedure.query(async ({ ctx }) => {
+        return listBadgesForProjects(ctx);
+    }),
 
     create: protectedProcedure
         .input(createBadgeSchema)

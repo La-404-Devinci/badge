@@ -1199,7 +1199,11 @@
                     "endDate": "End date",
                     "badgeName": "Badge name",
                     "badgeImage": "Badge image",
-                    "badgeUrl": "Badge URL"
+                    "badgeUrl": "Badge URL",
+                    "badge": "Badge",
+                    "expReward": "Experience reward",
+                    "contributors": "Contributors",
+                    "selectedContributors": "Selected contributors"
                 },
                 "placeholders": {
                     "title": "Project title",
@@ -1207,7 +1211,11 @@
                     "type": "Choose a type",
                     "startDate": "Select a date",
                     "endDate": "Select a date",
-                    "badgeName": "Badge name"
+                    "badgeName": "Badge name",
+                    "badge": "Select a badge",
+                    "expReward": "Experience amount",
+                    "contributors": "Select contributors",
+                    "contributorsDisabled": "Not available for exclusive 404 projects"
                 },
                 "types": {
                     "uxui": "UX/UI",
@@ -1228,7 +1236,9 @@
                     "title": "Title required",
                     "description": "Description required",
                     "badgeName": "Badge name required",
-                    "badgeImage": "Badge image required"
+                    "badgeImage": "Badge image required",
+                    "expReward": "Experience reward required",
+                    "loading": "Loading..."
                 }
             }
         }

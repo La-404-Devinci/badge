@@ -8,7 +8,8 @@ import { useTranslations } from "next-intl";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 
-import { AvatarUploader } from "@/components/custom/avatar-uploader";
+import { BadgeSelector } from "@/components/custom/badge-selector";
+import { ContributorSelector } from "@/components/custom/contributor-selector";
 import * as Button from "@/components/ui/button";
 import * as Checkbox from "@/components/ui/checkbox";
 import * as Divider from "@/components/ui/divider";
@@ -20,14 +21,15 @@ import * as Textarea from "@/components/ui/textarea";
 import { useTRPC } from "@/trpc/client";
 
 const schema = z.object({
-    type: z.string().min(1, "projectForm.errors.type"),
+    type: z.enum(["uxui", "dev", "marketing", "other"]),
     startDate: z.string().min(1, "projectForm.errors.startDate"),
     endDate: z.string().min(1, "projectForm.errors.endDate"),
     exclusive404: z.boolean(),
     title: z.string().min(2, "projectForm.errors.title"),
     description: z.string().min(5, "projectForm.errors.description"),
-    badgeName: z.string().min(2, "projectForm.errors.badgeName"),
-    badgeImage: z.string().url("projectForm.errors.badgeImage"),
+    badgeTypeId: z.string().optional(),
+    expReward: z.number().min(1, "projectForm.errors.expReward").optional(),
+    contributors: z.array(z.string()).optional(),
 });
 
 type ProjectFormValues = z.infer<typeof schema>;
@@ -46,20 +48,20 @@ export function NewProjectForm({
 
     const initialValues = React.useMemo(
         () => ({
-            type: "",
+            type: "" as "uxui" | "dev" | "marketing" | "other",
             startDate: "",
             endDate: "",
             exclusive404: false,
             title: "",
             description: "",
-            badgeName: "",
-            badgeImage:
-                "https://www.anthropics.com/portraitpro/img/page-images/homepage/v24/out-now.jpg",
+            badgeTypeId: "",
+            expReward: 100,
+            contributors: [],
         }),
         []
     );
 
-    const { control, register, handleSubmit, reset, formState } =
+    const { control, register, handleSubmit, reset, formState, watch } =
         useForm<ProjectFormValues>({
             resolver: zodResolver(schema, {
                 errorMap: (error) => ({
@@ -73,6 +75,9 @@ export function NewProjectForm({
     const { mutateAsync: storeProject } = useMutation({
         ...trpc.project.storeProject.mutationOptions(),
     });
+
+    const selectedBadgeTypeId = watch("badgeTypeId");
+    const exclusive404 = watch("exclusive404");
 
     const handleSave = async (values: ProjectFormValues) => {
         setGlobalError(null);
@@ -232,43 +237,60 @@ export function NewProjectForm({
                 <Divider.Root variant="line-spacing" />
 
                 <div className="flex flex-col gap-3">
-                    <div>
-                        <Label.Root>{t("fields.badgeName")}</Label.Root>
-                        <Input.Root hasError={!!formState.errors.badgeName}>
-                            <Input.Wrapper>
-                                <Input.Input
-                                    {...register("badgeName")}
-                                    placeholder={t("placeholders.badgeName")}
-                                />
-                            </Input.Wrapper>
-                        </Input.Root>
-                        <FormMessage>
-                            {formState.errors.badgeName?.message}
-                        </FormMessage>
-                    </div>
-                    <div>
-                        <Label.Root>{t("fields.badgeImage")}</Label.Root>
-                        <Controller
-                            name="badgeImage"
-                            control={control}
-                            render={({ field }) => (
-                                <AvatarUploader
-                                    username={
-                                        field.value ||
-                                        t("placeholders.badgeName")
-                                    }
-                                    currentAvatar={field.value}
-                                    onAvatarChange={(url: string) => {
-                                        field.onChange(url);
-                                    }}
-                                    size="64"
-                                />
-                            )}
-                        />
-                        <FormMessage>
-                            {formState.errors.badgeImage?.message}
-                        </FormMessage>
-                    </div>
+                    <Controller
+                        name="badgeTypeId"
+                        control={control}
+                        render={({ field }) => (
+                            <BadgeSelector
+                                value={field.value}
+                                onValueChange={field.onChange}
+                                placeholder={t("placeholders.badge")}
+                                hasError={!!formState.errors.badgeTypeId}
+                            />
+                        )}
+                    />
+                    <FormMessage>
+                        {formState.errors.badgeTypeId?.message}
+                    </FormMessage>
+
+                    {selectedBadgeTypeId && (
+                        <div>
+                            <Label.Root>{t("fields.expReward")}</Label.Root>
+                            <Input.Root hasError={!!formState.errors.expReward}>
+                                <Input.Wrapper>
+                                    <Input.Input
+                                        type="number"
+                                        min="1"
+                                        {...register("expReward", { valueAsNumber: true })}
+                                        placeholder={t("placeholders.expReward")}
+                                    />
+                                </Input.Wrapper>
+                            </Input.Root>
+                            <FormMessage>
+                                {formState.errors.expReward?.message}
+                            </FormMessage>
+                        </div>
+                    )}
+                </div>
+
+                <Divider.Root variant="line-spacing" />
+
+                <div className="flex flex-col gap-3">
+                    <Controller
+                        name="contributors"
+                        control={control}
+                        render={({ field }) => (
+                            <ContributorSelector
+                                value={field.value || []}
+                                onValueChange={field.onChange}
+                                placeholder={t("placeholders.contributors")}
+                                disabled={exclusive404}
+                            />
+                        )}
+                    />
+                    <FormMessage>
+                        {formState.errors.contributors?.message}
+                    </FormMessage>
                 </div>
 
                 <FormGlobalMessage variant="error">

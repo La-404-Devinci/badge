@@ -1,7 +1,8 @@
 import { TRPCError } from "@trpc/server";
 import { eq, and } from "drizzle-orm";
 
-import { project, ProjectType } from "@/db/schema";
+import { project, projectContributor, ProjectType } from "@/db/schema";
+import { projectBadgeReward } from "@/db/schema/badges";
 
 import type { StoreProjectInput, ProjectMutationContext } from "./types";
 
@@ -21,26 +22,54 @@ export async function storeProject({
                 and(eq(project.userId, userId), eq(project.title, input.title))
             );
 
-        if (!existingProject) {
-            // If not, create new project
-            const [newProject] = await db
-                .insert(project)
-                .values({
-                    ...input,
-                    type: input.type as ProjectType,
-                    startDate: new Date(input.startDate),
-                    endDate: new Date(input.endDate),
-                    userId,
-                })
-                .returning();
-
-            return { success: true, data: newProject };
+        if (existingProject) {
+            throw new TRPCError({
+                code: "BAD_REQUEST",
+                message: "Un projet avec ce titre existe déjà",
+            });
         }
 
-        throw new TRPCError({
-            code: "BAD_REQUEST",
-            message: "Project already exists",
-        });
+        // Create new project
+        const [newProject] = await db
+            .insert(project)
+            .values({
+                title: input.title,
+                description: input.description,
+                type: input.type as ProjectType,
+                exclusive404: input.exclusive404,
+                startDate: new Date(input.startDate),
+                endDate: new Date(input.endDate),
+                skills: input.skills,
+                userId,
+            })
+            .returning();
+
+        // Create badge reward if provided
+        if (input.badgeTypeId && input.expReward) {
+            await db.insert(projectBadgeReward).values({
+                projectId: newProject.id,
+                badgeTypeId: input.badgeTypeId,
+                expReward: input.expReward,
+            });
+        }
+
+        // Create contributors if provided and project is not exclusive to 404
+        if (
+            input.contributors &&
+            input.contributors.length > 0 &&
+            !input.exclusive404
+        ) {
+            const contributorValues = input.contributors.map(
+                (contributorId) => ({
+                    projectId: newProject.id,
+                    userId: contributorId,
+                })
+            );
+
+            await db.insert(projectContributor).values(contributorValues);
+        }
+
+        return { success: true, data: newProject };
     } catch (error) {
         console.error("Error storing project:", error);
         throw new TRPCError({

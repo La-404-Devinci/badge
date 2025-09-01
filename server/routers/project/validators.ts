@@ -1,14 +1,21 @@
 import { z } from "zod";
 
 export const storeProjectSchema = z.object({
-    title: z.string().min(1),
-    description: z.string().min(1),
-    type: z.string().min(1),
+    title: z.string().min(2, "Le titre doit contenir au moins 2 caractères"),
+    description: z
+        .string()
+        .min(5, "La description doit contenir au moins 5 caractères"),
+    type: z.enum(["uxui", "dev", "marketing", "other"]),
     exclusive404: z.boolean().default(false),
-    startDate: z.string().min(1),
-    endDate: z.string().min(1),
-    badgeName: z.string().min(1),
-    badgeImage: z.string().url(),
+    startDate: z.string().min(1, "Date de début requise"),
+    endDate: z.string().min(1, "Date de fin requise"),
+    skills: z.array(z.string()).optional(),
+    badgeTypeId: z.string().optional(),
+    expReward: z
+        .number()
+        .min(1, "La récompense d'expérience doit être au moins 1")
+        .optional(),
+    contributors: z.array(z.string()).optional(),
 });
 
 export const listAdminProjectsSchema = z.object({
